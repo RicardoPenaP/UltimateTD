@@ -11,11 +11,13 @@ public class Tile : MonoBehaviour
     [SerializeField] private int tileSize = 5;
     [SerializeField] private TileStatusID tileStatus = TileStatusID.Free;
 
-
+    private Node tileNode;
     private Vector2Int tileCoordinates = new Vector2Int();
 
+  
     public TileStatusID TileStatus { get { return tileStatus; } }
-    public Vector2Int TileCoordinates { get { return tileCoordinates; } }
+    public Node TileNode { get { return tileNode; } }
+  public Vector2Int TileCoordinates { get { return tileCoordinates; } }
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class Tile : MonoBehaviour
     private void SetTileCoordinates()
     {
         tileCoordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
-        tileCoordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
+        tileCoordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);        
+        tileNode = new Node(tileCoordinates, tileStatus == TileStatusID.Walkable);
     }
 }
