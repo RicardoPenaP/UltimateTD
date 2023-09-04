@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Enemy Controller")]
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int movementSpeed;
+    [SerializeField] private bool canMove;
 
-    // Update is called once per frame
-    void Update()
+    private EnemyMovement myMovement;
+
+    private int currentHealth;
+    private List<Tile> path;
+
+    
+    private void Awake()
     {
-        
+        myMovement = GetComponent<EnemyMovement>();
     }
 }
