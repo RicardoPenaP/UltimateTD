@@ -9,6 +9,9 @@ public class CoordinateLabeler : MonoBehaviour
 {
     [Header("Labeler")]
     [SerializeField] private int tileSize = 5;
+    [SerializeField] private Color freeColor = Color.white;
+    [SerializeField] private Color walkableColor = Color.green;
+    [SerializeField] private Color occupedColor = Color.red;
 
     private Vector2Int coordinates = new Vector2Int();
     private TextMeshPro labelText;
@@ -41,6 +44,22 @@ public class CoordinateLabeler : MonoBehaviour
         {
             return;
         }
+
+        switch (tile.TileStatus)
+        {
+            case TileStatusID.Free:
+                labelText.color = freeColor;
+                break;
+            case TileStatusID.Walkable:
+                labelText.color = walkableColor;
+                break;
+            case TileStatusID.Occuped:
+                labelText.color = occupedColor;
+                break;
+            default:
+                break;
+        }
+
         coordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
         coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
 

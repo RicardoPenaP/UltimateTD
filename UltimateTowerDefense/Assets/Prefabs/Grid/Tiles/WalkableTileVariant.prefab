@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WalkableTileVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+      propertyPath: tileStatus
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3353006742313967625, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_Mesh
       value: 

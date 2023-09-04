@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileStatus { Free, Walkable, Occuped}
+public enum TileStatusID { Free, Walkable, Occuped}
 
 public class Tile : MonoBehaviour
 {
     [Header("Tile")]
     [SerializeField] private int tileSize = 5;
-    [SerializeField] private TileStatus tileStatus = TileStatus.Free;
+    [SerializeField] private TileStatusID tileStatus = TileStatusID.Free;
 
 
     private Vector2Int tileCoordinates = new Vector2Int();
 
-
+    public TileStatusID TileStatus { get { return tileStatus; } }
     public Vector2Int TileCoordinates { get { return tileCoordinates; } }
 
     private void Awake()
