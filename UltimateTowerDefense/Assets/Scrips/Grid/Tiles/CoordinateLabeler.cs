@@ -12,6 +12,7 @@ public class CoordinateLabeler : MonoBehaviour
     [SerializeField] private Color freeColor = Color.white;
     [SerializeField] private Color walkableColor = Color.green;
     [SerializeField] private Color occupedColor = Color.red;
+    [SerializeField] private Color pathColor = Color.blue;
 
     private Vector2Int coordinates = new Vector2Int();
     private TextMeshPro labelText;
@@ -45,6 +46,17 @@ public class CoordinateLabeler : MonoBehaviour
             return;
         }
 
+        coordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
+        coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
+
+        labelText.text = $"({coordinates.x},{coordinates.y})";
+
+        if (tile.isPath)
+        {
+            labelText.color = pathColor;
+            return;
+        }
+
         switch (tile.TileStatus)
         {
             case TileStatusID.Free:
@@ -60,9 +72,6 @@ public class CoordinateLabeler : MonoBehaviour
                 break;
         }
 
-        coordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
-        coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
-
-        labelText.text = $"({coordinates.x},{coordinates.y})";
+       
     }
 }

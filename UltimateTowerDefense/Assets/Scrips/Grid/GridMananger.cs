@@ -8,17 +8,26 @@ public class GridMananger : MonoBehaviour
 
     [SerializeField] private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
 
+    public Dictionary<Vector2Int, Tile> MapGrid { get { return mapGrid; } }
+
     private void Awake()
     {
-        Tile[] tiles = transform.GetComponentsInChildren<Tile>(); 
+        UpdateTiles();
+    }
+
+    public void UpdateTiles()
+    {
+        Tile[] tiles = transform.GetComponentsInChildren<Tile>();
 
         foreach (Tile tile in tiles)
         {
-            if (!mapGrid.ContainsKey(tile.TileCoordinates))
+            if (!mapGrid.ContainsKey(tile.Coordinates))
             {
-                mapGrid.Add(tile.TileCoordinates, tile);
-                Debug.Log(tile.TileCoordinates);
+                mapGrid.Add(tile.Coordinates, tile);
+                Debug.Log(tile.Coordinates);
             }
         }
     }
+
+    
 }

@@ -10,29 +10,28 @@ public class Tile : MonoBehaviour
     [Header("Tile")]
     [SerializeField] private int tileSize = 5;
     [SerializeField] private TileStatusID tileStatus = TileStatusID.Free;
+    
+    private Vector2Int coordinates = new Vector2Int();
 
-    private Node tileNode;
-    private Vector2Int tileCoordinates = new Vector2Int();
+    //Pathfinding variables
 
-  
-    public TileStatusID TileStatus { get { return tileStatus; } }
-    public Node TileNode { get { return tileNode; } }
-  public Vector2Int TileCoordinates { get { return tileCoordinates; } }
+    public bool isWalkable;
+    public bool isExplored;
+    public bool isPath;
+    public Tile connectedTo;
+
+    public TileStatusID TileStatus { get { return tileStatus; } }    
+    public Vector2Int Coordinates { get { return coordinates; } }
 
     private void Awake()
     {
-        SetTileCoordinates();
+        SetTile();
     }    
 
-    private void Update()
+    private void SetTile()
     {
-        
-    }
-
-    private void SetTileCoordinates()
-    {
-        tileCoordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
-        tileCoordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);        
-        tileNode = new Node(tileCoordinates, tileStatus == TileStatusID.Walkable);
+        coordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
+        coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
+        isWalkable = tileStatus == TileStatusID.Walkable;
     }
 }
