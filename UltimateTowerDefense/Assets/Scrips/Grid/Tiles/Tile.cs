@@ -34,4 +34,9 @@ public class Tile : MonoBehaviour
         coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
         isWalkable = tileStatus == TileStatusID.Walkable;
     }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
 }
