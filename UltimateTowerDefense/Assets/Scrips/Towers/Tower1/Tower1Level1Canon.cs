@@ -8,7 +8,11 @@ public class Tower1Level1Canon : MonoBehaviour,ITowerCanon
     [SerializeField] private Transform shootingPos;
     public void Attack(GameObject ammunition,int attackDamage, Vector3 attackObjectivePos)
     {
-        
+        Vector3 objectiveDirection = (attackObjectivePos - shootingPos.position).normalized;
+        IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity,transform.parent).GetComponent<IAmmunition>();
+        ammoShooted.SetDamage(attackDamage);
+        ammoShooted.SetMovementDirection(objectiveDirection);
+
     }
 
     public void AimAt(Vector3 aimPos)
