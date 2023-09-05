@@ -8,7 +8,7 @@ public class Tower1Level1Canon : MonoBehaviour,ITowerCanon
     [SerializeField] private Transform shootingPos;
     public void Attack(GameObject ammunition,int attackDamage, Vector3 attackObjectivePos)
     {
-        Debug.Log("Attacked");
+        
     }
 
     public void AimAt(Vector3 aimPos)
