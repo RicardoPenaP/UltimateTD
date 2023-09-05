@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class BankMananger : MonoBehaviour
+public class BankMananger : Singleton<BankMananger>
 {
     [Header("Bank Mananger")]
     [SerializeField,Min(0)] private int maxAmountGold = 100000;
     [SerializeField,Min(0)] private int startingAmouuntGold = 250;
     [SerializeField] private int currentAmountGold;
 
+
+    private TextMeshProUGUI goldText;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        goldText = GetComponentInChildren<TextMeshProUGUI>();
+    }
     private void Start()
     {
         currentAmountGold = startingAmouuntGold;
+        UpdateBankUI();
     }
 
     public bool HaveEnoughGoldCheck(int amount)
@@ -27,6 +37,7 @@ public class BankMananger : MonoBehaviour
         }
 
         currentAmountGold-= amount;
+        UpdateBankUI();
     }
 
     public void AddGold(int amount)
@@ -39,5 +50,11 @@ public class BankMananger : MonoBehaviour
         {
             currentAmountGold += amount;
         }
+        UpdateBankUI();
+    }
+
+    private void UpdateBankUI()
+    {
+        goldText.text = $"Gold: {currentAmountGold}";
     }
 }
