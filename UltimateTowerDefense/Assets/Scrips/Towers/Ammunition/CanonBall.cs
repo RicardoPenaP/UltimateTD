@@ -32,5 +32,7 @@ public class CanonBall : MonoBehaviour
         }
 
         //Destroy Behaviour
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
