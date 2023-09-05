@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanonBall : MonoBehaviour
+public class CanonBall : MonoBehaviour,IAmmunition
 {
     [Header("Canon Ball")]
     [SerializeField,Min(0f)] private float movementSpeed = 30f;
+
+    private int damage;
 
     private void FixedUpdate()
     {
@@ -20,6 +22,11 @@ public class CanonBall : MonoBehaviour
     public void SetMovementDirection(Vector3 newDirection)
     {
         transform.right = newDirection;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 
     private void OnTriggerEnter(Collider other)
