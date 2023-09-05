@@ -54,7 +54,8 @@ public class TowerAiming : MonoBehaviour
             return;
         }
         canAttack = false;
-        myCanon.Attack();
+         
+        myCanon.Attack(myController.AmmunitionPrefab,myController.AttackDamage,target.transform.position);
         StartCoroutine(AttackCooldownTime());
     }
 
