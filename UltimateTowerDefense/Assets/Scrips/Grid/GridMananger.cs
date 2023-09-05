@@ -23,8 +23,7 @@ public class GridMananger : MonoBehaviour
         {
             if (!mapGrid.ContainsKey(tile.Coordinates))
             {
-                mapGrid.Add(tile.Coordinates, tile);
-                Debug.Log(tile.Coordinates);
+                mapGrid.Add(tile.Coordinates, tile);                
             }
         }
     }

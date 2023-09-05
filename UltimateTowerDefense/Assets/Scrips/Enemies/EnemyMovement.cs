@@ -6,14 +6,19 @@ public class EnemyMovement : MonoBehaviour
 {
     private Pathfinder pathfinder;
     private EnemyController myController;
+    private Animator myAnimator;
     private List<Tile> path;    
    
     private int pathIndex = 0;
     private Vector3 movementDirection;
+
+    private readonly int RUN_FOWARD_ANIMATOR_HASH = Animator.StringToHash("Run Forward");
+
     private void Awake()
     {
         pathfinder = FindObjectOfType<Pathfinder>();
         myController = GetComponent<EnemyController>();
+        myAnimator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -29,28 +34,42 @@ public class EnemyMovement : MonoBehaviour
 
     private void Move()
     {
+        myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
         if (!myController.CanMove)
         {
+            //myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
             return;
         }
 
         if (path.Count < 1)
         {
+            //myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
             return;
-        }      
-
-        transform.position += movementDirection * myController.MovementSpeed * Time.deltaTime;
+        }  
 
         if (Vector3.Distance(path[pathIndex].GetPosition(),transform.position) <= myController.DistanceFromNextTileOffset)
         {
-            pathIndex++;
-            SetMovementDirection();
+            transform.position = path[pathIndex].GetPosition();
+            if (pathIndex < path.Count - 1)
+            {
+                pathIndex++;
+                SetMovementDirection();
+            }
+            else
+            {
+                
+                return;
+            }           
         }
+
+        transform.position += movementDirection * myController.MovementSpeed * Time.deltaTime;
+        myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, true);
     }
 
     private void SetMovementDirection()
     {
-        Vector3 movementDirection = (path[pathIndex].GetPosition() - transform.position).normalized;
+        movementDirection = (path[pathIndex].GetPosition() - transform.position).normalized;
+        transform.LookAt(path[pathIndex].GetPosition());
     }
 
     public void SetPath(List<Tile> path)
