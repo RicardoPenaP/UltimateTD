@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private EnemyMovement myMovement;
 
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
     private List<Tile> path;
 
     public float MovementSpeed { get { return movementSpeed; } }
@@ -25,5 +25,28 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         myMovement = GetComponent<EnemyMovement>();
+    }
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        //Implement die behaviour
+
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

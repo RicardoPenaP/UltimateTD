@@ -35,7 +35,7 @@ public class CanonBall : MonoBehaviour,IAmmunition
 
         if (enemy)
         {
-            //Enemy Take Damage
+            enemy.TakeDamage(damage);
         }
 
         //Destroy Behaviour
