@@ -32,8 +32,7 @@ public class StoreManangerButton : MonoBehaviour
 
     private void SumitButtonEvents()
     {
-        myButton.onClick.AddListener(ButtonHasBeenPressed);
-        
+        myButton.onClick.AddListener(ButtonHasBeenPressed);        
     }
 
     public void SetButtonText(string newText)
