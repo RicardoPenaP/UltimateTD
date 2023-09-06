@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITowerCanon
+public interface ITowerWeapon
 {
     public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos);
 

@@ -6,7 +6,7 @@ public class TowerAiming : MonoBehaviour
 {
     [Header("Tower Aiming")]   
 
-    private ITowerCanon myCanon;
+    private ITowerWeapon myCanon;        
     private TowerController myController;
     private EnemyController target;
 
@@ -15,7 +15,7 @@ public class TowerAiming : MonoBehaviour
 
     private void Awake()
     {
-        myCanon = GetComponentInChildren<ITowerCanon>();
+        myCanon = GetComponentInChildren<ITowerWeapon>();
         myController = GetComponent<TowerController>();
     }
 
