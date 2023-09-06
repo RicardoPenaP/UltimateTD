@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class StoreManangerButton : MonoBehaviour
+public class StoreManangerButton : MonoBehaviour,IDeselectHandler
 {
     
     private Button myButton;
     private TextMeshProUGUI goldCostText;
 
-    private bool buttonPressed = false;
+    private bool buttonSelected = false;
 
-    public bool ButtonPressed { get { return buttonPressed; } set { buttonPressed = value; } }
+    public bool ButtonSelected { get { return buttonSelected; } set { buttonSelected = value; } }
+    public bool ButtonPressed { get; set; }
     private void Awake()
     {
         myButton = GetComponent<Button>();
         goldCostText = GetComponentInChildren<TextMeshProUGUI>();
+        ButtonPressed = false;
     }
 
     private void Start()
@@ -26,8 +29,7 @@ public class StoreManangerButton : MonoBehaviour
 
     private void SumitButtonEvents()
     {
-        myButton.onClick.AddListener(ButtonHasBeenPressed);
-       
+        myButton.onClick.AddListener(ButtonHasBeenSelected);       
     }
 
     public void SetGoldCostText(int goldCost)
@@ -40,12 +42,16 @@ public class StoreManangerButton : MonoBehaviour
         myButton.interactable = state;
     }
 
-    private void ButtonHasBeenPressed()
+    private void ButtonHasBeenSelected()
     {
-        buttonPressed = true;
-    }
+        ButtonPressed = true;
+        buttonSelected = true;
+    }  
 
-    
+    public void OnDeselect(BaseEventData baseData)
+    {
+        buttonSelected = false;
+    }
 
     
 

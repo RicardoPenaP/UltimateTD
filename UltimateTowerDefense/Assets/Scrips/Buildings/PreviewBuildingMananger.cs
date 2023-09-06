@@ -7,10 +7,8 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
     [Header("Preview Building Mananger")]
     [SerializeField] private GameObject previewTowerPrefab;
 
-
     private GameObject towerPreview;
     
-
     private void Start()
     {
         SetPreviewBuildings();
@@ -23,13 +21,25 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
     }
 
     public void PreviewTower(Vector3 tilePosition)
-    {        
+    {
+        if (!StoreMananger.Instance.SelectedTower)
+        {
+            if (towerPreview.activeInHierarchy)
+            {
+                TurnOffPreview();
+                return;
+            }
+        }
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);
     }
 
     public void TurnOffPreview()
     {
+        if (!towerPreview.activeInHierarchy)
+        {
+            return;
+        }
         towerPreview.SetActive(false);
         towerPreview.transform.position = new Vector3(0,0,0);        
     }

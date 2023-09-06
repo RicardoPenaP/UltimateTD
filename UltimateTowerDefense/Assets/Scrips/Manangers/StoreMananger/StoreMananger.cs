@@ -32,7 +32,8 @@ public class StoreMananger : Singleton<StoreMananger>
     private void Update()
     {
         CheckForAvailableGold();
-        CheckButtonsPressed();        
+        CheckForSelectedButton();
+        CancelTowerSelection();
     }
 
     private void SetGoldCost()
@@ -51,17 +52,18 @@ public class StoreMananger : Singleton<StoreMananger>
         }
     }
 
-    private void CheckButtonsPressed()
+    private void CheckForSelectedButton()
     {
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].ButtonPressed)
             {
                 buttons[i].ButtonPressed = false;
-                if (i < availableTowers.Count)
+
+                if (selectedTower != availableTowers[i])
                 {
                     selectedTower = availableTowers[i];
-                }
+                }                
             }
         }
     }
@@ -81,11 +83,28 @@ public class StoreMananger : Singleton<StoreMananger>
         }
     }
 
-   
-    public void CreateTower()
+    private void CancelTowerSelection()
     {
-        BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].ButtonSelected)
+            {
+                return;
+            }
+        }
+
         selectedTower = null;
+        PreviewBuildingMananger.Instance.TurnOffPreview();
+    }
+
+   
+    public IBuilding CreateBuilding(Transform tileTransform)
+    {
+        PreviewBuildingMananger.Instance.TurnOffPreview();
+        BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
+        IBuilding building = Instantiate(selectedTower.TowerPrefab, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();
+        selectedTower = null;
+        return building;
     }
 
   

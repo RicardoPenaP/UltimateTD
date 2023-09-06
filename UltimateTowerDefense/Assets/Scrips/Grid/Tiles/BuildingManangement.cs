@@ -21,7 +21,6 @@ public class BuildingManangement : MonoBehaviour
         {
             if (StoreMananger.Instance.SelectedTower)
             {
-                PreviewBuildingMananger.Instance.TurnOffPreview();
                 CreateBuilding();
             }
         }      
@@ -32,10 +31,7 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            if (StoreMananger.Instance.SelectedTower)
-            {
-                PreviewBuildingMananger.Instance.PreviewTower(transform.position);
-            }
+            PreviewBuildingMananger.Instance.PreviewTower(transform.position);
         }
     }
 
@@ -43,17 +39,13 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            if (StoreMananger.Instance.SelectedTower)
-            {
-                PreviewBuildingMananger.Instance.TurnOffPreview();
-            }
+            PreviewBuildingMananger.Instance.TurnOffPreview();
         }
     }
 
     private void CreateBuilding()
     {
-        tileBuilding = Instantiate(StoreMananger.Instance.SelectedTower.TowerPrefab, transform.position, Quaternion.identity, transform).GetComponent<IBuilding>();
-        myTile.TileStatus = TileStatusID.Occuped;
-        StoreMananger.Instance.CreateTower();
+        tileBuilding = StoreMananger.Instance.CreateBuilding(transform);
+        myTile.TileStatus = TileStatusID.Occuped;        
     }
 }

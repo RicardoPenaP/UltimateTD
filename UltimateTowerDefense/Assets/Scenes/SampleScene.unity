@@ -266,7 +266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: 1e7d4c8b4a8f4654e8272be8d51b3b1d, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: 1e7d4c8b4a8f4654e8272be8d51b3b1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -672,6 +672,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6544564070841100843, guid: dfe92b39a7da71a48ab677dd1f1096fa, type: 3}
   m_PrefabInstance: {fileID: 130202590}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &133432286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 133432288}
+  - component: {fileID: 133432287}
+  m_Layer: 0
+  m_Name: PreviewBuildingMananger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &133432287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133432286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020e792815e134041a63a09d3bc760fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewTowerPrefab: {fileID: 2395969334248799916, guid: c3efe88cbb8dbc24d82153357a1eb3f1, type: 3}
+--- !u!4 &133432288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133432286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &135436526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
@@ -867,7 +912,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: 825397cb89820634dadc19355d92d029, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: 825397cb89820634dadc19355d92d029, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1450,7 +1495,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: ba1e10af1e1ce544db3d5a2f789635b2, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: ba1e10af1e1ce544db3d5a2f789635b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3261,7 +3306,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: 0e775b6ef06bbb440b239e178cfd928e, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: 0e775b6ef06bbb440b239e178cfd928e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3529,8 +3574,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5220959, y: -0.0022777566, z: 0.0014211409, w: 0.8528826}
-  m_LocalPosition: {x: 21.180298, y: 36.571754, z: -2.964573}
+  m_LocalRotation: {x: -0.2742501, y: -0.0008689717, z: 0.00024705916, w: -0.961658}
+  m_LocalPosition: {x: 8.414068, y: 8.6628, z: -8.603985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3871,7 +3916,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: 825397cb89820634dadc19355d92d029, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: 825397cb89820634dadc19355d92d029, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4243,7 +4288,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 9db4bf56102ff3a4197054332e856c8b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 5efa54f782469604e9020f8e9aec60a9, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: c6ad4c89277e78945a4a7a5f3d1e5e4e, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: fe483ea8b2e374b48b25cf90141b877e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -5252,6 +5297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassTile (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+      propertyPath: tileStatus
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_RootOrder
       value: 62
@@ -5931,7 +5980,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableTowers:
+  - {fileID: 11400000, guid: 76264c54d8509c9448fb0393ef7f752d, type: 2}
+  - {fileID: 11400000, guid: 80f11de5a9115994fb3ad9ae80abd4a0, type: 2}
   - {fileID: 11400000, guid: b515cb0854828e34d90f0b2d8da9ac94, type: 2}
+  - {fileID: 11400000, guid: 97b65d344445b4248944a038da76a009, type: 2}
 --- !u!114 &1396645106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6307,7 +6359,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6544564070841100843, guid: 143117a8222131c4fb364a716a361c20, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6544564070841100843, guid: 143117a8222131c4fb364a716a361c20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6514,7 +6566,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 9db4bf56102ff3a4197054332e856c8b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 5efa54f782469604e9020f8e9aec60a9, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: c6ad4c89277e78945a4a7a5f3d1e5e4e, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: fe483ea8b2e374b48b25cf90141b877e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7613,7 +7665,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 9db4bf56102ff3a4197054332e856c8b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 5efa54f782469604e9020f8e9aec60a9, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: c6ad4c89277e78945a4a7a5f3d1e5e4e, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: fe483ea8b2e374b48b25cf90141b877e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -8003,6 +8055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GrassTile (98)
       objectReference: {fileID: 0}
+    - target: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+      propertyPath: tileStatus
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_RootOrder
       value: 77
@@ -8150,6 +8206,10 @@ PrefabInstance:
     - target: {fileID: 327929781564016204, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_Name
       value: GrassTile (88)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+      propertyPath: tileStatus
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_RootOrder
@@ -8475,7 +8535,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 9db4bf56102ff3a4197054332e856c8b, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 5efa54f782469604e9020f8e9aec60a9, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: c6ad4c89277e78945a4a7a5f3d1e5e4e, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: fe483ea8b2e374b48b25cf90141b877e, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
