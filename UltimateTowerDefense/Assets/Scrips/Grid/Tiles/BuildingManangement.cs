@@ -25,14 +25,14 @@ public class BuildingManangement : MonoBehaviour
                     CreateBuilding();
                 }
             }
-        }
-       
+        }      
         
     }
 
     private void CreateBuilding()
     {
         tileBuilding = Instantiate(StoreMananger.Instance.SelectedTower.TowerPrefab, transform.position, Quaternion.identity, transform).GetComponent<IBuilding>();
+        myTile.TileStatus = TileStatusID.Occuped;
         StoreMananger.Instance.CreateTower();
     }
 }

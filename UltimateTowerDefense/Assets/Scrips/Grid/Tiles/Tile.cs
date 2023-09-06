@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour
     public bool isPath;
     public Tile connectedTo;
 
-    public TileStatusID TileStatus { get { return tileStatus; } }    
+    public TileStatusID TileStatus { get { return tileStatus; } set { tileStatus = value; } }    
     public Vector2Int Coordinates { get { return coordinates; } }
 
     private void Awake()
