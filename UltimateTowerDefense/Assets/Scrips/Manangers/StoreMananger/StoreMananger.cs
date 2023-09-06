@@ -89,7 +89,7 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private void SetPreviewTower()
     {
-
+        
     }
 
     public void CreateTower()
