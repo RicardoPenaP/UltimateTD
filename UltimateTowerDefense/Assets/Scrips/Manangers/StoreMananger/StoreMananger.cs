@@ -8,11 +8,14 @@ public class StoreMananger : Singleton<StoreMananger>
 {
     [Header("Store Mananger")]
     [SerializeField] private List<TowerData> availableTowers;
-    [SerializeField] private GameObject previewTower;
+    [SerializeField] private GameObject previewTowerPrefab;
    
     private StoreManangerButton[] buttons;
 
-    [SerializeField]private TowerData selectedTower;
+    private TowerData selectedTower;
+
+    private GameObject towerPreview;
+    private bool towerPreviewed = false;
 
     public TowerData SelectedTower { get { return selectedTower; } }
 
@@ -29,6 +32,7 @@ public class StoreMananger : Singleton<StoreMananger>
     private void Start()
     {
         SetGoldCost();
+        SetPreviewTower();
     }
 
     private void Update()
@@ -83,10 +87,20 @@ public class StoreMananger : Singleton<StoreMananger>
         }
     }
 
+    private void SetPreviewTower()
+    {
+
+    }
+
     public void CreateTower()
     {
         BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
         selectedTower = null;
+    }
+
+    public void PreviewTower(Vector3 tilePosition)
+    {
+
     }
 
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class BuildingManangement : MonoBehaviour
 {
     [Header("TileManangement")]
-    [SerializeField] private IBuilding tileBuilding;
+
+    private IBuilding tileBuilding;
 
     private Tile myTile;
 
@@ -18,15 +19,23 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            if (tileBuilding == null)
+            if (StoreMananger.Instance.SelectedTower)
             {
-                if (StoreMananger.Instance.SelectedTower)
-                {
-                    CreateBuilding();
-                }
+                CreateBuilding();
             }
         }      
         
+    }
+
+    private void OnMouseEnter()
+    {
+        if (myTile.TileStatus == TileStatusID.Free)
+        {
+            if (StoreMananger.Instance.SelectedTower)
+            {
+                
+            }
+        }
     }
 
     private void CreateBuilding()
