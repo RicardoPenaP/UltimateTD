@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerController : MonoBehaviour
+public class TowerController : MonoBehaviour,IBuilding
 {
     [Header("Tower Controller")]
     [SerializeField] private GameObject ammunitionPrefab;

@@ -12,7 +12,7 @@ public class StoreMananger : Singleton<StoreMananger>
    
     private StoreManangerButton[] buttons;
 
-    private TowerData selectedTower;
+    [SerializeField]private TowerData selectedTower;
 
     public TowerData SelectedTower { get { return selectedTower; } }
 
@@ -59,6 +59,7 @@ public class StoreMananger : Singleton<StoreMananger>
         {
             if (buttons[i].ButtonPressed)
             {
+                buttons[i].ButtonPressed = false;
                 if (i < availableTowers.Count)
                 {
                     selectedTower = availableTowers[i];

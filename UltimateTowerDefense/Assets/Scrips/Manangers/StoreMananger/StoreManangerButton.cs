@@ -12,7 +12,7 @@ public class StoreManangerButton : MonoBehaviour
 
     private bool buttonPressed = false;
 
-    public bool ButtonPressed { get { return buttonPressed; } }
+    public bool ButtonPressed { get { return buttonPressed; } set { buttonPressed = value; } }
     private void Awake()
     {
         myButton = GetComponent<Button>();
@@ -24,14 +24,10 @@ public class StoreManangerButton : MonoBehaviour
         SumitButtonEvents();
     }
 
-    private void Update()
-    {
-        buttonPressed = false;
-    }
-
     private void SumitButtonEvents()
     {
-        myButton.onClick.AddListener(ButtonHasBeenPressed);        
+        myButton.onClick.AddListener(ButtonHasBeenPressed);
+       
     }
 
     public void SetGoldCostText(int goldCost)
@@ -48,6 +44,8 @@ public class StoreManangerButton : MonoBehaviour
     {
         buttonPressed = true;
     }
+
+    
 
     
 
