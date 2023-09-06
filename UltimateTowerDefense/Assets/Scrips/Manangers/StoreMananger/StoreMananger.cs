@@ -14,6 +14,8 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private TowerData selectedTower;
 
+    public TowerData SelectedTower { get { return selectedTower; } }
+
     protected override void Awake()
     {
         base.Awake();
@@ -21,8 +23,7 @@ public class StoreMananger : Singleton<StoreMananger>
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i] = transform.GetChild(i).GetComponent<StoreManangerButton>();
-        }
-        
+        }        
     }
 
     private void Start()
@@ -81,5 +82,10 @@ public class StoreMananger : Singleton<StoreMananger>
         }
     }
 
+    public void CreateTower()
+    {
+        BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
+        selectedTower = null;
+    }
 
 }
