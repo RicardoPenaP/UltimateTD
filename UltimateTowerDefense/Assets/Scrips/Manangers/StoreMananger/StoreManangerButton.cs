@@ -8,7 +8,7 @@ public class StoreManangerButton : MonoBehaviour
 {
     
     private Button myButton;
-    private TextMeshProUGUI buttonText;
+    private TextMeshProUGUI goldCostText;
 
     private bool buttonPressed = false;
 
@@ -16,8 +16,7 @@ public class StoreManangerButton : MonoBehaviour
     private void Awake()
     {
         myButton = GetComponent<Button>();
-        buttonText = GetComponentInChildren<TextMeshProUGUI>();
-
+        goldCostText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -35,9 +34,9 @@ public class StoreManangerButton : MonoBehaviour
         myButton.onClick.AddListener(ButtonHasBeenPressed);        
     }
 
-    public void SetButtonText(string newText)
+    public void SetGoldCostText(int goldCost)
     {
-        buttonText.text = newText;
+        goldCostText.text = goldCost.ToString();
     }
 
     public void SetButtonState(bool state)
@@ -49,5 +48,7 @@ public class StoreManangerButton : MonoBehaviour
     {
         buttonPressed = true;
     }
+
+    
 
 }
