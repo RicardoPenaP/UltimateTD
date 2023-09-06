@@ -21,6 +21,7 @@ public class BuildingManangement : MonoBehaviour
         {
             if (StoreMananger.Instance.SelectedTower)
             {
+                PreviewBuildingMananger.Instance.TurnOffPreview();
                 CreateBuilding();
             }
         }      
@@ -33,7 +34,18 @@ public class BuildingManangement : MonoBehaviour
         {
             if (StoreMananger.Instance.SelectedTower)
             {
-                
+                PreviewBuildingMananger.Instance.PreviewTower(transform.position);
+            }
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        if (myTile.TileStatus == TileStatusID.Free)
+        {
+            if (StoreMananger.Instance.SelectedTower)
+            {
+                PreviewBuildingMananger.Instance.TurnOffPreview();
             }
         }
     }
