@@ -7,6 +7,7 @@ public class TowerData : ScriptableObject
 {
     [Header("Tower Data")]
     [SerializeField] private GameObject towerPrefab;
+    [SerializeField] private Sprite towerIcon;
     [SerializeField] private string towerName;    
     [SerializeField,Min(0)] private int goldCost;
 
