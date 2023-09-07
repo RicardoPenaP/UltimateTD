@@ -18,7 +18,6 @@ public class Gun : MonoBehaviour,ITowerWeapon
         shootingPosIndex++;
         shootingPosIndex = shootingPosIndex >= shootingPos.Length ? 0 : shootingPosIndex;
 
-
     }
 
     public void AimAt(Vector3 aimPos)
