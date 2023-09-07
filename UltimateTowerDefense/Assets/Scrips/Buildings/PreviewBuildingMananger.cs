@@ -26,9 +26,9 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
         {
             if (towerPreview.activeInHierarchy)
             {
-                TurnOffPreview();
-                return;
+                TurnOffPreview();                
             }
+            return;
         }
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);

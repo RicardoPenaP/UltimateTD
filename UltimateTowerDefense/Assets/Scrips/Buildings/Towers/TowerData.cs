@@ -12,6 +12,7 @@ public class TowerData : ScriptableObject
     [SerializeField,Min(0)] private int goldCost;
 
     public GameObject TowerPrefab { get { return towerPrefab; } }
+    public Sprite TowerIcon { get { return towerIcon; } }
     public string TowerName { get { return towerName; } }
     public int GoldCost { get { return goldCost; } }
 }

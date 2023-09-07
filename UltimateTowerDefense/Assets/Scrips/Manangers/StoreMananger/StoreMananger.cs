@@ -7,8 +7,11 @@ using TMPro;
 public class StoreMananger : Singleton<StoreMananger>
 {
     [Header("Store Mananger")]
+    [SerializeField] private StoreManangerButton buttonPrefab;
     [SerializeField] private List<TowerData> availableTowers;
-    private StoreManangerButton[] buttons;
+    
+
+    private Dictionary<TowerData, StoreManangerButton> towerButtons = new Dictionary<TowerData, StoreManangerButton>();
 
     private TowerData selectedTower;
 
@@ -17,16 +20,11 @@ public class StoreMananger : Singleton<StoreMananger>
     protected override void Awake()
     {
         base.Awake();
-        buttons = new StoreManangerButton[transform.childCount];
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i] = transform.GetChild(i).GetComponent<StoreManangerButton>();
-        }        
     }
 
     private void Start()
     {
-        SetGoldCost();        
+        SetButtons();
     }
 
     private void Update()
@@ -35,64 +33,67 @@ public class StoreMananger : Singleton<StoreMananger>
         CheckForSelectedButton();
         CancelTowerSelection();
     }
+   
 
-    private void SetGoldCost()
+    private void SetButtons()
     {
-        if (availableTowers.Count < 1)
+        foreach (TowerData tower in availableTowers)
         {
-            return;
+            AddButton(tower);
         }
+    }
 
-        for (int i = 0; i < buttons.Length; i++)
+    private void AddButton(TowerData tower)
+    {
+        if (!towerButtons.ContainsKey(tower))
         {
-            if (i < availableTowers.Count)
-            {
-                buttons[i].SetGoldCostText(availableTowers[i].GoldCost);
-            }
+            StoreManangerButton button = Instantiate(buttonPrefab, transform.position, Quaternion.identity, transform);
+            button.SetButtonIcon(tower.TowerIcon);
+            button.SetGoldCostText(tower.GoldCost);
+            towerButtons.Add(tower, button);
         }
     }
 
     private void CheckForSelectedButton()
     {
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].ButtonPressed)
+        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
+        {           
+            if (entry.Value.ButtonPressed)
             {
-                buttons[i].ButtonPressed = false;
-
-                if (selectedTower != availableTowers[i])
+                entry.Value.ButtonPressed = false;
+                if (selectedTower != entry.Key)
                 {
-                    selectedTower = availableTowers[i];
-                }                
+                    selectedTower = entry.Key;
+                }
             }
         }
+              
     }
 
     private void CheckForAvailableGold()
     {
-        for (int i = 0; i < availableTowers.Count; i++)
+        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
         {
-            if (BankMananger.Instance.HaveEnoughGoldCheck(availableTowers[i].GoldCost))
+            if (BankMananger.Instance.HaveEnoughGoldCheck(entry.Key.GoldCost))
             {
-                buttons[i].SetButtonState(true);
+                entry.Value.SetButtonState(true);
             }
             else
             {
-                buttons[i].SetButtonState(false);
-            }
-        }
+                entry.Value.SetButtonState(false);
+            }            
+        }       
     }
 
     private void CancelTowerSelection()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
         {
-            if (buttons[i].ButtonSelected)
+            if (entry.Value.ButtonSelected)
             {
                 return;
             }
-        }
-
+        } 
         selectedTower = null;
         PreviewBuildingMananger.Instance.TurnOffPreview();
     }

@@ -10,7 +10,7 @@ public class StoreManangerButton : MonoBehaviour,IDeselectHandler
     
     private Button myButton;
     private TextMeshProUGUI goldCostText;
-
+    private Image buttonIcon;
     private bool buttonSelected = false;
 
     public bool ButtonSelected { get { return buttonSelected; } set { buttonSelected = value; } }
@@ -19,6 +19,7 @@ public class StoreManangerButton : MonoBehaviour,IDeselectHandler
     {
         myButton = GetComponent<Button>();
         goldCostText = GetComponentInChildren<TextMeshProUGUI>();
+        buttonIcon = transform.GetChild(0).GetComponent<Image>();
         ButtonPressed = false;
     }
 
@@ -53,6 +54,9 @@ public class StoreManangerButton : MonoBehaviour,IDeselectHandler
         buttonSelected = false;
     }
 
-    
+    public void SetButtonIcon(Sprite icon)
+    {
+        buttonIcon.sprite = icon;
+    }
 
 }
