@@ -14,14 +14,18 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private bool canMove;
     [SerializeField] private float distanceFromNextTileOffset = 0.05f;
 
+    [Header("Rewards Settings")]
+    [SerializeField,Min(0f)] private int goldReward = 25;
+
     private EnemyMovement myMovement;
 
-    [SerializeField] private int currentHealth;
+    private int currentHealth;
     private List<Tile> path;
 
     public float MovementSpeed { get { return movementSpeed; } }
     public bool CanMove { get { return canMove; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
+
     private void Awake()
     {
         myMovement = GetComponent<EnemyMovement>();
@@ -45,7 +49,7 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         //Implement die behaviour
-
+        BankMananger.Instance.AddGold(goldReward);
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
