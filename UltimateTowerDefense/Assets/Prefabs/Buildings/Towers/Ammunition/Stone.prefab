@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6875e24952a5a42be4712902fe4804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageRadius: 7.5
   timeOfTravel: 2
   maxHeightPercentage: 50
   heightCurve:

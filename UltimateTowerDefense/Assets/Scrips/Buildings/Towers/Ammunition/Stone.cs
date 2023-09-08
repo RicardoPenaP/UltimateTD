@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Stone : MonoBehaviour,IAmmunition
 {
-    [Header("Stone")]   
+    [Header("Stone")]
+    [SerializeField,Range(0f,20f)] float damageRadius = 5f;
     [Tooltip("The amount of time in seconds that will take to the stone travel to reach the target")]
     [SerializeField, Min(1f)] private float timeOfTravel = 1f;
     [Tooltip("Is the percentage of the distance that will translate to the max height of the curve")]
@@ -18,12 +19,29 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private int damage;
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, damageRadius);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
+
+        for (int i = 0; i < reachedObjects.Length; i++)
+        {            
+            reachedObjects[i].GetComponent<EnemyController>()?.TakeDamage(damage);
+        }
+
+        DestroyBehaviour();
+    }
+
     public void SetMovementDirection(Vector3 newDirection)
     {
         finalPos = newDirection;
         startPos = transform.position;
         maxY = (Vector3.Distance(startPos, finalPos) * maxHeightPercentage) /100;
-        StartCoroutine(ParaboleMovementRoutine());        
+        StartCoroutine(ParableMovementRoutine());        
     }
 
     public void SetDamage(int damage)
@@ -31,27 +49,7 @@ public class Stone : MonoBehaviour,IAmmunition
         this.damage = damage;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        EnemyController enemy = other.GetComponent<EnemyController>();
-
-        if (enemy)
-        {
-            enemy.TakeDamage(damage);
-            DestroyBehaviour();
-            return;
-        }
-
-        Tile tile = other.GetComponent<Tile>();
-        if (tile)
-        {
-            DestroyBehaviour();
-            return;
-        }
-
-        
-    }
-
+    
     private void DestroyBehaviour()
     {
         //Destroy Behaviour
@@ -59,7 +57,7 @@ public class Stone : MonoBehaviour,IAmmunition
         Destroy(gameObject);
     }
 
-    private IEnumerator ParaboleMovementRoutine()
+    private IEnumerator ParableMovementRoutine()
     {
         float elapsedTime = 0;  
         
@@ -72,10 +70,6 @@ public class Stone : MonoBehaviour,IAmmunition
             newPos.x = Mathf.Lerp(startPos.x, finalPos.x, deltaT);
             newPos.y = Mathf.Lerp(startPos.y, maxY, heightT);
             newPos.z = Mathf.Lerp(startPos.z, finalPos.z, deltaT);
-
-            //Height calculation
-            
-            
                       
             transform.position = newPos;           
             yield return null;
