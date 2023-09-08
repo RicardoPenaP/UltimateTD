@@ -8,6 +8,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
     [SerializeField] private Transform shootingPos;
 
     private Animator myAnimator;
+    private readonly int ATTACK_ANIMATION_HASH = Animator.StringToHash("Attack");
+
+    private IAmmunition myAmmunition;
+
+    private Vector3 attackObjectivePos;
 
     private void Awake()
     {
@@ -16,10 +21,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
     {
-        Vector3 objectivedirection = (attackObjectivePos - shootingPos.position).normalized;
-        IAmmunition ammoshooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
-        ammoshooted.SetDamage(attackDamage);
-        ammoshooted.SetMovementDirection(objectivedirection);
+        myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        myAmmunition.SetDamage(attackDamage);
+        this.attackObjectivePos = attackObjectivePos;
+        myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
+        
 
     }
 
@@ -28,5 +34,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
         Vector3 newDirection = (aimPos - transform.position).normalized;
         Vector3 baseAimDirection = new Vector3(newDirection.x, 0, newDirection.z);        
         transform.forward = baseAimDirection;       
+    }
+
+    public void AnimatorAttackCompletedHelper()
+    {
+        Vector3 objectiveDirection = (attackObjectivePos - shootingPos.position).normalized;
+        myAmmunition.SetMovementDirection(objectiveDirection);
     }
 }
