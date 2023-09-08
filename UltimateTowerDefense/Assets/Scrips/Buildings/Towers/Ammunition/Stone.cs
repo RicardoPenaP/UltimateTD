@@ -26,10 +26,15 @@ public class Stone : MonoBehaviour,IAmmunition
     }
     private void OnTriggerEnter(Collider other)
     {
+        Explode();
+    }
+
+    private void Explode()
+    {
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)
-        {            
+        {
             reachedObjects[i].GetComponent<EnemyController>()?.TakeDamage(damage);
         }
 
@@ -38,7 +43,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     public void SetMovementDirection(Vector3 newDirection)
     {
-        finalPos = newDirection;
+        finalPos = new Vector3(newDirection.x,0,newDirection.z);
         startPos = transform.position;
         maxY = (Vector3.Distance(startPos, finalPos) * maxHeightPercentage) /100;
         StartCoroutine(ParableMovementRoutine());        
@@ -74,7 +79,9 @@ public class Stone : MonoBehaviour,IAmmunition
             transform.position = newPos;           
             yield return null;
         }
-       
+
+        Explode();
+
     }
 
     

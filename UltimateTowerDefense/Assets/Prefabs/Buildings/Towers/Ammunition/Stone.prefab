@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageRadius: 7.5
-  timeOfTravel: 2
+  timeOfTravel: 1
   maxHeightPercentage: 50
   heightCurve:
     serializedVersion: 2

@@ -36,7 +36,7 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void AnimatorAttackCompletedHelper()
     {
-        (myAmmunition as MonoBehaviour).transform.SetParent(transform);
+        (myAmmunition as MonoBehaviour).transform.SetParent(transform.parent);
         myAmmunition.SetMovementDirection(objectivePos);
     }
 }
