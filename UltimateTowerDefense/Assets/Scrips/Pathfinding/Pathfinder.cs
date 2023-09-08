@@ -7,7 +7,6 @@ public class Pathfinder : Singleton<Pathfinder>
     [Header("Pathfinder")]
     [SerializeField] private Vector2Int startCoordinates;
     [SerializeField] private Vector2Int destinationCoordinates;
-    [SerializeField] private int tileSize = 5;
 
     private Tile startTile;
     private Tile destinationTile;
@@ -21,8 +20,9 @@ public class Pathfinder : Singleton<Pathfinder>
     private Dictionary<Vector2Int, Tile> tilesReached = new Dictionary<Vector2Int, Tile>();
     private Queue<Tile> frontier = new Queue<Tile>();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         gridMananger = GetComponent<GridMananger>();
 
         if (gridMananger)
@@ -154,13 +154,4 @@ public class Pathfinder : Singleton<Pathfinder>
         BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
     }
 
-    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates)
-    {
-        return new Vector3(coordinates.x * tileSize, 0, coordinates.y * tileSize);
-    }
-
-    public Vector2Int GetCoordinatesFromPosition(Vector3 position)
-    {
-        return new Vector2Int(Mathf.RoundToInt(position.x / tileSize), Mathf.RoundToInt(position.z / tileSize));
-    }
 }

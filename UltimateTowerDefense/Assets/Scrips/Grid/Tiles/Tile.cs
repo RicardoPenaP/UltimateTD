@@ -7,8 +7,7 @@ public enum TileStatusID { Free, Walkable, Occuped}
 
 public class Tile : MonoBehaviour
 {
-    [Header("Tile")]
-    [SerializeField] private int tileSize = 5;
+    [Header("Tile")]    
     [SerializeField] private TileStatusID tileStatus = TileStatusID.Free;
     
     private Vector2Int coordinates = new Vector2Int();
@@ -30,8 +29,8 @@ public class Tile : MonoBehaviour
 
     private void SetTile()
     {
-        coordinates.x = Mathf.RoundToInt(transform.position.x / tileSize);
-        coordinates.y = Mathf.RoundToInt(transform.position.z / tileSize);
+        coordinates.x = Mathf.RoundToInt(transform.position.x / GridMananger.Instance.TileSize);
+        coordinates.y = Mathf.RoundToInt(transform.position.z / GridMananger.Instance.TileSize);
         isWalkable = tileStatus == TileStatusID.Walkable;
     }
 

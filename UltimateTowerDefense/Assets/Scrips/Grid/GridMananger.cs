@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridMananger : MonoBehaviour
+public class GridMananger : Singleton<GridMananger>
 {
     [Header("Grid Mananger")]
+    [SerializeField] private int tileSize = 5;
 
-    [SerializeField] private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
 
+    public int TileSize { get { return tileSize; } }
     public Dictionary<Vector2Int, Tile> MapGrid { get { return mapGrid; } }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         UpdateTiles();
     }
 
@@ -28,5 +31,14 @@ public class GridMananger : MonoBehaviour
         }
     }
 
-    
+    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates)
+    {
+        return new Vector3(coordinates.x * tileSize, 0, coordinates.y * tileSize);
+    }
+
+    public Vector2Int GetCoordinatesFromPosition(Vector3 position)
+    {
+        return new Vector2Int(Mathf.RoundToInt(position.x / tileSize), Mathf.RoundToInt(position.z / tileSize));
+    }
+
 }
