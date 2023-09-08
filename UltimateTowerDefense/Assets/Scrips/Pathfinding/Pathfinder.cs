@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pathfinder : MonoBehaviour
+public class Pathfinder : Singleton<Pathfinder>
 {
     [Header("Pathfinder")]
     [SerializeField] private Vector2Int startCoordinates;
     [SerializeField] private Vector2Int destinationCoordinates;
+    [SerializeField] private int tileSize = 5;
 
     private Tile startTile;
     private Tile destinationTile;
@@ -153,7 +154,13 @@ public class Pathfinder : MonoBehaviour
         BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
     }
 
+    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates)
+    {
+        return new Vector3(coordinates.x * tileSize, 0, coordinates.y * tileSize);
+    }
 
-
-
+    public Vector2Int GetCoordinatesFromPosition(Vector3 position)
+    {
+        return new Vector2Int(Mathf.RoundToInt(position.x / tileSize), Mathf.RoundToInt(position.z / tileSize));
+    }
 }

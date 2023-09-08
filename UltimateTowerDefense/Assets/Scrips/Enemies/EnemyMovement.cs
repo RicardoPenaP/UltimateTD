@@ -21,6 +21,11 @@ public class EnemyMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
     private void Start()
     {
         path = pathfinder.GetNewPath();
@@ -36,28 +41,27 @@ public class EnemyMovement : MonoBehaviour
     {
         myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
         if (!myController.CanMove)
-        {
-            //myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
+        {            
             return;
         }
 
         if (path.Count < 1)
-        {
-            //myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
+        {            
             return;
         }  
 
         if (Vector3.Distance(path[pathIndex].GetPosition(),transform.position) <= myController.DistanceFromNextTileOffset)
         {
             transform.position = path[pathIndex].GetPosition();
-            if (pathIndex < path.Count - 1)
+            if (pathIndex < path.Count)
             {
                 pathIndex++;
                 SetMovementDirection();
             }
             else
             {
-                
+                //Reach the end of the path and do damage to the base life
+                gameObject.SetActive(false);
                 return;
             }           
         }

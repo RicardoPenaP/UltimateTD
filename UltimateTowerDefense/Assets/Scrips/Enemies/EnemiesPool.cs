@@ -6,30 +6,29 @@ public class EnemiesPool : MonoBehaviour
 {
     [Header("Enemies Pool")]
     [SerializeField] private EnemyController enemyPrefab;
-    [SerializeField] private int amountOfEnemies;
-    [SerializeField] private float spawnTime;
+    [SerializeField,Min(0)] private int amountOfEnemiesToPool = 1;
+    [SerializeField,Min(0f)] private float spawnTime = 1f;
     [SerializeField] private bool canSpawn;
 
     private List<EnemyController> enemies = new List<EnemyController>();
 
     private void Awake()
     {
-        //EnemiesPooling();
+        EnemiesPooling();
     }
 
     private void Start()
     {
-        //StartCoroutine(EnemiesSpawnRoutine());
+        StartCoroutine(EnemiesSpawnRoutine());
     }
 
     private void EnemiesPooling()
     {
-        for (int i = 0; i < amountOfEnemies; i++)
+        for (int i = 0; i < amountOfEnemiesToPool; i++)
         {
             EnemyController newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity, transform);
             newEnemy.gameObject.SetActive(false);
             enemies.Add(newEnemy);
-
         }
     }
 
@@ -38,15 +37,15 @@ public class EnemiesPool : MonoBehaviour
         while (true)
         {
             while (canSpawn)
-            {
-                yield return new WaitForSeconds(spawnTime);
+            {                
                 foreach (EnemyController enemy in enemies)
                 {
                     if (!enemy.gameObject.activeInHierarchy)
                     {
                         enemy.gameObject.SetActive(true);
+                        yield return new WaitForSeconds(spawnTime);
                     }
-                }
+                }               
             }
             yield return null;
         }
