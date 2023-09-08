@@ -12,7 +12,7 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     private IAmmunition myAmmunition;
 
-    private Vector3 attackObjectivePos;
+    private Vector3 objectivePos;
 
     private void Awake()
     {
@@ -21,12 +21,10 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
     {
-        myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<IAmmunition>();
         myAmmunition.SetDamage(attackDamage);
-        this.attackObjectivePos = attackObjectivePos;
+        this.objectivePos = attackObjectivePos;
         myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
-        
-
     }
 
     public void AimAt(Vector3 aimPos)
@@ -38,7 +36,7 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void AnimatorAttackCompletedHelper()
     {
-        Vector3 objectiveDirection = (attackObjectivePos - shootingPos.position).normalized;
-        myAmmunition.SetMovementDirection(objectiveDirection);
+        (myAmmunition as MonoBehaviour).transform.SetParent(transform);
+        myAmmunition.SetMovementDirection(objectivePos);
     }
 }

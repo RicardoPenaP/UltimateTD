@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641856623271566425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.355, z: -0.26}
+  m_LocalPosition: {x: 0, y: 0.4164, z: -0.235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6864ea135d4e94e945cfcc8fa5818e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammunitionPrefab: {fileID: 4842572988533219790, guid: f4edde24ea7b49d4aa76a4e4845e594e, type: 3}
-  attackDamage: 10
-  attackRatio: 3
-  attackRange: 7
+  ammunitionPrefab: {fileID: 2261852100830899983, guid: a8b066e74b7c7c8409bd773658aa52f4, type: 3}
+  attackDamage: 100
+  attackRatio: 0.5
+  attackRange: 25
 --- !u!114 &4452719907679204020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cee0428d8e7e19439e56c52d02c5d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPos: {fileID: 0}
+  shootingPos: {fileID: 4272648507321112182}
 --- !u!4 &7249074433792088751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5033198208762345741, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
