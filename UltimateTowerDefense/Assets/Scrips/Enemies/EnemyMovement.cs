@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Pathfinder pathfinder;
     private EnemyController myController;
     private Animator myAnimator;
     private List<Tile> path;    
@@ -16,19 +15,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
-        pathfinder = FindObjectOfType<Pathfinder>();
         myController = GetComponent<EnemyController>();
         myAnimator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
-    {
-        
-    }
-
     private void Start()
     {
-        path = pathfinder.GetNewPath();
         SetMovementDirection();
     }
 
@@ -42,6 +34,11 @@ public class EnemyMovement : MonoBehaviour
         myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
         if (!myController.CanMove)
         {            
+            return;
+        }
+
+        if (path == null)
+        {
             return;
         }
 
@@ -72,14 +69,21 @@ public class EnemyMovement : MonoBehaviour
 
     private void SetMovementDirection()
     {
+        if (path == null)
+        {
+            return;
+        }
         movementDirection = (path[pathIndex].GetPosition() - transform.position).normalized;
         transform.LookAt(path[pathIndex].GetPosition());
     }
 
-    public void SetPath(List<Tile> path)
+    public void ResetWalkthroughPath()
     {
-        this.path = path;
+        pathIndex = 0;        
     }
 
-
+    public void SetPath(List<Tile> newPath)
+    {
+        path = newPath;
+    }
 }

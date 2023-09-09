@@ -20,8 +20,7 @@ public class EnemyController : MonoBehaviour
     private EnemyMovement myMovement;
 
     private int currentHealth;
-    private List<Tile> path;
-
+    
     public float MovementSpeed { get { return movementSpeed; } }
     public bool CanMove { get { return canMove; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
@@ -31,9 +30,35 @@ public class EnemyController : MonoBehaviour
         myMovement = GetComponent<EnemyMovement>();
     }
 
+    private void OnEnable()
+    {
+        ResetEnemy();
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
+    }
+
+    private void Die()
+    {
+        //Implement die behaviour
+        BankMananger.Instance.AddGold(goldReward);
+        gameObject.SetActive(false);
+        
+    }
+
+    private void ResetEnemy()
+    {
+        transform.localPosition = Vector3.zero;
+        currentHealth = maxHealth;
+        canMove = true;
+        myMovement.ResetWalkthroughPath();
+    }
+
+    public void SetEnemyPath(List<Tile> newPath)
+    {
+        myMovement.SetPath(newPath);
     }
 
     public void TakeDamage(int damageAmount)
@@ -46,11 +71,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Die()
-    {
-        //Implement die behaviour
-        BankMananger.Instance.AddGold(goldReward);
-        gameObject.SetActive(false);
-        Destroy(gameObject);
-    }
+
+   
 }

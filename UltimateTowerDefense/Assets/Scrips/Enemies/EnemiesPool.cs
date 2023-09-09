@@ -11,43 +11,63 @@ public class EnemiesPool : MonoBehaviour
     [SerializeField] private bool canSpawn;
 
     private List<EnemyController> enemies = new List<EnemyController>();
+    private Vector2Int startCoordinates;
+    private List<Tile> pooledEnemiesPath;
+
+    private bool canActivate = true;
 
     private void Awake()
     {
-        EnemiesPooling();
+        startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
+        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
+        PopulatePool();
     }
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(EnemiesSpawnRoutine());
+        ActivateEnemy();
     }
 
-    private void EnemiesPooling()
+    private void ActivateEnemy()
+    {
+        if (!canSpawn)
+        {
+            return;
+        }
+
+        if (!canActivate)
+        {
+            return;
+        }
+
+        foreach (EnemyController enemy in enemies)
+        {
+            if (!enemy.gameObject.activeInHierarchy)
+            {
+                canActivate = false;
+                StartCoroutine(CanActivateRespawnRoutine());
+                enemy.gameObject.SetActive(true);
+                return;
+            }
+        }
+    }
+
+    private void PopulatePool()
     {
         for (int i = 0; i < amountOfEnemiesToPool; i++)
         {
             EnemyController newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity, transform);
+            newEnemy.SetEnemyPath(pooledEnemiesPath);
             newEnemy.gameObject.SetActive(false);
             enemies.Add(newEnemy);
         }
     }
 
-    private IEnumerator EnemiesSpawnRoutine()
+    
+
+    private IEnumerator CanActivateRespawnRoutine()
     {
-        while (true)
-        {
-            while (canSpawn)
-            {                
-                foreach (EnemyController enemy in enemies)
-                {
-                    if (!enemy.gameObject.activeInHierarchy)
-                    {
-                        enemy.gameObject.SetActive(true);
-                        yield return new WaitForSeconds(spawnTime);
-                    }
-                }               
-            }
-            yield return null;
-        }
+        yield return new WaitForSeconds(spawnTime);
+        canActivate = true;
     }
 }

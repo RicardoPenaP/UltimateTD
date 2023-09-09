@@ -20,6 +20,8 @@ public class Pathfinder : Singleton<Pathfinder>
     private Dictionary<Vector2Int, Tile> tilesReached = new Dictionary<Vector2Int, Tile>();
     private Queue<Tile> frontier = new Queue<Tile>();
 
+    public Vector2Int DestinationCoordinates { get { return destinationCoordinates; } }
+
     protected override void Awake()
     {
         base.Awake();

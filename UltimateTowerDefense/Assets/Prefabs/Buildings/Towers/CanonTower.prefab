@@ -79,10 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6864ea135d4e94e945cfcc8fa5818e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammunitionPrefab: {fileID: 2261852100830899983, guid: e60f69e712aaa464ea1ba85cec65d940, type: 3}
-  attackDamage: 75
-  attackRatio: 0.75
-  attackRange: 6
+  myData: {fileID: 11400000, guid: b515cb0854828e34d90f0b2d8da9ac94, type: 2}
 --- !u!114 &4452719907679204020
 MonoBehaviour:
   m_ObjectHideFlags: 0

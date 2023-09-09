@@ -406,10 +406,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  movementSpeed: 4
+  movementSpeed: 2
   canMove: 1
   distanceFromNextTileOffset: 0.05
-  currentHealth: 0
+  goldReward: 25
 --- !u!114 &7093361715567049829
 MonoBehaviour:
   m_ObjectHideFlags: 0

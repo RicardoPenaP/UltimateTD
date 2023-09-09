@@ -5,23 +5,21 @@ using UnityEngine;
 public class TowerController : MonoBehaviour,IBuilding
 {
     [Header("Tower Controller")]
-    [SerializeField] private GameObject ammunitionPrefab;
-    [Tooltip("Amount of damage dealt per attack")]
-    [SerializeField, Min(0)] private int attackDamage = 100;
-    [Tooltip("Amount of attacks per second")]
-    [SerializeField, Min(0)] private float attackRatio = 1;
-    [Tooltip("The range for dectecting enemies and attack them")]
-    [SerializeField, Min(0f)] private float attackRange = 10f;
+    [SerializeField] private TowerData myData;
 
-    public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }
-    public int AttackDamage { get { return attackDamage; } }
-    public float AttackRatio { get { return attackRatio; } }
-    public float AttackRange { get { return attackRange; } }
+    public GameObject AmmunitionPrefab { get { return myData.AmmunitionPrefab; } }
+    public int AttackDamage { get { return myData.AttackDamage; } }
+    public float AttackRatio { get { return myData.AttackRatio; } }
+    public float AttackRange { get { return myData.AttackRange; } }
 
+    private void Start()
+    {
+        gameObject.name = myData.TowerName;
+    }
     //Debugging Tools
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, myData.AttackRange);
     }
 }

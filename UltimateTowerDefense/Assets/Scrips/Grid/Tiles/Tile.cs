@@ -29,8 +29,8 @@ public class Tile : MonoBehaviour
 
     private void SetTile()
     {
-        coordinates.x = Mathf.RoundToInt(transform.position.x / GridMananger.Instance.TileSize);
-        coordinates.y = Mathf.RoundToInt(transform.position.z / GridMananger.Instance.TileSize);
+        coordinates.x = Mathf.RoundToInt(transform.position.x / GridMananger.tileSize);
+        coordinates.y = Mathf.RoundToInt(transform.position.z / GridMananger.tileSize);
         isWalkable = tileStatus == TileStatusID.Walkable;
     }
 

@@ -5,11 +5,10 @@ using UnityEngine;
 public class GridMananger : Singleton<GridMananger>
 {
     [Header("Grid Mananger")]
-    [SerializeField] private int tileSize = 5;
+    public static readonly int tileSize = 5;    
 
     private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
-
-    public int TileSize { get { return tileSize; } }
+   
     public Dictionary<Vector2Int, Tile> MapGrid { get { return mapGrid; } }
 
     protected override void Awake()
