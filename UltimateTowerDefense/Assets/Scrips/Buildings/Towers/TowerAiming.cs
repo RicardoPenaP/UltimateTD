@@ -36,7 +36,7 @@ public class TowerAiming : MonoBehaviour
 
     private void UpdateTowerCanon()
     {
-        SetTarget();
+        LookForTarget();
 
         if (!target)
         {
@@ -64,9 +64,25 @@ public class TowerAiming : MonoBehaviour
         myCanon.AimAt(target.transform.position);
     }
 
+    private void LookForTarget()
+    {
+        if (!target)
+        {
+            SetTarget();
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, target.transform.position) > myController.AttackRange)
+        {
+            SetTarget();
+        }
+        
+    }
+
     private void SetTarget()
     {
         //Takes all the near objects and search for a valid enemy in range
+
         Collider[] nearObjects = Physics.OverlapSphere(transform.position, myController.AttackRange);       
 
         foreach (Collider nearObject in nearObjects)
