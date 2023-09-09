@@ -75,6 +75,13 @@ public class TowerAiming : MonoBehaviour
         if (Vector3.Distance(transform.position, target.transform.position) > myController.AttackRange)
         {
             SetTarget();
+            return;
+        }
+
+        if (!target.gameObject.activeInHierarchy)
+        {
+            SetTarget();
+            return;
         }
         
     }

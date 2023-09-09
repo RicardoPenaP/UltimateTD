@@ -10,9 +10,9 @@ public class Canon : MonoBehaviour,ITowerWeapon
     public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
     {
         Vector3 objectivedirection = (attackObjectivePos - shootingPos.position).normalized;
-        IAmmunition ammoshooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
-        ammoshooted.SetDamage(attackDamage);
-        ammoshooted.SetMovementDirection(objectivedirection);
+        IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        ammoShooted.SetDamage(attackDamage);
+        ammoShooted.SetMovementDirection(objectivedirection);
 
     }
 

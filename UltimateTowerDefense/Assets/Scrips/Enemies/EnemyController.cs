@@ -35,6 +35,11 @@ public class EnemyController : MonoBehaviour
         ResetEnemy();
     }
 
+    private void OnDisable()
+    {
+        transform.localPosition = Vector3.zero; 
+    }
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -50,7 +55,7 @@ public class EnemyController : MonoBehaviour
 
     private void ResetEnemy()
     {
-        transform.localPosition = Vector3.zero;
+        
         currentHealth = maxHealth;
         canMove = true;
         myMovement.ResetWalkthroughPath();
