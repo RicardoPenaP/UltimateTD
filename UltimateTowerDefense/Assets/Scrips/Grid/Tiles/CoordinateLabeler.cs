@@ -24,6 +24,17 @@ public class CoordinateLabeler : MonoBehaviour
         tile = GetComponentInParent<Tile>();
     }
 
+    private void Start()
+    {
+        if (Application.isPlaying)
+        {
+            if (labelText.enabled)
+            {
+                labelText.enabled = !labelText.enabled;
+            }            
+        }
+    }
+
     private void Update()
     {  
         if (Input.GetKeyDown(KeyCode.U))
