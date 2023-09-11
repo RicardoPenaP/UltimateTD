@@ -50,7 +50,8 @@ public class EnemyMovement : MonoBehaviour
         if (Vector3.Distance(path[pathIndex].GetPosition(),transform.position) <= myController.DistanceFromNextTileOffset)
         {
             transform.position = path[pathIndex].GetPosition();
-            if (pathIndex < path.Count)
+
+            if (pathIndex < path.Count - 1)
             {
                 pathIndex++;
                 SetMovementDirection();
@@ -59,6 +60,8 @@ public class EnemyMovement : MonoBehaviour
             {
                 //Reach the end of the path and do damage to the base life
                 gameObject.SetActive(false);
+                //Only for testing, change for a variable and use it in enemy controller
+                HealthMananger.Instance.TakeDamage(1);
                 return;
             }           
         }

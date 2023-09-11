@@ -16,6 +16,12 @@ public class HealthMananger : Singleton<HealthMananger>
         healthBar = GetComponentInChildren<UIBar>();
     }
 
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.UpdateBar(currentHealth, maxHealth);
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
