@@ -6,8 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 public class StoreManangerButton : MonoBehaviour,IDeselectHandler
-{
-    
+{    
     private Button myButton;
     private TextMeshProUGUI goldCostText;
     private Image buttonIcon;

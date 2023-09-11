@@ -17,6 +17,6 @@ MonoBehaviour:
   goldCost: 500
   attackDamage: 25
   attackRatio: 0.25
-  attackRange: 0
+  attackRange: 15
   towerIcon: {fileID: 21300000, guid: 8381b95eee8258b47bdfc3b7c61b85c0, type: 3}
   towerName: Catapult Tower
