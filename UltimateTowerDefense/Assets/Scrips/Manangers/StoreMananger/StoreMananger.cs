@@ -101,6 +101,10 @@ public class StoreMananger : Singleton<StoreMananger>
    
     public IBuilding CreateBuilding(Transform tileTransform)
     {
+        if (MouseOverUIMananger.Instance.MouseOverUI)
+        {
+            return null;
+        }
         PreviewBuildingMananger.Instance.TurnOffPreview();
         BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
         IBuilding building = Instantiate(selectedTower.TowerPrefab, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();

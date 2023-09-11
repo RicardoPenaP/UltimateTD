@@ -46,6 +46,10 @@ public class BuildingManangement : MonoBehaviour
     private void CreateBuilding()
     {
         tileBuilding = StoreMananger.Instance.CreateBuilding(transform);
+        if (tileBuilding == null)
+        {
+            return;
+        }
         myTile.TileStatus = TileStatusID.Occuped;        
     }
 }
