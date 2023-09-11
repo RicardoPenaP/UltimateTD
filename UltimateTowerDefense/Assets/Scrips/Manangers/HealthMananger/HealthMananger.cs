@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthMananger : MonoBehaviour
+public class HealthMananger : Singleton<HealthMananger>
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Health Mananger")]
+    [SerializeField,Min(0)] private int maxHealth = 10;
+    [SerializeField] private int currentHealth;
+
+    private UIBar healthBar;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        healthBar = GetComponentInChildren<UIBar>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            //GameOver behaviour
+        }
+
+        healthBar.UpdateBar(currentHealth, maxHealth);
     }
 }
