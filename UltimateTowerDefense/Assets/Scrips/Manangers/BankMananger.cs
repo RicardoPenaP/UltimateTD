@@ -55,6 +55,6 @@ public class BankMananger : Singleton<BankMananger>
 
     private void UpdateBankUI()
     {
-        goldText.text = $"Gold: {currentAmountGold}";
+        goldText.text = $"{currentAmountGold}";
     }
 }
