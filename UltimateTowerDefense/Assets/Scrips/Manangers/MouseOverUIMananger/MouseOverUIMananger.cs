@@ -18,6 +18,21 @@ public class MouseOverUIMananger : Singleton<MouseOverUIMananger>
 
     private void SetMouseOverUI()
     {
-        mouseOverUI = EventSystem.current.IsPointerOverGameObject();
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+
+        for (int i = 0; i < raycastResults.Count; i++)
+        {
+            if (raycastResults[i].gameObject.GetComponent<IgnoredUI>())
+            {
+                raycastResults.RemoveAt(i);
+                i--;
+            }
+        }
+
+        mouseOverUI = raycastResults.Count > 0;
     }
 }
