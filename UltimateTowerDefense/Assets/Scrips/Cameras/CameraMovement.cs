@@ -20,6 +20,7 @@ public class CameraMovement : MonoBehaviour
 
     private Vector2 keysRawInput;
     private Vector2 mousePosition;
+    private Vector2 mouseLastPos;
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class CameraMovement : MonoBehaviour
     private void Update()
     {
         MoveByKeysInput();
-        MoveByEdgeScrollingInput();
+        MoveByEdgeScrollInput();
         MoveByMouseDragInput();
     }
 
@@ -59,16 +60,16 @@ public class CameraMovement : MonoBehaviour
         myPointer.position += movementDirection * byKeysMovementSpeed * Time.deltaTime;
     }
 
-    private void MoveByEdgeScrollingInput()
+    private void MoveByEdgeScrollInput()
     {
         GetMousePosition();
-        MoveByEdgeSrolling();
+        MoveByEdgeSroll();
     }
     private void GetMousePosition()
     {
         mousePosition = Input.mousePosition;
     }
-    private void MoveByEdgeSrolling()
+    private void MoveByEdgeSroll()
     {
         int horizontalTresholdInPixels = (Screen.width * horizontalTreshold) / 100;
         int verticalTresholdInPixels = (Screen.height * verticalTreshold) / 100;
@@ -100,6 +101,11 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveByMouseDragInput()
     {
-
+        GetMouseLastPosition();
     }
+    private void GetMouseLastPosition()
+    {
+        
+    }
+
 }

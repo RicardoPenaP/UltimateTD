@@ -3705,7 +3705,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.52573115, y: -0.000000020699304, z: 0.000000012792872, w: 0.85065085}
+  m_LocalRotation: {x: 0.52573115, y: 0.000000020699304, z: -0.000000012792872, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 36, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6037,7 +6037,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411445572}
-  m_LocalRotation: {x: 0.52573115, y: -0.000000020699304, z: 0.000000012792872, w: 0.85065085}
+  m_LocalRotation: {x: 0.52573115, y: 0.000000020699304, z: -0.000000012792872, w: 0.85065085}
   m_LocalPosition: {x: 0, y: 36, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6915,7 +6915,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90846d6b81114764e9b7632669c3c6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  byKeysMovementSpeed: 10
+  byKeysMovementSpeed: 60
+  byEdgeScrollingMovementSpeed: 60
+  byDragMouseMovementSpeed: 10
+  verticalTreshold: 20
+  horizontalTreshold: 20
 --- !u!4 &1912364771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
