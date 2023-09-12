@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
     [Header("Camera Movement")]
+    [Header("Movement Methods Active")]
+    [SerializeField] private bool byKeyInput = false;
+    [SerializeField] private bool byEdgeScroll = false;
+    [SerializeField] private bool byMouseDrag = false;
     [Header("Movement Speed Settings")]
     [SerializeField, Min(0f)] private float byKeysMovementSpeed = 10f;
     [SerializeField, Min(0f)] private float byEdgeScrollingMovementSpeed = 10f;
@@ -21,6 +23,8 @@ public class CameraMovement : MonoBehaviour
     private Vector2 keysRawInput;
     private Vector2 mousePosition;
     private Vector2 mouseLastPos;
+
+    private bool movementByDragActive = false;
 
     private void Awake()
     {
@@ -47,6 +51,10 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveByKeysInput()
     {
+        if (!byKeyInput)
+        {
+            return;
+        }
         GetKeysRawInput();
         MoveByKeys();
     }
@@ -62,12 +70,16 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveByEdgeScrollInput()
     {
+        if (!byEdgeScroll)
+        {
+            return;
+        }
         GetMousePosition();
         MoveByEdgeSroll();
     }
     private void GetMousePosition()
     {
-        mousePosition = Input.mousePosition;
+        mousePosition = playerInput.Player.MousePosition.ReadValue<Vector2>();
     }
     private void MoveByEdgeSroll()
     {
@@ -101,11 +113,39 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveByMouseDragInput()
     {
+        if (!byMouseDrag)
+        {
+            return;
+        }
         GetMouseLastPosition();
+        MoveByDrag();
     }
     private void GetMouseLastPosition()
     {
-        
+        if (playerInput.Player.MouseRightButton.WasPressedThisFrame())
+        {
+            movementByDragActive = true;
+            mouseLastPos = playerInput.Player.MousePosition.ReadValue<Vector2>();
+        }
+
+        if (playerInput.Player.MouseRightButton.WasReleasedThisFrame())
+        {
+            movementByDragActive = false;
+        }
+    }
+
+    private void MoveByDrag()
+    {
+        if (!movementByDragActive)
+        {
+            return;
+        }
+        Vector2 currentMousePos = playerInput.Player.MousePosition.ReadValue<Vector2>();
+
+        Vector3 movementDirection = new Vector3(mouseLastPos.x -currentMousePos.x , 0 ,mouseLastPos.y - currentMousePos.y);
+
+        myPointer.position += movementDirection * byDragMouseMovementSpeed * Time.deltaTime;
+        mouseLastPos = playerInput.Player.MousePosition.ReadValue<Vector2>();
     }
 
 }
