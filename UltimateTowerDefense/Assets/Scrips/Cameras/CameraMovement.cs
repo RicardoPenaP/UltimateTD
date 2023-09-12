@@ -64,8 +64,8 @@ public class CameraMovement : MonoBehaviour
     }
     private void MoveByKeys()
     {
-        Vector3 movementDirection = new Vector3(keysRawInput.x, 0, keysRawInput.y);
-        myPointer.position += movementDirection * byKeysMovementSpeed * Time.deltaTime;
+        Vector3 rawMovementDirection = new Vector3(keysRawInput.x, 0, keysRawInput.y);
+        MovePointer(rawMovementDirection, byKeysMovementSpeed);        
     }
 
     private void MoveByEdgeScrollInput()
@@ -86,29 +86,29 @@ public class CameraMovement : MonoBehaviour
         int horizontalTresholdInPixels = (Screen.width * horizontalTreshold) / 100;
         int verticalTresholdInPixels = (Screen.height * verticalTreshold) / 100;
 
-        Vector3 movementDirection = new Vector3();
+        Vector3 rawMovementDirection = new Vector3();
 
         if (mousePosition.x < 0 + horizontalTresholdInPixels)
         {
-            movementDirection.x = -1f;
+            rawMovementDirection.x = -1f;
         }
 
         if (mousePosition.x > Screen.width - horizontalTresholdInPixels)
         {
-            movementDirection.x = 1f;
+            rawMovementDirection.x = 1f;
         }
 
         if (mousePosition.y < 0 + verticalTresholdInPixels)
         {
-            movementDirection.z = -1f;
+            rawMovementDirection.z = -1f;
         }
 
         if (mousePosition.y > Screen.height - verticalTresholdInPixels)
         {
-            movementDirection.z = 1f;
+            rawMovementDirection.z = 1f;
         }
 
-        myPointer.position += movementDirection * byEdgeScrollingMovementSpeed * Time.deltaTime;
+        MovePointer(rawMovementDirection,byEdgeScrollingMovementSpeed);
     }
 
     private void MoveByMouseDragInput()
@@ -133,7 +133,6 @@ public class CameraMovement : MonoBehaviour
             movementByDragActive = false;
         }
     }
-
     private void MoveByDrag()
     {
         if (!movementByDragActive)
@@ -142,10 +141,19 @@ public class CameraMovement : MonoBehaviour
         }
         Vector2 currentMousePos = playerInput.Player.MousePosition.ReadValue<Vector2>();
 
-        Vector3 movementDirection = new Vector3(mouseLastPos.x -currentMousePos.x , 0 ,mouseLastPos.y - currentMousePos.y);
+        Vector3 rawMovementDirection = new Vector3(mouseLastPos.x -currentMousePos.x , 0 ,mouseLastPos.y - currentMousePos.y);
 
-        myPointer.position += movementDirection * byDragMouseMovementSpeed * Time.deltaTime;
+        MovePointer(rawMovementDirection,byDragMouseMovementSpeed);
         mouseLastPos = playerInput.Player.MousePosition.ReadValue<Vector2>();
+    }
+
+    private void MovePointer(Vector3 rawMovementDirection, float movementSpeed)
+    {
+        Vector3 movementDirection = myPointer.position + rawMovementDirection * movementSpeed * Time.deltaTime;
+        movementDirection.x = Mathf.Clamp(movementDirection.x, GridMananger.Instance.MyThresholds.minX, GridMananger.Instance.MyThresholds.maxX);
+        movementDirection.z = Mathf.Clamp(movementDirection.z, GridMananger.Instance.MyThresholds.minZ, GridMananger.Instance.MyThresholds.maxZ);
+
+        myPointer.position = movementDirection;
     }
 
 }
