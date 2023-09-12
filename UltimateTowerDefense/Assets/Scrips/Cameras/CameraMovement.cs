@@ -36,6 +36,7 @@ public class CameraMovement : MonoBehaviour
     {
         MoveByKeysInput();
         MoveByEdgeScrollingInput();
+        MoveByMouseDragInput();
     }
 
     private void OnDisable()
@@ -97,5 +98,8 @@ public class CameraMovement : MonoBehaviour
         myPointer.position += movementDirection * byEdgeScrollingMovementSpeed * Time.deltaTime;
     }
 
-    
+    private void MoveByMouseDragInput()
+    {
+
+    }
 }
