@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IEnenmy;
+using EnemiesInterface;
 
 public class SlimeIA : MonoBehaviour,IEnemy
 {

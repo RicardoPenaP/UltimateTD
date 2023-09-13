@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IEnenmy
+namespace EnemiesInterface
 {
     public enum EnemyState { None, Walking, Attacking }
     public interface IEnemy
