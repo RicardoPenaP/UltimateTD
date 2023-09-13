@@ -27,6 +27,12 @@ public class SlimeMovement : MonoBehaviour
         {
             return;
         }
+
+        if (!myController.CanWalk)
+        {
+            return;
+        }
+
         if (positionReached)
         {
             return;

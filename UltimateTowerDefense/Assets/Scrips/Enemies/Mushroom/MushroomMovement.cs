@@ -27,6 +27,12 @@ public class MushroomMovement : MonoBehaviour
         {
             return;
         }
+
+        if (!myController.CanWalk)
+        {
+            return;
+        }
+
         if (positionReached)
         {
             return;
