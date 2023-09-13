@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d754ecf6fc64294438bb2df5713b2413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4927327814512467264, guid: 7e362658a7813b64cae3eaddb645e993, type: 3}
+  enemyPrefab: {fileID: 1534167283859374720, guid: 84cbc9e72d35f7642876d0dcd4173f0e, type: 3}
   amountOfEnemiesToPool: 10
-  spawnTime: 2
+  spawnTime: 5
   canSpawn: 1
 --- !u!4 &80317826
 Transform:
