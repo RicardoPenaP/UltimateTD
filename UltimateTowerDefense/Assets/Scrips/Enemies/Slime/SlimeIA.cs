@@ -15,6 +15,8 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private bool canWalk = true;
 
+    private bool pathCompleted = false;
+
     private int pathIndex = 0;
     //Animator hash codes
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
@@ -24,7 +26,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void OnEnable()
     {
-        myState = EnemyState.Walking;
+        myState = EnemyState.Walking;       
     }
 
     private void Awake()
@@ -51,6 +53,10 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void UpdateWalking()
     {
+        if (pathCompleted)
+        {
+            return;
+        }
         myAnimator.SetBool(ANIMATOR_WALK_HASH, !myMovement.PositionReached);
         if (myMovement.PositionReached)
         {
@@ -67,15 +73,21 @@ public class SlimeIA : MonoBehaviour,IEnemy
     }
 
     private void PathCompleted()
-    {
-        //Pending: implement attack animator behaviour;
-        gameObject.SetActive(false);
-        HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);
-        ResetWalkthroughPath();
+    {        
+        pathCompleted = true;
+        myAnimator.SetTrigger(ANIMATOR_ATTACK_HASH);       
     }    
+
+    public void AttackAnimationCompleted()
+    {
+        HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);       
+        gameObject.SetActive(false);
+        ResetWalkthroughPath();
+    }
 
     private void ResetWalkthroughPath()
     {
+        pathCompleted = false;
         pathIndex = 0;
         myMovement.transform.position = path[pathIndex].transform.position;
     }

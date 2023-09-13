@@ -18,6 +18,11 @@ public class EnemiesPool : MonoBehaviour
 
     private void Awake()
     {
+          
+    }
+
+    private void Start()
+    {
         startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
         pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
         PopulatePool();
