@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class ChestAnimatorHelper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private ChestIA myIA;
+
+    private void Awake()
     {
-        
+        myIA = GetComponentInParent<ChestIA>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AttackAnimationCompleted()
     {
-        
+        myIA.AttackAnimationCompleted();
+    }
+
+    public void DieAnimationCompleted()
+    {
+        myIA.DieAnimationCompleted();
     }
 }
