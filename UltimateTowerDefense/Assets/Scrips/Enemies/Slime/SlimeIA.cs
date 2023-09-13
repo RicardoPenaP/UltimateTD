@@ -92,10 +92,23 @@ public class SlimeIA : MonoBehaviour,IEnemy
         myMovement.transform.position = path[pathIndex].transform.position;
     }
 
+    public void DieAnimationCompleted()
+    {
+        BankMananger.Instance.AddGold(myController.GoldReward);
+        gameObject.SetActive(false);
+    }
+
     //Interface Implementation Methods
     public void SetPath(List<Tile> path)
     {
         this.path = path;
         ResetWalkthroughPath();
     }
+
+    public void Die()
+    {
+        myAnimator.SetTrigger(ANIMATOR_DIE_HASH);
+    }
+
+
 }

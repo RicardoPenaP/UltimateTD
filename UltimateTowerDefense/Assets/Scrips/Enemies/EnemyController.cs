@@ -22,18 +22,22 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int damageToStronghold = 1;
 
     //private EnemyMovement myMovement;
-    private IEnemy myEnemy;
+    private IEnemy myEnemyIA;
 
     private int currentHealth;
+
+    private bool isAlive = true;
     
     public float MovementSpeed { get { return movementSpeed; } }
     public bool CanMove { get { return canMove; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
+    public int GoldReward { get { return goldReward; } }
     public int DamageToStronghold { get { return damageToStronghold; } }
+    public bool IsAlive { get { return isAlive; } }
 
     private void Awake()
     {        
-        myEnemy = GetComponentInChildren<IEnemy>();
+        myEnemyIA = GetComponentInChildren<IEnemy>();
     }
 
     private void OnEnable()
@@ -51,12 +55,6 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    private void Die()
-    {
-        BankMananger.Instance.AddGold(goldReward);
-        gameObject.SetActive(false);
-    }
-
     private void ResetEnemy()
     {
         currentHealth = maxHealth;
@@ -65,16 +63,21 @@ public class EnemyController : MonoBehaviour
 
     public void SetEnemyPath(List<Tile> newPath)
     {
-        myEnemy.SetPath(newPath);
+        myEnemyIA.SetPath(newPath);
     }
 
     public void TakeDamage(int damageAmount)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         currentHealth -= damageAmount;
         if (currentHealth <= 0)
         {
+            isAlive = false;
             currentHealth = 0;
-            Die();
+            myEnemyIA.Die();
         }
     }
 

@@ -8,6 +8,7 @@ namespace EnemiesInterface
     public interface IEnemy
     {
         public void SetPath(List<Tile> path);
+        public void Die();
     }
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class MushroomIA : MonoBehaviour, IEnemy
+public class MushroomIA : MonoBehaviour 
 {
     private EnemyController myController;
     private SlimeMovement myMovement;
