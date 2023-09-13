@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class MushroomIA : MonoBehaviour 
+public class MushroomIA : MonoBehaviour, IEnemy
 {
     private EnemyController myController;
-    private SlimeMovement myMovement;
+    private MushroomMovement myMovement;
     private Animator myAnimator;
 
     private List<Tile> path;
@@ -18,6 +18,7 @@ public class MushroomIA : MonoBehaviour
     private bool pathCompleted = false;
 
     private int pathIndex = 0;
+
     //Animator hash codes
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int ANIMATOR_WALK_HASH = Animator.StringToHash("Walk");
@@ -32,7 +33,7 @@ public class MushroomIA : MonoBehaviour
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
-        myMovement = GetComponentInChildren<SlimeMovement>();
+        myMovement = GetComponentInChildren<MushroomMovement>();
         myAnimator = GetComponentInChildren<Animator>();
     }
 
@@ -94,6 +95,10 @@ public class MushroomIA : MonoBehaviour
     {
         pathCompleted = false;
         pathIndex = 0;
+        if (path==null)
+        {
+            return;
+        }
         myMovement.transform.position = path[pathIndex].transform.position;
         myMovement.SetPositionToMove(path[pathIndex].transform.position);
     }
@@ -114,7 +119,6 @@ public class MushroomIA : MonoBehaviour
 
     public void Die()
     {
-        // myAnimator.SetBool(ANIMATOR_WALK_HASH, false);
         myAnimator.SetTrigger(ANIMATOR_DIE_HASH);
     }
 

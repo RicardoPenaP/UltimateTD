@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3744299321767909841}
   - component: {fileID: 7671989720915220819}
-  - component: {fileID: 3283088114875451561}
+  - component: {fileID: 3942837418910036771}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -53,7 +53,7 @@ MonoBehaviour:
   goldReward: 25
   damageToStronghold: 1
   currentHealth: 0
---- !u!114 &3283088114875451561
+--- !u!114 &3942837418910036771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,18 +292,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4245915190017150719, guid: cbc814ca6b730954b8a5e3641bde01c9, type: 3}
   m_PrefabInstance: {fileID: 1283932721199578772}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7619594429332211044
-MonoBehaviour:
+--- !u!65 &3244536451836499971
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3115918506582978667}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb726d114ac98e409ec48c762d1b144, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!114 &7525041013758786478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,5 +315,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e7e05cb35e49b3489ba79a8591423a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7619594429332211044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115918506582978667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb726d114ac98e409ec48c762d1b144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

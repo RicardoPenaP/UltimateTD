@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {        
-        myEnemyIA = GetComponentInChildren<IEnemy>();
+        myEnemyIA = GetComponent<IEnemy>();
     }
 
     private void OnEnable()
