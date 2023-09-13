@@ -15,4 +15,9 @@ public class MushroomAnimatorHelper : MonoBehaviour
     {
         myIA.AttackAnimationCompleted();
     }
+
+    public void DieAnimationCompleted()
+    {
+        myIA.DieAnimationCompleted();
+    }
 }

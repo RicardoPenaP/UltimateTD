@@ -23,6 +23,10 @@ public class MushroomMovement : MonoBehaviour
 
     private void Move()
     {
+        if (!myController.IsAlive)
+        {
+            return;
+        }
         if (positionReached)
         {
             return;
