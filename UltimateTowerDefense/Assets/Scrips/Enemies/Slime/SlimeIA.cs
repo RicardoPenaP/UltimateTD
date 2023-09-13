@@ -7,6 +7,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
 {
     private EnemyController myController;
     private SlimeMovement myMovement;
+    private Animator myAnimator;
 
     private List<Tile> path;
 
@@ -14,12 +15,15 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private bool canWalk = true;
 
+    private int pathIndex = 0;
+
     public bool CanWalk { get { return canWalk; } }
 
     private void Awake()
     {
-        myController = GetComponentInParent<EnemyController>();
-        myMovement = GetComponent<SlimeMovement>();
+        myController = GetComponent<EnemyController>();
+        myMovement = GetComponentInChildren<SlimeMovement>();
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -41,18 +45,34 @@ public class SlimeIA : MonoBehaviour,IEnemy
     {
         if (myMovement.PositionReached)
         {
-            HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);
+            if (pathIndex < path.Count-1)
+            {
+                pathIndex++;
+                myMovement.SetPositionToMove(path[pathIndex].transform.position);
+            }
+            else
+            {
+                PathCompleted();
+            }
         }
     }
 
-
-    public void ResetWalkthroughPath()
+    private void PathCompleted()
     {
-       
+        gameObject.SetActive(false);
+        ResetWalkthroughPath();
+    }
+    
+
+    private void ResetWalkthroughPath()
+    {
+        pathIndex = 0;
+        myMovement.transform.position = path[pathIndex].transform.position;
     }
 
     public void SetPath(List<Tile> path)
     {
         this.path = path;
+        ResetWalkthroughPath();
     }
 }

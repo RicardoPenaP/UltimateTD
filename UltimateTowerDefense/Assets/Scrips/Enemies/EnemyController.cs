@@ -32,8 +32,7 @@ public class EnemyController : MonoBehaviour
     public int DamageToStronghold { get { return damageToStronghold; } }
 
     private void Awake()
-    {
-        //myMovement = GetComponent<EnemyMovement>();
+    {        
         myEnemy = GetComponentInChildren<IEnemy>();
     }
 
@@ -63,9 +62,7 @@ public class EnemyController : MonoBehaviour
     private void ResetEnemy()
     {
         currentHealth = maxHealth;
-        canMove = true;
-        //myMovement.ResetWalkthroughPath();
-        myEnemy.ResetWalkthroughPath();
+        canMove = true;       
     }
 
     public void SetEnemyPath(List<Tile> newPath)
