@@ -53,10 +53,8 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        //Implement die behaviour
         BankMananger.Instance.AddGold(goldReward);
         gameObject.SetActive(false);
-        
     }
 
     private void ResetEnemy()
@@ -67,7 +65,6 @@ public class EnemyController : MonoBehaviour
 
     public void SetEnemyPath(List<Tile> newPath)
     {
-        //myMovement.SetPath(newPath);
         myEnemy.SetPath(newPath);
     }
 

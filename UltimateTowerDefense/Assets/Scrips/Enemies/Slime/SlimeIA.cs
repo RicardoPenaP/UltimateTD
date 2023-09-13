@@ -19,6 +19,11 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     public bool CanWalk { get { return canWalk; } }
 
+    private void OnEnable()
+    {
+        myState = EnemyState.Walking;
+    }
+
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
@@ -59,7 +64,9 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void PathCompleted()
     {
+        //Pending: implement attack animator behaviour;
         gameObject.SetActive(false);
+        HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);
         ResetWalkthroughPath();
     }
     

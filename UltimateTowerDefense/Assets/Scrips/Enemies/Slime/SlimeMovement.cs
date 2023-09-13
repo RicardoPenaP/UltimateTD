@@ -8,7 +8,7 @@ public class SlimeMovement : MonoBehaviour
 
     private Vector3 positionToMove;
 
-    private bool positionReached = false;
+    private bool positionReached = true;
     public bool PositionReached { get { return positionReached; } }
 
     private void Awake()
