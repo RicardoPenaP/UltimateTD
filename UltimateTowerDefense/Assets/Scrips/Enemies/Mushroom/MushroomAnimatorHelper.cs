@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MushroomAnimatorHelper : MonoBehaviour
 {
-    private SlimeIA myIA;
+    private MushroomIA myIA;
 
     private void Awake()
     {
-        myIA = GetComponentInParent<SlimeIA>();
+        myIA = GetComponentInParent<MushroomIA>();
     }
 
     public void AttackAnimationCompleted()

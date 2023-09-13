@@ -20,8 +20,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int ANIMATOR_WALK_HASH = Animator.StringToHash("Walk");
     private readonly int ANIMATOR_DIE_HASH = Animator.StringToHash("Die");
-    public bool CanWalk { get { return myController.CanWalk; } }
-
+   
     private void OnEnable()
     {
         myState = EnemyState.Walking;       

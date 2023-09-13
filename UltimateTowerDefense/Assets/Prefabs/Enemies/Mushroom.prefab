@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   movementSpeed: 4
-  canMove: 1
-  distanceFromNextTileOffset: 0.05
+  canWalk: 0
+  distanceFromNextTileOffset: 0.08
   goldReward: 25
   damageToStronghold: 1
   currentHealth: 0
