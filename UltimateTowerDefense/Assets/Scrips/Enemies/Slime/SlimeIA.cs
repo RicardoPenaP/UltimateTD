@@ -16,7 +16,10 @@ public class SlimeIA : MonoBehaviour,IEnemy
     private bool canWalk = true;
 
     private int pathIndex = 0;
-
+    //Animator hash codes
+    private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
+    private readonly int ANIMATOR_WALK_HASH = Animator.StringToHash("Walk");
+    private readonly int ANIMATOR_DIE_HASH = Animator.StringToHash("DIE");
     public bool CanWalk { get { return canWalk; } }
 
     private void OnEnable()
@@ -48,6 +51,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void UpdateWalking()
     {
+        myAnimator.SetBool(ANIMATOR_WALK_HASH, !myMovement.PositionReached);
         if (myMovement.PositionReached)
         {
             if (pathIndex < path.Count-1)
@@ -68,8 +72,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
         gameObject.SetActive(false);
         HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);
         ResetWalkthroughPath();
-    }
-    
+    }    
 
     private void ResetWalkthroughPath()
     {
@@ -77,6 +80,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
         myMovement.transform.position = path[pathIndex].transform.position;
     }
 
+    //Interface Implementation Methods
     public void SetPath(List<Tile> path)
     {
         this.path = path;
