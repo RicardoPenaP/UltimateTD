@@ -72,6 +72,12 @@ public class TowerAiming : MonoBehaviour
             return;
         }
 
+        if (!target.IsAlive)
+        {
+            SetTarget();
+            return;
+        }
+
         if (Vector3.Distance(transform.position, target.transform.position) > myController.AttackRange)
         {
             SetTarget();
@@ -97,8 +103,11 @@ public class TowerAiming : MonoBehaviour
             EnemyController enemy = nearObject.GetComponent<EnemyController>();
             if (enemy)
             {
-                target = enemy;
-                return;
+                if (enemy.IsAlive)
+                {
+                    target = enemy;
+                    return;
+                }                
             }
         }
 
