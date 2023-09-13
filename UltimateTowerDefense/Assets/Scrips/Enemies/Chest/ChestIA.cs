@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class ChestIA : MonoBehaviour,IEnemy
+public class ChestIA : MonoBehaviour, IEnemy
 {
     private EnemyController myController;
     private ChestMovement myMovement;
