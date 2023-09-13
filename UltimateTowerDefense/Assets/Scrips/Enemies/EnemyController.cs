@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IEnenmy;
 
 public class EnemyController : MonoBehaviour
 {
@@ -17,17 +18,23 @@ public class EnemyController : MonoBehaviour
     [Header("Rewards Settings")]
     [SerializeField,Min(0f)] private int goldReward = 25;
 
-    private EnemyMovement myMovement;
+    [Header("Damage Settings")]
+    [SerializeField] private int damageToStronghold = 1;
+
+    //private EnemyMovement myMovement;
+    private IEnemy myEnemy;
 
     private int currentHealth;
     
     public float MovementSpeed { get { return movementSpeed; } }
     public bool CanMove { get { return canMove; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
+    public int DamageToStronghold { get { return damageToStronghold; } }
 
     private void Awake()
     {
-        myMovement = GetComponent<EnemyMovement>();
+        //myMovement = GetComponent<EnemyMovement>();
+        myEnemy = GetComponentInChildren<IEnemy>();
     }
 
     private void OnEnable()
@@ -57,12 +64,14 @@ public class EnemyController : MonoBehaviour
     {
         currentHealth = maxHealth;
         canMove = true;
-        myMovement.ResetWalkthroughPath();
+        //myMovement.ResetWalkthroughPath();
+        myEnemy.ResetWalkthroughPath();
     }
 
     public void SetEnemyPath(List<Tile> newPath)
     {
-        myMovement.SetPath(newPath);
+        //myMovement.SetPath(newPath);
+        myEnemy.SetPath(newPath);
     }
 
     public void TakeDamage(int damageAmount)
