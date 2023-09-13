@@ -8,7 +8,7 @@ public class TowerAiming : MonoBehaviour
 
     private ITowerWeapon myCanon;        
     private TowerController myController;
-    private EnemyController target;
+    private EnemyDamageHandler target;
 
     private bool canAttack = true;
     private float attackCooldownTime;
@@ -100,7 +100,7 @@ public class TowerAiming : MonoBehaviour
 
         foreach (Collider nearObject in nearObjects)
         {
-            EnemyController enemy = nearObject.GetComponent<EnemyController>();
+            EnemyDamageHandler enemy = nearObject.GetComponent<EnemyDamageHandler>();
             if (enemy)
             {
                 if (enemy.IsAlive)

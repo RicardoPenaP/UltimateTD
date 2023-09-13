@@ -31,7 +31,7 @@ public class CanonBall : MonoBehaviour,IAmmunition
 
     private void OnTriggerEnter(Collider other)
     {
-        EnemyController enemy = other.GetComponent<EnemyController>();
+        EnemyDamageHandler enemy = other.GetComponent<EnemyDamageHandler>();
 
         if (enemy)
         {

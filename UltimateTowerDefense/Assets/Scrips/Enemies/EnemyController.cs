@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     //private EnemyMovement myMovement;
     private IEnemy myEnemyIA;
 
-    private int currentHealth;
+    [SerializeField]private int currentHealth;
 
     private bool isAlive = true;
     
@@ -58,7 +58,8 @@ public class EnemyController : MonoBehaviour
     private void ResetEnemy()
     {
         currentHealth = maxHealth;
-        canMove = true;       
+        canMove = true;
+        isAlive = true;
     }
 
     public void SetEnemyPath(List<Tile> newPath)

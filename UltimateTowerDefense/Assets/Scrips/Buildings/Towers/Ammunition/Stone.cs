@@ -35,7 +35,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
         for (int i = 0; i < reachedObjects.Length; i++)
         {
-            reachedObjects[i].GetComponent<EnemyController>()?.TakeDamage(damage);
+            reachedObjects[i].GetComponent<EnemyDamageHandler>()?.TakeDamage(damage);
         }
 
         DestroyBehaviour();

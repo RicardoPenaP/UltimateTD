@@ -21,7 +21,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
     //Animator hash codes
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int ANIMATOR_WALK_HASH = Animator.StringToHash("Walk");
-    private readonly int ANIMATOR_DIE_HASH = Animator.StringToHash("DIE");
+    private readonly int ANIMATOR_DIE_HASH = Animator.StringToHash("Die");
     public bool CanWalk { get { return canWalk; } }
 
     private void OnEnable()
@@ -43,6 +43,11 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void UpdateState()
     {
+        if (!myController.IsAlive)
+        {
+            return;
+        }
+        
         switch (myState)
         {            
             case EnemyState.Walking:
@@ -90,12 +95,14 @@ public class SlimeIA : MonoBehaviour,IEnemy
         pathCompleted = false;
         pathIndex = 0;
         myMovement.transform.position = path[pathIndex].transform.position;
+        myMovement.SetPositionToMove(path[pathIndex].transform.position);
     }
 
     public void DieAnimationCompleted()
     {
         BankMananger.Instance.AddGold(myController.GoldReward);
         gameObject.SetActive(false);
+        ResetWalkthroughPath();
     }
 
     //Interface Implementation Methods
@@ -107,6 +114,7 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     public void Die()
     {
+       // myAnimator.SetBool(ANIMATOR_WALK_HASH, false);
         myAnimator.SetTrigger(ANIMATOR_DIE_HASH);
     }
 
