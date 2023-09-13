@@ -55,7 +55,6 @@ public class EnemyController : MonoBehaviour
 
     private void ResetEnemy()
     {
-        
         currentHealth = maxHealth;
         canMove = true;
         myMovement.ResetWalkthroughPath();
