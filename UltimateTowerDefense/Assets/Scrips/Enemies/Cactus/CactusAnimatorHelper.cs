@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CactusAnimatorHelper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private CactusIA myIA;
+
+    private void Awake()
     {
-        
+        myIA = GetComponentInParent<CactusIA>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AttackAnimationCompleted()
     {
-        
+        myIA.AttackAnimationCompleted();
+    }
+
+    public void DieAnimationCompleted()
+    {
+        myIA.DieAnimationCompleted();
     }
 }
