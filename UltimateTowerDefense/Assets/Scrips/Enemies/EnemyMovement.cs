@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
     private void Move()
     {
         myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
-        if (!myController.CanMove)
+        if (!myController.CanWalk)
         {            
             return;
         }

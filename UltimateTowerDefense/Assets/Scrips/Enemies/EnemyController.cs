@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
-    [SerializeField] private bool canMove;
+    [SerializeField] private bool canWalk;
     [SerializeField] private float distanceFromNextTileOffset = 0.05f;
 
     [Header("Rewards Settings")]
@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     private bool isAlive = true;
     
     public float MovementSpeed { get { return movementSpeed; } }
-    public bool CanMove { get { return canMove; } }
+    public bool CanWalk { get { return canWalk; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
     public int GoldReward { get { return goldReward; } }
     public int DamageToStronghold { get { return damageToStronghold; } }
@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
     private void ResetEnemy()
     {
         currentHealth = maxHealth;
-        canMove = true;
+        canWalk = true;
         isAlive = true;
     }
 

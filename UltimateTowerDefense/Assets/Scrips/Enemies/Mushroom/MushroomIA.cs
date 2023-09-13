@@ -12,9 +12,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
     private List<Tile> path;
 
     private EnemyState myState;
-
-    private bool canWalk = true;
-
+   
     private bool pathCompleted = false;
 
     private int pathIndex = 0;
@@ -23,7 +21,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int ANIMATOR_WALK_HASH = Animator.StringToHash("Walk");
     private readonly int ANIMATOR_DIE_HASH = Animator.StringToHash("Die");
-    public bool CanWalk { get { return canWalk; } }
+    public bool CanWalk { get { return myController.CanWalk; } }
 
     private void OnEnable()
     {
