@@ -12,7 +12,7 @@ public class BuildingManangerIcon : MonoBehaviour
         icon = transform.GetChild(1).GetComponent<Image>();
     }
 
-    public void ChangeIcon(Sprite icon)
+    public void SetIcon(Sprite icon)
     {
         this.icon.sprite = icon;
     }
