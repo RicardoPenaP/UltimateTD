@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class BuildingManangerIcon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Image icon;
+    private void Awake()
     {
-        
+        icon = transform.GetChild(1).GetComponent<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeIcon(Sprite icon)
     {
-        
+        this.icon.sprite = icon;
     }
 }
