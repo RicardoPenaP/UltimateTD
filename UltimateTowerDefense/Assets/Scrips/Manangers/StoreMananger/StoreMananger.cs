@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using BuildingInterface;
 
 public class StoreMananger : Singleton<StoreMananger>
 {
@@ -49,7 +50,7 @@ public class StoreMananger : Singleton<StoreMananger>
         {
             StoreManangerButton button = Instantiate(buttonPrefab, transform.position, Quaternion.identity, transform);
             button.SetButtonIcon(tower.TowerIcon);
-            button.SetGoldCostText(tower.GoldCost);
+            button.SetGoldCostText(tower.BaseGoldCost);
             towerButtons.Add(tower, button);
         }
     }
@@ -74,7 +75,7 @@ public class StoreMananger : Singleton<StoreMananger>
     {
         foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
         {
-            if (BankMananger.Instance.HaveEnoughGoldCheck(entry.Key.GoldCost))
+            if (BankMananger.Instance.HaveEnoughGoldCheck(entry.Key.BaseGoldCost))
             {
                 entry.Value.SetButtonState(true);
             }
@@ -106,7 +107,7 @@ public class StoreMananger : Singleton<StoreMananger>
             return null;
         }
         PreviewBuildingMananger.Instance.TurnOffPreview();
-        BankMananger.Instance.SubtractGold(selectedTower.GoldCost);
+        BankMananger.Instance.SubtractGold(selectedTower.BaseGoldCost);
         IBuilding building = Instantiate(selectedTower.TowerPrefab, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();
         selectedTower = null;
         return building;

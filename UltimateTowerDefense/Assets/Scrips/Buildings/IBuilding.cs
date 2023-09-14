@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public interface IBuilding 
+namespace BuildingInterface
 {
-    
+    public interface IBuilding
+    {
+
+    }
 }
+

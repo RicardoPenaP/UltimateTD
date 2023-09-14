@@ -9,26 +9,37 @@ public class TowerData : ScriptableObject
     [Header("Prefab Reference")]
     [SerializeField] private TowerController towerPrefab;
     [SerializeField] private GameObject ammunitionPrefab;
-    [Header("Gameplay Settings")]
-    [SerializeField, Min(0)] private int goldCost = 0;
+
+    [Header("Gameplay Settings")]  
+    [SerializeField, Min(0)] private int baseGoldCost = 0;
     [Tooltip("Amount of damage dealt per attack")]
-    [SerializeField, Min(0)] int attackDamage = 0;
+    [SerializeField, Min(0)] int baseAttackDamage = 0;
     [Tooltip("Amount of attacks per second")]
-    [SerializeField, Min(0)] float attackRatio = 0;
+    [SerializeField, Min(0)] float baseAttackRatio = 0;
     [Tooltip("The range for dectecting enemies and attack them")]
-    [SerializeField, Min(0)] float attackRange = 0;
+    [SerializeField, Min(0)] float baseAttackRange = 0;
+
+    [Header("Upgrade Settings")]
+    [SerializeField, Min(0)] private int baseUpgradeGoldCost;
+    [SerializeField, Min(1f)] private float upgradeCostAugmentCoeficient;
+    [SerializeField, Min(1f)] private float upgradeStatsAugmentCoeficient;
 
     [Header("UI Settings")]
     [SerializeField] private Sprite towerIcon;
     [SerializeField] private string towerName;
+    [SerializeField,TextArea(4,8)] private string towerDescription;
 
     public TowerController TowerPrefab { get { return towerPrefab; } }
-    public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }
-    public int GoldCost { get { return goldCost; } }
-    public int AttackDamage { get { return attackDamage; } }
-    public float AttackRatio { get { return attackRatio; } }
-    public float AttackRange { get { return attackRange; } }
+    public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }    
+    public int BaseGoldCost { get { return baseGoldCost; } }
+    public int BaseAttackDamage { get { return baseAttackDamage; } }
+    public float BaseAttackRatio { get { return baseAttackRatio; } }
+    public float BaseAttackRange { get { return baseAttackRange; } }
+    public int BaseUpgradeGoldCost { get { return baseUpgradeGoldCost; } }
+    public float UpgradeCostAugmentCoeficient { get { return upgradeCostAugmentCoeficient; } }
+    public float UpgradeStatsAugmentCoeficient { get { return upgradeStatsAugmentCoeficient; } }
     public Sprite TowerIcon { get { return towerIcon; } }
     public string TowerName { get { return towerName; } }
+    public string TowerDescription { get { return towerDescription; } }
    
 }
