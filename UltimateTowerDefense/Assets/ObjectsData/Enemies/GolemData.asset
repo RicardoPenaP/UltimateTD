@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1534167283859374720, guid: 84cbc9e72d35f7642876d0dcd4173f0e, type: 3}
   enemyName: RockGolem
   maxHealth: 1000
-  maxShield: 0
+  maxShield: 500
   healthLevelMultiplier: 1.5
   movementSpeed: 1.6
   distanceFromNextTileOffset: 0.08
