@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &80317825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyReference: {fileID: 11400000, guid: 1495d74c4822f4c4ab67725541ea0c8c, type: 2}
   amountOfEnemiesToPool: 10
-  spawnTime: 5
+  spawnTime: 20
   canSpawn: 1
 --- !u!4 &80317826
 Transform:
@@ -1405,7 +1405,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21126f796d45cbc47b9136106580da97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelUpButton: {fileID: 0}
 --- !u!1 &1092636099
 GameObject:
   m_ObjectHideFlags: 0

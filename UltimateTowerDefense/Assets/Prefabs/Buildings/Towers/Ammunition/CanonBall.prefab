@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2830888337092495816}
   - component: {fileID: 1042252443228706216}
   - component: {fileID: 4059687317439605964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CanonBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7efdd82dc431842bbf49db1297f553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 30
 --- !u!33 &5191714521907918208
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -8,20 +8,15 @@ public class TowerController : MonoBehaviour,IBuilding
     [Header("Tower Controller")]
     [SerializeField] private TowerData myData;
 
-    private int currentLevel;
-    private int currentAttackDamage;
-    private float currentAttackRatio;
-    private float currentAttackRange;
-
+    private BuildingStats myStats = new BuildingStats();
     public GameObject AmmunitionPrefab { get { return myData.AmmunitionPrefab; } }
-    public int AttackDamage { get { return myData.BaseAttackDamage; } }
-    public float AttackRatio { get { return myData.BaseAttackRatio; } }
-    public float AttackRange { get { return myData.BaseAttackRange; } }
+    public int AttackDamage { get { return myStats.currentAttackDamage; } }
+    public float AttackRatio { get { return myStats.currentAttackRatio; } }
+    public float AttackRange { get { return myStats.currentAttackRange; } }
 
-    private void Start()
+    private void Awake()
     {
-        SetTowerValues();
-        
+        SetTowerValues();        
     }
     //Debugging Tools
     private void OnDrawGizmosSelected()
@@ -33,8 +28,10 @@ public class TowerController : MonoBehaviour,IBuilding
     private void SetTowerValues()
     {
         gameObject.name = myData.TowerName;
-        currentLevel = 1;
-        currentAttackDamage = myData.BaseAttackDamage;
-        currentAttackRatio = myData.BaseAttackRatio;
+        myStats.currentLevel = 1;
+        myStats.currentAttackDamage = myData.BaseAttackDamage;
+        myStats.currentAttackRatio = myData.BaseAttackRatio;
+        myStats.currentAttackRange = myData.BaseAttackRange;
+        myStats.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
     }
 }
