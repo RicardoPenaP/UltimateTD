@@ -26,5 +26,28 @@ public class BuildingManangerInfo : MonoBehaviour
         buildingLevel.text = $"Level: {level}";
     }
 
+    public void SetBuildingDescription(string description)
+    {
+        buildingDescription.SetDescription(description);
+    }
 
+    public void SetBuildinDamage(int damage)
+    {
+        buildingDescription.SetDamage(damage);
+    }
+
+    public void SetBuildingFireRation(float fireRatio)
+    {
+        buildingDescription.SetFireRatio(fireRatio);
+    }
+
+    public void SetBuildingRange(float range)
+    {
+        buildingDescription.SetRange(range);
+    }
+
+    public void SetBuildingAmmunition(string description)
+    {
+        buildingDescription.SetAmmunition(description);
+    }
 }
