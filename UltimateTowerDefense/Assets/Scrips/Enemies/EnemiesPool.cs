@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemiesPool : MonoBehaviour
 {
     [Header("Enemies Pool")]
-    [SerializeField] private EnemyController enemyPrefab;
+    [SerializeField] private EnemyData enemyReference;
     [SerializeField,Min(0)] private int amountOfEnemiesToPool = 1;
     [SerializeField,Min(0f)] private float spawnTime = 1f;
     [SerializeField] private bool canSpawn;
@@ -16,10 +16,6 @@ public class EnemiesPool : MonoBehaviour
 
     private bool canActivate = true;
 
-    private void Awake()
-    {
-          
-    }
 
     private void Start()
     {
@@ -61,7 +57,7 @@ public class EnemiesPool : MonoBehaviour
     {
         for (int i = 0; i < amountOfEnemiesToPool; i++)
         {
-            EnemyController newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity, transform);
+            EnemyController newEnemy = Instantiate(enemyReference.EnemyPrefab, transform.position, Quaternion.identity, transform);
             newEnemy.SetEnemyPath(pooledEnemiesPath);
             newEnemy.gameObject.SetActive(false);
             enemies.Add(newEnemy);
