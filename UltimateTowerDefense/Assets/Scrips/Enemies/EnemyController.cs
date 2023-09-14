@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData myData;
     
     private IEnemy myEnemyIA;
-    [SerializeField]private UIHealthAndShieldBar myUI;
+    private UIHealthAndShieldBar myUI;
 
     private int currentHealth;
     private int currentMaxHealth;
@@ -30,11 +30,6 @@ public class EnemyController : MonoBehaviour
     {        
         myEnemyIA = GetComponent<IEnemy>();
         myUI = GetComponentInChildren<UIHealthAndShieldBar>();
-    }
-
-    private void OnEnable()
-    {
-        
     }
 
     private void Start()
