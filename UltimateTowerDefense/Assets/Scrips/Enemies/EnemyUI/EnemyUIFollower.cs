@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class EnemyUIFollower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private EnemyDamageHandler myDamageHandler;
+
+    private void Awake()
     {
-        
+        myDamageHandler = GetComponent<EnemyDamageHandler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        UpdateUIPos();
+    }
+
+    private void UpdateUIPos()
+    {
+        transform.position = new Vector3(myDamageHandler.transform.position.x, transform.position.y, myDamageHandler.transform.position.z);
     }
 }
