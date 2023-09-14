@@ -7,12 +7,12 @@ using TMPro;
 public class UIHealthAndShieldBar : MonoBehaviour
 {    
     private TextMeshProUGUI nameText;
-    private Image healthFill;
-    private Image shieldFill;
+    [SerializeField] private Image healthFill;
+    [SerializeField] private Image shieldFill;
 
     private void Awake()
     {
-        nameText = GetComponentInChildren<TextMeshProUGUI>();
+        //nameText = GetComponentInChildren<TextMeshProUGUI>();
         healthFill = transform.GetChild(1).GetComponent<Image>();
         shieldFill = transform.GetChild(2).GetComponent<Image>();
     }
@@ -23,9 +23,4 @@ public class UIHealthAndShieldBar : MonoBehaviour
         shieldFill.fillAmount = (float)shieldCurrentValue / (float)shieldMaxValue;
     }
 
-    public void UpdateBar(float currentValue, float maxValue)
-    {
-        nameText.text = $"{currentValue}/{maxValue}";
-        healthFill.fillAmount = currentValue / maxValue;
-    }
 }

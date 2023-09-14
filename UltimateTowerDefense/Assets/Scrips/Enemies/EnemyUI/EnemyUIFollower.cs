@@ -8,7 +8,7 @@ public class EnemyUIFollower : MonoBehaviour
 
     private void Awake()
     {
-        myDamageHandler = GetComponent<EnemyDamageHandler>();
+        myDamageHandler = transform.parent.GetComponentInChildren<EnemyDamageHandler>();
     }
 
     private void Update()

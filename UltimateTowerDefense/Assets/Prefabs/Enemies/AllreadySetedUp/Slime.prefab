@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 471263442395873929}
   - component: {fileID: 471263442395873935}
   - component: {fileID: 471263442395873934}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471263442525761637}
   - component: {fileID: 8194026158303433893}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48535dda955bad041aef31fd1d5c8778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthFill: {fileID: 0}
+  shieldFill: {fileID: 0}
 --- !u!1 &471263442578321676
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +143,7 @@ GameObject:
   - component: {fileID: 471263442578321677}
   - component: {fileID: 471263442578321683}
   - component: {fileID: 471263442578321682}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +219,7 @@ GameObject:
   - component: {fileID: 471263443592072421}
   - component: {fileID: 471263443592072427}
   - component: {fileID: 471263443592072426}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,13 +295,13 @@ GameObject:
   - component: {fileID: 471263443941824079}
   - component: {fileID: 471263443941824077}
   - component: {fileID: 471263443941824076}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &471263443941824079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -430,7 +432,6 @@ GameObject:
   - component: {fileID: 3839902648492399162}
   - component: {fileID: 804417498286218178}
   - component: {fileID: 7169802709723333648}
-  - component: {fileID: 8538721124864916054}
   m_Layer: 0
   m_Name: EnemyUICanvas
   m_TagString: Untagged
@@ -532,18 +533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f434924a1327d24db3570ef0e4731ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8538721124864916054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5930500345006861049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48535dda955bad041aef31fd1d5c8778, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6296019619416119802
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,6 +581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myData: {fileID: 11400000, guid: 064eff22d47a6e84182fcf1ecadd5e90, type: 2}
+  myUI: {fileID: 0}
 --- !u!114 &7535476904134424475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +605,7 @@ GameObject:
   - component: {fileID: 2602368450779059809}
   - component: {fileID: 1975345611890905549}
   - component: {fileID: 1041024481411208305}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

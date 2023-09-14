@@ -9,9 +9,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData myData;
     
     private IEnemy myEnemyIA;
+    [SerializeField]private UIHealthAndShieldBar myUI;
 
     private int currentHealth;
+    private int currentMaxHealth;
     private int currentShield;
+    private int currentMaxShield;
 
     private bool isAlive = true;
     private bool canWalk;
@@ -26,24 +29,35 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {        
         myEnemyIA = GetComponent<IEnemy>();
+        myUI = GetComponentInChildren<UIHealthAndShieldBar>();
     }
 
     private void OnEnable()
+    {
+        
+    }
+
+    private void Start()
     {
         ResetEnemy();
     }
 
     private void OnDisable()
     {
-        transform.localPosition = Vector3.zero; 
+        ResetEnemy();
+        
     }
 
     private void ResetEnemy()
     {
-        currentHealth = myData.MaxHealth;
-        currentShield = myData.MaxShield;
+        currentMaxHealth = myData.MaxHealth;
+        currentHealth = currentMaxHealth;
+        currentMaxShield = myData.MaxShield;
+        currentShield = currentMaxShield;
+        UpdateUI();
         canWalk = true;
         isAlive = true;
+        transform.localPosition = Vector3.zero;
     }
 
     public void SetEnemyPath(List<Tile> newPath)
@@ -82,6 +96,12 @@ public class EnemyController : MonoBehaviour
             currentHealth = 0;
             myEnemyIA.Die();
         }
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        myUI.UpdateBar(currentHealth, currentMaxHealth, currentShield, currentMaxShield);
     }
 
 
