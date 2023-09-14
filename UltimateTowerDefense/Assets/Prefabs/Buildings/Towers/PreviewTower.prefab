@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2395969334248799891}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PreviewTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +116,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
 --- !u!4 &2795196152372110811 stripped
@@ -201,6 +209,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
       propertyPath: m_Name
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4415465852592416861}
   - component: {fileID: 4452719907679204020}
   - component: {fileID: 5479867860168522016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BallistaTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1841395865638118899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,6 +177,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59ead64768227b24f8ac3f59d140e67d, type: 3}
 --- !u!4 &2795196152372110811 stripped
@@ -255,6 +263,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607668393258877731, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7a455bf5523f5d46a25b62f93ca4646, type: 3}
 --- !u!4 &3620081672727990328 stripped
@@ -332,6 +348,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0d7080e13bc937d46a6ca7f79579b259, type: 3}
       propertyPath: m_Name
       value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0d7080e13bc937d46a6ca7f79579b259, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1087413553415064497, guid: 0d7080e13bc937d46a6ca7f79579b259, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276442123569471543, guid: 0d7080e13bc937d46a6ca7f79579b259, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d7080e13bc937d46a6ca7f79579b259, type: 3}
