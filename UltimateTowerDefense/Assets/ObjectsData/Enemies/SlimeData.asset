@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
   m_Name: SlimeData
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 739311754621939756, guid: a7ce79a8df7be264ba0f3d5432054bc7, type: 3}
+  enemyName: Slime
   maxHealth: 100
-  maxShield: 100
+  maxShield: 0
   healthLevelMultiplier: 1.5
-  movementSpeed: 0
+  movementSpeed: 2
   distanceFromNextTileOffset: 0.08
   goldReward: 25
   damageToStronghold: 1
