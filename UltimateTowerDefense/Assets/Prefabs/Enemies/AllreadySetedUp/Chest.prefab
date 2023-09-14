@@ -46,13 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a004c4d01b8e74a4a8214d95d0265b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  movementSpeed: 2
-  canWalk: 0
-  distanceFromNextTileOffset: 0.05
-  goldReward: 25
-  damageToStronghold: 1
-  currentHealth: 0
+  myData: {fileID: 11400000, guid: dcfa0437981032d41ab7a9371a0045d7, type: 2}
 --- !u!114 &7576518436438276503
 MonoBehaviour:
   m_ObjectHideFlags: 0

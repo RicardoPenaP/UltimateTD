@@ -7,21 +7,6 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
-
-    //[Header("Health Settings")]
-    //[SerializeField] private int maxHealth = 100;
-
-    //[Header("Movement Settings")]
-    //[SerializeField] private float movementSpeed;
-   
-    //[SerializeField] private float distanceFromNextTileOffset = 0.05f;
-
-    //[Header("Rewards Settings")]
-    //[SerializeField,Min(0f)] private int goldReward = 25;
-
-    //[Header("Damage Settings")]
-    //[SerializeField] private int damageToStronghold = 1;
-
     
     private IEnemy myEnemyIA;
 

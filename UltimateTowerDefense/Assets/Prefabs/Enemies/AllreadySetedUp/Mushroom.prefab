@@ -46,13 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a004c4d01b8e74a4a8214d95d0265b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  movementSpeed: 4
-  canWalk: 0
-  distanceFromNextTileOffset: 0.08
-  goldReward: 25
-  damageToStronghold: 1
-  currentHealth: 0
+  myData: {fileID: 11400000, guid: 965133a17a4d13d46abc822fa8c119c2, type: 2}
 --- !u!114 &3942837418910036771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +299,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.43, z: 0}
+--- !u!114 &3117008447923858742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3115918506582978667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b1057c87adb4264e804083674e7e0d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7525041013758786478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,17 +333,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eb726d114ac98e409ec48c762d1b144, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3117008447923858742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3115918506582978667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1057c87adb4264e804083674e7e0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

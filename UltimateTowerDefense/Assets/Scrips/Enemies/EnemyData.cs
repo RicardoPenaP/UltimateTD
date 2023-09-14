@@ -9,6 +9,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Reference Settings")]
     [SerializeField] private EnemyController enemyPrefab;
+    [SerializeField] private string enemyName = "";
 
     [Header("Health Settings")]
     [SerializeField, Min(1f)] private int maxHealth = 100;
@@ -30,6 +31,7 @@ public class EnemyData : ScriptableObject
 
 
     public EnemyController EnemyPrefab { get { return enemyPrefab; } }
+    public string EnemyName { get { return enemyName; } }
     public int MaxHealth { get { return maxHealth; } }
     public int MaxShield { get { return maxShield; } }
     public float HealthLevelMultiplier { get { return healthLevelMultiplier; } }
