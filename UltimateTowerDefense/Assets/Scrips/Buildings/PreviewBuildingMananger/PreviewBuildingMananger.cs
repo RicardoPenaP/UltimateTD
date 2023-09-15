@@ -6,8 +6,10 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
 {
     [Header("Preview Building Mananger")]
     [SerializeField] private GameObject previewTowerPrefab;
+    [SerializeField] private PreviewRange previewRangePrefab;
 
     private GameObject towerPreview;
+    private PreviewRange rangePreview;
     
     private void Start()
     {
@@ -18,6 +20,9 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
     {
         towerPreview = Instantiate(previewTowerPrefab, transform.position, Quaternion.identity, transform);
         towerPreview.SetActive(false);
+
+        rangePreview = Instantiate(previewRangePrefab, transform.position, Quaternion.identity, transform);
+        rangePreview.gameObject.SetActive(false);
     }
 
     public void PreviewTower(Vector3 tilePosition)
@@ -32,6 +37,9 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
         }
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);
+        rangePreview.transform.position = tilePosition;
+        rangePreview.SetCircleSize(StoreMananger.Instance.SelectedTower.BaseAttackRange);
+        rangePreview.gameObject.SetActive(true);
     }
 
     public void TurnOffPreview()
@@ -41,7 +49,9 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
             return;
         }
         towerPreview.SetActive(false);
-        towerPreview.transform.position = new Vector3(0,0,0);        
+        towerPreview.transform.position = Vector3.zero;
+        rangePreview.gameObject.SetActive(false);
+        rangePreview.transform.position = Vector3.zero;        
     }
 
     
