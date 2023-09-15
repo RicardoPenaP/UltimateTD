@@ -9,6 +9,9 @@ public class TowerController : MonoBehaviour,IBuilding
     [SerializeField] private TowerData myData;
 
     private BuildingInfo myInfo = new BuildingInfo();
+
+    private int totalBuildingCost;
+
     public GameObject AmmunitionPrefab { get { return myData.AmmunitionPrefab; } }
     public int AttackDamage { get { return myInfo.currentAttackDamage; } }
     public float AttackRatio { get { return myInfo.currentAttackRatio; } }
@@ -33,6 +36,9 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void SetTowerValues()
     {
+        float percentageCalculatorHelper = 1 + (myData.SellValuePercentageCoeficient / 100);
+        totalBuildingCost = myData.BaseGoldCost;
+
         gameObject.name = myData.TowerName;
         myInfo.name = myData.TowerName;        
         myInfo.currentLevel = 1;
@@ -40,7 +46,9 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
         myInfo.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
-        myInfo.sellCost = myData.BaseGoldCost;
+        myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
+
+       
     }
 
     //Interface Implementations
@@ -65,7 +73,11 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackRange *= percentageCalculatorHelper;
         myInfo.currentAttackRatio *= percentageCalculatorHelper;
         percentageCalculatorHelper = 1 + (myData.UpgradeCostAugmentPercentage / 100);
+        totalBuildingCost += myInfo.currentUpgradeGoldCost;
         myInfo.currentUpgradeGoldCost = Mathf.RoundToInt((float)myInfo.currentUpgradeGoldCost * percentageCalculatorHelper);
+        percentageCalculatorHelper = 1 + (myData.SellValuePercentageCoeficient / 100);
+        myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
+
     }
     public void SellBuilding()
     {

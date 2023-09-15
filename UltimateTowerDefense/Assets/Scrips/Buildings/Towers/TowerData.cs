@@ -21,6 +21,7 @@ public class TowerData : ScriptableObject
     [SerializeField, Min(0)] private int baseUpgradeGoldCost;
     [SerializeField, Range(0, 100)] private int upgradeCostAugmentPercentage;
     [SerializeField, Range(0, 100)] private int upgradeStatsAugmentPercentage;
+    [SerializeField, Range(0, 100)] private int sellValuePercentageCoeficient;
 
     [Header("UI Settings")]
     [SerializeField] private Sprite towerIcon;
@@ -36,6 +37,7 @@ public class TowerData : ScriptableObject
     public int BaseUpgradeGoldCost { get { return baseUpgradeGoldCost; } }
     public float UpgradeCostAugmentPercentage { get { return upgradeCostAugmentPercentage; } }
     public float UpgradeStatsAugmentPercentage { get { return upgradeStatsAugmentPercentage; } }
+    public float SellValuePercentageCoeficient { get { return sellValuePercentageCoeficient; } }
     public Sprite TowerIcon { get { return towerIcon; } }
     public string TowerName { get { return towerName; } }
     public string TowerDescription { get { return towerDescription; } }

@@ -21,6 +21,7 @@ MonoBehaviour:
   baseUpgradeGoldCost: 50
   upgradeCostAugmentPercentage: 20
   upgradeStatsAugmentPercentage: 10
+  sellValuePercentageCoeficient: 80
   towerIcon: {fileID: 21300000, guid: eca36a75c2e25584c92da9b633aa14ab, type: 3}
   towerName: Ballista Tower
   towerDescription: 
