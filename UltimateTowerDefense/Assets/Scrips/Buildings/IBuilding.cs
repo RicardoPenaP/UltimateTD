@@ -21,6 +21,7 @@ namespace BuildingInterface
         public Sprite GetBuildingIcon();
         public string GetBuildingDescription();
         public void LevelUp();
+        public void SellBuilding();
     }
 }
 

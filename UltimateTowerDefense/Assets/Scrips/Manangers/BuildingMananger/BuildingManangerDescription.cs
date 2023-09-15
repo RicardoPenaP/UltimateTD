@@ -32,12 +32,12 @@ public class BuildingManangerDescription : MonoBehaviour
 
     public void SetAttackRatio(float attackRatio)
     {
-        fireRatioText.text = $"Fire Ratio: {attackRatio}/s";
+        fireRatioText.text = $"Fire Ratio: {attackRatio.ToString("0.0")}/s";
     }
 
     public void SetRange(float range)
     {
-        rangeText.text = $"Range: {range}";
+        rangeText.text = $"Range: {range.ToString("0.0")}";
     }
 
     public void SetAmmunition(string description)

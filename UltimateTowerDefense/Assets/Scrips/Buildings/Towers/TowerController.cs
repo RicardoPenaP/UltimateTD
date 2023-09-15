@@ -58,6 +58,14 @@ public class TowerController : MonoBehaviour,IBuilding
     }
     public void LevelUp()
     {
+        myInfo.currentLevel++;
+        myInfo.currentAttackDamage = Mathf.RoundToInt((float)myInfo.currentAttackDamage * myData.UpgradeStatsAugmentCoeficient);
+        myInfo.currentAttackRange *= myData.UpgradeStatsAugmentCoeficient;
+        myInfo.currentAttackRatio *= myData.UpgradeStatsAugmentCoeficient;       
+        myInfo.currentUpgradeGoldCost = Mathf.RoundToInt((float)myInfo.currentUpgradeGoldCost * myData.UpgradeCostAugmentCoeficient);
+    }
+    public void SellBuilding()
+    {
 
     }
 }

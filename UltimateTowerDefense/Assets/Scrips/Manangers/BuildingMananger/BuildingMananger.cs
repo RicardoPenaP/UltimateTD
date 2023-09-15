@@ -58,7 +58,9 @@ public class BuildingMananger : Singleton<BuildingMananger>
         {
             return;
         }
-
+        BankMananger.Instance.SubtractGold(selectedBuildingInfo.currentUpgradeGoldCost);
+        selectedBuilding.LevelUp();
+        UpdateSelectedBuildingInfo();
     }
     private void SellBuilding()
     {
@@ -87,9 +89,18 @@ public class BuildingMananger : Singleton<BuildingMananger>
     public void OpenBuildingMananger(IBuilding selectedBuilding)
     {
         this.selectedBuilding = selectedBuilding;
-        selectedBuildingInfo = selectedBuilding.GetBuildingInfo();
-
+        UpdateSelectedBuildingInfo();
         buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
+        gameObject.SetActive(true);
+    }
+
+    private void UpdateSelectedBuildingInfo()
+    {
+        if (selectedBuilding==null)
+        {
+            return;
+        }
+        selectedBuildingInfo = selectedBuilding.GetBuildingInfo();
         this.buildingInfo.SetName(selectedBuildingInfo.name);
         this.buildingInfo.SetLevel(selectedBuildingInfo.currentLevel);
         this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildingDescription());
@@ -98,6 +109,5 @@ public class BuildingMananger : Singleton<BuildingMananger>
         this.buildingInfo.SetBuildingRange(selectedBuildingInfo.currentAttackRange);
         levelUpButton.SetLevelUPCost(selectedBuildingInfo.currentUpgradeGoldCost);
         sellButton.SetSellCost(selectedBuildingInfo.sellCost);
-        gameObject.SetActive(true);
     }
 }
