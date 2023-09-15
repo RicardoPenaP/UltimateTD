@@ -39,19 +39,26 @@ public class BuildingMananger : Singleton<BuildingMananger>
         LevelUpAvailableCheck();
     }
 
-    //Settings Methods
+    //Setting Methods
     private void SubmitToButtonsEvents()
     {
         closeButton.GetComponent<Button>()?.onClick.AddListener(CloseBuildingManangerWindow);
         levelUpButton.GetComponent<Button>()?.onClick.AddListener(LevelUp);
         sellButton.GetComponent<Button>()?.onClick.AddListener(SellBuilding);
     }
+
+    //Utilities Methods
     private void CloseBuildingManangerWindow()
     {
         gameObject.SetActive(false);
     }
-
-    //Utilities Methods
+    public void OpenBuildingMananger(IBuilding selectedBuilding)
+    {
+        this.selectedBuilding = selectedBuilding;
+        UpdateSelectedBuildingInfo();
+        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
+        gameObject.SetActive(true);
+    }
     private void LevelUp()
     {
         if (selectedBuilding == null)
@@ -64,7 +71,14 @@ public class BuildingMananger : Singleton<BuildingMananger>
     }
     private void SellBuilding()
     {
-
+        if (selectedBuilding == null)
+        {
+            return;
+        }
+        BankMananger.Instance.AddGold(selectedBuildingInfo.sellCost);
+        selectedBuilding.SellBuilding();
+        CloseBuildingManangerWindow();
+        selectedBuilding = null;
     }
 
     //Check and Update Methods
@@ -86,13 +100,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
         }
     }
 
-    public void OpenBuildingMananger(IBuilding selectedBuilding)
-    {
-        this.selectedBuilding = selectedBuilding;
-        UpdateSelectedBuildingInfo();
-        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
-        gameObject.SetActive(true);
-    }
+   
 
     private void UpdateSelectedBuildingInfo()
     {

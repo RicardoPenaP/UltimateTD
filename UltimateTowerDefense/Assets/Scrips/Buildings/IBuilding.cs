@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace BuildingInterface
 {
     public struct BuildingInfo
@@ -15,6 +16,8 @@ namespace BuildingInterface
         public int sellCost;
     }
 
+    public delegate void OnSellDelegate();
+
     public interface IBuilding
     {
         public BuildingInfo GetBuildingInfo();
@@ -22,6 +25,7 @@ namespace BuildingInterface
         public string GetBuildingDescription();
         public void LevelUp();
         public void SellBuilding();
+        public void SubscribeToOnSell(OnSellDelegate onSell);
     }
 }
 

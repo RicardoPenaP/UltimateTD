@@ -11,9 +11,12 @@ public class BuildingManangement : MonoBehaviour
 
     private Tile myTile;
 
+    private OnSellDelegate onSellMethods;
+
     private void Awake()
     {
         myTile = GetComponent<Tile>();
+        onSellMethods = SellBuilding;
     }
 
     private void OnMouseDown()
@@ -24,8 +27,7 @@ public class BuildingManangement : MonoBehaviour
             {
                 CreateBuilding();
             }
-        }      
-        
+        }
     }
 
     private void OnMouseEnter()
@@ -51,6 +53,13 @@ public class BuildingManangement : MonoBehaviour
         {
             return;
         }
-        myTile.TileStatus = TileStatusID.Occuped;        
+        myTile.TileStatus = TileStatusID.Occuped;
+        tileBuilding.SubscribeToOnSell(onSellMethods);
+    }
+
+    private void SellBuilding()
+    {   
+        tileBuilding = null;
+        myTile.TileStatus = TileStatusID.Free;
     }
 }

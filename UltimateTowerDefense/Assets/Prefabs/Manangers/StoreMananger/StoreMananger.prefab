@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4694604513020241854}
   - component: {fileID: 4694604513020241855}
-  - component: {fileID: 4694604513020241852}
+  - component: {fileID: 1396645107}
   m_Layer: 5
   m_Name: StoreMananger
   m_TagString: Untagged
@@ -50,13 +50,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf348749df289845a440644286230c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 7172570311894184203, guid: e819dd5e34feca5439fd6d00c944fe97, type: 3}
+  buttonPrefab: {fileID: 7172570311894184203, guid: 178a682052e36344283f6c331298c06c, type: 3}
   availableTowers:
   - {fileID: 11400000, guid: 76264c54d8509c9448fb0393ef7f752d, type: 2}
   - {fileID: 11400000, guid: b515cb0854828e34d90f0b2d8da9ac94, type: 2}
   - {fileID: 11400000, guid: 80f11de5a9115994fb3ad9ae80abd4a0, type: 2}
   - {fileID: 11400000, guid: 97b65d344445b4248944a038da76a009, type: 2}
---- !u!114 &4694604513020241852
+--- !u!114 &1396645107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4694604513020241825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -74,11 +74,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 125, y: 125}
+  m_Spacing: {x: 10, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using BuildingInterface;
 
 public class TowerController : MonoBehaviour,IBuilding
@@ -11,6 +12,8 @@ public class TowerController : MonoBehaviour,IBuilding
     private BuildingInfo myInfo = new BuildingInfo();
 
     private int totalBuildingCost;
+
+    private OnSellDelegate onSell;
 
     public GameObject AmmunitionPrefab { get { return myData.AmmunitionPrefab; } }
     public int AttackDamage { get { return myInfo.currentAttackDamage; } }
@@ -81,6 +84,12 @@ public class TowerController : MonoBehaviour,IBuilding
     }
     public void SellBuilding()
     {
-
+        onSell.Invoke();
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+    public void SubscribeToOnSell(OnSellDelegate onSell)
+    {
+        this.onSell += onSell;
     }
 }
