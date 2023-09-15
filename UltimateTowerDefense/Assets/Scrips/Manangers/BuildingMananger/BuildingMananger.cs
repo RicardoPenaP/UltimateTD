@@ -15,7 +15,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
 
     private IBuilding selectedBuilding;
-
+    BuildingInfo selectedBuildingInfo;
     protected override void Awake()
     {
         base.Awake();
@@ -34,18 +34,24 @@ public class BuildingMananger : Singleton<BuildingMananger>
         CloseBuildingManangerWindow();
     }
 
+    private void Update()
+    {
+        LevelUpAvailableCheck();
+    }
+
+    //Settings Methods
     private void SubmitToButtonsEvents()
     {
         closeButton.GetComponent<Button>()?.onClick.AddListener(CloseBuildingManangerWindow);
         levelUpButton.GetComponent<Button>()?.onClick.AddListener(LevelUp);
         sellButton.GetComponent<Button>()?.onClick.AddListener(SellBuilding);
     }
-
     private void CloseBuildingManangerWindow()
     {
         gameObject.SetActive(false);
     }
 
+    //Utilities Methods
     private void LevelUp()
     {
         if (selectedBuilding == null)
@@ -54,28 +60,44 @@ public class BuildingMananger : Singleton<BuildingMananger>
         }
 
     }
-
     private void SellBuilding()
     {
 
     }
 
-   
+    //Check and Update Methods
+
+    private void LevelUpAvailableCheck()
+    {
+        if (selectedBuilding == null)
+        {
+            return;
+        }
+
+        if (BankMananger.Instance.HaveEnoughGoldCheck(selectedBuildingInfo.currentUpgradeGoldCost))
+        {
+            levelUpButton.SetButtonInteractable(true);
+        }
+        else
+        {
+            levelUpButton.SetButtonInteractable(false);
+        }
+    }
 
     public void OpenBuildingMananger(IBuilding selectedBuilding)
     {
         this.selectedBuilding = selectedBuilding;
-        BuildingInfo buildingInfo = selectedBuilding.GetBuildingInfo();
+        selectedBuildingInfo = selectedBuilding.GetBuildingInfo();
 
         buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
-        this.buildingInfo.SetName(buildingInfo.name);
-        this.buildingInfo.SetLevel(buildingInfo.currentLevel);
+        this.buildingInfo.SetName(selectedBuildingInfo.name);
+        this.buildingInfo.SetLevel(selectedBuildingInfo.currentLevel);
         this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildingDescription());
-        this.buildingInfo.SetBuildingDamage(buildingInfo.currentAttackDamage);
-        this.buildingInfo.SetBuildingAttackRatio(buildingInfo.currentAttackRatio);
-        this.buildingInfo.SetBuildingRange(buildingInfo.currentAttackRange);
-        levelUpButton.SetLevelUPCost(buildingInfo.currentUpgradeGoldCost);
-        sellButton.SetSellCost(buildingInfo.sellCost);
+        this.buildingInfo.SetBuildingDamage(selectedBuildingInfo.currentAttackDamage);
+        this.buildingInfo.SetBuildingAttackRatio(selectedBuildingInfo.currentAttackRatio);
+        this.buildingInfo.SetBuildingRange(selectedBuildingInfo.currentAttackRange);
+        levelUpButton.SetLevelUPCost(selectedBuildingInfo.currentUpgradeGoldCost);
+        sellButton.SetSellCost(selectedBuildingInfo.sellCost);
         gameObject.SetActive(true);
     }
 }
