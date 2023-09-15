@@ -42,7 +42,7 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            PreviewBuildingMananger.Instance.TurnOffPreview();
+            PreviewBuildingMananger.Instance.TurnOffPreviewTower();
         }
     }
 

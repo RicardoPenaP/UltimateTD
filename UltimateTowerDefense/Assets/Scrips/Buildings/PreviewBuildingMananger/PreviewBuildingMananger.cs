@@ -31,18 +31,17 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
         {
             if (towerPreview.activeInHierarchy)
             {
-                TurnOffPreview();                
+                TurnOffPreviewTower();                
             }
             return;
         }
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);
-        rangePreview.transform.position = tilePosition;
-        rangePreview.SetCircleSize(StoreMananger.Instance.SelectedTower.BaseAttackRange);
-        rangePreview.gameObject.SetActive(true);
+        PreviewRange(tilePosition, StoreMananger.Instance.SelectedTower.BaseAttackRange);
+       
     }
 
-    public void TurnOffPreview()
+    public void TurnOffPreviewTower()
     {
         if (!towerPreview.activeInHierarchy)
         {
@@ -50,8 +49,20 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
         }
         towerPreview.SetActive(false);
         towerPreview.transform.position = Vector3.zero;
+        TurnOffPreviewRange();
+    }
+
+    public void PreviewRange(Vector3 tilePosition,float rangeSize)
+    {
+        rangePreview.transform.position = tilePosition;
+        rangePreview.SetCircleSize(rangeSize);
+        rangePreview.gameObject.SetActive(true);
+    }
+
+    public void TurnOffPreviewRange()
+    {        
         rangePreview.gameObject.SetActive(false);
-        rangePreview.transform.position = Vector3.zero;        
+        rangePreview.transform.position = Vector3.zero;
     }
 
     

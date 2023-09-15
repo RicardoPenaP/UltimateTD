@@ -50,15 +50,18 @@ public class BuildingMananger : Singleton<BuildingMananger>
     //Utilities Methods
     private void CloseBuildingManangerWindow()
     {
+        PreviewBuildingMananger.Instance.TurnOffPreviewRange();
         gameObject.SetActive(false);
     }
+
     public void OpenBuildingMananger(IBuilding selectedBuilding)
     {
         this.selectedBuilding = selectedBuilding;
         UpdateSelectedBuildingInfo();
-        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
+        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());        
         gameObject.SetActive(true);
     }
+
     private void LevelUp()
     {
         if (selectedBuilding == null)
@@ -69,6 +72,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
         selectedBuilding.LevelUp();
         UpdateSelectedBuildingInfo();
     }
+
     private void SellBuilding()
     {
         if (selectedBuilding == null)
@@ -100,8 +104,6 @@ public class BuildingMananger : Singleton<BuildingMananger>
         }
     }
 
-   
-
     private void UpdateSelectedBuildingInfo()
     {
         if (selectedBuilding==null)
@@ -117,5 +119,12 @@ public class BuildingMananger : Singleton<BuildingMananger>
         this.buildingInfo.SetBuildingRange(selectedBuildingInfo.currentAttackRange);
         levelUpButton.SetLevelUPCost(selectedBuildingInfo.currentUpgradeGoldCost);
         sellButton.SetSellCost(selectedBuildingInfo.sellCost);
+        UpdatePreviewRange();
+
+    }
+
+    private void UpdatePreviewRange()
+    {
+        PreviewBuildingMananger.Instance.PreviewRange((selectedBuilding as MonoBehaviour).transform.position, selectedBuildingInfo.currentAttackRange);
     }
 }
