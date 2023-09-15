@@ -28,7 +28,7 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void OnMouseDown()
     {
-        BuildingMananger.Instance.OpenBuildingMananger(myInfo,myData.TowerDescription,myData.TowerIcon);
+        BuildingMananger.Instance.OpenBuildingMananger(this);
     }
 
     private void SetTowerValues()
@@ -40,5 +40,23 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
         myInfo.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
+    }
+
+    //Interface Implementations
+    public BuildingInfo GetBuildingInfo()
+    {
+        return myInfo;
+    }
+    public Sprite GetBuildingIcon()
+    {
+        return myData.TowerIcon;
+    }
+    public string GetBuildingDescription()
+    {
+        return myData.TowerDescription;
+    }
+    public void LevelUp()
+    {
+
     }
 }

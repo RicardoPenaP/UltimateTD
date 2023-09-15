@@ -8,8 +8,13 @@ public class BuildingMananger : Singleton<BuildingMananger>
 {   
     private BuildingManangerIcon buildingIcon;
     private BuildingManangerInfo buildingInfo;
-    private Button levelUpButton;
-    private Button closeButton;
+    private BuildinManangerCloseButton closeButton;
+    private BuildingManangerLevelUpButton levelUpButton;
+    private BuildingManangerSellButton sellButton;
+    
+
+
+    private IBuilding selectedBuilding;
 
     protected override void Awake()
     {
@@ -17,8 +22,10 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
         buildingIcon = GetComponentInChildren<BuildingManangerIcon>();
         buildingInfo = GetComponentInChildren<BuildingManangerInfo>();
-        levelUpButton = GetComponentInChildren<BuildingManangerLevelUpButton>().GetComponent<Button>();
-        closeButton = GetComponentInChildren<BuildinManangerCloseButton>().GetComponent<Button>();
+        levelUpButton = GetComponentInChildren<BuildingManangerLevelUpButton>();
+        closeButton = GetComponentInChildren<BuildinManangerCloseButton>();
+        sellButton = GetComponentInChildren<BuildingManangerSellButton>();
+
         SubmitToButtonsEvents();
     }
 
@@ -29,13 +36,9 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
     private void SubmitToButtonsEvents()
     {
-        levelUpButton.onClick.AddListener(LevelUp);
-        closeButton.onClick.AddListener(CloseBuildingManangerWindow);
-    }
-
-    private void LevelUp()
-    {
-
+        closeButton.GetComponent<Button>()?.onClick.AddListener(CloseBuildingManangerWindow);
+        levelUpButton.GetComponent<Button>()?.onClick.AddListener(LevelUp);
+        sellButton.GetComponent<Button>()?.onClick.AddListener(SellBuilding);
     }
 
     private void CloseBuildingManangerWindow()
@@ -43,16 +46,34 @@ public class BuildingMananger : Singleton<BuildingMananger>
         gameObject.SetActive(false);
     }
 
-    public void OpenBuildingMananger(BuildingInfo buildingInfo,string buildingDescription, Sprite buildingIcon)
+    private void LevelUp()
     {
-        this.buildingIcon.SetIcon(buildingIcon);
+        if (selectedBuilding == null)
+        {
+            return;
+        }
+
+    }
+
+    private void SellBuilding()
+    {
+
+    }
+
+   
+
+    public void OpenBuildingMananger(IBuilding selectedBuilding)
+    {
+        this.selectedBuilding = selectedBuilding;
+        BuildingInfo buildingInfo = selectedBuilding.GetBuildingInfo();
+
+        this.buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
         this.buildingInfo.SetName(buildingInfo.name);
         this.buildingInfo.SetLevel(buildingInfo.currentLevel);
-        this.buildingInfo.SetBuildingDescription(buildingDescription);
+        this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildingDescription());
         this.buildingInfo.SetBuildingDamage(buildingInfo.currentAttackDamage);
         this.buildingInfo.SetBuildingAttackRatio(buildingInfo.currentAttackRatio);
         this.buildingInfo.SetBuildingRange(buildingInfo.currentAttackRange);
         gameObject.SetActive(true);
-
     }
 }

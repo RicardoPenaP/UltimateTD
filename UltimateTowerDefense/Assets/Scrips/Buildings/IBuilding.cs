@@ -16,7 +16,10 @@ namespace BuildingInterface
 
     public interface IBuilding
     {
-
+        public BuildingInfo GetBuildingInfo();
+        public Sprite GetBuildingIcon();
+        public string GetBuildingDescription();
+        public void LevelUp();
     }
 }
 
