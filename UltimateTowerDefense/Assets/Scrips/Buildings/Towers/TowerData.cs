@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewTowerData",menuName =("TowerData"))]
@@ -21,8 +19,8 @@ public class TowerData : ScriptableObject
 
     [Header("Upgrade Settings")]
     [SerializeField, Min(0)] private int baseUpgradeGoldCost;
-    [SerializeField, Min(1f)] private float upgradeCostAugmentCoeficient;
-    [SerializeField, Min(1f)] private float upgradeStatsAugmentCoeficient;
+    [SerializeField, Range(0, 100)] private int upgradeCostAugmentPercentage;
+    [SerializeField, Range(0, 100)] private int upgradeStatsAugmentPercentage;
 
     [Header("UI Settings")]
     [SerializeField] private Sprite towerIcon;
@@ -36,8 +34,8 @@ public class TowerData : ScriptableObject
     public float BaseAttackRatio { get { return baseAttackRatio; } }
     public float BaseAttackRange { get { return baseAttackRange; } }
     public int BaseUpgradeGoldCost { get { return baseUpgradeGoldCost; } }
-    public float UpgradeCostAugmentCoeficient { get { return upgradeCostAugmentCoeficient; } }
-    public float UpgradeStatsAugmentCoeficient { get { return upgradeStatsAugmentCoeficient; } }
+    public float UpgradeCostAugmentPercentage { get { return upgradeCostAugmentPercentage; } }
+    public float UpgradeStatsAugmentPercentage { get { return upgradeStatsAugmentPercentage; } }
     public Sprite TowerIcon { get { return towerIcon; } }
     public string TowerName { get { return towerName; } }
     public string TowerDescription { get { return towerDescription; } }

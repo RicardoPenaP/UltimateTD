@@ -19,8 +19,8 @@ MonoBehaviour:
   baseAttackRatio: 1
   baseAttackRange: 20
   baseUpgradeGoldCost: 50
-  upgradeCostAugmentCoeficient: 0
-  upgradeStatsAugmentCoeficient: 0
+  upgradeCostAugmentPercentage: 20
+  upgradeStatsAugmentPercentage: 10
   towerIcon: {fileID: 21300000, guid: 366340aeb70736749afc3385d75bdd02, type: 3}
   towerName: Gun Tower
   towerDescription: 

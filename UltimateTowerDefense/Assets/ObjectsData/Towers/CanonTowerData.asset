@@ -19,8 +19,8 @@ MonoBehaviour:
   baseAttackRatio: 1
   baseAttackRange: 20
   baseUpgradeGoldCost: 50
-  upgradeCostAugmentCoeficient: 0
-  upgradeStatsAugmentCoeficient: 0
+  upgradeCostAugmentPercentage: 20
+  upgradeStatsAugmentPercentage: 10
   towerIcon: {fileID: 21300000, guid: 5c39250745a91ed4eb7158ca300d60fc, type: 3}
   towerName: Canon Tower
   towerDescription: 
