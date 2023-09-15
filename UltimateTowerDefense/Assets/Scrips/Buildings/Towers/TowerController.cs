@@ -40,6 +40,7 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
         myInfo.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
+        myInfo.sellCost = myData.BaseGoldCost;
     }
 
     //Interface Implementations

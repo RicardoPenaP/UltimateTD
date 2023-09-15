@@ -11,7 +11,8 @@ namespace BuildingInterface
         public int currentAttackDamage;
         public float currentAttackRatio;
         public float currentAttackRange;
-        public float currentUpgradeGoldCost;
+        public int currentUpgradeGoldCost;
+        public int sellCost;
     }
 
     public interface IBuilding

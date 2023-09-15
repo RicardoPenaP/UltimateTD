@@ -67,13 +67,15 @@ public class BuildingMananger : Singleton<BuildingMananger>
         this.selectedBuilding = selectedBuilding;
         BuildingInfo buildingInfo = selectedBuilding.GetBuildingInfo();
 
-        this.buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
+        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());
         this.buildingInfo.SetName(buildingInfo.name);
         this.buildingInfo.SetLevel(buildingInfo.currentLevel);
         this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildingDescription());
         this.buildingInfo.SetBuildingDamage(buildingInfo.currentAttackDamage);
         this.buildingInfo.SetBuildingAttackRatio(buildingInfo.currentAttackRatio);
         this.buildingInfo.SetBuildingRange(buildingInfo.currentAttackRange);
+        levelUpButton.SetLevelUPCost(buildingInfo.currentUpgradeGoldCost);
+        sellButton.SetSellCost(buildingInfo.sellCost);
         gameObject.SetActive(true);
     }
 }

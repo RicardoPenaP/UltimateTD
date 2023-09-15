@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BuildingManangerSellButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private TextMeshProUGUI buttonText;
+
+    private void Awake()
     {
-        
+        buttonText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetSellCost(int cost)
     {
-        
+        buttonText.text = cost.ToString();
     }
 }
