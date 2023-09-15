@@ -36,7 +36,7 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void SetTowerValues()
     {
-        float percentageCalculatorHelper = 1 + (myData.SellValuePercentageCoeficient / 100);
+        float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         totalBuildingCost = myData.BaseGoldCost;
 
         gameObject.name = myData.TowerName;
@@ -75,7 +75,7 @@ public class TowerController : MonoBehaviour,IBuilding
         percentageCalculatorHelper = 1 + (myData.UpgradeCostAugmentPercentage / 100);
         totalBuildingCost += myInfo.currentUpgradeGoldCost;
         myInfo.currentUpgradeGoldCost = Mathf.RoundToInt((float)myInfo.currentUpgradeGoldCost * percentageCalculatorHelper);
-        percentageCalculatorHelper = 1 + (myData.SellValuePercentageCoeficient / 100);
+        percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
 
     }
