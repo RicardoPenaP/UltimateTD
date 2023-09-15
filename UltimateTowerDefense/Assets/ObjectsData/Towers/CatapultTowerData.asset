@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 4415465852592416861, guid: cd1e7d4c02d836e44abf1f3810cbf383, type: 3}
   ammunitionPrefab: {fileID: 2261852100830899983, guid: a8b066e74b7c7c8409bd773658aa52f4, type: 3}
-  goldCost: 500
-  attackDamage: 25
-  attackRatio: 0.25
-  attackRange: 15
+  baseGoldCost: 100
+  baseAttackDamage: 50
+  baseAttackRatio: 1
+  baseAttackRange: 20
+  baseUpgradeGoldCost: 50
+  upgradeCostAugmentCoeficient: 0
+  upgradeStatsAugmentCoeficient: 0
   towerIcon: {fileID: 21300000, guid: 8381b95eee8258b47bdfc3b7c61b85c0, type: 3}
   towerName: Catapult Tower
+  towerDescription: 

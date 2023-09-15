@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 4415465852592416861, guid: d38b9b1c50e8c9f45b357c28ecc13770, type: 3}
   ammunitionPrefab: {fileID: 2261852100830899983, guid: e60f69e712aaa464ea1ba85cec65d940, type: 3}
-  goldCost: 100
-  attackDamage: 50
-  attackRatio: 1
-  attackRange: 7
+  baseGoldCost: 100
+  baseAttackDamage: 50
+  baseAttackRatio: 1
+  baseAttackRange: 20
+  baseUpgradeGoldCost: 50
+  upgradeCostAugmentCoeficient: 0
+  upgradeStatsAugmentCoeficient: 0
   towerIcon: {fileID: 21300000, guid: 5c39250745a91ed4eb7158ca300d60fc, type: 3}
   towerName: Canon Tower
+  towerDescription: 

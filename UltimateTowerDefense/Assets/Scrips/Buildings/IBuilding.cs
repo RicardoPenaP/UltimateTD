@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace BuildingInterface
 {
-    public struct BuildingStats
+    public struct BuildingInfo
     {
+        public string name;        
         public int currentLevel;
         public int currentAttackDamage;
         public float currentAttackRatio;

@@ -8,16 +8,12 @@ public class TowerController : MonoBehaviour,IBuilding
     [Header("Tower Controller")]
     [SerializeField] private TowerData myData;
 
-    private BuildingStats myStats = new BuildingStats();
+    private BuildingInfo myInfo = new BuildingInfo();
     public GameObject AmmunitionPrefab { get { return myData.AmmunitionPrefab; } }
-    public int AttackDamage { get { return myStats.currentAttackDamage; } }
-    public float AttackRatio { get { return myStats.currentAttackRatio; } }
-    public float AttackRange { get { return myStats.currentAttackRange; } }
+    public int AttackDamage { get { return myInfo.currentAttackDamage; } }
+    public float AttackRatio { get { return myInfo.currentAttackRatio; } }
+    public float AttackRange { get { return myInfo.currentAttackRange; } }
 
-    private void Awake()
-    {
-        SetTowerValues();        
-    }
     //Debugging Tools
     private void OnDrawGizmosSelected()
     {
@@ -25,13 +21,24 @@ public class TowerController : MonoBehaviour,IBuilding
         Gizmos.DrawWireSphere(transform.position, myData.BaseAttackRange);
     }
 
+    private void Awake()
+    {
+        SetTowerValues();        
+    }
+
+    private void OnMouseDown()
+    {
+        BuildingMananger.Instance.OpenBuildingMananger(myInfo,myData.TowerDescription,myData.TowerIcon);
+    }
+
     private void SetTowerValues()
     {
         gameObject.name = myData.TowerName;
-        myStats.currentLevel = 1;
-        myStats.currentAttackDamage = myData.BaseAttackDamage;
-        myStats.currentAttackRatio = myData.BaseAttackRatio;
-        myStats.currentAttackRange = myData.BaseAttackRange;
-        myStats.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
+        myInfo.name = myData.TowerName;        
+        myInfo.currentLevel = 1;
+        myInfo.currentAttackDamage = myData.BaseAttackDamage;
+        myInfo.currentAttackRatio = myData.BaseAttackRatio;
+        myInfo.currentAttackRange = myData.BaseAttackRange;
+        myInfo.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
     }
 }

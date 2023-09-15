@@ -30,9 +30,9 @@ public class BuildingManangerDescription : MonoBehaviour
         damageText.text = $"Damage: {damage}";
     }
 
-    public void SetFireRatio(float fireRatio)
+    public void SetAttackRatio(float attackRatio)
     {
-        fireRatioText.text = $"Fire Ratio: {fireRatio}/s";
+        fireRatioText.text = $"Fire Ratio: {attackRatio}/s";
     }
 
     public void SetRange(float range)

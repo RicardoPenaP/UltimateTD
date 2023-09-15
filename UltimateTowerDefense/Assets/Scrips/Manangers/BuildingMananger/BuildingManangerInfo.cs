@@ -31,14 +31,14 @@ public class BuildingManangerInfo : MonoBehaviour
         buildingDescription.SetDescription(description);
     }
 
-    public void SetBuildinDamage(int damage)
+    public void SetBuildingDamage(int damage)
     {
         buildingDescription.SetDamage(damage);
     }
 
-    public void SetBuildingFireRation(float fireRatio)
+    public void SetBuildingAttackRatio(float attackRatio)
     {
-        buildingDescription.SetFireRatio(fireRatio);
+        buildingDescription.SetAttackRatio(attackRatio);
     }
 
     public void SetBuildingRange(float range)
