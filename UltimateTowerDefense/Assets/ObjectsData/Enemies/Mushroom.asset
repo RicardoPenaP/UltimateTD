@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
-  m_Name: SlimeData
+  m_Name: Mushroom
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 739311754621939756, guid: a7ce79a8df7be264ba0f3d5432054bc7, type: 3}
-  enemyName: Slime
+  enemyPrefab: {fileID: 7671989720915220819, guid: 87433b5de74b80c4aac51fd55f5ff63f, type: 3}
+  enemyName: AngryMushroom
   maxHealth: 100
   maxShield: 0
   healthLevelMultiplier: 1.5

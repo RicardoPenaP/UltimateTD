@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
-  m_Name: CactusData
+  m_Name: Golem
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4927327814512467264, guid: 7e362658a7813b64cae3eaddb645e993, type: 3}
-  enemyName: WildCactus
-  maxHealth: 250
-  maxShield: 0
+  enemyPrefab: {fileID: 1534167283859374720, guid: 84cbc9e72d35f7642876d0dcd4173f0e, type: 3}
+  enemyName: RockGolem
+  maxHealth: 1000
+  maxShield: 500
   healthLevelMultiplier: 1.5
-  movementSpeed: 4
+  movementSpeed: 1.6
   distanceFromNextTileOffset: 0.08
-  goldReward: 50
-  damageToStronghold: 2
+  goldReward: 100
+  damageToStronghold: 3

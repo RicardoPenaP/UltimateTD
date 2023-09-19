@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class EnemiesPool : MonoBehaviour
 {
-    [SerializeField] private EnemyToSpawn enemyToSpawn;
+    [SerializeField] private EnemyData enemyToSpawn;
 
     private List<EnemyController> enemiesPooled = new List<EnemyController>();
     private Vector2Int startCoordinates;
     private List<Tile> pooledEnemiesPath;
 
-    private bool allEnemiesSpawned = false;
     private bool allEnemiesKilled = false;
     private bool canActivate = true;
+    private float timeBetweenSpawn = 0f;
     private int enemiesSpawned = 0;
-    [SerializeField]private int enemiesKilled = 0;
+    private int enemiesToSpawn = 0;
+    private int enemiesKilled = 0;
 
+    public bool CanSpawn { get; set; }
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
 
-    private void OnDisable()
+    private void Awake()
     {
-        StopAllCoroutines();
+        CanSpawn = false;
     }
 
     private void Start()
@@ -36,7 +38,7 @@ public class EnemiesPool : MonoBehaviour
 
     private void ActivateEnemy()
     {
-        if (allEnemiesSpawned)
+        if (!CanSpawn)
         {
             return;
         }
@@ -54,34 +56,33 @@ public class EnemiesPool : MonoBehaviour
                 StartCoroutine(CanActivateRespawnRoutine());
                 enemy.SetEnemyPath(pooledEnemiesPath);
                 enemy.gameObject.SetActive(true);
-                if (enemiesSpawned >= enemyToSpawn.AmountToSpawn)
-                {
-                    allEnemiesSpawned = true;
+                if (enemiesSpawned >= enemiesToSpawn)
+                {                    
+                    CanSpawn = false;
                 }
                 return;
             }
         }
     }
 
-    public void SetEnemyToSpawn(EnemyToSpawn enemyToSpawn)
+    public void SetEnemyToSpawn(EnemyData enemyToSpawn)
     {
-        this.enemyToSpawn = enemyToSpawn;        
+        this.enemyToSpawn = enemyToSpawn;
+        gameObject.name = $"{enemyToSpawn.name} Pool";
         ResetPool();
-        PopulatePool();
-        StartCoroutine(CanActivateRespawnRoutine());
+        PopulatePool();        
     }
 
-    private void ResetPool()
+    public void ResetPool()
     {
-        allEnemiesKilled = false;
-        allEnemiesSpawned = false;
+        allEnemiesKilled = false;        
         enemiesKilled = 0;
-        enemiesSpawned = 0;
-        foreach (EnemyController enemy in enemiesPooled)
-        {
-            Destroy(enemy.gameObject);
-        }
-        enemiesPooled.Clear();
+        enemiesSpawned = 0;        
+    }
+
+    public void SetAmountOfEnemiesInWave(int amount)
+    {
+        enemiesToSpawn = amount;
     }
 
     private void PopulatePool()
@@ -104,7 +105,7 @@ public class EnemiesPool : MonoBehaviour
     private void OnEnemyDie()
     {
         enemiesKilled++;
-        if (enemiesKilled >= enemyToSpawn.AmountToSpawn)
+        if (enemiesKilled >= enemiesToSpawn)
         {
             allEnemiesKilled = true;
         }
