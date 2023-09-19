@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyReference: {fileID: 11400000, guid: 1495d74c4822f4c4ab67725541ea0c8c, type: 2}
   amountOfEnemiesToPool: 10
-  spawnTime: 20
+  spawnTime: 5
   canSpawn: 1
 --- !u!4 &80317826
 Transform:
@@ -977,6 +977,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 371498527}
     m_Modifications:
+    - target: {fileID: 5294006985996267527, guid: 9b765295d6619444bafd3800a9f02253, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.3959961
+      objectReference: {fileID: 0}
     - target: {fileID: 5294006986113120164, guid: 9b765295d6619444bafd3800a9f02253, type: 3}
       propertyPath: m_Name
       value: BuildingMananger
@@ -1064,6 +1068,14 @@ PrefabInstance:
     - target: {fileID: 5294006986113120165, guid: 9b765295d6619444bafd3800a9f02253, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294006987456249853, guid: 9b765295d6619444bafd3800a9f02253, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.19029236
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294006987865582180, guid: 9b765295d6619444bafd3800a9f02253, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.3959961
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b765295d6619444bafd3800a9f02253, type: 3}

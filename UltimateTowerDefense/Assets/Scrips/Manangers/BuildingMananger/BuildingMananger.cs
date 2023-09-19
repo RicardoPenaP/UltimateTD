@@ -50,7 +50,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
     //Utilities Methods
     private void CloseBuildingManangerWindow()
     {
-        PreviewBuildingMananger.Instance.TurnOffPreviewRange();
+        PreviewBuildingMananger.Instance?.TurnOffPreviewRange();
         gameObject.SetActive(false);
     }
 

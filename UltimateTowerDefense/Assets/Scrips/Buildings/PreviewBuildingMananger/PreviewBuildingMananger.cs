@@ -10,12 +10,13 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
 
     private GameObject towerPreview;
     private PreviewRange rangePreview;
-    
-    private void Start()
+
+    protected override void Awake()
     {
+        base.Awake();
         SetPreviewBuildings();
     }
-
+   
     private void SetPreviewBuildings()
     {
         towerPreview = Instantiate(previewTowerPrefab, transform.position, Quaternion.identity, transform);
