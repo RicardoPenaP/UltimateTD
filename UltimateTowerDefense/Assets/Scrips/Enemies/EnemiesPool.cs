@@ -6,7 +6,7 @@ public class EnemiesPool : MonoBehaviour
 {
     [SerializeField] private EnemyToSpawn enemyToSpawn;
 
-    private List<EnemyController> enemies = new List<EnemyController>();
+    private List<EnemyController> enemiesPooled = new List<EnemyController>();
     private Vector2Int startCoordinates;
     private List<Tile> pooledEnemiesPath;
 
@@ -18,12 +18,15 @@ public class EnemiesPool : MonoBehaviour
 
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
     private void Start()
     {
         startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
         pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
-        PopulatePool();
-        StartCoroutine(CanActivateRespawnRoutine());
     }
 
     private void Update()
@@ -43,12 +46,13 @@ public class EnemiesPool : MonoBehaviour
             return;
         }
 
-        foreach (EnemyController enemy in enemies)
+        foreach (EnemyController enemy in enemiesPooled)
         {
             if (!enemy.gameObject.activeInHierarchy)
             {
                 enemiesSpawned++;
                 StartCoroutine(CanActivateRespawnRoutine());
+                enemy.SetEnemyPath(pooledEnemiesPath);
                 enemy.gameObject.SetActive(true);
                 if (enemiesSpawned >= enemyToSpawn.AmountToSpawn)
                 {
@@ -61,8 +65,10 @@ public class EnemiesPool : MonoBehaviour
 
     public void SetEnemyToSpawn(EnemyToSpawn enemyToSpawn)
     {
-        this.enemyToSpawn = enemyToSpawn;
-       
+        this.enemyToSpawn = enemyToSpawn;        
+        ResetPool();
+        PopulatePool();
+        StartCoroutine(CanActivateRespawnRoutine());
     }
 
     private void ResetPool()
@@ -71,6 +77,11 @@ public class EnemiesPool : MonoBehaviour
         allEnemiesSpawned = false;
         enemiesKilled = 0;
         enemiesSpawned = 0;
+        foreach (EnemyController enemy in enemiesPooled)
+        {
+            Destroy(enemy.gameObject);
+        }
+        enemiesPooled.Clear();
     }
 
     private void PopulatePool()
@@ -83,10 +94,10 @@ public class EnemiesPool : MonoBehaviour
         for (int i = 0; i < enemyToSpawn.AmountToSpawn; i++)
         {
             EnemyController newEnemy = Instantiate(enemyToSpawn.EnemyDataReference.EnemyPrefab, transform.position, Quaternion.identity, transform);
-            newEnemy.SetEnemyPath(pooledEnemiesPath);
+            //newEnemy.SetEnemyPath(pooledEnemiesPath);
             newEnemy.onEnemyDie += OnEnemyDie;
             newEnemy.gameObject.SetActive(false);
-            enemies.Add(newEnemy);
+            enemiesPooled.Add(newEnemy);
         }
     }
 

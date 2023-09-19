@@ -59,7 +59,8 @@ public class EnemyController : MonoBehaviour
 
     public void SetEnemyPath(List<Tile> newPath)
     {
-        myEnemyIA.SetPath(newPath);
+        List<Tile> newList = newPath;
+        myEnemyIA.SetPath(newList);
     }
 
     public void TakeDamage(int damageAmount)
