@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4922201113967060868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d754ecf6fc64294438bb2df5713b2413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyReference: {fileID: 11400000, guid: 1495d74c4822f4c4ab67725541ea0c8c, type: 2}
-  amountOfEnemiesToPool: 10
-  spawnTime: 5
+  enemyReference: {fileID: 0}
+  amountOfEnemiesToPool: 0
+  spawnTime: 0
   canSpawn: 1

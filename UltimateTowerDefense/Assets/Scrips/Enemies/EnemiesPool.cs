@@ -19,14 +19,14 @@ public class EnemiesPool : MonoBehaviour
 
     private void Start()
     {
-        startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
-        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
-        PopulatePool();
+        //startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
+        //pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
+        //PopulatePool();
     }
 
     private void Update()
     {
-        ActivateEnemy();
+        //ActivateEnemy();
     }
 
     private void ActivateEnemy()
