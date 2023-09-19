@@ -37,21 +37,43 @@ public class WaveMananger : MonoBehaviour
 
     private void InitEnemiesPool()
     {
+        //First, set all the enemies and the maximum amount of units to instantiate in a dictionary
+        Dictionary<EnemyData, int> enemiesToInstantiate = new Dictionary<EnemyData, int>();
+
         foreach (WaveData wave in waves)
         {
             foreach (EnemyToSpawn enemy in wave.EnemiesToSpawn)
             {
-                Dictionary<EnemyData, int> enemiesToInstantiate = new Dictionary<EnemyData, int>();
-
-                if (!enemiesPools.ContainsKey(enemy.EnemyDataReference))
+                //Checks if the enemy exist on the dictionary; if not, it is added. If exist, check if
+                //the current amount is lower than the new one to change it for the bigger
+                if (!enemiesToInstantiate.ContainsKey(enemy.EnemyDataReference))
                 {
-                    EnemiesPool pool = Instantiate(enemyPoolPrefabReference,transform.position,Quaternion.identity,transform);
-                    pool.SetEnemyToSpawn(enemy);
-                    onResetPools += pool.ResetPool;
-                    enemiesPools.Add(enemy.EnemyDataReference, pool);
+                    enemiesToInstantiate.Add(enemy.EnemyDataReference, enemy.AmountToSpawn);
+                }
+                else
+                {
+                    if (enemiesToInstantiate[enemy.EnemyDataReference] < enemy.AmountToSpawn)
+                    {
+                        enemiesToInstantiate[enemy.EnemyDataReference] = enemy.AmountToSpawn;
+                    }                    
                 }
             }
         }
+
+        //Second, instantiate a enemies pool for each unit of enemy in the previus diccionary,
+        //each pool is seted before both , enemy and enemies pool, are added to the enemies pools diccionary 
+        foreach (KeyValuePair<EnemyData, int> key in enemiesToInstantiate)
+        {
+            if (!enemiesPools.ContainsKey(key.Key))
+            {
+                EnemiesPool pool = Instantiate(enemyPoolPrefabReference, transform.position, Quaternion.identity, transform);
+                pool.PopulatePool(key.Key,key.Value);
+                onResetPools += pool.ResetPool;
+                enemiesPools.Add(key.Key, pool);
+            }
+        }
+
+        
     }
 
     private void StartNewWave()
@@ -65,7 +87,8 @@ public class WaveMananger : MonoBehaviour
         {
             if (enemiesPools.ContainsKey(enemyInWave.EnemyDataReference))
             {
-                enemiesPools[enemyInWave.EnemyDataReference].SetAmountOfEnemiesInWave(enemyInWave.AmountToSpawn);
+                enemiesPools[enemyInWave.EnemyDataReference].SetAmountOfEnemiesToSpawn(enemyInWave.AmountToSpawn);
+                enemiesPools[enemyInWave.EnemyDataReference].SetTimeBetweenSpawn(enemyInWave.TimeBetweenSpawn);
                 enemiesPools[enemyInWave.EnemyDataReference].CanSpawn = true;
             }
         }
@@ -90,6 +113,11 @@ public class WaveMananger : MonoBehaviour
 
     private bool WaveCompleted()
     {
+        if (!currentWave)
+        {
+            return false;
+        }
+
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
             if (enemiesPools.ContainsKey(enemyInWave.EnemyDataReference))

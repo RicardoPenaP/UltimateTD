@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemiesPool : MonoBehaviour
-{
-    [SerializeField] private EnemyData enemyToSpawn;
-
+{   
     private List<EnemyController> enemiesPooled = new List<EnemyController>();
     private Vector2Int startCoordinates;
     private List<Tile> pooledEnemiesPath;
@@ -34,6 +32,17 @@ public class EnemiesPool : MonoBehaviour
     private void Update()
     {
         ActivateEnemy();
+    }
+
+    public void PopulatePool(EnemyData enemyToSpawn, int amountToInstantiate)
+    {
+        for (int i = 0; i < amountToInstantiate; i++)
+        {
+            EnemyController newEnemy = Instantiate(enemyToSpawn.EnemyPrefab, transform.position, Quaternion.identity, transform);
+            newEnemy.onEnemyDie += OnEnemyDie;
+            newEnemy.gameObject.SetActive(false);
+            enemiesPooled.Add(newEnemy);
+        }
     }
 
     private void ActivateEnemy()
@@ -66,11 +75,9 @@ public class EnemiesPool : MonoBehaviour
     }
 
     public void SetEnemyToSpawn(EnemyData enemyToSpawn)
-    {
-        this.enemyToSpawn = enemyToSpawn;
+    {        
         gameObject.name = $"{enemyToSpawn.name} Pool";
-        ResetPool();
-        PopulatePool();        
+        ResetPool();         
     }
 
     public void ResetPool()
@@ -80,27 +87,16 @@ public class EnemiesPool : MonoBehaviour
         enemiesSpawned = 0;        
     }
 
-    public void SetAmountOfEnemiesInWave(int amount)
+    public void SetAmountOfEnemiesToSpawn(int amount)
     {
         enemiesToSpawn = amount;
     }
-
-    private void PopulatePool()
+    public void SetTimeBetweenSpawn(float timeBetweenSpawn)
     {
-        if (!enemyToSpawn.EnemyDataReference)
-        {
-            return;
-        }
-
-        for (int i = 0; i < enemyToSpawn.AmountToSpawn; i++)
-        {
-            EnemyController newEnemy = Instantiate(enemyToSpawn.EnemyDataReference.EnemyPrefab, transform.position, Quaternion.identity, transform);
-            //newEnemy.SetEnemyPath(pooledEnemiesPath);
-            newEnemy.onEnemyDie += OnEnemyDie;
-            newEnemy.gameObject.SetActive(false);
-            enemiesPooled.Add(newEnemy);
-        }
+        this.timeBetweenSpawn = timeBetweenSpawn;
     }
+
+   
 
     private void OnEnemyDie()
     {
@@ -114,7 +110,7 @@ public class EnemiesPool : MonoBehaviour
     private IEnumerator CanActivateRespawnRoutine()
     {
         canActivate = false;
-        yield return new WaitForSeconds(enemyToSpawn.TimeBetweenSpawn);
+        yield return new WaitForSeconds(timeBetweenSpawn);
         canActivate = true;
     }
 }
