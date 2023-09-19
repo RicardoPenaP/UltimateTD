@@ -32,25 +32,25 @@ public class WaveMananger : MonoBehaviour
         }
 
         currentWave = waves[0];
-        
+        SetEnemiesPool(currentWave.EnemiesToSpawn.Length);
     }
 
     private void StartWaves()
-    {
-        while (waveIndex < waves.Length)
-        {
-            SetEnemiesPool(waves[waveIndex].EnemiesToSpawn.Length);
-            waveIndex++;
-        }
-       
+    {  
        
     }
 
     private void SetEnemiesPool(int amount)
     {
+        SetAmountOfEnemiesPool(amount);
+        SetWaveDataToEnemiesPool();
+    }
+
+    private void SetAmountOfEnemiesPool(int amount)
+    {
         foreach (EnemiesPool pool in currentEnemiesPool)
         {
-            pool.gameObject.SetActive(true);
+            pool.gameObject.SetActive(false);
         }
 
         if (currentEnemiesPool.Count < amount)
@@ -63,17 +63,16 @@ public class WaveMananger : MonoBehaviour
                 currentEnemiesPool.Add(newPool);
             }
         }
-        else
-        {
-            if (currentEnemiesPool.Count > amount)
-            {
-                int diference = currentEnemiesPool.Count - amount;
-                for (int i = 0; i < diference; i++)
-                {                   
-                    currentEnemiesPool[i].gameObject.SetActive(false);
-                }
-            }
-        }
+        
     }
 
+    private void SetWaveDataToEnemiesPool()
+    {
+        for (int i = 0; i < currentWave.EnemiesToSpawn.Length; i++)
+        {
+            currentEnemiesPool[i].SetEnemyToSpawn(currentWave.EnemiesToSpawn[i]);
+            currentEnemiesPool[i].gameObject.SetActive(true);
+
+        }
+    }
 }

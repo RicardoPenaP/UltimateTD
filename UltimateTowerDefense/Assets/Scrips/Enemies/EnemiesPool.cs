@@ -4,34 +4,36 @@ using UnityEngine;
 
 public class EnemiesPool : MonoBehaviour
 {
-    [Header("Enemies Pool")]
-    [SerializeField] private EnemyData enemyReference;
-    [SerializeField,Min(0)] private int amountOfEnemiesToPool = 1;
-    [SerializeField,Min(0f)] private float spawnTime = 1f;
-    [SerializeField] private bool canSpawn;
+    [SerializeField] private EnemyToSpawn enemyToSpawn;
 
     private List<EnemyController> enemies = new List<EnemyController>();
     private Vector2Int startCoordinates;
     private List<Tile> pooledEnemiesPath;
 
+    private bool allEnemiesSpawned = false;
+    private bool allEnemiesKilled = false;
     private bool canActivate = true;
+    private int enemiesSpawned = 0;
+    [SerializeField]private int enemiesKilled = 0;
 
+    public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
 
     private void Start()
     {
-        //startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
-        //pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
-        //PopulatePool();
+        startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
+        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
+        PopulatePool();
+        StartCoroutine(CanActivateRespawnRoutine());
     }
 
     private void Update()
     {
-        //ActivateEnemy();
+        ActivateEnemy();
     }
 
     private void ActivateEnemy()
     {
-        if (!canSpawn)
+        if (allEnemiesSpawned)
         {
             return;
         }
@@ -45,30 +47,62 @@ public class EnemiesPool : MonoBehaviour
         {
             if (!enemy.gameObject.activeInHierarchy)
             {
-                canActivate = false;
+                enemiesSpawned++;
                 StartCoroutine(CanActivateRespawnRoutine());
                 enemy.gameObject.SetActive(true);
+                if (enemiesSpawned >= enemyToSpawn.AmountToSpawn)
+                {
+                    allEnemiesSpawned = true;
+                }
                 return;
             }
         }
     }
 
+    public void SetEnemyToSpawn(EnemyToSpawn enemyToSpawn)
+    {
+        this.enemyToSpawn = enemyToSpawn;
+       
+    }
+
+    private void ResetPool()
+    {
+        allEnemiesKilled = false;
+        allEnemiesSpawned = false;
+        enemiesKilled = 0;
+        enemiesSpawned = 0;
+    }
+
     private void PopulatePool()
     {
-        for (int i = 0; i < amountOfEnemiesToPool; i++)
+        if (!enemyToSpawn.EnemyDataReference)
         {
-            EnemyController newEnemy = Instantiate(enemyReference.EnemyPrefab, transform.position, Quaternion.identity, transform);
+            return;
+        }
+
+        for (int i = 0; i < enemyToSpawn.AmountToSpawn; i++)
+        {
+            EnemyController newEnemy = Instantiate(enemyToSpawn.EnemyDataReference.EnemyPrefab, transform.position, Quaternion.identity, transform);
             newEnemy.SetEnemyPath(pooledEnemiesPath);
+            newEnemy.onEnemyDie += OnEnemyDie;
             newEnemy.gameObject.SetActive(false);
             enemies.Add(newEnemy);
         }
     }
 
-    
+    private void OnEnemyDie()
+    {
+        enemiesKilled++;
+        if (enemiesKilled >= enemyToSpawn.AmountToSpawn)
+        {
+            allEnemiesKilled = true;
+        }
+    }
 
     private IEnumerator CanActivateRespawnRoutine()
     {
-        yield return new WaitForSeconds(spawnTime);
+        canActivate = false;
+        yield return new WaitForSeconds(enemyToSpawn.TimeBetweenSpawn);
         canActivate = true;
     }
 }

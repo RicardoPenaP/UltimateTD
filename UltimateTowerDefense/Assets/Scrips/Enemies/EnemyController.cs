@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
+public delegate void OnEnemyDieDelegate();
+
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
-    
+
+    public OnEnemyDieDelegate onEnemyDie;
     private IEnemy myEnemyIA;
     private UIHealthAndShieldBar myUI;
 
@@ -38,9 +41,8 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnDisable()
-    {
+    {        
         ResetEnemy();
-        
     }
 
     private void ResetEnemy()
@@ -88,8 +90,9 @@ public class EnemyController : MonoBehaviour
         if (currentHealth <= 0)
         {
             isAlive = false;
-            currentHealth = 0;
+            currentHealth = 0;            
             myEnemyIA.Die();
+            onEnemyDie?.Invoke();
         }
         UpdateUI();
     }
