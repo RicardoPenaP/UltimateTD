@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: Wave1Data
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-    enemyPrefab: {fileID: 0}
-    amountToSpawn: 0
-    timeBetweenSpawn: 0
-    enemyLevel: 0
+  - enemyPrefab: {fileID: 11400000, guid: 064eff22d47a6e84182fcf1ecadd5e90, type: 2}
+    amountToSpawn: 10
+    timeBetweenSpawn: 1
+    enemyLevel: 1
+    isABoss: 0
+  - enemyPrefab: {fileID: 11400000, guid: 965133a17a4d13d46abc822fa8c119c2, type: 2}
+    amountToSpawn: 5
+    timeBetweenSpawn: 1.5
+    enemyLevel: 1
+    isABoss: 0
