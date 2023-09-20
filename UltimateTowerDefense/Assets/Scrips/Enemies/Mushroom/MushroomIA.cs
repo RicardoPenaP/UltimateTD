@@ -7,11 +7,13 @@ public class MushroomIA : MonoBehaviour, IEnemy
 {
     [Header("Mushroom IA")]
     [Header("Skills Settings")]
-    [SerializeField] private ISkil onDieSkill;
+    [SerializeField] private MonoBehaviour onDieSkillPrefab;
+
 
     private EnemyController myController;
     private MushroomMovement myMovement;
     private Animator myAnimator;
+    private ISkil onDieSkill;
 
     private List<Tile> path;
 
@@ -37,12 +39,18 @@ public class MushroomIA : MonoBehaviour, IEnemy
     {
         myController = GetComponent<EnemyController>();
         myMovement = GetComponentInChildren<MushroomMovement>();
-        myAnimator = GetComponentInChildren<Animator>();        
+        myAnimator = GetComponentInChildren<Animator>();
+        onDieSkill = Instantiate(onDieSkillPrefab, myMovement.transform.position, Quaternion.identity, myMovement.transform).GetComponent<ISkil>();
     }
 
     private void Update()
     {
         UpdateState();
+        //Testing propose only
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            onDieSkill?.CastSkill(transform.position);
+        }
     }
 
     private void UpdateState()
@@ -62,6 +70,11 @@ public class MushroomIA : MonoBehaviour, IEnemy
 
     private void UpdateWalking()
     {
+        if (path==null)
+        {
+            return;
+        }
+
         if (pathCompleted)
         {
             return;

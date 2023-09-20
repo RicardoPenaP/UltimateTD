@@ -55,6 +55,11 @@ public class SlimeIA : MonoBehaviour,IEnemy
 
     private void UpdateWalking()
     {
+        if (path == null)
+        {
+            return;
+        }
+
         if (pathCompleted)
         {
             return;

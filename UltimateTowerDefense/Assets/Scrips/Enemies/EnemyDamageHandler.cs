@@ -24,7 +24,7 @@ public class EnemyDamageHandler : MonoBehaviour
 
     public void HealMaxHealthPercentage(int percentage)
     {
-        int healthHealed = Mathf.RoundToInt((float)myController.GetCurrentMaxHealth() * (1f + ((float)percentage / 100)));
+        int healthHealed = Mathf.RoundToInt(((float)myController.GetCurrentMaxHealth() * (float)percentage) / 100);
         myController.HealDamage(healthHealed);
     }
 

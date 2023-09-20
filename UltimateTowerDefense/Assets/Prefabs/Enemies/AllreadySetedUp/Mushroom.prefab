@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf0e6a2553ef2d4cb92630de29e377f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDieSkillPrefab: {fileID: 4049948381849358057, guid: 600d578473b96c74f92447e6d9c0c04c, type: 3}
 --- !u!1001 &1283932721199578772
 PrefabInstance:
   m_ObjectHideFlags: 0
