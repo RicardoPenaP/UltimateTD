@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHealth: 100
   maxShield: 0
   healthLevelMultiplier: 1.5
-  movementSpeed: 2
+  movementSpeed: 1.2
   distanceFromNextTileOffset: 0.08
   goldReward: 25
   damageToStronghold: 1

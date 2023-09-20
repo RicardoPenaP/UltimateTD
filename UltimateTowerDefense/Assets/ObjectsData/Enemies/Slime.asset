@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 739311754621939756, guid: a7ce79a8df7be264ba0f3d5432054bc7, type: 3}
   enemyName: Slime
-  maxHealth: 100
+  maxHealth: 500
   maxShield: 0
   healthLevelMultiplier: 1.5
-  movementSpeed: 2
+  movementSpeed: 1
   distanceFromNextTileOffset: 0.08
   goldReward: 25
   damageToStronghold: 1
