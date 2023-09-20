@@ -29,7 +29,6 @@ public class EnemyData : ScriptableObject
     [Header("Damage Settings")]
     [SerializeField] private int damageToStronghold = 1;
 
-
     public EnemyController EnemyPrefab { get { return enemyPrefab; } }
     public string EnemyName { get { return enemyName; } }
     public int MaxHealth { get { return maxHealth; } }
@@ -39,6 +38,5 @@ public class EnemyData : ScriptableObject
     public float DistanceFromNextileOffset { get { return distanceFromNextTileOffset; } }
     public int GoldReward { get { return goldReward; } }
     public int DamageToStronghold { get { return damageToStronghold; } }
-
 
 }

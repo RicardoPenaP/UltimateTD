@@ -5,6 +5,10 @@ using EnemiesInterface;
 
 public class MushroomIA : MonoBehaviour, IEnemy
 {
+    [Header("Mushroom IA")]
+    [Header("Skills Settings")]
+    [SerializeField] private ISkil onDieSkill;
+
     private EnemyController myController;
     private MushroomMovement myMovement;
     private Animator myAnimator;
@@ -16,6 +20,8 @@ public class MushroomIA : MonoBehaviour, IEnemy
     private bool pathCompleted = false;
 
     private int pathIndex = 0;
+
+    
 
     //Animator hash codes
     private readonly int ANIMATOR_ATTACK_HASH = Animator.StringToHash("Attack");
@@ -31,7 +37,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
     {
         myController = GetComponent<EnemyController>();
         myMovement = GetComponentInChildren<MushroomMovement>();
-        myAnimator = GetComponentInChildren<Animator>();
+        myAnimator = GetComponentInChildren<Animator>();        
     }
 
     private void Update()
@@ -116,6 +122,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
 
     public void Die()
     {
+        onDieSkill?.CastSkill(transform.position);
         myAnimator.SetTrigger(ANIMATOR_DIE_HASH);
     }
 

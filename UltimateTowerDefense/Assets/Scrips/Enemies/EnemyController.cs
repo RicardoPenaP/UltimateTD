@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour
     public int GoldReward { get { return myData.GoldReward; } }
     public int DamageToStronghold { get { return myData.DamageToStronghold; } }
     public bool IsAlive { get { return isAlive; } }
-    
 
     private void Awake()
     {        
