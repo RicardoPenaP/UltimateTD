@@ -5,8 +5,9 @@ using UnityEngine;
 public class MushroomHeal : MonoBehaviour,ISkil
 {
     [Header("Mushroom Heal")]
-    [SerializeField, Range(0, 100)] private int lifePercentageHealed = 0;
-    [SerializeField, Min(0f)] private float rangeOfEffect = 0;
+    [SerializeField, Range(0, 100)] private int lifePercentageHealedPerSecond = 0;
+    [SerializeField, Min(0f)] private float rangeOfEffect = 0f;
+    [SerializeField, Min(0f)] private float durationOfEffect = 0f;
 
     private ParticleSystem visualEffect;
 
@@ -27,7 +28,7 @@ public class MushroomHeal : MonoBehaviour,ISkil
         Collider[] surroundingObjects = Physics.OverlapSphere(position,rangeOfEffect);
         foreach (Collider surroundingObject in surroundingObjects)
         {
-            surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealed);
+            surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealedPerSecond);
         }
 
     }

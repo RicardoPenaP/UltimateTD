@@ -102,6 +102,10 @@ public class EnemyController : MonoBehaviour
 
     public void HealDamage(int healAmount)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         currentHealth += healAmount;
         if (currentHealth > currentMaxHealth)
         {

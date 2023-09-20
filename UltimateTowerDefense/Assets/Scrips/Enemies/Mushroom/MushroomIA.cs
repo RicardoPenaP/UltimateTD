@@ -6,7 +6,7 @@ using EnemiesInterface;
 public class MushroomIA : MonoBehaviour, IEnemy
 {
     [Header("Mushroom IA")]
-    [Header("Skills Settings")]
+    [Header("Skills Reference")]
     [SerializeField] private MonoBehaviour onDieSkillPrefab;
 
 
@@ -45,12 +45,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
 
     private void Update()
     {
-        UpdateState();
-        //Testing propose only
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            onDieSkill?.CastSkill(transform.position);
-        }
+        UpdateState();        
     }
 
     private void UpdateState()
