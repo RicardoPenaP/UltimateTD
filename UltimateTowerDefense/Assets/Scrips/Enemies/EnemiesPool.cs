@@ -26,11 +26,7 @@ public class EnemiesPool : MonoBehaviour
     }    
 
     private void Update()
-    {
-        foreach (EnemyController enemy in enemiesPooled)
-        {
-            enemy.gameObject.SetActive(false);
-        }
+    {       
         ActivateEnemy();
     }
 

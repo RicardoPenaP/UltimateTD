@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b4630a3e3a99a4cbe351a4a08d9571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 10
+  timeBetweenWaves: 2
   enemyPoolPrefabReference: {fileID: 4922201113967060869, guid: 5ac8090d1f379244ea11f292ef4fcfef, type: 3}
   waves:
   - {fileID: 11400000, guid: 592162ec96157a541aae6d4a04fa6405, type: 2}
