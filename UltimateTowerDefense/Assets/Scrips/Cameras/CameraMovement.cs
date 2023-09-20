@@ -179,7 +179,6 @@ public class CameraMovement : MonoBehaviour
         float zoomDirection = -Input.mouseScrollDelta.y;
         targetFOV += (zoomDirection * zoomStep);
         targetFOV = Mathf.Clamp(targetFOV, minValue, maxValue);
-        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, targetFOV, zoomSmoothSpeed * Time.deltaTime);
-        //virtualCamera.m_Lens.FieldOfView = targetFOV;
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, targetFOV, zoomSmoothSpeed * Time.deltaTime);        
     }
 }
