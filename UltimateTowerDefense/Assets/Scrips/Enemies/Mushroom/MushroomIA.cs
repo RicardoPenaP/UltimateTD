@@ -45,7 +45,11 @@ public class MushroomIA : MonoBehaviour, IEnemy
 
     private void Update()
     {
-        UpdateState();        
+        UpdateState();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            onDieSkill?.CastSkill();
+        }
     }
 
     private void UpdateState()
@@ -130,7 +134,7 @@ public class MushroomIA : MonoBehaviour, IEnemy
 
     public void Die()
     {
-        onDieSkill?.CastSkill(transform.position);
+        onDieSkill?.CastSkill();
         myAnimator.SetTrigger(ANIMATOR_DIE_HASH);
     }
 

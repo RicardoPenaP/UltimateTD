@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47bbb04f02510cf4a9d6e647c950d28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePercentageHealed: 100
-  rangeOfEffect: 7.5
+  lifePercentageHealedPerSecond: 10
+  rangeOfTheEffect: 5
+  durationOfTheEffect: 2
 --- !u!1001 &4049948382369876106
 PrefabInstance:
   m_ObjectHideFlags: 0

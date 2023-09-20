@@ -6,8 +6,9 @@ public class MushroomHeal : MonoBehaviour,ISkil
 {
     [Header("Mushroom Heal")]
     [SerializeField, Range(0, 100)] private int lifePercentageHealedPerSecond = 0;
-    [SerializeField, Min(0f)] private float rangeOfEffect = 0f;
-    [SerializeField, Min(0f)] private float durationOfEffect = 0f;
+    [SerializeField, Min(0f)] private float rangeOfTheEffect = 0f;
+    [SerializeField, Min(0f)] private float durationOfTheEffect = 0f;
+
 
     private ParticleSystem visualEffect;
 
@@ -15,21 +16,41 @@ public class MushroomHeal : MonoBehaviour,ISkil
     {
         visualEffect = GetComponentInChildren<ParticleSystem>();
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, rangeOfEffect);
+        Gizmos.DrawWireSphere(transform.position, rangeOfTheEffect);
     }
 
-    public void CastSkill(Vector3 position)
+    public void CastSkill()
     {
-        visualEffect.transform.localScale = new Vector3(rangeOfEffect*2,1, rangeOfEffect * 2);
-        visualEffect?.Play();
-        Collider[] surroundingObjects = Physics.OverlapSphere(position,rangeOfEffect);
-        foreach (Collider surroundingObject in surroundingObjects)
+        visualEffect.transform.localScale = new Vector3(rangeOfTheEffect * 2, 1, rangeOfTheEffect * 2);
+        StartCoroutine(SkillActiveRoutine());
+    }
+
+    private IEnumerator SkillActiveRoutine()
+    {
+        int timer = 0;
+
+        while (timer < durationOfTheEffect)
         {
-            surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealedPerSecond);
+            if (!visualEffect.isPlaying)
+            {
+                visualEffect?.Play();
+            }
+            Collider[] surroundingObjects = Physics.OverlapSphere(transform.position, rangeOfTheEffect);
+            foreach (Collider surroundingObject in surroundingObjects)
+            {
+                surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealedPerSecond);
+            }
+            yield return new WaitForSeconds(1f);
+            timer++;
         }
 
+        if (visualEffect.isPlaying)
+        {
+            visualEffect?.Stop();
+        }
     }
 }

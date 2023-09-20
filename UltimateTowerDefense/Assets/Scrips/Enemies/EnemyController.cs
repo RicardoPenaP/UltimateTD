@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     private IEnemy myEnemyIA;
     private UIHealthAndShieldBar myUI;
 
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
     private int currentMaxHealth;
     private int currentShield;
     private int currentMaxShield;

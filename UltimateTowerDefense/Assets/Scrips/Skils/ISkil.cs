@@ -5,6 +5,6 @@ using UnityEngine;
 
 public interface ISkil
 {
-    public void CastSkill(Vector3 position);
+    public void CastSkill();
 }
 
