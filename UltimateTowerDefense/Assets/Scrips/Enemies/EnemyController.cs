@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
+    [SerializeField] private Transform aimPoint;
 
     public OnEnemyDieDelegate onEnemyDie;
     private IEnemy myEnemyIA;
@@ -22,12 +23,14 @@ public class EnemyController : MonoBehaviour
     private bool isAlive = true;
     private bool canWalk;
 
+    public Transform AimPoint { get { return aimPoint; } }
     public float MovementSpeed { get { return myData.MovementSpeed; } }
     public bool CanWalk { get { return canWalk; } }
     public float DistanceFromNextTileOffset { get { return myData.DistanceFromNextileOffset; } }
     public int GoldReward { get { return myData.GoldReward; } }
     public int DamageToStronghold { get { return myData.DamageToStronghold; } }
     public bool IsAlive { get { return isAlive; } }
+    
 
     private void Awake()
     {        

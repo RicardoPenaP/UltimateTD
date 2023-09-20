@@ -7,12 +7,11 @@ public class Canon : MonoBehaviour,ITowerWeapon
     [Header("Canon")]
     [SerializeField] private Transform canonBody;
     [SerializeField] private Transform shootingPos;
-    public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
-    {
-        Vector3 objectivedirection = (attackObjectivePos - shootingPos.position).normalized;
+    public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
+    {       
         IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
         ammoShooted.SetDamage(attackDamage);
-        ammoShooted.SetMovementDirection(objectivedirection);
+        ammoShooted.SetTarget(attackObjectivePos);
 
     }
 

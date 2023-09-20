@@ -25,7 +25,7 @@ public class Stone : MonoBehaviour,IAmmunition
         Gizmos.DrawWireSphere(transform.position, damageRadius);
     }
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         Explode();
     }
 
@@ -41,9 +41,9 @@ public class Stone : MonoBehaviour,IAmmunition
         DestroyBehaviour();
     }
 
-    public void SetMovementDirection(Vector3 newDirection)
+    public void SetTarget(Transform newDirection)
     {
-        finalPos = new Vector3(newDirection.x,0,newDirection.z);
+        finalPos = new Vector3(newDirection.position.x,0,newDirection.position.z);
         startPos = transform.position;
         maxY = (Vector3.Distance(startPos, finalPos) * maxHeightPercentage) /100;
         StartCoroutine(ParableMovementRoutine());        

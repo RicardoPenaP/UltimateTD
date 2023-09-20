@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IAmmunition 
 {
-    public void SetMovementDirection(Vector3 newDirection);
+    public void SetTarget(Transform target);
     public void SetDamage(int damage);
 }

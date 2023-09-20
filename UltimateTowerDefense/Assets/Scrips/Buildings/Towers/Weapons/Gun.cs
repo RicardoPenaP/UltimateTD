@@ -8,16 +8,13 @@ public class Gun : MonoBehaviour,ITowerWeapon
     [SerializeField] private Transform[] shootingPos;
 
     private int shootingPosIndex = 0;
-    public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
-    {
-        Vector3 objectivedirection = (attackObjectivePos - shootingPos[shootingPosIndex].position).normalized;
+    public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
+    {       
         IAmmunition ammoshooted = Instantiate(ammunition, shootingPos[shootingPosIndex].position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
         ammoshooted.SetDamage(attackDamage);
-        ammoshooted.SetMovementDirection(objectivedirection);
-
+        ammoshooted.SetTarget(attackObjectivePos);
         shootingPosIndex++;
         shootingPosIndex = shootingPosIndex >= shootingPos.Length ? 0 : shootingPosIndex;
-
     }
 
     public void AimAt(Vector3 aimPos)

@@ -12,15 +12,22 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     private IAmmunition myAmmunition;
 
-    private Vector3 objectivePos;
+    private Transform objectivePos;
+
+    private bool canAttack = true;
 
     private void Awake()
     {
         myAnimator = GetComponent<Animator>();
     }
 
-    public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
+    public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
     {
+        if (!canAttack)
+        {
+            return;
+        }
+        canAttack = false;
         myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<IAmmunition>();
         myAmmunition.SetDamage(attackDamage);
         this.objectivePos = attackObjectivePos;
@@ -36,7 +43,12 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void AnimatorAttackCompletedHelper()
     {
+        if (myAmmunition==null)
+        {
+            return;
+        }
         (myAmmunition as MonoBehaviour).transform.SetParent(transform.parent);
-        myAmmunition.SetMovementDirection(objectivePos);
+        myAmmunition.SetTarget(objectivePos);
+        canAttack = true;
     }
 }

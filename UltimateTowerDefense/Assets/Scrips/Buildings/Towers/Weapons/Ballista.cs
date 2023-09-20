@@ -7,12 +7,11 @@ public class Ballista : MonoBehaviour, ITowerWeapon
     [Header("Ballista")]
     [SerializeField] private Transform ballistaBody;
     [SerializeField] private Transform shootingPos;
-    public void Attack(GameObject ammunition, int attackDamage, Vector3 attackObjectivePos)
-    {
-        Vector3 objectivedirection = (attackObjectivePos - shootingPos.position).normalized;
+    public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
+    {        
         IAmmunition ammoshooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
         ammoshooted.SetDamage(attackDamage);
-        ammoshooted.SetMovementDirection(objectivedirection);
+        ammoshooted.SetTarget(attackObjectivePos);
 
     }
 

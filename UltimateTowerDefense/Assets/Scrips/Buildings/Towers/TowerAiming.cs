@@ -6,7 +6,7 @@ public class TowerAiming : MonoBehaviour
 {
     [Header("Tower Aiming")]   
 
-    private ITowerWeapon myCanon;        
+    private ITowerWeapon myWeapon;        
     private TowerController myController;
     private EnemyDamageHandler target;
 
@@ -15,7 +15,7 @@ public class TowerAiming : MonoBehaviour
 
     private void Awake()
     {
-        myCanon = GetComponentInChildren<ITowerWeapon>();
+        myWeapon = GetComponentInChildren<ITowerWeapon>();
         myController = GetComponent<TowerController>();
     }
 
@@ -48,21 +48,21 @@ public class TowerAiming : MonoBehaviour
     }
 
     private void Attack()
-    {
+    {       
         if (!canAttack)
         {
             return;
         }
         canAttack = false;
          
-        myCanon.Attack(myController.AmmunitionPrefab,myController.AttackDamage,target.transform.position);
+        myWeapon.Attack(myController.AmmunitionPrefab,myController.AttackDamage,target.GetEnemyAimPoint());
         SetAttackCooldownTime(myController.AttackRatio);
         StartCoroutine(AttackCooldownTime());
     }
 
     private void AimTowerCanon()
     {
-        myCanon.AimAt(target.transform.position);
+        myWeapon.AimAt(target.transform.position);
     }
 
     private void LookForTarget()

@@ -16,4 +16,9 @@ public class EnemyDamageHandler : MonoBehaviour
     {
         myController.TakeDamage(damage);
     }
+
+    public Transform GetEnemyAimPoint()
+    {
+        return myController.AimPoint;
+    }
 }

@@ -49,7 +49,8 @@ public class ChestMovement : MonoBehaviour
 
     private void SetMovementDirection()
     {
-        transform.forward = (positionToMove - transform.position).normalized;
+        Vector3 newDirection = (positionToMove - transform.position).normalized;
+        transform.forward = newDirection == Vector3.zero ? Vector3.forward : newDirection;
     }
 
     public void SetPositionToMove(Vector3 positionToMove)
