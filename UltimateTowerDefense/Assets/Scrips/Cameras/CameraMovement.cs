@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -16,20 +17,34 @@ public class CameraMovement : MonoBehaviour
     [SerializeField, Range(0, 50)] private int verticalTreshold = 10;
     [Tooltip("Percentage of screen width")]
     [SerializeField, Range(0, 50)] private int horizontalTreshold = 10;
+    [Header("Camera Zoom")]
+    [Tooltip("Max diference from the starting zoom")]
+    [SerializeField, Min(0f)] private float maxZoom;
+    [Tooltip("Zoom step by every mouse scroll")]
+    [SerializeField, Min(0f)] private float zoomStep;
+    [Tooltip("Zoom smooth speed")]
+    [SerializeField, Min(0f)] private float zoomSmoothSpeed;
+
 
     private Transform myPointer;
     private PlayerInput playerInput;
+    private CinemachineVirtualCamera virtualCamera;
 
     private Vector2 keysRawInput;
     private Vector2 mousePosition;
     private Vector2 mouseLastPos;
 
     private bool movementByDragActive = false;
+    private float startingFOV;
+    private float targetFOV;
 
     private void Awake()
     {
         myPointer = GetComponentInChildren<CameraPointer>().transform;
         playerInput = new PlayerInput();
+        virtualCamera = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
+        startingFOV = virtualCamera.m_Lens.FieldOfView;
+        targetFOV = virtualCamera.m_Lens.FieldOfView;
     }
 
     private void OnEnable()
@@ -42,6 +57,7 @@ public class CameraMovement : MonoBehaviour
         MoveByKeysInput();
         MoveByEdgeScrollInput();
         MoveByMouseDragInput();
+        ZoomHandler();
     }
 
     private void OnDisable()
@@ -156,4 +172,14 @@ public class CameraMovement : MonoBehaviour
         myPointer.position = movementDirection;
     }
 
+    private void ZoomHandler()
+    {
+        float minValue = startingFOV - maxZoom;
+        float maxValue = startingFOV + maxZoom;
+        float zoomDirection = -Input.mouseScrollDelta.y;
+        targetFOV += (zoomDirection * zoomStep);
+        targetFOV = Mathf.Clamp(targetFOV, minValue, maxValue);
+        virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, targetFOV, zoomSmoothSpeed * Time.deltaTime);
+        //virtualCamera.m_Lens.FieldOfView = targetFOV;
+    }
 }

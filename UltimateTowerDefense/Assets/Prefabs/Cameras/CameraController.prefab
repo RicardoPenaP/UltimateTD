@@ -54,6 +54,9 @@ MonoBehaviour:
   byDragMouseMovementSpeed: 20
   verticalTreshold: 20
   horizontalTreshold: 20
+  maxZoom: 30
+  zoomStep: 5
+  zoomSmoothSpeed: 10
 --- !u!1 &3614154015367441635
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +81,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3614154015367441635}
-  m_LocalRotation: {x: 0.38268343, y: -0.000000022478478, z: 0.000000009310891, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: -0.000000022481213, z: 0.000000009312022, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -108,7 +111,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 3614154016432455302}
   m_Follow: {fileID: 3614154016432455302}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 45
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

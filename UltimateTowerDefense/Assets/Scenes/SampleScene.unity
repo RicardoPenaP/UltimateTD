@@ -396,7 +396,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -600,7 +600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1713349779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,11 +613,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b4630a3e3a99a4cbe351a4a08d9571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 2
+  timeBetweenWaves: 5
   enemyPoolPrefabReference: {fileID: 4922201113967060869, guid: 5ac8090d1f379244ea11f292ef4fcfef, type: 3}
   waves:
   - {fileID: 11400000, guid: 592162ec96157a541aae6d4a04fa6405, type: 2}
   - {fileID: 11400000, guid: e07f0ccb84b39b34f820d485104a5dea, type: 2}
+  - {fileID: 11400000, guid: 2d771b94998778346aa7401b7868a5e2, type: 2}
+  - {fileID: 11400000, guid: 932058c8d2d54904db3476b9833fbd70, type: 2}
 --- !u!4 &1713349780
 Transform:
   m_ObjectHideFlags: 0
@@ -759,6 +761,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1280243347}
     m_Modifications:
+    - target: {fileID: 3614154014985726609, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
+      propertyPath: maxZoom
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614154014985726609, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
+      propertyPath: zoomStep
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614154014985726609, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
+      propertyPath: zoomSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614154014985726609, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
+      propertyPath: zoomSmoothSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3614154014985726610, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -806,6 +824,10 @@ PrefabInstance:
     - target: {fileID: 3614154014985726611, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_Name
       value: CameraController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614154015367441633, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3614154015367441634, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_LocalRotation.y
