@@ -71,9 +71,7 @@ public class WaveMananger : MonoBehaviour
                 onResetPools += pool.ResetPool;
                 enemiesPools.Add(key.Key, pool);
             }
-        }
-
-        
+        }        
     }
 
     private void StartNewWave()
@@ -89,7 +87,7 @@ public class WaveMananger : MonoBehaviour
             {
                 enemiesPools[enemyInWave.EnemyDataReference].SetAmountOfEnemiesToSpawn(enemyInWave.AmountToSpawn);
                 enemiesPools[enemyInWave.EnemyDataReference].SetTimeBetweenSpawn(enemyInWave.TimeBetweenSpawn);
-                enemiesPools[enemyInWave.EnemyDataReference].CanSpawn = true;
+                enemiesPools[enemyInWave.EnemyDataReference].EnemiesCanSpawn();
             }
         }
     }

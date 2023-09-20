@@ -15,22 +15,22 @@ public class EnemiesPool : MonoBehaviour
     private int enemiesToSpawn = 0;
     private int enemiesKilled = 0;
 
-    public bool CanSpawn { get; set; }
+    private bool canSpawn = false;
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
 
-    private void Awake()
-    {
-        CanSpawn = false;
-    }
 
     private void Start()
     {
         startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
         pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
-    }
+    }    
 
     private void Update()
     {
+        foreach (EnemyController enemy in enemiesPooled)
+        {
+            enemy.gameObject.SetActive(false);
+        }
         ActivateEnemy();
     }
 
@@ -47,7 +47,7 @@ public class EnemiesPool : MonoBehaviour
 
     private void ActivateEnemy()
     {
-        if (!CanSpawn)
+        if (!canSpawn)
         {
             return;
         }
@@ -67,17 +67,11 @@ public class EnemiesPool : MonoBehaviour
                 enemy.gameObject.SetActive(true);
                 if (enemiesSpawned >= enemiesToSpawn)
                 {                    
-                    CanSpawn = false;
+                    canSpawn = false;
                 }
                 return;
             }
         }
-    }
-
-    public void SetEnemyToSpawn(EnemyData enemyToSpawn)
-    {        
-        gameObject.name = $"{enemyToSpawn.name} Pool";
-        ResetPool();         
     }
 
     public void ResetPool()
@@ -91,12 +85,11 @@ public class EnemiesPool : MonoBehaviour
     {
         enemiesToSpawn = amount;
     }
+
     public void SetTimeBetweenSpawn(float timeBetweenSpawn)
     {
         this.timeBetweenSpawn = timeBetweenSpawn;
     }
-
-   
 
     private void OnEnemyDie()
     {
@@ -105,6 +98,17 @@ public class EnemiesPool : MonoBehaviour
         {
             allEnemiesKilled = true;
         }
+    }
+
+    public void EnemiesCanSpawn()
+    {
+        StartCoroutine(EnemiesCanSpawnRoutine());
+    }
+
+    private IEnumerator EnemiesCanSpawnRoutine()
+    {
+        yield return new WaitForSeconds(timeBetweenSpawn);
+        canSpawn = true;
     }
 
     private IEnumerator CanActivateRespawnRoutine()

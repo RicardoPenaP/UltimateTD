@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - enemyPrefab: {fileID: 11400000, guid: 064eff22d47a6e84182fcf1ecadd5e90, type: 2}
-    amountToSpawn: 0
-    timeBetweenSpawn: 0
+  - enemyDataReference: {fileID: 11400000, guid: 09eee9f67f002fc439b116297a837bb9, type: 2}
+    amountToSpawn: 5
+    timeBetweenSpawn: 2
     enemyLevel: 1
     isABoss: 0
-  - enemyPrefab: {fileID: 11400000, guid: 965133a17a4d13d46abc822fa8c119c2, type: 2}
-    amountToSpawn: 0
-    timeBetweenSpawn: 0
+  - enemyDataReference: {fileID: 11400000, guid: dcfa0437981032d41ab7a9371a0045d7, type: 2}
+    amountToSpawn: 2
+    timeBetweenSpawn: 12
     enemyLevel: 1
     isABoss: 0
-  - enemyPrefab: {fileID: 11400000, guid: 965133a17a4d13d46abc822fa8c119c2, type: 2}
-    amountToSpawn: 0
-    timeBetweenSpawn: 0
+  - enemyDataReference: {fileID: 11400000, guid: 965133a17a4d13d46abc822fa8c119c2, type: 2}
+    amountToSpawn: 10
+    timeBetweenSpawn: 1.5
     enemyLevel: 1
     isABoss: 0
