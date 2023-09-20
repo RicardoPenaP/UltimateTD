@@ -17,6 +17,17 @@ public class EnemyDamageHandler : MonoBehaviour
         myController.TakeDamage(damage);
     }
 
+    public void HealDamage(int healAmount)
+    {
+        myController.HealDamage(healAmount);
+    }
+
+    public void HealMaxHealthPercentage(int percentage)
+    {
+        int healthHealed = Mathf.RoundToInt((float)myController.GetCurrentMaxHealth() * (1f + ((float)percentage / 100)));
+        myController.HealDamage(healthHealed);
+    }
+
     public Transform GetEnemyAimPoint()
     {
         return myController.AimPoint;

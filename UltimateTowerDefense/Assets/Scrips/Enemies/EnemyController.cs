@@ -100,6 +100,23 @@ public class EnemyController : MonoBehaviour
         UpdateUI();
     }
 
+    public void HealDamage(int healAmount)
+    {
+        currentHealth += healAmount;
+        if (currentHealth > currentMaxHealth)
+        {
+            currentHealth = currentMaxHealth;
+        }
+        UpdateUI();
+    }
+
+    public int GetCurrentMaxHealth()
+    {
+        return currentMaxHealth;
+    }
+
+    
+
     private void UpdateUI()
     {
         myUI.UpdateBar(currentHealth, currentMaxHealth, currentShield, currentMaxShield);
