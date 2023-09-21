@@ -870,7 +870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Defend Your Unholy Kingdom
+  m_text: "Defend \nYour\nKingdom"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 72f9786e3d841c44482172687da4373c, type: 2}
   m_sharedMaterial: {fileID: -7892722044231282609, guid: 72f9786e3d841c44482172687da4373c, type: 2}
