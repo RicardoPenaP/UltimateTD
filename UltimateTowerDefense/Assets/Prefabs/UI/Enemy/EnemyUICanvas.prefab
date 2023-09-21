@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 2430631780612037929}
   - component: {fileID: 2294752059937397969}
   - component: {fileID: 8606664997267702531}
+  - component: {fileID: 3617202879532025993}
   m_Layer: 0
   m_Name: EnemyUICanvas
   m_TagString: Untagged
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2294752059937397969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +530,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f434924a1327d24db3570ef0e4731ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3617202879532025993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096978566234009066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e809c59d2c89b64a9d54006f5a2ae36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5432678132562250296

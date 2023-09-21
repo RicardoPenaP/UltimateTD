@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public delegate void UpdateEnemyUIDelegate(int healthCurrentValue, int healthMaxValue, int shieldCurrentValue, int shieldMaxValue);
+   
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
 
+    public UpdateEnemyUIDelegate OnUIUpdate;
 
     private int maxHealth;
     private int currentHealth;
@@ -15,6 +18,7 @@ public class EnemyController : MonoBehaviour
     private int currentShield;
 
     private int currentAttackDamage;
+    private float attackRange;
 
     private float normalMovementSpeed;
     private float movementSpeedMultiplier;
@@ -62,14 +66,19 @@ public class EnemyController : MonoBehaviour
             //Die Behaviour
         }
 
-        //Update Enemy UI;
+        UpdateUI();
     }
 
     private void HealDamage(int healedAmount)
     {
         currentHealth += healedAmount;
         currentHealth = currentHealth > maxHealth ? maxHealth : currentHealth;
-        //UpdateUI
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
     }
 
 }

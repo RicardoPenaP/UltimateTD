@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyUI : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+{   
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UIHealthAndShieldBar myUIBar = GetComponentInChildren<UIHealthAndShieldBar>();
+        GetComponentInParent<EnemyController>().OnUIUpdate += myUIBar.UpdateBar;
     }
 }
