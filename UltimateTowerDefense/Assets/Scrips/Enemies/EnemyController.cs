@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public delegate void UpdateEnemyUIDelegate(int healthCurrentValue, int healthMaxValue, int shieldCurrentValue, int shieldMaxValue);
+    public delegate void UpdateEnemyUIDelegate(int healthCurrentValue, int healthMaxValue, int shieldCurrentValue, int shieldMaxValue);    
    
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
+    [SerializeField] private bool canMove = true;
 
     public UpdateEnemyUIDelegate OnUIUpdate;
+
+    private List<Tile> path;
 
     private int maxHealth;
     private int currentHealth;
@@ -20,15 +23,26 @@ public class EnemyController : MonoBehaviour
     private int currentAttackDamage;
     private float attackRange;
 
-    private float normalMovementSpeed;
+    private float defaultMovementSpeed;
     private float movementSpeedMultiplier;
     private float currentMovementSpeed;
+
+    private bool isAlive = true;
     
+
+    public List<Tile> Path { get { return path; } }
+    public int CurrentAttackDamage { get { return currentAttackDamage; } }
+    public float AttackRange { get { return attackRange; } }
+    public float NormalMovementSpeed { get { return defaultMovementSpeed; } }
+    public float MovementSpeedMultiplier { get { return movementSpeedMultiplier; } }
+    public float CurrentMovementSpeed { get { return currentMovementSpeed; } }
+
+    public bool IsAlive { get { return isAlive; } }
+    public bool CanMove { get { return canMove; } }
 
     private void Awake()
     {
         InitHandlers();
-
     }
 
     private void InitHandlers()
@@ -38,7 +52,6 @@ public class EnemyController : MonoBehaviour
         {
             myDamageHandler.OnTakeDamage += TakeDamage;
             myDamageHandler.OnHealDamage += HealDamage;
-
         }
     }
 
@@ -63,6 +76,7 @@ public class EnemyController : MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            isAlive = false;
             //Die Behaviour
         }
 
@@ -81,4 +95,8 @@ public class EnemyController : MonoBehaviour
         OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
     }
 
+    public void SetPath(List<Tile> path)
+    {
+        this.path = path;
+    }
 }
