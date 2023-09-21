@@ -32,10 +32,10 @@ public class EnemyMovement : MonoBehaviour
     private void Move()
     {
         myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, false);
-        if (!myController.CanWalk)
-        {            
-            return;
-        }
+        //if (!myController.CanWalk)
+        //{            
+        //    return;
+        //}
 
         if (path == null)
         {
@@ -47,26 +47,26 @@ public class EnemyMovement : MonoBehaviour
             return;
         }  
 
-        if (Vector3.Distance(path[pathIndex].GetPosition(),transform.position) <= myController.DistanceFromNextTileOffset)
-        {
-            transform.position = path[pathIndex].GetPosition();
+        //if (Vector3.Distance(path[pathIndex].GetPosition(),transform.position) <= myController.DistanceFromNextTileOffset)
+        //{
+        //    transform.position = path[pathIndex].GetPosition();
 
-            if (pathIndex < path.Count - 1)
-            {
-                pathIndex++;
-                SetMovementDirection();
-            }
-            else
-            {
-                //Reach the end of the path and do damage to the base life
-                gameObject.SetActive(false);
-                //Only for testing, change for a variable and use it in enemy controller
-                HealthMananger.Instance.TakeDamage(1);
-                return;
-            }           
-        }
+        //    if (pathIndex < path.Count - 1)
+        //    {
+        //        pathIndex++;
+        //        SetMovementDirection();
+        //    }
+        //    else
+        //    {
+        //        //Reach the end of the path and do damage to the base life
+        //        gameObject.SetActive(false);
+        //        //Only for testing, change for a variable and use it in enemy controller
+        //        HealthMananger.Instance.TakeDamage(1);
+        //        return;
+        //    }           
+        //}
 
-        transform.position += movementDirection * myController.MovementSpeed * Time.deltaTime;
+        //transform.position += movementDirection * myController.MovementSpeed * Time.deltaTime;
         myAnimator.SetBool(RUN_FOWARD_ANIMATOR_HASH, true);
     }
 

@@ -42,7 +42,7 @@ public class MushroomHeal : MonoBehaviour,ISkil
             Collider[] surroundingObjects = Physics.OverlapSphere(transform.position, rangeOfTheEffect);
             foreach (Collider surroundingObject in surroundingObjects)
             {
-                surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealedPerSecond);
+                //surroundingObject.GetComponent<EnemyDamageHandler>()?.HealMaxHealthPercentage(lifePercentageHealedPerSecond);
             }
             yield return new WaitForSeconds(1f);
             timer++;

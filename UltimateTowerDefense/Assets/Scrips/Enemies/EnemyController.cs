@@ -1,131 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using EnemiesInterface;
-
-public delegate void OnEnemyDieDelegate();
 
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
-    [SerializeField] private Transform aimPoint;
 
-    public OnEnemyDieDelegate onEnemyDie;
-    private IEnemy myEnemyIA;
-    private UIHealthAndShieldBar myUI;
 
-    [SerializeField] private int currentHealth;
-    private int currentMaxHealth;
+    private int maxHealth;
+    private int currentHealth;
+
+    private int maxShield;
     private int currentShield;
-    private int currentMaxShield;
 
-    private bool isAlive = true;
-    private bool canWalk;
+    private int currentAttackDamage;
 
-    public Transform AimPoint { get { return aimPoint; } }
-    public float MovementSpeed { get { return myData.MovementSpeed; } }
-    public bool CanWalk { get { return canWalk; } }
-    public float DistanceFromNextTileOffset { get { return myData.DistanceFromNextileOffset; } }
-    public int GoldReward { get { return myData.GoldReward; } }
-    public int DamageToStronghold { get { return myData.DamageToStronghold; } }
-    public bool IsAlive { get { return isAlive; } }
+    private float normalMovementSpeed;
+    private float movementSpeedMultiplier;
+    private float currentMovementSpeed;
+    
 
     private void Awake()
-    {        
-        myEnemyIA = GetComponent<IEnemy>();
-        myUI = GetComponentInChildren<UIHealthAndShieldBar>();
-    }
-
-    private void Start()
     {
-        ResetEnemy();
+        InitHandlers();
+
     }
 
-    private void OnDisable()
-    {        
-        ResetEnemy();
-    }
-
-    private void ResetEnemy()
+    private void InitHandlers()
     {
-        currentMaxHealth = myData.MaxHealth;
-        currentHealth = currentMaxHealth;
-        currentMaxShield = myData.MaxShield;
-        currentShield = currentMaxShield;
-        UpdateUI();
-        canWalk = true;
-        isAlive = true;
-        transform.localPosition = Vector3.zero;
-    }
-
-    public void SetEnemyPath(List<Tile> newPath)
-    {
-        List<Tile> newList = newPath;
-        myEnemyIA.SetPath(newList);
-    }
-
-    public void TakeDamage(int damageAmount)
-    {
-        if (!isAlive)
+        EnemyDamageHandler myDamageHandler = GetComponent<EnemyDamageHandler>();
+        if (myDamageHandler)
         {
-            return;
+            myDamageHandler.OnTakeDamage += TakeDamage;
+            myDamageHandler.OnHealDamage += HealDamage;
+
         }
+    }
 
-        if (currentShield > 0)
+    private void TakeDamage(int damageAmount)
+    {
+        int damageTaken = damageAmount;
+        if (currentShield >= damageTaken)
         {
-            if (currentShield >= damageAmount)
-            {
-                currentShield -= damageAmount;
-            }
-            else
-            {
-                int leftDamage = damageAmount - currentShield;
-                currentShield = 0;
-                currentHealth -= leftDamage;
-            }
+            currentShield -= damageTaken;
+            damageTaken = 0;
         }
         else
         {
-            currentHealth -= damageAmount;
+            damageTaken -= currentShield;
+        }
+
+        if (damageTaken > 0)
+        {
+            currentHealth -= damageTaken;
+            damageTaken = 0;
         }
         
         if (currentHealth <= 0)
         {
-            isAlive = false;
-            currentHealth = 0;            
-            myEnemyIA.Die();
-            onEnemyDie?.Invoke();
+            //Die Behaviour
         }
-        UpdateUI();
+
+        //Update Enemy UI;
     }
 
-    public void HealDamage(int healAmount)
+    private void HealDamage(int healedAmount)
     {
-        if (!isAlive)
-        {
-            return;
-        }
-        currentHealth += healAmount;
-        if (currentHealth > currentMaxHealth)
-        {
-            currentHealth = currentMaxHealth;
-        }
-        UpdateUI();
+        currentHealth += healedAmount;
+        currentHealth = currentHealth > maxHealth ? maxHealth : currentHealth;
+        //UpdateUI
     }
 
-    public int GetCurrentMaxHealth()
-    {
-        return currentMaxHealth;
-    }
-
-    
-
-    private void UpdateUI()
-    {
-        myUI.UpdateBar(currentHealth, currentMaxHealth, currentShield, currentMaxShield);
-    }
-
-
-   
 }

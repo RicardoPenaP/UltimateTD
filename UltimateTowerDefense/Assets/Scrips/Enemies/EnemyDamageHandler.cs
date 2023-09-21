@@ -2,34 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class EnemyDamageHandler : MonoBehaviour
 {
-    private EnemyController myController;
+    public delegate void DamageHandler(int amount);
+    
 
-    public bool IsAlive { get { return myController.IsAlive; } }
+    public DamageHandler OnTakeDamage;
+    public DamageHandler OnHealDamage;
+   
+    private Transform myAimPoint;
+
+    public bool IsAlive { get { return false; } }
     private void Awake()
     {
-        myController = GetComponentInParent<EnemyController>();
+        myAimPoint = GetComponentInChildren<EnemyAimPoint>().transform;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damageAmount)
     {
-        myController.TakeDamage(damage);
+        OnTakeDamage?.Invoke(damageAmount);
     }
 
     public void HealDamage(int healAmount)
     {
-        myController.HealDamage(healAmount);
-    }
-
-    public void HealMaxHealthPercentage(int percentage)
-    {
-        int healthHealed = Mathf.RoundToInt(((float)myController.GetCurrentMaxHealth() * (float)percentage) / 100);
-        myController.HealDamage(healthHealed);
+        OnHealDamage?.Invoke(healAmount);
     }
 
     public Transform GetEnemyAimPoint()
-    {
-        return myController.AimPoint;
+    {        
+        return myAimPoint;
     }
 }
