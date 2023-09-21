@@ -24,6 +24,7 @@ public class Stone : MonoBehaviour,IAmmunition
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);
     }
+
     private void OnTriggerEnter(Collider other)
     {        
         Explode();
@@ -34,7 +35,7 @@ public class Stone : MonoBehaviour,IAmmunition
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)
-        {
+        {           
             reachedObjects[i].GetComponent<EnemyDamageHandler>()?.TakeDamage(damage);
         }
 
