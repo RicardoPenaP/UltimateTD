@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave3
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - enemyPrefabReference: {fileID: 5627208938180993730, guid: 94222f475fec1174c9803946261857de, type: 3}
-    amountToSpawn: 10
-    timeBetweenSpawn: 2
-    enemyLevel: 20
+  - enemyPrefabReference: {fileID: 119431296148040286, guid: 5fb16296adcbc5e4b8bd31b13064396a, type: 3}
+    amountToSpawn: 1
+    timeBetweenSpawn: 0
+    enemyLevel: 50
