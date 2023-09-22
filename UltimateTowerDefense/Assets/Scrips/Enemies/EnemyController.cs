@@ -20,22 +20,20 @@ public class EnemyController : MonoBehaviour
     private int maxShield;
     private int currentShield;
 
-    private int currentAttackDamage;
-    private float attackRange;
+    private int damageToStronghold;
 
     private float defaultMovementSpeed;
     private float movementSpeedMultiplier;
     private float currentMovementSpeed;
+    private float distanceFromNextTileOffset;
 
     private bool isAlive = true;
     
 
-    public List<Tile> Path { get { return path; } }
-    public int CurrentAttackDamage { get { return currentAttackDamage; } }
-    public float AttackRange { get { return attackRange; } }
-    public float NormalMovementSpeed { get { return defaultMovementSpeed; } }
-    public float MovementSpeedMultiplier { get { return movementSpeedMultiplier; } }
-    public float CurrentMovementSpeed { get { return currentMovementSpeed; } }
+    public List<Tile> Path { get { return path; } }    
+   
+    public float CurrentMovementSpeed { get { return currentMovementSpeed * movementSpeedMultiplier; } }
+    public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
 
     public bool IsAlive { get { return isAlive; } }
     public bool CanMove { get { return canMove; } }
@@ -43,6 +41,14 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         InitHandlers();
+    }
+
+    private void Start()
+    {
+        //testing only
+        currentMovementSpeed = myData.MovementSpeed;
+        movementSpeedMultiplier = 1;
+        distanceFromNextTileOffset = myData.DistanceFromNextileOffset;
     }
 
     private void InitHandlers()
