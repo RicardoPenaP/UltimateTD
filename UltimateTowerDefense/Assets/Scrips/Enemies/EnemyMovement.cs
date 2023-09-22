@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(EnemyController))]
 public class EnemyMovement : MonoBehaviour
 {
     public event Action OnPathEnded;
