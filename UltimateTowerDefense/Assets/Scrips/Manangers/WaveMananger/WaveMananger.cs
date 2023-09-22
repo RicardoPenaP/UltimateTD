@@ -67,7 +67,7 @@ public class WaveMananger : MonoBehaviour
             if (!enemiesPools.ContainsKey(key.Key))
             {
                 EnemiesPool pool = Instantiate(enemyPoolPrefabReference, transform.position, Quaternion.identity, transform);
-                pool.PopulatePool(key.Key,key.Value);
+                //pool.PopulatePool(key.Key,key.Value);
                 onResetPools += pool.ResetPool;
                 enemiesPools.Add(key.Key, pool);
             }

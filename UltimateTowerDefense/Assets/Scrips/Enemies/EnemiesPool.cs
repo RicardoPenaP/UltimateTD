@@ -30,14 +30,14 @@ public class EnemiesPool : MonoBehaviour
         ActivateEnemy();
     }
 
-    public void PopulatePool(EnemyData enemyToSpawn, int amountToInstantiate)
+    public void PopulatePool(EnemyController enemyToSpawn, int amountToInstantiate)
     {
         for (int i = 0; i < amountToInstantiate; i++)
         {
-            //EnemyController newEnemy = Instantiate(enemyToSpawn.EnemyPrefab, transform.position, Quaternion.identity, transform);
-            //newEnemy.onEnemyDie += OnEnemyDie;
-            //newEnemy.gameObject.SetActive(false);
-            //enemiesPooled.Add(newEnemy);
+            EnemyController newEnemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
+            newEnemy.OnDie += OnEnemyDie;
+            newEnemy.gameObject.SetActive(false);
+            enemiesPooled.Add(newEnemy);
         }
     }
 
@@ -59,7 +59,7 @@ public class EnemiesPool : MonoBehaviour
             {
                 enemiesSpawned++;
                 StartCoroutine(CanActivateRespawnRoutine());
-                //enemy.SetEnemyPath(pooledEnemiesPath);
+                enemy.SetPath(pooledEnemiesPath);
                 enemy.gameObject.SetActive(true);
                 if (enemiesSpawned >= enemiesToSpawn)
                 {                    
