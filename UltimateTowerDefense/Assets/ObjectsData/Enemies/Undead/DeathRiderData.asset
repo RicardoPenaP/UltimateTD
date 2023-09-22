@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeathRiderData
   m_EditorClassIdentifier: 
   enemyName: Death Rider
-  levelingData: {fileID: 11400000, guid: 2656c9716f238384f831ee4a2118a94a, type: 2}
+  levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
   baseHealth: 200
   baseShield: 100
   baseMovementSpeed: 2

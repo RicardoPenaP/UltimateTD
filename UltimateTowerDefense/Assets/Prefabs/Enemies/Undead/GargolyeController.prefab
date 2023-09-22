@@ -673,6 +673,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 506382022263628463, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: m_Size.y
+      value: 1.698216
+      objectReference: {fileID: 0}
+    - target: {fileID: 506382022263628463, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: m_Size.z
+      value: 1.85046
+      objectReference: {fileID: 0}
+    - target: {fileID: 506382022263628463, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: m_Center.y
+      value: 3.7808921
+      objectReference: {fileID: 0}
+    - target: {fileID: 506382022263628463, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: m_Center.z
+      value: 0.12103391
+      objectReference: {fileID: 0}
     - target: {fileID: 3906062701849726703, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
       propertyPath: m_Name
       value: GargolyeController

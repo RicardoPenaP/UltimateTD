@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe3107589883c94e92fb102e3bc1992, type: 3}
   m_Name: UndeadLevelingData
   m_EditorClassIdentifier: 
-  baseHealthAugment: 50
+  baseHealthAugment: 20
   baseShieldAugment: 50
   baseMovementSpeedAugment: 0
-  baseGoldRewardAugment: 50
-  baseDamageToStrongholdAugment: 25
+  baseGoldRewardAugment: 20
+  baseDamageToStrongholdAugment: 10

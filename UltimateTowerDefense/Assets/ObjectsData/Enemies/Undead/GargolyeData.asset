@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GargolyeData
   m_EditorClassIdentifier: 
   enemyName: Gargolye
-  levelingData: {fileID: 11400000, guid: 0629a049ba749a94eb092a33c1491611, type: 2}
+  levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
   baseHealth: 1000
   baseShield: 0
   baseMovementSpeed: 2

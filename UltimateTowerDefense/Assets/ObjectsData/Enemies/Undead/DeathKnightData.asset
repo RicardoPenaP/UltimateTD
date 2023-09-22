@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeathKnightData
   m_EditorClassIdentifier: 
   enemyName: DeathKnight
-  levelingData: {fileID: 11400000, guid: 09da6c088da9c7748923f367aa087412, type: 2}
+  levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
   baseHealth: 100
   baseShield: 50
   baseMovementSpeed: 0.8
