@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemiesPool : MonoBehaviour
-{   
+{
+    //For testing only
+    [SerializeField] private EnemyController enemyToSpawn;
+    [SerializeField] private int amountToSpawn;
+    [SerializeField] private float timeCooldown;
+    [SerializeField] private int enemiesLevel;
+
+    private delegate void LevelUpEnemiesHandler(int level);
+    private LevelUpEnemiesHandler OnLevelUpEnemies;
+
     private List<EnemyController> enemiesPooled = new List<EnemyController>();
     private Vector2Int startCoordinates;
     private List<Tile> pooledEnemiesPath;
@@ -20,9 +29,16 @@ public class EnemiesPool : MonoBehaviour
 
 
     private void Start()
-    {
-        startCoordinates = GridMananger.Instance.GetCoordinatesFromPosition(transform.position);
-        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(startCoordinates);
+    {        
+        pooledEnemiesPath = Pathfinder.Instance.GetNewPath();
+
+        //For testing only
+        PopulatePool(enemyToSpawn, amountToSpawn);
+        SetAmountOfEnemiesToSpawn(amountToSpawn/2);
+        SetEnemiesLevel(enemiesLevel);
+        SetTimeBetweenSpawn(timeCooldown);
+        
+
     }    
 
     private void Update()
@@ -36,6 +52,7 @@ public class EnemiesPool : MonoBehaviour
         {
             EnemyController newEnemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
             newEnemy.OnDie += OnEnemyDie;
+            OnLevelUpEnemies += newEnemy.SetLevel;
             newEnemy.gameObject.SetActive(false);
             enemiesPooled.Add(newEnemy);
         }
@@ -84,7 +101,7 @@ public class EnemiesPool : MonoBehaviour
 
     public void SetEnemiesLevel(int level)
     {
-
+        OnLevelUpEnemies?.Invoke(level);
     }
 
     public void SetTimeBetweenSpawn(float timeBetweenSpawn)

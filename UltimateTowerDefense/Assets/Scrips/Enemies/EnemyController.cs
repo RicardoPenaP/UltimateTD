@@ -58,6 +58,13 @@ public class EnemyController : MonoBehaviour
         myAnimator = GetComponentInChildren<Animator>();
     }
 
+    private void OnEnable()
+    {
+        transform.localPosition = Vector3.zero;
+        ResetStats();
+    }
+
+
     private void Start()
     {             
         movementSpeedMultiplier = 1;
