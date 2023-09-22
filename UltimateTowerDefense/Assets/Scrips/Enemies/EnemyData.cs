@@ -5,38 +5,30 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="NewEnemyData",menuName ="EnemyData")]
 public class EnemyData : ScriptableObject
 {
-    [Header("Enemy Data")]
-
-    [Header("Reference Settings")]
-    [SerializeField] private EnemyController enemyPrefab;
+    [Header("Enemy Data")]   
     [SerializeField] private string enemyName = "";
 
     [Header("Health Settings")]
-    [SerializeField, Min(1f)] private int maxHealth = 100;
-    [SerializeField, Min(0f)] private int maxShield = 100;
-
-    [Header("Level Settings")]
-    [SerializeField, Min(1f)] private float healthLevelMultiplier = 1.5f;
+    [SerializeField, Min(1f)] private int baseHealth = 100;
+    [SerializeField, Min(0f)] private int baseShield = 100;
 
     [Header("Movement Settings")]
-    [SerializeField, Min(0f)] private float movementSpeed;   
+    [SerializeField, Min(0f)] private float baseMovementSpeed;   
     [Tooltip("The minimun near distance from the next tile to cosider that you are in there")]
     [SerializeField, Min(0f)] private float distanceFromNextTileOffset = 0.08f;
 
     [Header("Rewards Settings")]
-    [SerializeField, Min(0f)] private int goldReward = 25;
+    [SerializeField, Min(0f)] private int baseGoldReward = 25;
 
     [Header("Damage Settings")]
-    [SerializeField] private int damageToStronghold = 1;
-
-    public EnemyController EnemyPrefab { get { return enemyPrefab; } }
+    [SerializeField] private int baseDamageToStronghold = 1;
+   
     public string EnemyName { get { return enemyName; } }
-    public int MaxHealth { get { return maxHealth; } }
-    public int MaxShield { get { return maxShield; } }
-    public float HealthLevelMultiplier { get { return healthLevelMultiplier; } }
-    public float MovementSpeed { get { return movementSpeed; } }
+    public int BaseHealth { get { return baseHealth; } }
+    public int BaseShield { get { return baseShield; } }   
+    public float BaseMovementSpeed { get { return baseMovementSpeed; } }
     public float DistanceFromNextileOffset { get { return distanceFromNextTileOffset; } }
-    public int GoldReward { get { return goldReward; } }
-    public int DamageToStronghold { get { return damageToStronghold; } }
+    public int BaseGoldReward { get { return baseGoldReward; } }
+    public int DamageToStronghold { get { return baseDamageToStronghold; } }
 
 }

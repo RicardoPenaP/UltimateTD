@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
 
     private List<Tile> path;
 
+    private int level;
+
     private int maxHealth;
     private int currentHealth;
 
@@ -46,7 +48,8 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         //testing only
-        currentMovementSpeed = myData.MovementSpeed;
+        level = 1;
+        currentMovementSpeed = myData.BaseMovementSpeed;
         movementSpeedMultiplier = 1;
         distanceFromNextTileOffset = myData.DistanceFromNextileOffset;
     }
