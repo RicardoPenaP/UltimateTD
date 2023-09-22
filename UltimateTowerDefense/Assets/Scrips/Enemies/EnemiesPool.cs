@@ -3,18 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemiesPool : MonoBehaviour
-{
-    //For testing only
-    [SerializeField] private EnemyController enemyToSpawn;
-    [SerializeField] private int amountToSpawn;
-    [SerializeField] private float timeCooldown;
-    [SerializeField] private int enemiesLevel;
-
+{    
     private delegate void LevelUpEnemiesHandler(int level);
     private LevelUpEnemiesHandler OnLevelUpEnemies;
 
-    private List<EnemyController> enemiesPooled = new List<EnemyController>();
-    private Vector2Int startCoordinates;
+    private List<EnemyController> enemiesPooled = new List<EnemyController>();    
     private List<Tile> pooledEnemiesPath;
 
     private bool allEnemiesKilled = false;
@@ -31,15 +24,6 @@ public class EnemiesPool : MonoBehaviour
     private void Start()
     {        
         pooledEnemiesPath = Pathfinder.Instance.GetNewPath();
-
-        //For testing only
-        PopulatePool(enemyToSpawn, amountToSpawn);
-        SetAmountOfEnemiesToSpawn(amountToSpawn/2);
-        SetEnemiesLevel(enemiesLevel);
-        SetTimeBetweenSpawn(timeCooldown);
-        canSpawn = true;
-        
-
     }    
 
     private void Update()
