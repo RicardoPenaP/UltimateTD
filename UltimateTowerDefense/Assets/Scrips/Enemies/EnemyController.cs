@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     private List<Tile> path;
     private Animator myAnimator;
+    EnemyMovement myMovement; 
 
     private int maxHealth;  
 
@@ -52,6 +53,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         gameObject.name = myData.EnemyName;
+        myMovement = GetComponent<EnemyMovement>();
         InitHandlers();
         myAnimator = GetComponentInChildren<Animator>();
     }
@@ -76,8 +78,7 @@ public class EnemyController : MonoBehaviour
             myDamageHandler.OnTakeDamage += TakeDamage;
             myDamageHandler.OnHealDamage += HealDamage;
         }
-
-        EnemyMovement myMovement = GetComponent<EnemyMovement>();
+                
         if (myMovement)
         {
             myMovement.OnPathEnded += PathEnded;
@@ -101,8 +102,7 @@ public class EnemyController : MonoBehaviour
             myDamageHandler.OnTakeDamage -= TakeDamage;
             myDamageHandler.OnHealDamage -= HealDamage;
         }
-
-        EnemyMovement myMovement = GetComponent<EnemyMovement>();
+        
         if (myMovement)
         {
             myMovement.OnPathEnded -= PathEnded;
@@ -161,7 +161,7 @@ public class EnemyController : MonoBehaviour
 
     public void SetPath(List<Tile> path)
     {
-        this.path = path;
+        myMovement.SetPath(path);
     }
 
     public void SetLevel(int level)

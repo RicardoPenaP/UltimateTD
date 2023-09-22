@@ -23,8 +23,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        //For test only
-        path = Pathfinder.Instance.GetNewPath();
         SetMovementDirection();
     }
 
