@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathRiderController
       objectReference: {fileID: 0}
+    - target: {fileID: 5225176943445473941, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: myData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7559ce7195685c445bab0601343d98f5, type: 2}
     - target: {fileID: 5730903996162539135, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.67

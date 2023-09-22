@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
+  m_Name: DeathRiderData
+  m_EditorClassIdentifier: 
+  enemyName: Death Rider
+  levelingData: {fileID: 11400000, guid: 2656c9716f238384f831ee4a2118a94a, type: 2}
+  baseHealth: 200
+  baseShield: 100
+  baseMovementSpeed: 2
+  distanceFromNextTileOffset: 0.08
+  baseGoldReward: 25
+  baseDamageToStronghold: 1
