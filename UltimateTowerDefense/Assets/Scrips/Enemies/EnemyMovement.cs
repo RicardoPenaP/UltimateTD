@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
     private void Move()
     {
         myAnimator.SetBool(WALK_HASH, false);
-        if (!myController.CanMove)
+        if (!myController.CanMove || !myController.IsAlive)
         {            
             return;
         }

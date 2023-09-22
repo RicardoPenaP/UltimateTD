@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class EnemyDamageHandler : MonoBehaviour
 {
-    public delegate void DamageHandler(int amount);
-    
+    public delegate void DamageHandler(int amount);    
 
     public DamageHandler OnTakeDamage;
     public DamageHandler OnHealDamage;
-   
+
+    private EnemyController myController;
     private Transform myAimPoint;
 
-    public bool IsAlive { get { return false; } }
+    public bool IsAlive { get { return myController.IsAlive; } }
     private void Awake()
     {
+        myController = GetComponent<EnemyController>();
         myAimPoint = GetComponentInChildren<EnemyAimPoint>().transform;
     }
 

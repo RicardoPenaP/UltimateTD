@@ -129,6 +129,7 @@ public class EnemyController : MonoBehaviour
         else
         {
             damageTaken -= currentShield;
+            currentShield = 0;
         }
 
         if (damageTaken > 0)
@@ -193,6 +194,7 @@ public class EnemyController : MonoBehaviour
     {
         myAnimator.SetTrigger(DIE_HASH);
         OnDie?.Invoke();
+        isAlive = false;
     }
 
     private void DealDamageToStronghold()
