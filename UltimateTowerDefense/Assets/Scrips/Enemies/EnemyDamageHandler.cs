@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(EnemyController),typeof(BoxCollider), typeof(Rigidbody))]
 public class EnemyDamageHandler : MonoBehaviour
 {
     public delegate void DamageHandler(int amount);    
