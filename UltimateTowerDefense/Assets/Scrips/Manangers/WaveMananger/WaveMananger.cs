@@ -2,21 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnemiesWaves;
 
 public class WaveMananger : MonoBehaviour
-{
-    private delegate void OnResetPoolsDelegate();
-
+{  
     [Header("Wave Mananger")]
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private EnemiesPool enemyPoolPrefabReference;
     [SerializeField] private WaveData[] waves;
 
-    private Dictionary<EnemyData, EnemiesPool> enemiesPools = new Dictionary<EnemyData, EnemiesPool>();
-    private WaveData currentWave;
-    private List<EnemiesPool> currentEnemiesPool= new List<EnemiesPool>();
+    private event Action OnResetPools;
 
-    private OnResetPoolsDelegate onResetPools;
+    private Dictionary<EnemyController, EnemiesPool> enemiesPools = new Dictionary<EnemyController, EnemiesPool>();
+    private WaveData currentWave;
 
     private int waveIndex = 0;
 
@@ -38,7 +36,7 @@ public class WaveMananger : MonoBehaviour
     private void InitEnemiesPool()
     {
         //First, set all the enemies and the maximum amount of units to instantiate in a dictionary
-        Dictionary<EnemyData, int> enemiesToInstantiate = new Dictionary<EnemyData, int>();
+        Dictionary<EnemyController, int> enemiesToInstantiate = new Dictionary<EnemyController, int>();
 
         foreach (WaveData wave in waves)
         {
@@ -46,15 +44,15 @@ public class WaveMananger : MonoBehaviour
             {
                 //Checks if the enemy exist on the dictionary; if not, it is added. If exist, check if
                 //the current amount is lower than the new one to change it for the bigger
-                if (!enemiesToInstantiate.ContainsKey(enemy.EnemyDataReference))
+                if (!enemiesToInstantiate.ContainsKey(enemy.EnemyPrefabReference))
                 {
-                    enemiesToInstantiate.Add(enemy.EnemyDataReference, enemy.AmountToSpawn);
+                    enemiesToInstantiate.Add(enemy.EnemyPrefabReference, enemy.AmountToSpawn);
                 }
                 else
                 {
-                    if (enemiesToInstantiate[enemy.EnemyDataReference] < enemy.AmountToSpawn)
+                    if (enemiesToInstantiate[enemy.EnemyPrefabReference] < enemy.AmountToSpawn)
                     {
-                        enemiesToInstantiate[enemy.EnemyDataReference] = enemy.AmountToSpawn;
+                        enemiesToInstantiate[enemy.EnemyPrefabReference] = enemy.AmountToSpawn;
                     }                    
                 }
             }
@@ -62,14 +60,14 @@ public class WaveMananger : MonoBehaviour
 
         //Second, instantiate a enemies pool for each unit of enemy in the previus diccionary,
         //each pool is seted before both , enemy and enemies pool, are added to the enemies pools diccionary 
-        foreach (KeyValuePair<EnemyData, int> key in enemiesToInstantiate)
+        foreach (KeyValuePair<EnemyController, int> keyValuePar in enemiesToInstantiate)
         {
-            if (!enemiesPools.ContainsKey(key.Key))
+            if (!enemiesPools.ContainsKey(keyValuePar.Key))
             {
                 EnemiesPool pool = Instantiate(enemyPoolPrefabReference, transform.position, Quaternion.identity, transform);
-                //pool.PopulatePool(key.Key,key.Value);
-                onResetPools += pool.ResetPool;
-                enemiesPools.Add(key.Key, pool);
+                pool.PopulatePool(keyValuePar.Key,keyValuePar.Value);
+                OnResetPools += pool.ResetPool;
+                enemiesPools.Add(keyValuePar.Key, pool);
             }
         }        
     }
@@ -83,11 +81,12 @@ public class WaveMananger : MonoBehaviour
         currentWave = waves[waveIndex];
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
-            if (enemiesPools.ContainsKey(enemyInWave.EnemyDataReference))
+            if (enemiesPools.ContainsKey(enemyInWave.EnemyPrefabReference))
             {
-                enemiesPools[enemyInWave.EnemyDataReference].SetAmountOfEnemiesToSpawn(enemyInWave.AmountToSpawn);
-                enemiesPools[enemyInWave.EnemyDataReference].SetTimeBetweenSpawn(enemyInWave.TimeBetweenSpawn);
-                enemiesPools[enemyInWave.EnemyDataReference].EnemiesCanSpawn();
+                enemiesPools[enemyInWave.EnemyPrefabReference].SetAmountOfEnemiesToSpawn(enemyInWave.AmountToSpawn);
+                enemiesPools[enemyInWave.EnemyPrefabReference].SetTimeBetweenSpawn(enemyInWave.TimeBetweenSpawn);
+                enemiesPools[enemyInWave.EnemyPrefabReference].EnemiesCanSpawn();
+                enemiesPools[enemyInWave.EnemyPrefabReference].SetEnemiesLevel(enemyInWave.EnemyLevel);
             }
         }
     }
@@ -118,9 +117,9 @@ public class WaveMananger : MonoBehaviour
 
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
-            if (enemiesPools.ContainsKey(enemyInWave.EnemyDataReference))
+            if (enemiesPools.ContainsKey(enemyInWave.EnemyPrefabReference))
             {                
-                if (!enemiesPools[enemyInWave.EnemyDataReference].AllEnemiesKilled)
+                if (!enemiesPools[enemyInWave.EnemyPrefabReference].AllEnemiesKilled)
                 {
                     return false;
                 }
@@ -137,7 +136,7 @@ public class WaveMananger : MonoBehaviour
 
     private void ResetPools()
     {
-        onResetPools.Invoke();
+        OnResetPools.Invoke();
         StartCoroutine(WaitBetweenWavesRoutine());
     }
 

@@ -82,6 +82,11 @@ public class EnemiesPool : MonoBehaviour
         enemiesToSpawn = amount;
     }
 
+    public void SetEnemiesLevel(int level)
+    {
+
+    }
+
     public void SetTimeBetweenSpawn(float timeBetweenSpawn)
     {
         this.timeBetweenSpawn = timeBetweenSpawn;
