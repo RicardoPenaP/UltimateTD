@@ -113,6 +113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathKnightController
       objectReference: {fileID: 0}
+    - target: {fileID: 5225176943445473941, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: myData
+      value: 
+      objectReference: {fileID: 11400000, guid: 022653500bf52064c8a1016164d0d0d3, type: 2}
     - target: {fileID: 5730903996162539135, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
       propertyPath: m_RootOrder
       value: 1

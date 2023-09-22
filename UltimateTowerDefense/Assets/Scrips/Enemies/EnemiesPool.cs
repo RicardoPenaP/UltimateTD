@@ -37,6 +37,7 @@ public class EnemiesPool : MonoBehaviour
         SetAmountOfEnemiesToSpawn(amountToSpawn/2);
         SetEnemiesLevel(enemiesLevel);
         SetTimeBetweenSpawn(timeCooldown);
+        canSpawn = true;
         
 
     }    

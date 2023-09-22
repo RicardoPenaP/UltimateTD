@@ -51,8 +51,7 @@ public class EnemyController : MonoBehaviour
     public bool CanMove { get { return canMove; } }
 
     private void Awake()
-    {
-        gameObject.name = myData.EnemyName;
+    {        
         myMovement = GetComponent<EnemyMovement>();
         InitHandlers();
         myAnimator = GetComponentInChildren<Animator>();
@@ -147,6 +146,7 @@ public class EnemyController : MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             isAlive = false;
             Die();
         }
@@ -202,6 +202,7 @@ public class EnemyController : MonoBehaviour
         myAnimator.SetTrigger(DIE_HASH);
         OnDie?.Invoke();
         isAlive = false;
+        BankMananger.Instance.AddGold(goldReward);
     }
 
     private void DealDamageToStronghold()
