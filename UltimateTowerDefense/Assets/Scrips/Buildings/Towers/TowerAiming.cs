@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TowerAiming : MonoBehaviour
 {
-    [Header("Tower Aiming")]   
-
+    [Header("Tower Aiming")]
+    [SerializeField] private LayerMask validLayerToAim;
     private ITowerWeapon myWeapon;        
     private TowerController myController;
     private EnemyDamageHandler target;
@@ -97,7 +97,7 @@ public class TowerAiming : MonoBehaviour
     {
         //Takes all the near objects and search for a valid enemy in range
 
-        Collider[] nearObjects = Physics.OverlapSphere(transform.position, myController.AttackRange);       
+        Collider[] nearObjects = Physics.OverlapSphere(transform.position, myController.AttackRange, validLayerToAim);       
 
         foreach (Collider nearObject in nearObjects)
         {
