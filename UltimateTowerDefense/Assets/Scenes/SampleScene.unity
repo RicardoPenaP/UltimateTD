@@ -123,6 +123,71 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &242159174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 851495732184268689, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 851495732184268689, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: myData
+      value: 
+      objectReference: {fileID: 11400000, guid: 022653500bf52064c8a1016164d0d0d3, type: 2}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.097620964
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149140784115276253, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459887863777823723, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
+      propertyPath: m_Name
+      value: DeathKnightController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
 --- !u!1 &371498523
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +486,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.38268343, y: -0.000000022481213, z: 0.000000009312022, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268343, y: 0.000000022481224, z: -0.000000009312028, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -760,11 +825,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614154015367441634, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000022481213
+      value: 0.000000022481224
       objectReference: {fileID: 0}
     - target: {fileID: 3614154015367441634, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000009312022
+      value: -0.000000009312028
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
@@ -1088,7 +1153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5804288724035966436, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
       propertyPath: timeBetweenWaves

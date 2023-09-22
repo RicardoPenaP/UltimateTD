@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public event Action OnPathEnded;
     private EnemyController myController;
     private Animator myAnimator;
     private List<Tile> path;    
@@ -11,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     private int pathIndex = 0;
     private Vector3 movementDirection;
 
-    private readonly int WALK_ANIMATOR_HASH = Animator.StringToHash("Walk");
+    private readonly int WALK_HASH = Animator.StringToHash("Walk");
 
     private void Awake()
     {
@@ -33,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Move()
     {
-        myAnimator.SetBool(WALK_ANIMATOR_HASH, false);
+        myAnimator.SetBool(WALK_HASH, false);
         if (!myController.CanMove)
         {            
             return;
@@ -55,16 +57,13 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                //Reach the end of the path and do damage to the base life
-                gameObject.SetActive(false);
-                //Only for testing, change for a variable and use it in enemy controller
-                //HealthMananger.Instance.TakeDamage(1);
+                OnPathEnded?.Invoke();               
                 return;
             }
         }
 
         transform.position += movementDirection * myController.CurrentMovementSpeed * Time.deltaTime;
-        myAnimator.SetBool(WALK_ANIMATOR_HASH, true);
+        myAnimator.SetBool(WALK_HASH, true);
     }
 
     private void SetMovementDirection()

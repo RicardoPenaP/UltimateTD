@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,24 +11,31 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData myData;
     [SerializeField] private bool canMove = true;
 
-    public UpdateEnemyUIDelegate OnUIUpdate;
-
-    private List<Tile> path;
-
-    [SerializeField]private int level;
-
-    private int maxHealth;
+    [Header("Testing Values")]
+    [SerializeField] private int level;
     [SerializeField] private int currentHealth;
-
-    private int maxShield;
     [SerializeField] private int currentShield;
-
     [SerializeField] private int damageToStronghold;
     [SerializeField] private int goldReward;
+    [SerializeField] private float currentMovementSpeed;
+
+    public UpdateEnemyUIDelegate OnUIUpdate;
+    public event Action OnDie;
+
+    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    private readonly int DIE_HASH = Animator.StringToHash("Die");
+
+    private List<Tile> path;
+    private Animator myAnimator;
+
+    private int maxHealth;  
+
+    private int maxShield;
+    
 
     private float defaultMovementSpeed;
     private float movementSpeedMultiplier;
-    [SerializeField] private float currentMovementSpeed;
+    
     private float distanceFromNextTileOffset;
 
     private bool isAlive = true;
@@ -43,7 +51,9 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.name = myData.EnemyName;
         InitHandlers();
+        myAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -53,6 +63,11 @@ public class EnemyController : MonoBehaviour
         SetLevel(level);
     }
 
+    private void OnDestroy()
+    {
+        DeInitHandlers();
+    }
+
     private void InitHandlers()
     {
         EnemyDamageHandler myDamageHandler = GetComponent<EnemyDamageHandler>();
@@ -60,6 +75,46 @@ public class EnemyController : MonoBehaviour
         {
             myDamageHandler.OnTakeDamage += TakeDamage;
             myDamageHandler.OnHealDamage += HealDamage;
+        }
+
+        EnemyMovement myMovement = GetComponent<EnemyMovement>();
+        if (myMovement)
+        {
+            myMovement.OnPathEnded += PathEnded;
+        }
+
+        EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
+        if (myAnimatorHelper)
+        {
+            myAnimatorHelper.OnAttackAnimationPerformed += DealDamageToStronghold;
+            myAnimatorHelper.OnAttackAnimationEnded += Desactivate;
+
+            myAnimatorHelper.OnDieAnimationEnded += Desactivate;
+        }
+    }
+
+    private void DeInitHandlers()
+    {
+        EnemyDamageHandler myDamageHandler = GetComponent<EnemyDamageHandler>();
+        if (myDamageHandler)
+        {
+            myDamageHandler.OnTakeDamage -= TakeDamage;
+            myDamageHandler.OnHealDamage -= HealDamage;
+        }
+
+        EnemyMovement myMovement = GetComponent<EnemyMovement>();
+        if (myMovement)
+        {
+            myMovement.OnPathEnded -= PathEnded;
+        }
+
+        EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
+        if (myAnimatorHelper)
+        {
+            myAnimatorHelper.OnAttackAnimationPerformed -= DealDamageToStronghold;
+            myAnimatorHelper.OnAttackAnimationEnded -= Desactivate;
+
+            myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
         }
     }
 
@@ -85,7 +140,7 @@ public class EnemyController : MonoBehaviour
         if (currentHealth <= 0)
         {
             isAlive = false;
-            //Die Behaviour
+            Die();
         }
 
         UpdateUI();
@@ -117,10 +172,7 @@ public class EnemyController : MonoBehaviour
 
         this.level = level;
         SetLevelStats();
-        currentHealth = maxHealth;
-        currentShield = maxShield;
-        currentMovementSpeed = defaultMovementSpeed;
-
+        ResetStats();
     }
 
     private void SetLevelStats()
@@ -130,5 +182,34 @@ public class EnemyController : MonoBehaviour
         damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseDamageToStronghold, level));
         defaultMovementSpeed = myData.GetLevelRelatedStatValue(StatToAugment.BaseMovementSpeed, level);
         goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseGoldReward, level));
+    }
+
+    private void PathEnded()
+    {
+        myAnimator.SetTrigger(ATTACK_HASH);
+    }
+
+    private void Die()
+    {
+        myAnimator.SetTrigger(DIE_HASH);
+        OnDie?.Invoke();
+    }
+
+    private void DealDamageToStronghold()
+    {
+        HealthMananger.Instance.TakeDamage(damageToStronghold);
+    }
+
+    private void Desactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void ResetStats()
+    {
+        currentHealth = maxHealth;
+        currentShield = maxShield;
+        currentMovementSpeed = defaultMovementSpeed;
+        isAlive = true;
     }
 }
