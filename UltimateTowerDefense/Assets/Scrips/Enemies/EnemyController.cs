@@ -14,19 +14,20 @@ public class EnemyController : MonoBehaviour
 
     private List<Tile> path;
 
-    private int level;
+    [SerializeField]private int level;
 
     private int maxHealth;
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
 
     private int maxShield;
-    private int currentShield;
+    [SerializeField] private int currentShield;
 
-    private int damageToStronghold;
+    [SerializeField] private int damageToStronghold;
+    [SerializeField] private int goldReward;
 
     private float defaultMovementSpeed;
     private float movementSpeedMultiplier;
-    private float currentMovementSpeed;
+    [SerializeField] private float currentMovementSpeed;
     private float distanceFromNextTileOffset;
 
     private bool isAlive = true;
@@ -46,12 +47,10 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Start()
-    {
-        //testing only
-        level = 1;
-        currentMovementSpeed = myData.BaseMovementSpeed;
+    {             
         movementSpeedMultiplier = 1;
         distanceFromNextTileOffset = myData.DistanceFromNextileOffset;
+        SetLevel(level);
     }
 
     private void InitHandlers()
@@ -107,5 +106,29 @@ public class EnemyController : MonoBehaviour
     public void SetPath(List<Tile> path)
     {
         this.path = path;
+    }
+
+    public void SetLevel(int level)
+    {
+        if (level < 1 || level > 100)
+        {
+            return; 
+        }
+
+        this.level = level;
+        SetLevelStats();
+        currentHealth = maxHealth;
+        currentShield = maxShield;
+        currentMovementSpeed = defaultMovementSpeed;
+
+    }
+
+    private void SetLevelStats()
+    {
+        maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(StatToAugment.BaseHealth, level));
+        maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseShield, level));
+        damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseDamageToStronghold, level));
+        defaultMovementSpeed = myData.GetLevelRelatedStatValue(StatToAugment.BaseMovementSpeed, level);
+        goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseGoldReward, level));
     }
 }

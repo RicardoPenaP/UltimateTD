@@ -26,14 +26,41 @@ public class EnemyData : ScriptableObject
     [Header("Damage Settings")]
     [SerializeField] private int baseDamageToStronghold = 1;
 
-    
-    public string EnemyName { get { return enemyName; } }
-    public EnemyLevelingData LevelingData { get { return levelingData; } }
+    public string EnemyName { get { return enemyName; } }   
     public int BaseHealth { get { return baseHealth; } }
     public int BaseShield { get { return baseShield; } }   
     public float BaseMovementSpeed { get { return baseMovementSpeed; } }
     public float DistanceFromNextileOffset { get { return distanceFromNextTileOffset; } }
     public int BaseGoldReward { get { return baseGoldReward; } }
     public int DamageToStronghold { get { return baseDamageToStronghold; } }
+
+    public float GetLevelRelatedStatValue(StatToAugment wantedStatValue, int level)
+    {
+        float statValue = 0f;
+        switch (wantedStatValue)
+        {
+            case StatToAugment.BaseHealth:
+                statValue = baseHealth;
+                break;
+            case StatToAugment.BaseShield:
+                statValue = baseShield;
+                break;
+            case StatToAugment.BaseMovementSpeed:
+                statValue = baseMovementSpeed;
+                break;
+            case StatToAugment.BaseGoldReward:
+                statValue = baseGoldReward;
+                break;
+            case StatToAugment.BaseDamageToStronghold:
+                statValue = baseDamageToStronghold;
+                break;
+            default:
+                break;
+        }       
+
+        return statValue * levelingData.GetAugmentCoeficient(wantedStatValue, level);
+        
+    }
+
 
 }

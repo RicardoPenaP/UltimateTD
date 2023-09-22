@@ -21,36 +21,30 @@ public class EnemyLevelingData : ScriptableObject
     [Header("Damage")]
     [SerializeField, Range(0, 100)] private int baseDamageToStrongholdAugment = 0;
 
-    //public int BaseHealthAugment { get { return baseHealthAugment; } }
-    //public int BaseShieldAugment { get { return baseShieldAugment; } }
-    //public int BaseMovementSpeedAugment { get { return baseMovementSpeedAugment; } }
-    //public int BaseGoldRewardAugment { get { return baseGoldRewardAugment; } }
-    //public int BaseDamageToStrongholdAugment { get { return baseDamageToStrongholdAugment; } }
-
     public float GetAugmentCoeficient(StatToAugment wantedStatCoeficient, int currentLevel)
     {        
         float resultingPercentage = 0f;
         switch (wantedStatCoeficient)
         {
             case StatToAugment.BaseHealth:
-                resultingPercentage = baseHealthAugment / 100;
+                resultingPercentage = (float)baseHealthAugment / 100;
                 break;
             case StatToAugment.BaseShield:
-                resultingPercentage = baseShieldAugment / 100;
+                resultingPercentage = (float)baseShieldAugment / 100;
                 break;
             case StatToAugment.BaseMovementSpeed:
-                resultingPercentage = baseMovementSpeedAugment / 100;
+                resultingPercentage = (float)baseMovementSpeedAugment / 100;
                 break;
             case StatToAugment.BaseGoldReward:
-                resultingPercentage = baseGoldRewardAugment / 100;
+                resultingPercentage = (float)baseGoldRewardAugment / 100;
                 break;
             case StatToAugment.BaseDamageToStronghold:
-                resultingPercentage = baseDamageToStrongholdAugment / 100;
+                resultingPercentage = (float)baseDamageToStrongholdAugment / 100;
                 break;
             default:
                 break;
         }
-        resultingPercentage *= currentLevel;
+        resultingPercentage *= currentLevel-1;
         float augmentCoeficient = 1f+resultingPercentage;
         return augmentCoeficient;
     }

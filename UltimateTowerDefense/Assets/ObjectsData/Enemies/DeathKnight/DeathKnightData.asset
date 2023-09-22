@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
-  m_Name: DKTest
+  m_Name: DeathKnightData
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 739311754621939756, guid: a7ce79a8df7be264ba0f3d5432054bc7, type: 3}
-  enemyName: DK
-  maxHealth: 500
-  maxShield: 500
-  healthLevelMultiplier: 1.5
-  movementSpeed: 0.7
+  enemyName: DeathKnight
+  levelingData: {fileID: 11400000, guid: 09da6c088da9c7748923f367aa087412, type: 2}
+  baseHealth: 100
+  baseShield: 50
+  baseMovementSpeed: 0.8
   distanceFromNextTileOffset: 0.08
-  goldReward: 25
-  damageToStronghold: 1
+  baseGoldReward: 50
+  baseDamageToStronghold: 1
