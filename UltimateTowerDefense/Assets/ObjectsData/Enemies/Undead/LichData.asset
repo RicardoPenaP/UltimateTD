@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
-  m_Name: DeathRiderData
+  m_Name: LichData
   m_EditorClassIdentifier: 
-  enemyName: Death Rider
+  enemyName: Lich
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 200
-  baseShield: 100
+  baseHealth: 150
+  baseShield: 0
   baseMovementSpeed: 2
   distanceFromNextTileOffset: 0.08
-  baseGoldReward: 100
+  baseGoldReward: 75
   baseDamageToStronghold: 1

@@ -18,5 +18,5 @@ MonoBehaviour:
   baseShield: 0
   baseMovementSpeed: 2
   distanceFromNextTileOffset: 0.08
-  baseGoldReward: 25
+  baseGoldReward: 200
   baseDamageToStronghold: 1

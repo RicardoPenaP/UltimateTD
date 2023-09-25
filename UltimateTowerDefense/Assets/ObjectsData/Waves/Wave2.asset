@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToSpawn:
   - enemyPrefabReference: {fileID: 5627208938180993730, guid: 94222f475fec1174c9803946261857de, type: 3}
-    amountToSpawn: 10
-    timeBetweenSpawn: 2
+    amountToSpawn: 5
+    timeBetweenSpawn: 5
     enemyLevel: 20

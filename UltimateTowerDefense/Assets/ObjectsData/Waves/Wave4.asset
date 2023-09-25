@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e307c1d9f97071946ba89fcfe09fb530, type: 3}
-  m_Name: Wave1
+  m_Name: Wave4
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - enemyPrefabReference: {fileID: 851495732184268689, guid: ef1718a71c0f93f41aab6f858907785c, type: 3}
-    amountToSpawn: 10
+  - enemyPrefabReference: {fileID: 2293519425157681360, guid: 8737147780bfca64c9de0f13a4ae149c, type: 3}
+    amountToSpawn: 1
     timeBetweenSpawn: 2
-    enemyLevel: 10
+    enemyLevel: 30

@@ -127,6 +127,10 @@ public class EnemyController : MonoBehaviour
 
     private void TakeDamage(int damageAmount)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         int damageTaken = damageAmount;
         if (currentShield >= damageTaken)
         {
