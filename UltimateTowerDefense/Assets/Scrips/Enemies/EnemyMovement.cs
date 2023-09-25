@@ -61,7 +61,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        transform.position += movementDirection * myController.CurrentMovementSpeed * Time.deltaTime;
+        transform.position += movementDirection * myController.CurrentMovementSpeed * Time.fixedDeltaTime;
         myAnimator.SetBool(WALK_HASH, true);
     }
 

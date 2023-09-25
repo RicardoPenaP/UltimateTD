@@ -27,9 +27,13 @@ public class Catapult : MonoBehaviour,ITowerWeapon
         {
             return;
         }
-        canAttack = false;
-        myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<IAmmunition>();
-        myAmmunition.SetDamage(attackDamage);
+
+        if (myAmmunition == null)
+        {
+            myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<IAmmunition>();
+        }
+        canAttack = false;       
+        myAmmunition.SetDamage(attackDamage);        
         this.objectivePos = attackObjectivePos;
         myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
     }
@@ -47,8 +51,14 @@ public class Catapult : MonoBehaviour,ITowerWeapon
         {
             return;
         }
-        (myAmmunition as MonoBehaviour).transform.SetParent(transform.parent);
-        myAmmunition.SetTarget(objectivePos);
         canAttack = true;
+        if (!objectivePos.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        myAmmunition.SetTarget(objectivePos);
+        (myAmmunition as MonoBehaviour).transform.SetParent(transform.parent);
+        myAmmunition = null;
+        
     }
 }
