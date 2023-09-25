@@ -9,10 +9,10 @@ public class StoreMananger : Singleton<StoreMananger>
 {
     [Header("Store Mananger")]
     [SerializeField] private StoreManangerButton buttonPrefab;
-    [SerializeField] private List<TowerData> availableTowers;
+    [SerializeField] private List<TowerController> availableTowers;
     
 
-    private Dictionary<TowerData, StoreManangerButton> towerButtons = new Dictionary<TowerData, StoreManangerButton>();
+    private Dictionary<TowerController, StoreManangerButton> towerButtons = new Dictionary<TowerController, StoreManangerButton>();
 
     private TowerData selectedTower;
 
@@ -38,13 +38,13 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private void SetButtons()
     {
-        foreach (TowerData tower in availableTowers)
+        foreach (TowerController tower in availableTowers)
         {
             AddButton(tower);
         }
     }
 
-    private void AddButton(TowerData tower)
+    private void AddButton(TowerController tower)
     {
         if (!towerButtons.ContainsKey(tower))
         {

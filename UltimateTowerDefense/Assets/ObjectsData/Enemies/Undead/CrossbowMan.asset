@@ -21,3 +21,4 @@ MonoBehaviour:
   baseGoldReward: 15
   baseDamageToStronghold: 1
   attackRange: 8
+  isRanged: 1

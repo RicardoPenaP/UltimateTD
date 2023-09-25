@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2c621a8a592a714eb058cacb4489c4d, type: 3}
-  m_Name: BallistaTowerData
+  m_Name: CanonTowerData
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 4415465852592416861, guid: a5339955c46f23e4b895558d60cf4d08, type: 3}
-  ammunitionPrefab: {fileID: 4842572988533219790, guid: 31b69f55276e49e4e841f078daf90c06, type: 3}
+  levelingData: {fileID: 11400000, guid: 1dcecb5901ed84242adf0b378b2b10fb, type: 2}
+  towerPrefab: {fileID: 4415465852592416861, guid: d38b9b1c50e8c9f45b357c28ecc13770, type: 3}
+  ammunitionPrefab: {fileID: 2261852100830899983, guid: e60f69e712aaa464ea1ba85cec65d940, type: 3}
   baseGoldCost: 100
   baseAttackDamage: 50
   baseAttackRatio: 1
   baseAttackRange: 20
-  baseUpgradeGoldCost: 50
+  baseLevelUpGoldCost: 0
   upgradeCostAugmentPercentage: 20
   upgradeStatsAugmentPercentage: 10
   sellValuePercentageCoeficient: 80
-  towerIcon: {fileID: 21300000, guid: eca36a75c2e25584c92da9b633aa14ab, type: 3}
-  towerName: Ballista Tower
+  towerIcon: {fileID: 21300000, guid: 5c39250745a91ed4eb7158ca300d60fc, type: 3}
+  towerName: Canon Tower
   towerDescription: 

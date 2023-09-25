@@ -20,4 +20,5 @@ MonoBehaviour:
   distanceFromNextTileOffset: 0.08
   baseGoldReward: 200
   baseDamageToStronghold: 1
-  attackRange: 4.07
+  attackRange: 1
+  isRanged: 0
