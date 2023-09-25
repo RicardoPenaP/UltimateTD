@@ -4,6 +4,8 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     [Header("Tower Data")]
+    [Header("Leveling Data")]
+    [SerializeField] private TowerLevelingData levelingData;
     [Header("Prefab Reference")]
     [SerializeField] private TowerController towerPrefab;
     [SerializeField] private GameObject ammunitionPrefab;
@@ -18,7 +20,7 @@ public class TowerData : ScriptableObject
     [SerializeField, Min(0)] float baseAttackRange = 0;
 
     [Header("Upgrade Settings")]
-    [SerializeField, Min(0)] private int baseUpgradeGoldCost;
+    [SerializeField, Min(0)] private int baseLevelUpGoldCost;
     [SerializeField, Range(0, 100)] private int upgradeCostAugmentPercentage;
     [SerializeField, Range(0, 100)] private int upgradeStatsAugmentPercentage;
     [SerializeField, Range(0, 100)] private int sellValuePercentageCoeficient;
@@ -34,7 +36,7 @@ public class TowerData : ScriptableObject
     public int BaseAttackDamage { get { return baseAttackDamage; } }
     public float BaseAttackRatio { get { return baseAttackRatio; } }
     public float BaseAttackRange { get { return baseAttackRange; } }
-    public int BaseUpgradeGoldCost { get { return baseUpgradeGoldCost; } }
+    public int BaseLevelUpGoldCost { get { return baseLevelUpGoldCost; } }
     public float UpgradeCostAugmentPercentage { get { return upgradeCostAugmentPercentage; } }
     public float UpgradeStatsAugmentPercentage { get { return upgradeStatsAugmentPercentage; } }
     public float SellValuePercentageCoeficient { get { return sellValuePercentageCoeficient; } }
@@ -42,4 +44,28 @@ public class TowerData : ScriptableObject
     public string TowerName { get { return towerName; } }
     public string TowerDescription { get { return towerDescription; } }
    
+    public float GetLevelRelatedStatValue(TowerStatToAugment wantedStatValue, int level)
+    {
+        float statValue = 0f;
+
+        switch (wantedStatValue)
+        {
+            case TowerStatToAugment.BaseLevelUpGoldCost:
+                statValue = baseLevelUpGoldCost;
+                break;
+            case TowerStatToAugment.BaseAttackDamage:
+                statValue = baseAttackDamage;
+                break;
+            case TowerStatToAugment.BaseAttackRatio:
+                statValue = baseAttackRatio;
+                break;
+            case TowerStatToAugment.BaseAttackRange:
+                statValue = baseAttackRange;
+                break;
+            default:
+                break;
+        }
+
+        return statValue * levelingData.GetAugmentCostCoeficient(wantedStatValue, level);
+    }
 }

@@ -48,9 +48,8 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackDamage = myData.BaseAttackDamage;
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
-        myInfo.currentUpgradeGoldCost = myData.BaseUpgradeGoldCost;
+        myInfo.currentUpgradeGoldCost = myData.BaseLevelUpGoldCost;
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
-
        
     }
 
@@ -69,18 +68,14 @@ public class TowerController : MonoBehaviour,IBuilding
     }
     public void LevelUp()
     {
-        float percentageCalculatorHelper = 1 + (myData.UpgradeStatsAugmentPercentage / 100);
-
         myInfo.currentLevel++;        
-        myInfo.currentAttackDamage = Mathf.RoundToInt((float)myInfo.currentAttackDamage * percentageCalculatorHelper);        
-        myInfo.currentAttackRange *= percentageCalculatorHelper;
-        myInfo.currentAttackRatio *= percentageCalculatorHelper;
-        percentageCalculatorHelper = 1 + (myData.UpgradeCostAugmentPercentage / 100);
+        myInfo.currentAttackDamage = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackDamage, myInfo.currentLevel));        
+        myInfo.currentAttackRange *= myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRange, myInfo.currentLevel);
+        myInfo.currentAttackRatio *= myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRatio, myInfo.currentLevel);        
         totalBuildingCost += myInfo.currentUpgradeGoldCost;
-        myInfo.currentUpgradeGoldCost = Mathf.RoundToInt((float)myInfo.currentUpgradeGoldCost * percentageCalculatorHelper);
-        percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
+        myInfo.currentUpgradeGoldCost = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
+        float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
-
     }
     public void SellBuilding()
     {

@@ -214,8 +214,6 @@ public class EnemyController : MonoBehaviour
         {
             Attack();
         }
-
-       
     }
 
     private void UpdateUI()
@@ -243,11 +241,11 @@ public class EnemyController : MonoBehaviour
 
     private void SetLevelStats()
     {
-        maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(StatToAugment.BaseHealth, level));
-        maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseShield, level));
-        damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseDamageToStronghold, level));
-        defaultMovementSpeed = myData.GetLevelRelatedStatValue(StatToAugment.BaseMovementSpeed, level);
-        goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseGoldReward, level));
+        maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseHealth, level));
+        maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseShield, level));
+        damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseDamageToStronghold, level));
+        defaultMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
+        goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
     }
 
     private void PathEnded()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatToAugment { BaseHealth, BaseShield, BaseMovementSpeed, BaseGoldReward, BaseDamageToStronghold}
+public enum EnemyStatToAugment { BaseHealth, BaseShield, BaseMovementSpeed, BaseGoldReward, BaseDamageToStronghold}
 [CreateAssetMenu(fileName = "NewEnemyLevelingData", menuName = "EnemyLevelingData")]
 public class EnemyLevelingData : ScriptableObject
 {
@@ -21,30 +21,30 @@ public class EnemyLevelingData : ScriptableObject
     [Header("Damage")]
     [SerializeField, Range(0, 100)] private int baseDamageToStrongholdAugment = 0;
 
-    public float GetAugmentCoeficient(StatToAugment wantedStatCoeficient, int currentLevel)
+    public float GetAugmentCoeficient(EnemyStatToAugment wantedStatCoeficient, int level)
     {        
         float resultingPercentage = 0f;
         switch (wantedStatCoeficient)
         {
-            case StatToAugment.BaseHealth:
+            case EnemyStatToAugment.BaseHealth:
                 resultingPercentage = (float)baseHealthAugment / 100;
                 break;
-            case StatToAugment.BaseShield:
+            case EnemyStatToAugment.BaseShield:
                 resultingPercentage = (float)baseShieldAugment / 100;
                 break;
-            case StatToAugment.BaseMovementSpeed:
+            case EnemyStatToAugment.BaseMovementSpeed:
                 resultingPercentage = (float)baseMovementSpeedAugment / 100;
                 break;
-            case StatToAugment.BaseGoldReward:
+            case EnemyStatToAugment.BaseGoldReward:
                 resultingPercentage = (float)baseGoldRewardAugment / 100;
                 break;
-            case StatToAugment.BaseDamageToStronghold:
+            case EnemyStatToAugment.BaseDamageToStronghold:
                 resultingPercentage = (float)baseDamageToStrongholdAugment / 100;
                 break;
             default:
                 break;
         }
-        resultingPercentage *= currentLevel-1;
+        resultingPercentage *= level-1;
         float augmentCoeficient = 1f+resultingPercentage;
         return augmentCoeficient;
     }

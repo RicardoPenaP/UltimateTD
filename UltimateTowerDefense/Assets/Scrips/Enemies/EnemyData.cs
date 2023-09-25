@@ -38,24 +38,24 @@ public class EnemyData : ScriptableObject
     public float AttackRange { get { return attackRange; } }
     public bool IsRanged { get { return isRanged; } }
 
-    public float GetLevelRelatedStatValue(StatToAugment wantedStatValue, int level)
+    public float GetLevelRelatedStatValue(EnemyStatToAugment wantedStatValue, int level)
     {
         float statValue = 0f;
         switch (wantedStatValue)
         {
-            case StatToAugment.BaseHealth:
+            case EnemyStatToAugment.BaseHealth:
                 statValue = baseHealth;
                 break;
-            case StatToAugment.BaseShield:
+            case EnemyStatToAugment.BaseShield:
                 statValue = baseShield;
                 break;
-            case StatToAugment.BaseMovementSpeed:
+            case EnemyStatToAugment.BaseMovementSpeed:
                 statValue = baseMovementSpeed;
                 break;
-            case StatToAugment.BaseGoldReward:
+            case EnemyStatToAugment.BaseGoldReward:
                 statValue = baseGoldReward;
                 break;
-            case StatToAugment.BaseDamageToStronghold:
+            case EnemyStatToAugment.BaseDamageToStronghold:
                 statValue = baseDamageToStronghold;
                 break;
             default:
