@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerUIData : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "NewTowerUIData", menuName = "TowerUIData")]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class TowerUIData : ScriptableObject
+{
+    [Header("Tower UI Data")]
+    [SerializeField] private Sprite towerIcon;
+    [SerializeField] private string towerName;
+    [SerializeField, TextArea(4, 8)] private string towerDescription;
+    public Sprite TowerIcon { get { return towerIcon; } }
+    public string TowerName { get { return towerName; } }
+    public string TowerDescription { get { return towerDescription; } }
 }

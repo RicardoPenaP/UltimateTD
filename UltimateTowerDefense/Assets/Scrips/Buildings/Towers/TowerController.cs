@@ -87,4 +87,9 @@ public class TowerController : MonoBehaviour,IBuilding
     {
         this.onSell += onSell;
     }
+    
+    public TowerUIData GetUIData()
+    {
+        return myData.UIData;
+    }
 }

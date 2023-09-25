@@ -4,6 +4,10 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
     [Header("Tower Data")]
+
+    [Header("UI Settings")]
+    [SerializeField] private TowerUIData uiData;
+
     [Header("Leveling Data")]
     [SerializeField] private TowerLevelingData levelingData;
     [Header("Prefab Reference")]
@@ -30,6 +34,7 @@ public class TowerData : ScriptableObject
     [SerializeField] private string towerName;
     [SerializeField,TextArea(4,8)] private string towerDescription;
 
+    public TowerUIData UIData { get { return uiData; } }
     public TowerController TowerPrefab { get { return towerPrefab; } }
     public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }    
     public int BaseGoldCost { get { return baseGoldCost; } }
@@ -40,10 +45,6 @@ public class TowerData : ScriptableObject
     public float UpgradeCostAugmentPercentage { get { return upgradeCostAugmentPercentage; } }
     public float UpgradeStatsAugmentPercentage { get { return upgradeStatsAugmentPercentage; } }
     public float SellValuePercentageCoeficient { get { return sellValuePercentageCoeficient; } }
-    public Sprite TowerIcon { get { return towerIcon; } }
-    public string TowerName { get { return towerName; } }
-    public string TowerDescription { get { return towerDescription; } }
-   
     public float GetLevelRelatedStatValue(TowerStatToAugment wantedStatValue, int level)
     {
         float statValue = 0f;
