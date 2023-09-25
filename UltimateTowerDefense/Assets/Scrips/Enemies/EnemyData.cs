@@ -24,7 +24,8 @@ public class EnemyData : ScriptableObject
     [SerializeField, Min(0f)] private int baseGoldReward = 25;
 
     [Header("Damage Settings")]
-    [SerializeField] private int baseDamageToStronghold = 1;
+    [SerializeField, Min(0)] private int baseDamageToStronghold = 1;
+    [SerializeField, Min(0)] private float attackRange = 1f;
 
     public string EnemyName { get { return enemyName; } }   
     public int BaseHealth { get { return baseHealth; } }
@@ -32,7 +33,8 @@ public class EnemyData : ScriptableObject
     public float BaseMovementSpeed { get { return baseMovementSpeed; } }
     public float DistanceFromNextileOffset { get { return distanceFromNextTileOffset; } }
     public int BaseGoldReward { get { return baseGoldReward; } }
-    public int DamageToStronghold { get { return baseDamageToStronghold; } }
+    public int BaseDamageToStronghold { get { return baseDamageToStronghold; } }
+    public float AttackRange { get { return attackRange; } }
 
     public float GetLevelRelatedStatValue(StatToAugment wantedStatValue, int level)
     {

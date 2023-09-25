@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
     private float distanceFromNextTileOffset;
 
     private bool isAlive = true;
+    private bool canAttack = true;
     
 
     public List<Tile> Path { get { return path; } }    
@@ -50,6 +51,12 @@ public class EnemyController : MonoBehaviour
 
     public bool IsAlive { get { return isAlive; } }
     public bool CanMove { get { return canMove; } }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, myData.AttackRange);
+    }
 
     private void Awake()
     {        
@@ -72,6 +79,11 @@ public class EnemyController : MonoBehaviour
         SetLevel(level);
     }
 
+    private void Update()
+    {
+        InRangeForAttack();
+    }
+
     private void OnDestroy()
     {
         DeInitHandlers();
@@ -88,14 +100,25 @@ public class EnemyController : MonoBehaviour
                 
         if (myMovement)
         {
-            myMovement.OnPathEnded += PathEnded;
+            //myMovement.OnPathEnded += PathEnded;
         }
 
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         if (myAnimatorHelper)
         {
+            myAnimatorHelper.OnAttackAnimationStarted += () =>
+            {
+                canAttack = false;
+            };
+
             myAnimatorHelper.OnAttackAnimationPerformed += DealDamageToStronghold;
-            myAnimatorHelper.OnAttackAnimationEnded += Desactivate;
+
+            myAnimatorHelper.OnAttackAnimationEnded += () =>
+            {
+                canAttack = true;
+            };
+
+            //myAnimatorHelper.OnAttackAnimationEnded += Desactivate;
 
             myAnimatorHelper.OnDieAnimationEnded += Desactivate;
         }
@@ -112,7 +135,7 @@ public class EnemyController : MonoBehaviour
         
         if (myMovement)
         {
-            myMovement.OnPathEnded -= PathEnded;
+            //myMovement.OnPathEnded -= PathEnded;
         }
 
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
@@ -166,6 +189,23 @@ public class EnemyController : MonoBehaviour
         UpdateUI();
     }
 
+    private void InRangeForAttack()
+    {
+        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myData.AttackRange)
+        {
+            canMove = false;
+            if (!canAttack)
+            {
+                return;
+            }
+            Attack();
+        }
+        else
+        {
+            canMove = true;
+        }
+    }
+
     private void UpdateUI()
     {
         OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
@@ -198,7 +238,7 @@ public class EnemyController : MonoBehaviour
         goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseGoldReward, level));
     }
 
-    private void PathEnded()
+    private void Attack()
     {
         myAnimator.SetTrigger(ATTACK_HASH);
     }
