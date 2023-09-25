@@ -16,7 +16,7 @@ MonoBehaviour:
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
   baseHealth: 150
   baseShield: 0
-  baseMovementSpeed: 2
+  baseMovementSpeed: 1.4
   distanceFromNextTileOffset: 0.08
   baseGoldReward: 75
   baseDamageToStronghold: 1
