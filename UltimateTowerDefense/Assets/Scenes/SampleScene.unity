@@ -1096,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
       propertyPath: timeBetweenWaves
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
       propertyPath: waves.Array.size
