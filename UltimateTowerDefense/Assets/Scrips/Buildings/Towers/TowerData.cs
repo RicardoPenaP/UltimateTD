@@ -6,7 +6,7 @@ public class TowerData : ScriptableObject
     [Header("Tower Data")]
 
     [Header("UI Settings")]
-    [SerializeField] private TowerUIData uiData;
+    [SerializeField] private BuildingUIData uiData;
 
     [Header("Leveling Data")]
     [SerializeField] private TowerLevelingData levelingData;
@@ -23,10 +23,8 @@ public class TowerData : ScriptableObject
     [Tooltip("The range for dectecting enemies and attack them")]
     [SerializeField, Min(0)] float baseAttackRange = 0;
 
-    [Header("Upgrade Settings")]
-    [SerializeField, Min(0)] private int baseLevelUpGoldCost;
-    [SerializeField, Range(0, 100)] private int upgradeCostAugmentPercentage;
-    [SerializeField, Range(0, 100)] private int upgradeStatsAugmentPercentage;
+    [Header("Gold Cost Settings")]
+    [SerializeField, Min(0)] private int baseLevelUpCost;
     [SerializeField, Range(0, 100)] private int sellValuePercentageCoeficient;
 
     [Header("UI Settings")]
@@ -34,16 +32,14 @@ public class TowerData : ScriptableObject
     [SerializeField] private string towerName;
     [SerializeField,TextArea(4,8)] private string towerDescription;
 
-    public TowerUIData UIData { get { return uiData; } }
+    public BuildingUIData UIData { get { return uiData; } }
     public TowerController TowerPrefab { get { return towerPrefab; } }
-    public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }    
-    public int BaseGoldCost { get { return baseGoldCost; } }
+    public GameObject AmmunitionPrefab { get { return ammunitionPrefab; } }  
     public int BaseAttackDamage { get { return baseAttackDamage; } }
     public float BaseAttackRatio { get { return baseAttackRatio; } }
     public float BaseAttackRange { get { return baseAttackRange; } }
-    public int BaseLevelUpGoldCost { get { return baseLevelUpGoldCost; } }
-    public float UpgradeCostAugmentPercentage { get { return upgradeCostAugmentPercentage; } }
-    public float UpgradeStatsAugmentPercentage { get { return upgradeStatsAugmentPercentage; } }
+    public int BaseLevelUpCost { get { return baseLevelUpCost; } }
+    public int BaseGoldCost { get { return baseGoldCost; } }  
     public float SellValuePercentageCoeficient { get { return sellValuePercentageCoeficient; } }
     public float GetLevelRelatedStatValue(TowerStatToAugment wantedStatValue, int level)
     {
@@ -52,7 +48,7 @@ public class TowerData : ScriptableObject
         switch (wantedStatValue)
         {
             case TowerStatToAugment.BaseLevelUpGoldCost:
-                statValue = baseLevelUpGoldCost;
+                statValue = baseLevelUpCost;
                 break;
             case TowerStatToAugment.BaseAttackDamage:
                 statValue = baseAttackDamage;

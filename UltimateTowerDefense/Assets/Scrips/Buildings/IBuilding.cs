@@ -20,9 +20,8 @@ namespace BuildingInterface
 
     public interface IBuilding
     {
-        public BuildingInfo GetBuildingInfo();
-        public Sprite GetBuildingIcon();
-        public string GetBuildingDescription();
+        public BuildingUIData GetBuildindUIInfo();
+        public BuildingInfo GetBuildingInfo();       
         public void LevelUp();
         public void SellBuilding();
         public void SubscribeToOnSell(OnSellDelegate onSell);

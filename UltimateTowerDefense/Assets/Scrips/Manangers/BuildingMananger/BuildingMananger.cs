@@ -58,7 +58,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
     {
         this.selectedBuilding = selectedBuilding;
         UpdateSelectedBuildingInfo();
-        buildingIcon.SetIcon(selectedBuilding.GetBuildingIcon());        
+        buildingIcon.SetIcon(selectedBuilding.GetBuildindUIInfo().BuildingIcon);        
         gameObject.SetActive(true);
     }
 
@@ -113,7 +113,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
         selectedBuildingInfo = selectedBuilding.GetBuildingInfo();
         this.buildingInfo.SetName(selectedBuildingInfo.name);
         this.buildingInfo.SetLevel(selectedBuildingInfo.currentLevel);
-        this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildingDescription());
+        this.buildingInfo.SetBuildingDescription(selectedBuilding.GetBuildindUIInfo().BuildingDescription);
         this.buildingInfo.SetBuildingDamage(selectedBuildingInfo.currentAttackDamage);
         this.buildingInfo.SetBuildingAttackRatio(selectedBuildingInfo.currentAttackRatio);
         this.buildingInfo.SetBuildingRange(selectedBuildingInfo.currentAttackRange);

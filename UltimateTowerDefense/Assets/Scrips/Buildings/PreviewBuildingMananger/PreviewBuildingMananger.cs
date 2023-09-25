@@ -38,7 +38,7 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
         }
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);
-        PreviewRange(tilePosition, StoreMananger.Instance.SelectedTower.BaseAttackRange);
+        PreviewRange(tilePosition, StoreMananger.Instance.SelectedTower.AttackRange);
        
     }
 

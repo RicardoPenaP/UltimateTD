@@ -14,9 +14,9 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private Dictionary<TowerController, StoreManangerButton> towerButtons = new Dictionary<TowerController, StoreManangerButton>();
 
-    private TowerData selectedTower;
+    private TowerController selectedTower;
 
-    public TowerData SelectedTower { get { return selectedTower; } }
+    public TowerController SelectedTower { get { return selectedTower; } }
 
     protected override void Awake()
     {
@@ -48,16 +48,17 @@ public class StoreMananger : Singleton<StoreMananger>
     {
         if (!towerButtons.ContainsKey(tower))
         {
+            BuildingUIData uiData = tower.GetBuildindUIInfo();
             StoreManangerButton button = Instantiate(buttonPrefab, transform.position, Quaternion.identity, transform);
-            button.SetButtonIcon(tower.TowerIcon);
-            button.SetGoldCostText(tower.BaseGoldCost);
+            button.SetButtonIcon(uiData.BuildingIcon);
+            button.SetGoldCostText(uiData.BaseGoldCost);
             towerButtons.Add(tower, button);
         }
     }
 
     private void CheckForSelectedButton()
     {
-        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
+        foreach (KeyValuePair<TowerController, StoreManangerButton> entry in towerButtons)
         {           
             if (entry.Value.ButtonPressed)
             {
@@ -73,9 +74,9 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private void CheckForAvailableGold()
     {
-        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
+        foreach (KeyValuePair<TowerController, StoreManangerButton> entry in towerButtons)
         {
-            if (BankMananger.Instance.HaveEnoughGoldCheck(entry.Key.BaseGoldCost))
+            if (BankMananger.Instance.HaveEnoughGoldCheck(entry.Key.GetBuildindUIInfo().BaseGoldCost))
             {
                 entry.Value.SetButtonState(true);
             }
@@ -88,7 +89,7 @@ public class StoreMananger : Singleton<StoreMananger>
 
     private void CancelTowerSelection()
     {
-        foreach (KeyValuePair<TowerData, StoreManangerButton> entry in towerButtons)
+        foreach (KeyValuePair<TowerController, StoreManangerButton> entry in towerButtons)
         {
             if (entry.Value.ButtonSelected)
             {
@@ -107,8 +108,8 @@ public class StoreMananger : Singleton<StoreMananger>
             return null;
         }
         PreviewBuildingMananger.Instance.TurnOffPreviewTower();
-        BankMananger.Instance.SubtractGold(selectedTower.BaseGoldCost);
-        IBuilding building = Instantiate(selectedTower.TowerPrefab, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();
+        BankMananger.Instance.SubtractGold(selectedTower.GetBuildindUIInfo().BaseGoldCost);
+        IBuilding building = Instantiate(selectedTower, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();
         selectedTower = null;
         return building;
     }

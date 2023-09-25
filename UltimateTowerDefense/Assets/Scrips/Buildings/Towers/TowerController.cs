@@ -42,13 +42,13 @@ public class TowerController : MonoBehaviour,IBuilding
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         totalBuildingCost = myData.BaseGoldCost;
 
-        gameObject.name = myData.TowerName;
-        myInfo.name = myData.TowerName;        
+        gameObject.name = myData.UIData.BuildingName;
+        myInfo.name = myData.UIData.BuildingName;
         myInfo.currentLevel = 1;
         myInfo.currentAttackDamage = myData.BaseAttackDamage;
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
-        myInfo.currentUpgradeGoldCost = myData.BaseLevelUpGoldCost;
+        myInfo.currentUpgradeGoldCost = myData.BaseLevelUpCost;
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
        
     }
@@ -58,14 +58,7 @@ public class TowerController : MonoBehaviour,IBuilding
     {
         return myInfo;
     }
-    public Sprite GetBuildingIcon()
-    {
-        return myData.TowerIcon;
-    }
-    public string GetBuildingDescription()
-    {
-        return myData.TowerDescription;
-    }
+   
     public void LevelUp()
     {
         myInfo.currentLevel++;        
@@ -77,6 +70,7 @@ public class TowerController : MonoBehaviour,IBuilding
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
     }
+
     public void SellBuilding()
     {
         onSell.Invoke();
@@ -88,7 +82,7 @@ public class TowerController : MonoBehaviour,IBuilding
         this.onSell += onSell;
     }
     
-    public TowerUIData GetUIData()
+    public BuildingUIData GetBuildindUIInfo()
     {
         return myData.UIData;
     }
