@@ -7,7 +7,8 @@ using System;
 public class EnemyController : MonoBehaviour
 {
     public delegate void UpdateEnemyUIDelegate(int healthCurrentValue, int healthMaxValue, int shieldCurrentValue, int shieldMaxValue);    
-   
+    private enum EnemyStatus { None, WalkinInAPath, AttackingStronghold}
+
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
     [SerializeField] private bool canMove = true;
@@ -28,7 +29,9 @@ public class EnemyController : MonoBehaviour
 
     private List<Tile> path;
     private Animator myAnimator;
-    EnemyMovement myMovement; 
+    private EnemyMovement myMovement;
+
+    private EnemyStatus myStatus;
 
     private int maxHealth;  
 
@@ -42,7 +45,7 @@ public class EnemyController : MonoBehaviour
 
     private bool isAlive = true;
     private bool canAttack = true;
-    
+    private bool startAttacking = false;
 
     public List<Tile> Path { get { return path; } }    
    
@@ -68,7 +71,7 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()
     {
         transform.localPosition = Vector3.zero;
-        ResetStats();
+        ResetEnemy();
     }
 
 
@@ -100,25 +103,17 @@ public class EnemyController : MonoBehaviour
                 
         if (myMovement)
         {
-            //myMovement.OnPathEnded += PathEnded;
+            myMovement.OnPathEnded += PathEnded;
         }
 
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         if (myAnimatorHelper)
         {
-            myAnimatorHelper.OnAttackAnimationStarted += () =>
-            {
-                canAttack = false;
-            };
+            myAnimatorHelper.OnAttackAnimationStarted += AttackStarted;
 
             myAnimatorHelper.OnAttackAnimationPerformed += DealDamageToStronghold;
 
-            myAnimatorHelper.OnAttackAnimationEnded += () =>
-            {
-                canAttack = true;
-            };
-
-            //myAnimatorHelper.OnAttackAnimationEnded += Desactivate;
+            myAnimatorHelper.OnAttackAnimationEnded += AttackEnded;
 
             myAnimatorHelper.OnDieAnimationEnded += Desactivate;
         }
@@ -135,17 +130,31 @@ public class EnemyController : MonoBehaviour
         
         if (myMovement)
         {
-            //myMovement.OnPathEnded -= PathEnded;
+            myMovement.OnPathEnded -= PathEnded;
         }
 
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
+
         if (myAnimatorHelper)
         {
+            myAnimatorHelper.OnAttackAnimationStarted -= AttackStarted;
+
             myAnimatorHelper.OnAttackAnimationPerformed -= DealDamageToStronghold;
-            myAnimatorHelper.OnAttackAnimationEnded -= Desactivate;
+
+            myAnimatorHelper.OnAttackAnimationEnded -= AttackEnded;
 
             myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
         }
+    }
+
+    private void AttackStarted()
+    {
+        canAttack = false;
+    }
+
+    private void AttackEnded()
+    {
+        canAttack = true;
     }
 
     private void TakeDamage(int damageAmount)
@@ -191,19 +200,22 @@ public class EnemyController : MonoBehaviour
 
     private void InRangeForAttack()
     {
-        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myData.AttackRange)
+        if (!myData.IsRanged)
         {
-            canMove = false;
-            if (!canAttack)
-            {
-                return;
-            }
+            return;
+        }
+
+        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myData.AttackRange && !startAttacking)
+        {
+            PathEnded();
+        }
+
+        if (startAttacking)
+        {
             Attack();
         }
-        else
-        {
-            canMove = true;
-        }
+
+       
     }
 
     private void UpdateUI()
@@ -225,7 +237,7 @@ public class EnemyController : MonoBehaviour
 
         this.level = level;
         SetLevelStats();
-        ResetStats();
+        ResetEnemy();
         UpdateUI();
     }
 
@@ -238,8 +250,18 @@ public class EnemyController : MonoBehaviour
         goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(StatToAugment.BaseGoldReward, level));
     }
 
+    private void PathEnded()
+    {
+        canMove = false;
+        startAttacking = true;
+    }
+
     private void Attack()
     {
+        if (!canAttack)
+        {
+            return;
+        }
         myAnimator.SetTrigger(ATTACK_HASH);
     }
 
@@ -261,12 +283,14 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void ResetStats()
+    private void ResetEnemy()
     {
         currentHealth = maxHealth;
         currentShield = maxShield;
         currentMovementSpeed = defaultMovementSpeed;
         isAlive = true;
+        canAttack = true;
+        startAttacking = false;
         UpdateUI();
     }
 }

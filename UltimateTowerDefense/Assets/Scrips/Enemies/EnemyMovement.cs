@@ -6,6 +6,7 @@ using System;
 [RequireComponent(typeof(EnemyController))]
 public class EnemyMovement : MonoBehaviour
 {
+
     public event Action OnPathEnded;
     private EnemyController myController;
     private Animator myAnimator;
@@ -13,6 +14,9 @@ public class EnemyMovement : MonoBehaviour
    
     private int pathIndex = 0;
     private Vector3 movementDirection;
+    private Vector3 positionToMove;
+    
+
 
     private readonly int WALK_HASH = Animator.StringToHash("Walk");
 
@@ -29,11 +33,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        MoveByAPath();
     }
 
-    private void Move()
+    private void MoveByAPath()
     {
+       
         myAnimator.SetBool(WALK_HASH, false);
         if (!myController.CanMove || !myController.IsAlive)
         {            

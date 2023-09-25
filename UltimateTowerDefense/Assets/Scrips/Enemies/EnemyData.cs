@@ -26,6 +26,7 @@ public class EnemyData : ScriptableObject
     [Header("Damage Settings")]
     [SerializeField, Min(0)] private int baseDamageToStronghold = 1;
     [SerializeField, Min(0)] private float attackRange = 1f;
+    [SerializeField] private bool isRanged = false;
 
     public string EnemyName { get { return enemyName; } }   
     public int BaseHealth { get { return baseHealth; } }
@@ -35,6 +36,7 @@ public class EnemyData : ScriptableObject
     public int BaseGoldReward { get { return baseGoldReward; } }
     public int BaseDamageToStronghold { get { return baseDamageToStronghold; } }
     public float AttackRange { get { return attackRange; } }
+    public bool IsRanged { get { return isRanged; } }
 
     public float GetLevelRelatedStatValue(StatToAugment wantedStatValue, int level)
     {
