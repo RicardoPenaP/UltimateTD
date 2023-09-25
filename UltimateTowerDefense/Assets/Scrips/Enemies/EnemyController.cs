@@ -186,6 +186,7 @@ public class EnemyController : MonoBehaviour
         this.level = level;
         SetLevelStats();
         ResetStats();
+        UpdateUI();
     }
 
     private void SetLevelStats()
@@ -226,5 +227,6 @@ public class EnemyController : MonoBehaviour
         currentShield = maxShield;
         currentMovementSpeed = defaultMovementSpeed;
         isAlive = true;
+        UpdateUI();
     }
 }

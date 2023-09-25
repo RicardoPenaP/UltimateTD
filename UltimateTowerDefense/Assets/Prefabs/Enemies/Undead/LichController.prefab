@@ -105,6 +105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LichController
       objectReference: {fileID: 0}
+    - target: {fileID: 5225176943445473941, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+      propertyPath: myData
+      value: 
+      objectReference: {fileID: 11400000, guid: c9a0c01ebe9cb034cb4bd6c614906e3f, type: 2}
     - target: {fileID: 5730903996162539135, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.124
