@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GunLevelingData
   m_EditorClassIdentifier: 
   baseLevelUpGoldCostAugment: 25
-  baseAttackDamageAugment: 10
-  baseAttackRatioAugment: 5
-  baseAttackRangeAugment: 1
+  baseAttackDamageAugment: 2
+  baseAttackRatioAugment: 10
+  baseAttackRangeAugment: 2

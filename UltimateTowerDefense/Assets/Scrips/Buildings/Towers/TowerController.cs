@@ -29,7 +29,7 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void Awake()
     {
-        SetTowerValues();        
+        InitTowerStats();        
     }
 
     private void OnMouseDown()
@@ -37,10 +37,10 @@ public class TowerController : MonoBehaviour,IBuilding
         BuildingMananger.Instance.OpenBuildingMananger(this);
     }
 
-    private void SetTowerValues()
+    private void InitTowerStats()
     {
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
-        totalBuildingCost = myData.BaseGoldCost;
+        totalBuildingCost = myData.UIData.BaseGoldCost;
 
         gameObject.name = myData.UIData.BuildingName;
         myInfo.name = myData.UIData.BuildingName;
@@ -48,7 +48,7 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentAttackDamage = myData.BaseAttackDamage;
         myInfo.currentAttackRatio = myData.BaseAttackRatio;
         myInfo.currentAttackRange = myData.BaseAttackRange;
-        myInfo.currentUpgradeGoldCost = myData.BaseLevelUpCost;
+        myInfo.currentLevelUpGoldCost = myData.BaseLevelUpCost;
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
        
     }
@@ -63,10 +63,10 @@ public class TowerController : MonoBehaviour,IBuilding
     {
         myInfo.currentLevel++;        
         myInfo.currentAttackDamage = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackDamage, myInfo.currentLevel));        
-        myInfo.currentAttackRange *= myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRange, myInfo.currentLevel);
-        myInfo.currentAttackRatio *= myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRatio, myInfo.currentLevel);        
-        totalBuildingCost += myInfo.currentUpgradeGoldCost;
-        myInfo.currentUpgradeGoldCost = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
+        myInfo.currentAttackRange = myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRange, myInfo.currentLevel);
+        myInfo.currentAttackRatio = myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRatio, myInfo.currentLevel);        
+        totalBuildingCost += myInfo.currentLevelUpGoldCost;
+        myInfo.currentLevelUpGoldCost = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
     }
@@ -77,6 +77,7 @@ public class TowerController : MonoBehaviour,IBuilding
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
+
     public void SubscribeToOnSell(OnSellDelegate onSell)
     {
         this.onSell += onSell;

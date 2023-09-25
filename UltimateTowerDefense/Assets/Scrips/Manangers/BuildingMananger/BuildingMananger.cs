@@ -68,7 +68,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
         {
             return;
         }
-        BankMananger.Instance.SubtractGold(selectedBuildingInfo.currentUpgradeGoldCost);
+        BankMananger.Instance.SubtractGold(selectedBuildingInfo.currentLevelUpGoldCost);
         selectedBuilding.LevelUp();
         UpdateSelectedBuildingInfo();
     }
@@ -94,7 +94,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
             return;
         }
 
-        if (BankMananger.Instance.HaveEnoughGoldCheck(selectedBuildingInfo.currentUpgradeGoldCost))
+        if (BankMananger.Instance.HaveEnoughGoldCheck(selectedBuildingInfo.currentLevelUpGoldCost))
         {
             levelUpButton.SetButtonInteractable(true);
         }
@@ -117,7 +117,7 @@ public class BuildingMananger : Singleton<BuildingMananger>
         this.buildingInfo.SetBuildingDamage(selectedBuildingInfo.currentAttackDamage);
         this.buildingInfo.SetBuildingAttackRatio(selectedBuildingInfo.currentAttackRatio);
         this.buildingInfo.SetBuildingRange(selectedBuildingInfo.currentAttackRange);
-        levelUpButton.SetLevelUPCost(selectedBuildingInfo.currentUpgradeGoldCost);
+        levelUpButton.SetLevelUPCost(selectedBuildingInfo.currentLevelUpGoldCost);
         sellButton.SetSellCost(selectedBuildingInfo.sellCost);
         UpdatePreviewRange();
 

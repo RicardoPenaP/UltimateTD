@@ -12,7 +12,7 @@ namespace BuildingInterface
         public int currentAttackDamage;
         public float currentAttackRatio;
         public float currentAttackRange;
-        public int currentUpgradeGoldCost;
+        public int currentLevelUpGoldCost;
         public int sellCost;
     }
 
