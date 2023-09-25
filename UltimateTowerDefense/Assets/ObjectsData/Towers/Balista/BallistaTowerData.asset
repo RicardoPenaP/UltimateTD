@@ -14,14 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiData: {fileID: 11400000, guid: bee13752dff9c6f4288cc96d524b8232, type: 2}
   levelingData: {fileID: 11400000, guid: dc607e9f802b8d143b1a7f9eed5172b2, type: 2}
-  towerPrefab: {fileID: 4415465852592416861, guid: a5339955c46f23e4b895558d60cf4d08, type: 3}
   ammunitionPrefab: {fileID: 4842572988533219790, guid: 31b69f55276e49e4e841f078daf90c06, type: 3}
-  baseGoldCost: 100
   baseAttackDamage: 50
   baseAttackRatio: 1
   baseAttackRange: 20
-  baseLevelUpCost: 0
+  baseLevelUpCost: 100
   sellValuePercentageCoeficient: 80
-  towerIcon: {fileID: 21300000, guid: eca36a75c2e25584c92da9b633aa14ab, type: 3}
-  towerName: Ballista Tower
-  towerDescription: 

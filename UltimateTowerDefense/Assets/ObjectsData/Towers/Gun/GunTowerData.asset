@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c621a8a592a714eb058cacb4489c4d, type: 3}
   m_Name: GunTowerData
   m_EditorClassIdentifier: 
-  uiData: {fileID: 0}
+  uiData: {fileID: 11400000, guid: 9edc31fb281f4d544ba911ee8bd3882d, type: 2}
   levelingData: {fileID: 11400000, guid: 31bf7684d1025d345886d51685b8a583, type: 2}
-  towerPrefab: {fileID: 4415465852592416861, guid: 1f3a0e95f08e47345992a612456729a5, type: 3}
   ammunitionPrefab: {fileID: 4842572988533219790, guid: f4edde24ea7b49d4aa76a4e4845e594e, type: 3}
-  baseGoldCost: 100
   baseAttackDamage: 50
   baseAttackRatio: 1
   baseAttackRange: 20
-  baseLevelUpCost: 0
+  baseLevelUpCost: 100
   sellValuePercentageCoeficient: 80
-  towerIcon: {fileID: 21300000, guid: 366340aeb70736749afc3385d75bdd02, type: 3}
-  towerName: Gun Tower
-  towerDescription: 

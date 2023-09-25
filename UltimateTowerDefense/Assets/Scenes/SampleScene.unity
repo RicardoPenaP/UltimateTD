@@ -845,6 +845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoreMananger
       objectReference: {fileID: 0}
+    - target: {fileID: 4694604513020241825, guid: 203d4f4db625d6a42918d14a8db8bff8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4694604513020241854, guid: 203d4f4db625d6a42918d14a8db8bff8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1261,6 +1265,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 371498527}
     m_Modifications:
+    - target: {fileID: 8172348536653633584, guid: b1b0d14dcf39c374f8afeab761be3c5f, type: 3}
+      propertyPath: maxAmountGold
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172348536653633584, guid: b1b0d14dcf39c374f8afeab761be3c5f, type: 3}
+      propertyPath: startingAmouuntGold
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8172348536653633585, guid: b1b0d14dcf39c374f8afeab761be3c5f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

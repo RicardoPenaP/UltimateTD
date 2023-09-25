@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a48bbd4ed185244cbc2902dbfa33f9e, type: 3}
   m_Name: BalistaLevelingData
   m_EditorClassIdentifier: 
-  baseLevelUpGoldCostAugment: 25
+  baseLevelUpGoldCostAugment: 50
   baseAttackDamageAugment: 10
   baseAttackRatioAugment: 5
   baseAttackRangeAugment: 1
