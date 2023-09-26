@@ -10,7 +10,7 @@ public class GargolyeAI : MonoBehaviour
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-    private readonly int CAST_SKIL_HASH = Animator.StringToHash("CastSkil");
+    private readonly int CAST_SKIL_HASH = Animator.StringToHash("Skil");
 
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -51,7 +51,7 @@ public class GargolyeAI : MonoBehaviour
     {
         myState = EnemyState.Walking;
         canAttack = true;
-        skillDamage = Mathf.RoundToInt( (float)myController.DamageToStronghold * (1 + (float)damageToStrongholdPercentageAugment));
+        skillDamage = Mathf.RoundToInt( (float)myController.DamageToStronghold * (1 + (float)damageToStrongholdPercentageAugment/100));
         StartCoroutine(SkillCooldownRoutine());
     }
 
@@ -63,11 +63,9 @@ public class GargolyeAI : MonoBehaviour
 
     private void SetAnimationsEvents()
     {
-        myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
         myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
-
-        myAnimatorHelper.OnSkilCastStarted += () => { canAttack = false; };
+                
         myAnimatorHelper.OnSkilCastPerformed += () => { HealthMananger.Instance.TakeDamage(skillDamage); };
         myAnimatorHelper.OnSkilCastEnded += () => { StartCoroutine(SkillCooldownRoutine()); };
         myAnimatorHelper.OnSkilCastEnded += () => { canAttack = true; };
@@ -108,15 +106,16 @@ public class GargolyeAI : MonoBehaviour
         {
             return;
         }
-
+        canAttack = false;
         if (canCastSkill)
         {           
             CastSkill();
-            return;
         }
-       
+        else
+        {
+            Attack();
+        } 
         
-        Attack();
     }
 
     private void Attack()
