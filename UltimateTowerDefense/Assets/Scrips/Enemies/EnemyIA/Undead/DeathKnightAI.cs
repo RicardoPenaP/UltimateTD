@@ -7,7 +7,7 @@ public class DeathKnightAI : MonoBehaviour
 {
     [Header("Death Knight AI")]
     [SerializeField, Min(0)] private float skillDurationTime = 1;
-    [SerializeField, Min(0)] private int speedPercentageAugment = 100;
+    [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
@@ -20,8 +20,6 @@ public class DeathKnightAI : MonoBehaviour
     private EnemyState myState;
 
     private bool canAttack = true;
-    private bool canCastSkill = false;    
-
 
     private void Awake()
     {
@@ -37,17 +35,22 @@ public class DeathKnightAI : MonoBehaviour
         ResetEnemy();
     }
 
-    private void ResetEnemy()
+    private void OnDisable()
     {
-        myState = EnemyState.Walking;
-        canAttack = true;
-        canCastSkill = false;        
-        StartCoroutine(SkillCooldownRoutine());
+        StopAllCoroutines();
     }
+
 
     private void Update()
     {
         UpdateState();
+    }
+
+    private void ResetEnemy()
+    {
+        myState = EnemyState.Walking;
+        canAttack = true;
+        StartCoroutine(SkillCooldownRoutine());
     }
 
     private void InitEventsSubscriptions()
@@ -80,8 +83,8 @@ public class DeathKnightAI : MonoBehaviour
 
     private void CastSkill()
     {
-        myController.MovementSpeedMultiplier = 1f + (speedPercentageAugment / 100);
-        StartCoroutine(SkillDurationRoutine());
+       
+        StartCoroutine(SkillCooldownRoutine());
     }
 
     private void Walking()
@@ -118,10 +121,4 @@ public class DeathKnightAI : MonoBehaviour
         CastSkill();
     }
 
-    private IEnumerator SkillDurationRoutine()
-    {
-        yield return new WaitForSeconds(skillDurationTime);
-        myController.MovementSpeedMultiplier = 1f;        
-        StartCoroutine(SkillCooldownRoutine());
-    }
 }

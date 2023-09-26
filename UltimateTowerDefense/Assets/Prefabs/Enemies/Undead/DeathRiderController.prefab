@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a306e1d3da90c4cbdd6c6054c7a14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillDurationTime: 5
+  skillDurationTime: 5000
   speedPercentageAugment: 300
   skillCooldownTime: 3
 --- !u!4 &6347131276537496718 stripped

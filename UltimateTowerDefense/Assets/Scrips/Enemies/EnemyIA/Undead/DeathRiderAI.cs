@@ -35,17 +35,22 @@ public class DeathRiderAI : MonoBehaviour
         ResetEnemy();
     }
 
-    private void ResetEnemy()
+    private void OnDisable()
     {
-        myState = EnemyState.Walking;
-        canAttack = true;
-        
-        StartCoroutine(SkillCooldownRoutine());
+        StopAllCoroutines();
     }
 
     private void Update()
     {
         UpdateState();
+    }
+
+    private void ResetEnemy()
+    {
+        myState = EnemyState.Walking;
+        canAttack = true;
+
+        StartCoroutine(SkillCooldownRoutine());
     }
 
     private void InitEventsSubscriptions()

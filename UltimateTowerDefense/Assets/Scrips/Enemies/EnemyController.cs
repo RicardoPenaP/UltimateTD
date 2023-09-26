@@ -212,6 +212,7 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
         currentShield = maxShield;
         currentMovementSpeed = defaultMovementSpeed;
+        movementSpeedMultiplier = 1;
         isAlive = true;
         canMove = true;
         UpdateUI();
