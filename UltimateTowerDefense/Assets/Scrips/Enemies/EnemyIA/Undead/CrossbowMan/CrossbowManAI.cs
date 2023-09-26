@@ -5,6 +5,10 @@ using EnemiesInterface;
 
 public class CrossbowManAI : MonoBehaviour,IEnemy
 {
+    [Header("Crossbow Man AI")]
+    [SerializeField] private CrossbowManAmmo ammoPrefab;
+    [SerializeField] private Transform shootPosition;
+
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
     private EnemyController myController;
