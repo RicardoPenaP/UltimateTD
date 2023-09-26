@@ -36,15 +36,33 @@ public class TowerAiming : MonoBehaviour
 
     private void UpdateTowerCanon()
     {
-        LookForTarget();
-
-        if (!target)
+        if (!HaveAValidTarged())
         {
+            LookForTarget();
             return;
         }
 
         AimTowerCanon();
         Attack();
+    }
+
+    private bool HaveAValidTarged()
+    {
+        if (!target)
+        {
+            return false;
+        }
+
+        if (!target.IsAlive)
+        {
+            return false;
+        }
+
+        if (Vector3.Distance( target.transform.position,transform.position) > myController.AttackRange)
+        {
+            return false;
+        }
+        return true;
     }
 
     private void Attack()
@@ -54,7 +72,7 @@ public class TowerAiming : MonoBehaviour
             return;
         }
         canAttack = false;
-         
+
         myWeapon.Attack(myController.AmmunitionPrefab,myController.AttackDamage,target.GetEnemyAimPoint());
         SetAttackCooldownTime(myController.AttackRatio);
         StartCoroutine(AttackCooldownTime());
@@ -67,30 +85,7 @@ public class TowerAiming : MonoBehaviour
 
     private void LookForTarget()
     {
-        if (!target)
-        {
-            SetTarget();
-            return;
-        }
-
-        if (!target.IsAlive)
-        {
-            SetTarget();
-            return;
-        }
-
-        if (Vector3.Distance(transform.position, target.transform.position) > myController.AttackRange)
-        {
-            SetTarget();
-            return;
-        }
-
-        if (!target.gameObject.activeInHierarchy)
-        {
-            SetTarget();
-            return;
-        }
-        
+        SetTarget();
     }
 
     private void SetTarget()
@@ -108,7 +103,7 @@ public class TowerAiming : MonoBehaviour
                 {
                     target = enemy;
                     return;
-                }                
+                }
             }
         }
 

@@ -44,9 +44,7 @@ public class EnemyController : MonoBehaviour
     private float distanceFromNextTileOffset;
 
     private bool isAlive = true;
-    private bool canAttack = true;
-    private bool startAttacking = false;
-
+    
     public List<Tile> Path { get { return path; } }    
    
     public float AttackRange { get { return myData.AttackRange; } }
@@ -117,7 +115,8 @@ public class EnemyController : MonoBehaviour
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
 
         if (myAnimatorHelper)
-        {   
+        {
+            myAnimatorHelper.OnDieAnimationStarted += () => { isAlive = false; };
             myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
         }
     }
@@ -205,7 +204,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Desactivate()
-    {
+    {       
         gameObject.SetActive(false);
     }
 
@@ -215,8 +214,6 @@ public class EnemyController : MonoBehaviour
         currentShield = maxShield;
         currentMovementSpeed = defaultMovementSpeed;
         isAlive = true;
-        canAttack = true;
-        startAttacking = false;
         canMove = true;
         UpdateUI();
     }
