@@ -6,7 +6,6 @@ using EnemiesInterface;
 public class DeathKnightAI : MonoBehaviour
 {
     [Header("Death Knight AI")]
-    [SerializeField, Min(0)] private float skillDurationTime = 1;
     [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
 
@@ -83,7 +82,7 @@ public class DeathKnightAI : MonoBehaviour
 
     private void CastSkill()
     {
-       
+        myController.RestShieldPercentage(shieldPercentageRecover);
         StartCoroutine(SkillCooldownRoutine());
     }
 

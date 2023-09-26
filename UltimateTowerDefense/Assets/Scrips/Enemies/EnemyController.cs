@@ -162,6 +162,18 @@ public class EnemyController : MonoBehaviour
         UpdateUI();
     }
 
+    public void RestShieldPercentage(int percentageRested)
+    {
+        if (!isAlive)
+        {
+            return;
+        }
+        int amountRested =  Mathf.RoundToInt( (float)(maxShield * percentageRested) / 100);
+        currentShield += amountRested;
+        currentShield = currentShield > maxShield ? maxShield : currentShield;
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
