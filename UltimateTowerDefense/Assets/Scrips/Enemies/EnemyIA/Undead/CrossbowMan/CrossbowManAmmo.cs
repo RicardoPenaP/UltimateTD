@@ -1,18 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrossbowManAmmo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Crossbow Man Ammo")]
+    [SerializeField,Min(0f)] private float movementSpeed;
+
+    private float range;
+    private Vector3 staringPos;
+
+    private void Awake()
     {
-        
+        staringPos = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        Move();
     }
+
+    private void Move()
+    {
+        transform.position += transform.forward * movementSpeed * Time.fixedDeltaTime;
+        if (Vector3.Distance(transform.position,staringPos)>= range)
+        {
+            SelfDestroy();
+        }
+    }
+
+    private void SelfDestroy()
+    {
+        gameObject.SetActive(false);
+        Destroy(this.gameObject);
+    }
+
+    public void SetRange(float range)
+    {
+        this.range = range;
+    }
+
 }

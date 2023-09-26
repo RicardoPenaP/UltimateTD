@@ -49,7 +49,7 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); Shoot(); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -104,6 +104,11 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
     {
         myController.SetCanMove(false);
         myState = EnemyState.Attacking;
+    }
+
+    private void Shoot()
+    {
+        Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<CrossbowManAmmo>().SetRange(myController.AttackRange);
     }
 
 
