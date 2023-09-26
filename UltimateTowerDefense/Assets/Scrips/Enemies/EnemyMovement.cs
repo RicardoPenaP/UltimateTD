@@ -21,6 +21,10 @@ public class EnemyMovement : MonoBehaviour
         myController = GetComponent<EnemyController>();
         myAnimator = GetComponentInChildren<Animator>();
     }
+    private void OnEnable()
+    {
+        ResetWalkthroughPath();
+    }
 
     private void Start()
     {
@@ -60,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
                 return;
             }
         }
-
+       
         transform.position += movementDirection * myController.CurrentMovementSpeed * Time.fixedDeltaTime;
         myAnimator.SetBool(WALK_HASH, true);
     }
