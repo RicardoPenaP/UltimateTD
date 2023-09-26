@@ -20,8 +20,6 @@ public class DeathRiderAI : MonoBehaviour
     private EnemyState myState;
 
     private bool canAttack = true;
-    private bool canCastSkill = false;
-
 
     private void Awake()
     {
@@ -41,7 +39,7 @@ public class DeathRiderAI : MonoBehaviour
     {
         myState = EnemyState.Walking;
         canAttack = true;
-        canCastSkill = false;
+        
         StartCoroutine(SkillCooldownRoutine());
     }
 

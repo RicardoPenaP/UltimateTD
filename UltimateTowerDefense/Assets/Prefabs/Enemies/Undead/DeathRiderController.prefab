@@ -97,6 +97,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+--- !u!1 &3504167046791911096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3906062701849726703, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+  m_PrefabInstance: {fileID: 474094063676463191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8917734084355398461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3504167046791911096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a306e1d3da90c4cbdd6c6054c7a14c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillDurationTime: 5
+  speedPercentageAugment: 300
+  skillCooldownTime: 3
 --- !u!4 &6347131276537496718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6809961939054402777, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
