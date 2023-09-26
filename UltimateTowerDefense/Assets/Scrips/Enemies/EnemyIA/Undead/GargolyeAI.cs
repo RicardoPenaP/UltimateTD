@@ -10,6 +10,7 @@ public class GargolyeAI : MonoBehaviour
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    private readonly int CAST_SKIL_HASH = Animator.StringToHash("CastSkil");
 
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -20,7 +21,8 @@ public class GargolyeAI : MonoBehaviour
 
     private bool canAttack = true;
     private bool canCastSkill = false;
-   
+
+    private int skillDamage;
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
@@ -40,7 +42,6 @@ public class GargolyeAI : MonoBehaviour
         StopAllCoroutines();
     }
 
-
     private void Update()
     {
         UpdateState();
@@ -50,20 +51,26 @@ public class GargolyeAI : MonoBehaviour
     {
         myState = EnemyState.Walking;
         canAttack = true;
+        skillDamage = Mathf.RoundToInt( (float)myController.DamageToStronghold * (1 + (float)damageToStrongholdPercentageAugment));
         StartCoroutine(SkillCooldownRoutine());
     }
 
     private void InitEventsSubscriptions()
     {
-        SetAttackAnimationsEvents();
+        SetAnimationsEvents();
         myMovement.OnPathEnded += PathEnded;
     }
 
-    private void SetAttackAnimationsEvents()
+    private void SetAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
         myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
+
+        myAnimatorHelper.OnSkilCastStarted += () => { canAttack = false; };
+        myAnimatorHelper.OnSkilCastPerformed += () => { HealthMananger.Instance.TakeDamage(skillDamage); };
+        myAnimatorHelper.OnSkilCastEnded += () => { StartCoroutine(SkillCooldownRoutine()); };
+        myAnimatorHelper.OnSkilCastEnded += () => { canAttack = true; };
     }
 
     private void UpdateState()
@@ -82,10 +89,10 @@ public class GargolyeAI : MonoBehaviour
     }
 
     private void CastSkill()
-    {       
-        StartCoroutine(SkillCooldownRoutine());
+    {
+        canCastSkill = false;
+        myAnimator.SetTrigger(CAST_SKIL_HASH);        
     }
-
 
     private void Walking()
     {
@@ -96,18 +103,19 @@ public class GargolyeAI : MonoBehaviour
     }
 
     private void Attacking()
-    {       
-        if (canCastSkill)
-        {
-            myState = EnemyState.CastingSkill;
-            CastSkill();
-            return;
-        }
-       
+    {
         if (!canAttack)
         {
             return;
         }
+
+        if (canCastSkill)
+        {           
+            CastSkill();
+            return;
+        }
+       
+        
         Attack();
     }
 
