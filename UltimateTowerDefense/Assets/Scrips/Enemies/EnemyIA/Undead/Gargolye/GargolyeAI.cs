@@ -9,6 +9,7 @@ public class GargolyeAI : MonoBehaviour
     [SerializeField] private GargolyeColdFireBall coldFireBallPrefab;
     [SerializeField, Min(0)] private int damageToStrongholdPercentageAugment = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
+    [SerializeField] private Transform launchPos;
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int CAST_SKIL_HASH = Animator.StringToHash("Skil");
@@ -67,7 +68,7 @@ public class GargolyeAI : MonoBehaviour
         myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
                 
-        myAnimatorHelper.OnSkilCastPerformed += () => { HealthMananger.Instance.TakeDamage(skillDamage); };
+        myAnimatorHelper.OnSkilCastPerformed += () => { HealthMananger.Instance.TakeDamage(skillDamage); LaunchColdFireball(); };
         myAnimatorHelper.OnSkilCastEnded += () => { StartCoroutine(SkillCooldownRoutine()); };
         myAnimatorHelper.OnSkilCastEnded += () => { canAttack = true; };
     }
@@ -91,6 +92,11 @@ public class GargolyeAI : MonoBehaviour
     {
         canCastSkill = false;
         myAnimator.SetTrigger(CAST_SKIL_HASH);        
+    }
+
+    private void LaunchColdFireball()
+    {
+        Instantiate(coldFireBallPrefab, launchPos.position, launchPos.rotation, transform).GetComponent<GargolyeColdFireBall>().SetRange(myController.AttackRange);
     }
 
     private void Walking()
