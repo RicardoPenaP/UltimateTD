@@ -201,5 +201,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe108600c7a76946aa75d988fd608b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldPercentageRecover: 50
-  skillCooldownTime: 1
+  shieldPercentageRecover: 30
+  skillCooldownTime: 3
