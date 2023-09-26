@@ -20,6 +20,8 @@ public class TowerController : MonoBehaviour,IBuilding
     public float AttackRatio { get { return myInfo.currentAttackRatio; } }
     public float AttackRange { get { return myInfo.currentAttackRange; } }
 
+    public float BaseAttackRange { get { return myData.BaseAttackRange; } }
+
     //Debugging Tools
     private void OnDrawGizmosSelected()
     {
