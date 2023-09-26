@@ -49,6 +49,8 @@ public class EnemyController : MonoBehaviour
 
     public List<Tile> Path { get { return path; } }    
    
+    public float AttackRange { get { return myData.AttackRange; } }
+    public int DamageToStronghold { get { return myData.BaseDamageToStronghold; } }
     public float CurrentMovementSpeed { get { return currentMovementSpeed * movementSpeedMultiplier; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
 
@@ -82,11 +84,6 @@ public class EnemyController : MonoBehaviour
         SetLevel(level);
     }
 
-    private void Update()
-    {
-        InRangeForAttack();
-    }
-
     private void OnDestroy()
     {
         DeInitHandlers();
@@ -100,21 +97,10 @@ public class EnemyController : MonoBehaviour
             myDamageHandler.OnTakeDamage += TakeDamage;
             myDamageHandler.OnHealDamage += HealDamage;
         }
-                
-        if (myMovement)
-        {
-            myMovement.OnPathEnded += PathEnded;
-        }
-
+        
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         if (myAnimatorHelper)
         {
-            myAnimatorHelper.OnAttackAnimationStarted += AttackStarted;
-
-            myAnimatorHelper.OnAttackAnimationPerformed += DealDamageToStronghold;
-
-            myAnimatorHelper.OnAttackAnimationEnded += AttackEnded;
-
             myAnimatorHelper.OnDieAnimationEnded += Desactivate;
         }
     }
@@ -128,34 +114,14 @@ public class EnemyController : MonoBehaviour
             myDamageHandler.OnHealDamage -= HealDamage;
         }
         
-        if (myMovement)
-        {
-            myMovement.OnPathEnded -= PathEnded;
-        }
-
         EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
 
         if (myAnimatorHelper)
-        {
-            myAnimatorHelper.OnAttackAnimationStarted -= AttackStarted;
-
-            myAnimatorHelper.OnAttackAnimationPerformed -= DealDamageToStronghold;
-
-            myAnimatorHelper.OnAttackAnimationEnded -= AttackEnded;
-
+        {   
             myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
         }
     }
 
-    private void AttackStarted()
-    {
-        canAttack = false;
-    }
-
-    private void AttackEnded()
-    {
-        canAttack = true;
-    }
 
     private void TakeDamage(int damageAmount)
     {
@@ -198,24 +164,6 @@ public class EnemyController : MonoBehaviour
         UpdateUI();
     }
 
-    private void InRangeForAttack()
-    {
-        if (!myData.IsRanged)
-        {
-            return;
-        }
-
-        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myData.AttackRange && !startAttacking)
-        {
-            PathEnded();
-        }
-
-        if (startAttacking)
-        {
-            Attack();
-        }
-    }
-
     private void UpdateUI()
     {
         OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
@@ -247,33 +195,13 @@ public class EnemyController : MonoBehaviour
         defaultMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
         goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
     }
-
-    private void PathEnded()
-    {
-        canMove = false;
-        startAttacking = true;
-    }
-
-    private void Attack()
-    {
-        if (!canAttack)
-        {
-            return;
-        }
-        myAnimator.SetTrigger(ATTACK_HASH);
-    }
-
+    
     private void Die()
     {
         myAnimator.SetTrigger(DIE_HASH);
         OnDie?.Invoke();
         isAlive = false;
         BankMananger.Instance.AddGold(goldReward);
-    }
-
-    private void DealDamageToStronghold()
-    {
-        HealthMananger.Instance.TakeDamage(damageToStronghold);
     }
 
     private void Desactivate()
@@ -289,6 +217,12 @@ public class EnemyController : MonoBehaviour
         isAlive = true;
         canAttack = true;
         startAttacking = false;
+        canMove = true;
         UpdateUI();
+    }
+
+    public void SetCanMove(bool state)
+    {
+        canMove = state;
     }
 }

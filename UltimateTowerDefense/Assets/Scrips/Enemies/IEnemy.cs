@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace EnemiesInterface
 {
-    public enum EnemyState { None, Walking, Attacking }
+    public enum EnemyState { None, Walking, CastingSkill,Attacking }
     public interface IEnemy
     {
-        public void SetPath(List<Tile> path);
-        public void Die();
+        
     }
 }
 
