@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class CrossbowManAI : MonoBehaviour
+public class DeathRiderAI : MonoBehaviour
 {
-    [Header("Crossbow Man AI")]
-    [SerializeField] private CrossbowManAmmo ammoPrefab;
-    [SerializeField] private Transform shootPosition;
+    [Header("Death Knight AI")]
+    [SerializeField, Min(0)] private float skillDurationTime = 1;
+    [SerializeField, Min(0)] private int speedPercentageAugment = 100;
+    [SerializeField, Min(0)] private float skillCooldownTime = 3;
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
     private EnemyController myController;
-    private EnemyAnimatorHelper myAnimatorHelper;    
+    private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovement myMovement;
     private Animator myAnimator;
 
     private EnemyState myState;
 
     private bool canAttack = true;
+    private bool canCastSkill = false;
+
 
     private void Awake()
     {
@@ -31,8 +34,15 @@ public class CrossbowManAI : MonoBehaviour
 
     private void OnEnable()
     {
+        ResetEnemy();
+    }
+
+    private void ResetEnemy()
+    {
         myState = EnemyState.Walking;
         canAttack = true;
+        canCastSkill = false;
+        StartCoroutine(SkillCooldownRoutine());
     }
 
     private void Update()
@@ -49,7 +59,7 @@ public class CrossbowManAI : MonoBehaviour
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); Shoot(); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -57,11 +67,9 @@ public class CrossbowManAI : MonoBehaviour
     {
         switch (myState)
         {
-            case EnemyState.None:
-                break;
             case EnemyState.Walking:
                 Walking();
-                break;         
+                break;
             case EnemyState.Attacking:
                 Attacking();
                 break;
@@ -70,11 +78,17 @@ public class CrossbowManAI : MonoBehaviour
         }
     }
 
+    private void CastSkill()
+    {
+        myController.MovementSpeedMultiplier = 1f + (speedPercentageAugment / 100);
+        StartCoroutine(SkillDurationRoutine());
+    }
+
     private void Walking()
-    {        
-        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myController.AttackRange)
+    {
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
         {
-            PathEnded();            
+            PathEnded();
         }
     }
 
@@ -98,10 +112,16 @@ public class CrossbowManAI : MonoBehaviour
         myState = EnemyState.Attacking;
     }
 
-    private void Shoot()
+    private IEnumerator SkillCooldownRoutine()
     {
-        Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<CrossbowManAmmo>().SetRange(myController.AttackRange);
+        yield return new WaitForSeconds(skillCooldownTime);
+        CastSkill();
     }
 
-
+    private IEnumerator SkillDurationRoutine()
+    {
+        yield return new WaitForSeconds(skillDurationTime);
+        myController.MovementSpeedMultiplier = 1f;
+        StartCoroutine(SkillCooldownRoutine());
+    }
 }

@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 movementDirection;
 
     private readonly int WALK_HASH = Animator.StringToHash("Walk");
+    private readonly int SPEED_MULTIPLIER_HASH = Animator.StringToHash("SpeedMultiplier");
 
     private void Awake()
     {
@@ -67,6 +68,7 @@ public class EnemyMovement : MonoBehaviour
        
         transform.position += movementDirection * myController.CurrentMovementSpeed * Time.fixedDeltaTime;
         myAnimator.SetBool(WALK_HASH, true);
+        myAnimator.SetFloat(SPEED_MULTIPLIER_HASH, myController.MovementSpeedMultiplier);
     }
 
     private void SetMovementDirection()

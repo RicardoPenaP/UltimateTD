@@ -31,8 +31,6 @@ public class EnemyController : MonoBehaviour
     private Animator myAnimator;
     private EnemyMovement myMovement;
 
-    private EnemyStatus myStatus;
-
     private int maxHealth;  
 
     private int maxShield;
@@ -50,6 +48,7 @@ public class EnemyController : MonoBehaviour
     public float AttackRange { get { return myData.AttackRange; } }
     public int DamageToStronghold { get { return myData.BaseDamageToStronghold; } }
     public float CurrentMovementSpeed { get { return currentMovementSpeed * movementSpeedMultiplier; } }
+    public float MovementSpeedMultiplier { get { return movementSpeedMultiplier; } set { movementSpeedMultiplier = value; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
 
     public bool IsAlive { get { return isAlive; } }
