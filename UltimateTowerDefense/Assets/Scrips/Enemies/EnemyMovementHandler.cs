@@ -7,6 +7,11 @@ using AnimatorHandler;
 [RequireComponent(typeof(EnemyController))]
 public class EnemyMovementHandler : MonoBehaviour
 {
+    [Header("Enemy Movement Handler")]
+    [Tooltip("The offset distance that the enemy can consider that is on the next tile," +
+    " higher values allows higher movement speed but can cause tearing on the movement")]
+    [SerializeField] private float distanceFromNextTileOffset = 0.08f;
+
     public event Action OnPathEnded;
     private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHandler myAnimatorHandler;
@@ -16,7 +21,6 @@ public class EnemyMovementHandler : MonoBehaviour
     private int pathIndex = 0;
     private Vector3 movementDirection;
 
-    private float distanceFromNextTileOffset;
     private float currentMovementSpeed;
     private float movementSpeedMultiplier;
 
@@ -113,8 +117,13 @@ public class EnemyMovementHandler : MonoBehaviour
         canMove = state;
     }
 
-    public void InitializeMovementHandler()
+    public void InitializeMovementHandler(float baseMovementSpeed)
     {
+        currentMovementSpeed = baseMovementSpeed;
+    }
 
+    public void SetMovementSpeedMultiplier(float movementSpeedMultiplier)
+    {
+        this.movementSpeedMultiplier = movementSpeedMultiplier;
     }
 }

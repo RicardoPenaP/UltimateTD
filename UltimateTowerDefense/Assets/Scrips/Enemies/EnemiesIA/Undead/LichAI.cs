@@ -94,7 +94,7 @@ public class LichAI : MonoBehaviour
     private void CastSkill()
     {
         canAttack = false;
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myAnimator.SetTrigger(SKILL_HASH);        
     }
 
@@ -127,7 +127,7 @@ public class LichAI : MonoBehaviour
 
     private void PathEnded()
     {
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
 
@@ -151,7 +151,7 @@ public class LichAI : MonoBehaviour
     private void SkilCasted()
     {
         canAttack = true;
-        myController.SetCanMove(true);
+        myMovement.SetCanMove(true);
         StartCoroutine(SkillCooldownRoutine());
     }
 

@@ -94,7 +94,7 @@ public class BaseMeleeAI : MonoBehaviour
 
     private void PathEnded()
     {
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
 

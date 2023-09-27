@@ -22,35 +22,13 @@ public class EnemyController : MonoBehaviour
     
     public event Action OnDie;
 
-    private List<Tile> path;
-    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
 
-    private int maxHealth;  
-
-    private int maxShield;
-    
-
-    private float defaultMovementSpeed;
-    private float movementSpeedMultiplier;
-    
-    private float distanceFromNextTileOffset;
-
-    private bool isAlive = true;
-    
-    public List<Tile> Path { get { return path; } }    
-   
     public float AttackRange { get { return myData.AttackRange; } }
     public int DamageToStronghold { get { return damageToStronghold; } }
     public int CurrentLevel { get { return level; } }
-    public float CurrentMovementSpeed { get { return currentMovementSpeed * movementSpeedMultiplier; } }
-    public float MovementSpeedMultiplier { get { return movementSpeedMultiplier; } set { movementSpeedMultiplier = value; } }
-    public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
-
-    public bool IsAlive { get { return isAlive; } }
-    public bool CanMove { get { return canMove; } }
-
+   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -61,7 +39,6 @@ public class EnemyController : MonoBehaviour
     {        
         myMovement = GetComponent<EnemyMovementHandler>();
         myHealthHandler = GetComponent<EnemyHealthHandler>();
-        myAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
     }
 
     private void OnEnable()
@@ -75,21 +52,21 @@ public class EnemyController : MonoBehaviour
     }
 
     private void Start()
-    {             
-        movementSpeedMultiplier = 1;
-        distanceFromNextTileOffset = myData.DistanceFromNextileOffset;
+    {    
         SetLevel(level);
     }
 
     private void InitializeHealthHandler()
     {
-        myHealthHandler.InitializeHandler(maxHealth, maxShield);
+        myHealthHandler.InitializeHandler(myData.BaseHealth, myData.BaseShield);
     }
-
+    private void InitializeMovementHandler()
+    {
+        myMovement.InitializeMovementHandler(myData.BaseMovementSpeed);
+    }
     
     public void SetPath(List<Tile> path)
-    {
-        this.path = path;
+    {       
         myMovement.SetPath(path);
     }
 
@@ -107,29 +84,18 @@ public class EnemyController : MonoBehaviour
 
     private void SetLevelStats()
     {
-        maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseHealth, level));
-        maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseShield, level));
-        damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseDamageToStronghold, level));
-        defaultMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
-        goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
+        //maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseHealth, level));
+        //maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseShield, level));
+        //damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseDamageToStronghold, level));
+        //defaultMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
+        //goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
     }
     
-    private void Desactivate()
-    {       
-        gameObject.SetActive(false);
-    }
-
     private void InitializeEnemy()
     {
-        InitializeHealthHandler();        
-        currentMovementSpeed = defaultMovementSpeed;
-        movementSpeedMultiplier = 1;        
-        canMove = true;
+        InitializeHealthHandler();
+        InitializeMovementHandler();
         
     }
 
-    public void SetCanMove(bool state)
-    {
-        canMove = state;
-    }
 }

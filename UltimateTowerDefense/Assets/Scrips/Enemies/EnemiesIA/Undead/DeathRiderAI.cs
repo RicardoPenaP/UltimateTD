@@ -83,7 +83,7 @@ public class DeathRiderAI : MonoBehaviour
 
     private void CastSkill()
     {
-        myController.MovementSpeedMultiplier = 1f + (speedPercentageAugment / 100);
+        myMovement.SetMovementSpeedMultiplier(1f + (speedPercentageAugment / 100));
         StartCoroutine(SkillDurationRoutine());
     }
 
@@ -111,7 +111,7 @@ public class DeathRiderAI : MonoBehaviour
 
     private void PathEnded()
     {
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
 
@@ -124,7 +124,7 @@ public class DeathRiderAI : MonoBehaviour
     private IEnumerator SkillDurationRoutine()
     {
         yield return new WaitForSeconds(skillDurationTime);
-        myController.MovementSpeedMultiplier = 1f;
+        myMovement.SetMovementSpeedMultiplier(1f);
         StartCoroutine(SkillCooldownRoutine());
     }
 }

@@ -116,7 +116,7 @@ public class DeathKnightAI : MonoBehaviour
 
     private void PathEnded()
     {
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
 

@@ -132,7 +132,7 @@ public class GargolyeAI : MonoBehaviour
 
     private void PathEnded()
     {
-        myController.SetCanMove(false);
+        myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
 
