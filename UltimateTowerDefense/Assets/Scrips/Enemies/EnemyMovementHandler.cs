@@ -32,11 +32,6 @@ public class EnemyMovementHandler : MonoBehaviour
         meshTransform = GetComponentInChildren<Animator>().transform;
     }
 
-    private void OnEnable()
-    {
-        ResetWalkthroughPath();
-    }
-
     private void Start()
     {
         SetMovementDirection();
@@ -91,13 +86,9 @@ public class EnemyMovementHandler : MonoBehaviour
         meshTransform.LookAt(path[pathIndex].GetPosition());
     }
 
-    public void ResetWalkthroughPath()
-    {
-        pathIndex = 0;        
-    }
-
     public void SetPath(List<Tile> newPath)
     {
+        pathIndex = 0;
         path = newPath;
     }
 
@@ -120,6 +111,7 @@ public class EnemyMovementHandler : MonoBehaviour
     public void InitializeMovementHandler(float baseMovementSpeed)
     {
         currentMovementSpeed = baseMovementSpeed;
+        movementSpeedMultiplier = 1;
     }
 
     public void SetMovementSpeedMultiplier(float movementSpeedMultiplier)

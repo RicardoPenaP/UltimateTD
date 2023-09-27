@@ -19,6 +19,8 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
     private EnemyState myState;
 
     private bool canAttack = true;
+    private float attackRange;
+    private int damageToStronghold;
 
     private void Awake()
     {
@@ -49,7 +51,7 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); Shoot(); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); Shoot(); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -72,7 +74,7 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
 
     private void Walking()
     {        
-        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= myController.AttackRange)
+        if (Vector3.Distance(transform.position,HealthMananger.Instance.GetStrongholdPos())<= attackRange)
         {
             PathEnded();            
         }
@@ -100,12 +102,13 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
 
     private void Shoot()
     {
-        Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<CrossbowManAmmo>().SetRange(myController.AttackRange);
+        Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<CrossbowManAmmo>().SetRange(attackRange);
     }
 
     public void InitializeEnemy(float attackRange, int damageToStronghold)
     {
-
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
     }
 
 

@@ -27,6 +27,9 @@ public class LichAI : MonoBehaviour,IEnemy
 
     private bool canAttack = true;
 
+    private float attackRange;
+    private int damageToStronghold;
+
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
@@ -68,7 +71,7 @@ public class LichAI : MonoBehaviour,IEnemy
     private void SetAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
 
         myAnimatorHelper.OnSkilCastPerformed += SummonMinions;
@@ -105,7 +108,7 @@ public class LichAI : MonoBehaviour,IEnemy
 
     private void Walking()
     {
-        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= attackRange)
         {
             PathEnded();
         }
@@ -174,10 +177,11 @@ public class LichAI : MonoBehaviour,IEnemy
         }
        
     }
-
+   
     public void InitializeEnemy(float attackRange, int damageToStronghold)
     {
-
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
     }
 
 

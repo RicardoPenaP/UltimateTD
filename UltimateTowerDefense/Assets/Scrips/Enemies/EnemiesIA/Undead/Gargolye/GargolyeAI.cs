@@ -23,8 +23,10 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private bool canAttack = true;
     private bool canCastSkill = false;
-
     private int skillDamage;
+    private float attackRange;
+    private int damageToStronghold;
+
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
@@ -53,7 +55,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
     {
         myState = EnemyState.Walking;
         canAttack = true;
-        skillDamage = Mathf.RoundToInt( (float)myController.DamageToStronghold * (1 + (float)damageToStrongholdPercentageAugment/100));
+        skillDamage = Mathf.RoundToInt( (float)damageToStronghold * (1 + (float)damageToStrongholdPercentageAugment/100));
         StartCoroutine(SkillCooldownRoutine());
     }
 
@@ -65,7 +67,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private void SetAnimationsEvents()
     {
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
                 
         myAnimatorHelper.OnSkilCastPerformed += () => { HealthMananger.Instance.TakeDamage(skillDamage); LaunchColdFireball(); };
@@ -96,12 +98,12 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private void LaunchColdFireball()
     {
-        Instantiate(coldFireBallPrefab, launchPos.position, launchPos.rotation, transform).GetComponent<GargolyeColdFireBall>().SetRange(myController.AttackRange);
+        Instantiate(coldFireBallPrefab, launchPos.position, launchPos.rotation, transform).GetComponent<GargolyeColdFireBall>().SetRange(attackRange);
     }
 
     private void Walking()
     {
-        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= attackRange)
         {
             PathEnded();
         }
@@ -144,7 +146,8 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     public void InitializeEnemy(float attackRange, int damageToStronghold)
     {
-
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
     }
 
 }

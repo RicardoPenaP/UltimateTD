@@ -22,6 +22,8 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
     private EnemyState myState;
 
     private bool canAttack = true;
+    private float attackRange;
+    private int damageToStronghold;
 
     private void Awake()
     {
@@ -66,7 +68,7 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold);};
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold);};
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -94,7 +96,7 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
 
     private void Walking()
     {
-        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= attackRange)
         {
             PathEnded();
         }
@@ -128,7 +130,9 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
 
     public void InitializeEnemy(float attackRange, int damageToStronghold)
     {
-
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
     }
+
 
 }

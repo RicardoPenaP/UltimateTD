@@ -9,20 +9,20 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
-    [SerializeField] private bool canMove = true;
 
     public event Action OnDie;
 
-    private int level;
-    private int damageToStronghold;
-    private int goldReward;
-
+    private IEnemy myAI;
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
-    private IEnemy myAI;
 
-    public float AttackRange { get { return myData.AttackRange; } }
-    public int DamageToStronghold { get { return damageToStronghold; } }
+    private int level;
+
+    private int currentMaxHealth;
+    private int currentMaxShield;
+    private float currentMovementSpeed;
+    private int currentGoldReward;
+    private int currentDamageToStronghold;
     public int CurrentLevel { get { return level; } }
    
     private void OnDrawGizmos()
@@ -35,10 +35,11 @@ public class EnemyController : MonoBehaviour
     {        
         myMovement = GetComponent<EnemyMovementHandler>();
         myHealthHandler = GetComponent<EnemyHealthHandler>();
+        myAI = GetComponent<IEnemy>();
     }
 
     private void OnEnable()
-    {        
+    {
         InitializeEnemy();
     }
 
@@ -46,24 +47,20 @@ public class EnemyController : MonoBehaviour
     {
         transform.localPosition = Vector3.zero;
         OnDie?.Invoke();
-    }
-
-    private void Start()
-    {    
-        SetLevel(level);
+        BankMananger.Instance.AddGold(currentGoldReward);
     }
 
     private void InitializeHealthHandler()
     {
-        myHealthHandler.InitializeHandler(myData.BaseHealth, myData.BaseShield);
+        myHealthHandler.InitializeHandler(currentMaxHealth, currentMaxShield);
     }
     private void InitializeMovementHandler()
     {
-        myMovement.InitializeMovementHandler(myData.BaseMovementSpeed);
+        myMovement.InitializeMovementHandler(currentMovementSpeed);
     }
     private void InitializeMyAI()
     {
-        myAI.InitializeEnemy(myData.AttackRange,myData.BaseDamageToStronghold);
+        myAI.InitializeEnemy(myData.AttackRange,currentDamageToStronghold);
     }
     
     public void SetPath(List<Tile> path)
@@ -77,7 +74,6 @@ public class EnemyController : MonoBehaviour
         {
             return; 
         }
-
         this.level = level;
         SetLevelStats();
         InitializeEnemy();
@@ -85,11 +81,12 @@ public class EnemyController : MonoBehaviour
 
     private void SetLevelStats()
     {
-        //maxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseHealth, level));
-        //maxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseShield, level));
-        //damageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseDamageToStronghold, level));
-        //defaultMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
-        //goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
+        currentMaxHealth = Mathf.RoundToInt( myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseHealth, level));
+        currentMaxShield = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseShield, level));
+        currentDamageToStronghold = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseDamageToStronghold, level));
+        currentMovementSpeed = myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseMovementSpeed, level);
+        currentGoldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
+        InitializeEnemy();
     }
     
     private void InitializeEnemy()

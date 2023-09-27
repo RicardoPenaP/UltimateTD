@@ -19,6 +19,8 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
     private EnemyState myState;
 
     private bool canAttack = true;
+    private float attackRange;
+    private int damageToStronghold;
 
     private void Awake()
     {
@@ -72,7 +74,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Walking()
     {
-        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= attackRange)
         {
             PathEnded();
         }
@@ -102,12 +104,14 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
     private void Shoot()
     {
         SiegeEngineAmmo currentAmmo = Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform);
-        currentAmmo.SetRange(myController.AttackRange);
-        currentAmmo.OnInpact += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
+        currentAmmo.SetRange(attackRange);
+        currentAmmo.OnInpact += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
     }
 
     public void InitializeEnemy(float attackRange, int damageToStronghold)
     {
-
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
     }
+
 }
