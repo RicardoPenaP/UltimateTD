@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using AnimatorHandler;
 
 [RequireComponent(typeof(EnemyMovement),typeof(EnemyDamageHandler))]
 public class EnemyController : MonoBehaviour
@@ -23,10 +24,8 @@ public class EnemyController : MonoBehaviour
     public UpdateEnemyUIDelegate OnUIUpdate;
     public event Action OnDie;
 
-    private readonly int DIE_HASH = Animator.StringToHash("Die");
-
     private List<Tile> path;
-    private Animator myAnimator;
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyMovement myMovement;
 
     private int maxHealth;  
@@ -63,7 +62,7 @@ public class EnemyController : MonoBehaviour
     {        
         myMovement = GetComponent<EnemyMovement>();
         InitHandlers();
-        myAnimator = GetComponentInChildren<Animator>();
+        myAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
     }
 
     private void OnEnable()
@@ -210,7 +209,7 @@ public class EnemyController : MonoBehaviour
     
     private void Die()
     {
-        myAnimator.SetTrigger(DIE_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Die);
         OnDie?.Invoke();
         isAlive = false;
         BankMananger.Instance.AddGold(goldReward);
