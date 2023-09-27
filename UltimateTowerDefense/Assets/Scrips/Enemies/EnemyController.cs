@@ -14,14 +14,14 @@ public class EnemyController : MonoBehaviour
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
+    //For testing
+    [SerializeField] private int level;
 
-    private int level;
-
-    private int currentMaxHealth;
-    private int currentMaxShield;
-    private float currentMovementSpeed;
-    private int currentGoldReward;
-    private int currentDamageToStronghold;
+    [SerializeField] private int currentMaxHealth;
+    [SerializeField] private int currentMaxShield;
+    [SerializeField] private float currentMovementSpeed;
+    [SerializeField] private int currentGoldReward;
+    [SerializeField] private int currentDamageToStronghold;
     public int CurrentLevel { get { return level; } }
    
     private void OnDrawGizmos()

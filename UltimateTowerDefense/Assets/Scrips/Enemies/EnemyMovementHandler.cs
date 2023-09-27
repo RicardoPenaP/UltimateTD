@@ -22,7 +22,7 @@ public class EnemyMovementHandler : MonoBehaviour
     private Vector3 movementDirection;
 
     private float currentMovementSpeed;
-    private float movementSpeedMultiplier;
+    [SerializeField] private float movementSpeedMultiplier;
 
     private bool canMove = true;
     private void Awake()
@@ -71,7 +71,7 @@ public class EnemyMovementHandler : MonoBehaviour
             }
         }
        
-        transform.position += movementDirection * currentMovementSpeed * Time.fixedDeltaTime;
+        transform.position += movementDirection * currentMovementSpeed * movementSpeedMultiplier * Time.fixedDeltaTime;
         myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, true);
         myAnimatorHandler.ChangeAnimationSpeed(AnimationWithSpeedModifiers.Walk, movementSpeedMultiplier);
     }
