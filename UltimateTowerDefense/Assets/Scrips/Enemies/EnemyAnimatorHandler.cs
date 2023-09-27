@@ -27,7 +27,7 @@ namespace AnimatorHandler
         private static readonly int DIE_HASH = Animator.StringToHash("Die");
         private static readonly int WALK_HASH = Animator.StringToHash("Walk");
 
-        private static readonly int WALK_SPEED_MODIFIER_HASH = Animator.StringToHash("");
+        private static readonly int WALK_SPEED_MULTIPLIER_HASH = Animator.StringToHash("WalkMultiplier");
 
         private Animator myAnimator;
         private void Awake()
@@ -73,7 +73,7 @@ namespace AnimatorHandler
             switch (animationToModify)
             {
                 case AnimationWithSpeedModifiers.Walk:
-                    myAnimator.SetFloat(WALK_SPEED_MODIFIER_HASH, value);
+                    myAnimator.SetFloat(WALK_SPEED_MULTIPLIER_HASH, value);
                     break;
                 default:
                     break;

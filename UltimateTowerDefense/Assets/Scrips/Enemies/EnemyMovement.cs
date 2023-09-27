@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using AnimatorHandler;
 
 [RequireComponent(typeof(EnemyController))]
 public class EnemyMovement : MonoBehaviour
 {
     public event Action OnPathEnded;
     private EnemyController myController;
-    private Animator myAnimator;
+    private EnemyAnimatorHandler myAnimatorHandler;
+    private Transform meshTransform;
     private List<Tile> path;    
    
     private int pathIndex = 0;
     private Vector3 movementDirection;
 
-    private readonly int WALK_HASH = Animator.StringToHash("Walk");
-    private readonly int SPEED_MULTIPLIER_HASH = Animator.StringToHash("SpeedMultiplier");
 
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
-        myAnimator = GetComponentInChildren<Animator>();
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
+        meshTransform = GetComponentInChildren<Animator>().transform;
     }
     private void OnEnable()
     {
@@ -38,8 +39,8 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void Move()
-    {       
-        myAnimator.SetBool(WALK_HASH, false);
+    {
+        myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, false);
         if (!myController.CanMove || !myController.IsAlive)
         {            
             return;
@@ -67,8 +68,8 @@ public class EnemyMovement : MonoBehaviour
         }
        
         transform.position += movementDirection * myController.CurrentMovementSpeed * Time.fixedDeltaTime;
-        myAnimator.SetBool(WALK_HASH, true);
-        myAnimator.SetFloat(SPEED_MULTIPLIER_HASH, myController.MovementSpeedMultiplier);
+        myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, true);
+        myAnimatorHandler.ChangeAnimationSpeed(AnimationWithSpeedModifiers.Walk, myController.MovementSpeedMultiplier);
     }
 
     private void SetMovementDirection()
@@ -78,7 +79,7 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
         movementDirection = (path[pathIndex].GetPosition() - transform.position).normalized;
-        myAnimator.transform.LookAt(path[pathIndex].GetPosition());
+        meshTransform.LookAt(path[pathIndex].GetPosition());
     }
 
     public void ResetWalkthroughPath()
