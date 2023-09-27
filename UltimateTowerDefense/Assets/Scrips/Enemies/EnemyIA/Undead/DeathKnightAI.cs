@@ -5,9 +5,10 @@ using EnemiesInterface;
 
 public class DeathKnightAI : MonoBehaviour
 {
-    [Header("Death Knight AI")]
+    [Header("Death Knight AI")]    
     [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
+    
 
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
@@ -15,6 +16,7 @@ public class DeathKnightAI : MonoBehaviour
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovement myMovement;
     private Animator myAnimator;
+    private ParticleSystem skillVFX;
 
     private EnemyState myState;
 
@@ -26,6 +28,7 @@ public class DeathKnightAI : MonoBehaviour
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovement>();
         myAnimator = GetComponentInChildren<Animator>();
+        skillVFX = GetComponentInChildren<ParticleSystem>();
         InitEventsSubscriptions();
     }
 
@@ -82,6 +85,7 @@ public class DeathKnightAI : MonoBehaviour
 
     private void CastSkill()
     {
+        skillVFX.Play();
         myController.RestShieldPercentage(shieldPercentageRecover);
         StartCoroutine(SkillCooldownRoutine());
     }
