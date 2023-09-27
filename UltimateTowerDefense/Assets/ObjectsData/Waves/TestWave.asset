@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestWave
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - enemyPrefabReference: {fileID: 2293519425157681360, guid: 8737147780bfca64c9de0f13a4ae149c, type: 3}
-    amountToSpawn: 3
-    timeBetweenSpawn: 15
+  - enemyPrefabReference: {fileID: 6362884921322940634, guid: 58a69451b48e12a4190981b71fb017ae, type: 3}
+    amountToSpawn: 1
+    timeBetweenSpawn: 0
     enemyLevel: 1
