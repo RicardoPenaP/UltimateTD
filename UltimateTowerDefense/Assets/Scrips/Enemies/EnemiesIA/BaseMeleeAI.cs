@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
+using AnimatorHandler;
 
 public class BaseMeleeAI : MonoBehaviour, IEnemy
 {
-    [Header("Base Melee AI")]
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-
-    private EnemyController myController;
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
-    private Animator myAnimator;
-
+   
     private EnemyState myState;
     private bool canAttack = true;
     private float attackRange;
@@ -20,10 +17,9 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
 
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
-        myAnimator = GetComponentInChildren<Animator>();
         InitEventsSubscriptions();
     }
 
@@ -52,7 +48,7 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
+        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -73,7 +69,7 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
 
     private void Walking()
     {
-        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= myController.AttackRange)
+        if (Vector3.Distance(transform.position, HealthMananger.Instance.GetStrongholdPos()) <= attackRange)
         {
             PathEnded();
         }
@@ -90,7 +86,7 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
 
     private void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
     private void PathEnded()
@@ -99,6 +95,12 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
         myState = EnemyState.Attacking;
     }
 
-    
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+        this.attackRange = attackRange;
+        this.damageToStronghold = damageToStronghold;
+    }
+
+
 
 }

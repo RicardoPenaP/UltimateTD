@@ -142,4 +142,9 @@ public class GargolyeAI : MonoBehaviour,IEnemy
         canCastSkill = true;       
     }
 
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
+
 }

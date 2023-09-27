@@ -126,4 +126,9 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
         CastSkill();
     }
 
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
+
 }

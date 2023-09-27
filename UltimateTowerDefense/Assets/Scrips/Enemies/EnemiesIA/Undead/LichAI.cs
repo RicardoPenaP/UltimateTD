@@ -175,5 +175,10 @@ public class LichAI : MonoBehaviour,IEnemy
        
     }
 
-    
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
+
+
 }

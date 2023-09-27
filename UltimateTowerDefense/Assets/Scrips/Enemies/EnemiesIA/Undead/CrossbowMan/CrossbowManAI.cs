@@ -103,5 +103,10 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
         Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<CrossbowManAmmo>().SetRange(myController.AttackRange);
     }
 
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
+
 
 }

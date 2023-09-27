@@ -105,4 +105,9 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
         currentAmmo.SetRange(myController.AttackRange);
         currentAmmo.OnInpact += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
     }
+
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
 }

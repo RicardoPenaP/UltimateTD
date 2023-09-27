@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using AnimatorHandler;
-
+using EnemiesInterface;
 
 [RequireComponent(typeof(EnemyMovementHandler),typeof(EnemyDamageHandler))]
 public class EnemyController : MonoBehaviour
@@ -17,11 +16,10 @@ public class EnemyController : MonoBehaviour
     private int level;
     private int damageToStronghold;
     private int goldReward;
-    
-    
 
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
+    private IEnemy myAI;
 
     public float AttackRange { get { return myData.AttackRange; } }
     public int DamageToStronghold { get { return damageToStronghold; } }
@@ -63,6 +61,10 @@ public class EnemyController : MonoBehaviour
     {
         myMovement.InitializeMovementHandler(myData.BaseMovementSpeed);
     }
+    private void InitializeMyAI()
+    {
+        myAI.InitializeEnemy(myData.AttackRange,myData.BaseDamageToStronghold);
+    }
     
     public void SetPath(List<Tile> path)
     {       
@@ -92,6 +94,7 @@ public class EnemyController : MonoBehaviour
     
     private void InitializeEnemy()
     {
+        InitializeMyAI();
         InitializeHealthHandler();
         InitializeMovementHandler();
         

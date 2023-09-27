@@ -127,4 +127,9 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
         myMovement.SetMovementSpeedMultiplier(1f);
         StartCoroutine(SkillCooldownRoutine());
     }
+
+    public void InitializeEnemy(float attackRange, int damageToStronghold)
+    {
+
+    }
 }
