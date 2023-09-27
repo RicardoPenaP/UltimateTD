@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SiegeEngineAmmo : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SiegeEngineAmmo : MonoBehaviour
     [Tooltip("Is the representaive curve off the movement")]
     [SerializeField] private AnimationCurve heightCurve;
 
+    public event Action OnInpact;
     private float range;
     private Vector3 startPos;
     private Vector3 finalPos;
@@ -25,9 +27,9 @@ public class SiegeEngineAmmo : MonoBehaviour
         StartCoroutine(ParableMovementRoutine());
     }
 
-    private void DestroyBehaviour()
+    private void InpactBehaviour()
     {
-        //Destroy Behaviour
+        OnInpact?.Invoke();
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
@@ -50,7 +52,7 @@ public class SiegeEngineAmmo : MonoBehaviour
             yield return null;
         }
 
-        DestroyBehaviour();
+        InpactBehaviour();
     }
 
 }

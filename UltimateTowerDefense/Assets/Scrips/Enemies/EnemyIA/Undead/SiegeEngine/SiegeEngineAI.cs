@@ -49,7 +49,7 @@ public class SiegeEngineAI : MonoBehaviour
     private void SetAttackAnimationsEvents()
     {
         myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
-        myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); Shoot(); };
+        myAnimatorHelper.OnAttackAnimationPerformed += Shoot;
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
 
@@ -80,6 +80,7 @@ public class SiegeEngineAI : MonoBehaviour
 
     private void Attacking()
     {
+        myAnimator.transform.LookAt(HealthMananger.Instance.GetStrongholdPos());
         if (!canAttack)
         {
             return;
@@ -100,6 +101,8 @@ public class SiegeEngineAI : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform).GetComponent<SiegeEngineAmmo>().SetRange(myController.AttackRange);
+        SiegeEngineAmmo currentAmmo = Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform);
+        currentAmmo.SetRange(myController.AttackRange);
+        currentAmmo.OnInpact += () => { HealthMananger.Instance.TakeDamage(myController.DamageToStronghold); };
     }
 }
