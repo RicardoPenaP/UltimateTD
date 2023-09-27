@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
+using AnimatorHandler;
 
 public class SiegeEngineAI : MonoBehaviour,IEnemy
 {
@@ -9,9 +10,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
     [SerializeField] private SiegeEngineAmmo ammoPrefab;
     [SerializeField] private Transform shootPosition;
 
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-
-    private EnemyController myController;
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
     private Animator myAnimator;
@@ -24,7 +23,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
         myAnimator = GetComponentInChildren<Animator>();
@@ -92,7 +91,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
     private void PathEnded()

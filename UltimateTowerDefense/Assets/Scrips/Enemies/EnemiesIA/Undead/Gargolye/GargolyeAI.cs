@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
+using AnimatorHandler;
 
 public class GargolyeAI : MonoBehaviour,IEnemy
 {
@@ -11,10 +12,8 @@ public class GargolyeAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
     [SerializeField] private Transform launchPos;
 
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-    private readonly int CAST_SKIL_HASH = Animator.StringToHash("Skil");
 
-    private EnemyController myController;
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
     private Animator myAnimator;
@@ -29,7 +28,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
         myAnimator = GetComponentInChildren<Animator>();
@@ -55,7 +54,6 @@ public class GargolyeAI : MonoBehaviour,IEnemy
     {
         myState = EnemyState.Walking;
         canAttack = true;
-        skillDamage = Mathf.RoundToInt( (float)damageToStronghold * (1 + (float)damageToStrongholdPercentageAugment/100));
         StartCoroutine(SkillCooldownRoutine());
     }
 
@@ -90,10 +88,10 @@ public class GargolyeAI : MonoBehaviour,IEnemy
         }
     }
 
-    private void CastSkill()
+    private void SkilCast()
     {
         canCastSkill = false;
-        myAnimator.SetTrigger(CAST_SKIL_HASH);        
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.SkilCast);
     }
 
     private void LaunchColdFireball()
@@ -118,7 +116,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
         canAttack = false;
         if (canCastSkill)
         {           
-            CastSkill();
+            SkilCast();
         }
         else
         {
@@ -129,7 +127,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
     private void PathEnded()
@@ -148,6 +146,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
     {
         this.attackRange = attackRange;
         this.damageToStronghold = damageToStronghold;
+        skillDamage = Mathf.RoundToInt((float)damageToStronghold * (1 + (float)damageToStrongholdPercentageAugment / 100));
     }
 
 }

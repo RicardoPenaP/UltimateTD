@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
+using AnimatorHandler;
 
 public class LichAI : MonoBehaviour,IEnemy
 {
@@ -12,10 +13,7 @@ public class LichAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0f)] private float skillCooldownTime = 3;
     [SerializeField, Min(0f)] private float betweenSummonTime = 0.5f;
     
-
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-    private readonly int SKILL_HASH = Animator.StringToHash("Skil");
-
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
@@ -32,6 +30,7 @@ public class LichAI : MonoBehaviour,IEnemy
 
     private void Awake()
     {
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myController = GetComponent<EnemyController>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
@@ -94,11 +93,11 @@ public class LichAI : MonoBehaviour,IEnemy
         
     }
 
-    private void CastSkill()
+    private void SkilCast()
     {
         canAttack = false;
         myMovement.SetCanMove(false);
-        myAnimator.SetTrigger(SKILL_HASH);        
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.SkilCast);
     }
 
     private void SummonMinions()
@@ -125,7 +124,7 @@ public class LichAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
     private void PathEnded()
@@ -161,7 +160,7 @@ public class LichAI : MonoBehaviour,IEnemy
     private IEnumerator SkillCooldownRoutine()
     {
         yield return new WaitForSeconds(skillCooldownTime);
-        CastSkill();
+        SkilCast();
     }
 
     private IEnumerator SummonNewMinionsRoutine()

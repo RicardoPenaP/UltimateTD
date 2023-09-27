@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
+using AnimatorHandler;
 
 public class DeathKnightAI : MonoBehaviour,IEnemy
 {
@@ -9,10 +10,7 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
     
-
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-
-    private EnemyController myController;
+    private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
@@ -27,7 +25,7 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
 
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
+        myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myHealthHandler = GetComponent<EnemyHealthHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
@@ -113,7 +111,7 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
-        myAnimator.SetTrigger(ATTACK_HASH);
+        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
     private void PathEnded()
