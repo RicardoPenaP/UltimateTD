@@ -45,7 +45,7 @@ public class EnemyMovementHandler : MonoBehaviour
     private void Move()
     {
         myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, false);
-        if (canMove || !myHealthHandler.IsAlive)
+        if (!canMove || !myHealthHandler.IsAlive)
         {            
             return;
         }
