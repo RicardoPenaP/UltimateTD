@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8005248228738759411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8759920548857105749}
+  m_Layer: 0
+  m_Name: SummonPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8759920548857105749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005248228738759411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1795637994343155865}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1800165776642762555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61,6 +92,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 8777586f0a9fff944ad2c67f2d7b4658, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6296eefa2bfa8414a8f498b71c9c404a, type: 3}
+--- !u!4 &1795637994343155865 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4532193567158178, guid: 6296eefa2bfa8414a8f498b71c9c404a, type: 3}
+  m_PrefabInstance: {fileID: 1800165776642762555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1801315708342328969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1396567563581874, guid: 6296eefa2bfa8414a8f498b71c9c404a, type: 3}
@@ -172,3 +208,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6809961939054402777, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
   m_PrefabInstance: {fileID: 6293702951053273669}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7017353860284703914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3906062701849726703, guid: e9799239d3cae50419ca5b2dbdee93dc, type: 3}
+  m_PrefabInstance: {fileID: 6293702951053273669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290942820110685075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017353860284703914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b433e6ecedcc4174799499b9f1ba6e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionPrefab: {fileID: 3268712963724518002, guid: 7b0fb1497a9440c4ba65d06b1d43c61f, type: 3}
+  summonPos: {fileID: 8759920548857105749}
+  amountOfMinionsPerCast: 3
+  skillCooldownTime: 4
+  betweenSummonTime: 1.8

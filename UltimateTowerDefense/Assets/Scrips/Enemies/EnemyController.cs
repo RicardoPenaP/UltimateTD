@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
     public UpdateEnemyUIDelegate OnUIUpdate;
     public event Action OnDie;
 
-    private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
     private readonly int DIE_HASH = Animator.StringToHash("Die");
 
     private List<Tile> path;
@@ -46,7 +45,8 @@ public class EnemyController : MonoBehaviour
     public List<Tile> Path { get { return path; } }    
    
     public float AttackRange { get { return myData.AttackRange; } }
-    public int DamageToStronghold { get { return myData.BaseDamageToStronghold; } }
+    public int DamageToStronghold { get { return damageToStronghold; } }
+    public int CurrentLevel { get { return level; } }
     public float CurrentMovementSpeed { get { return currentMovementSpeed * movementSpeedMultiplier; } }
     public float MovementSpeedMultiplier { get { return movementSpeedMultiplier; } set { movementSpeedMultiplier = value; } }
     public float DistanceFromNextTileOffset { get { return distanceFromNextTileOffset; } }
@@ -68,11 +68,14 @@ public class EnemyController : MonoBehaviour
     }
 
     private void OnEnable()
-    {
-        transform.localPosition = Vector3.zero;
+    {        
         ResetEnemy();
     }
 
+    private void OnDisable()
+    {
+        transform.localPosition = Vector3.zero;
+    }
 
     private void Start()
     {             
@@ -181,6 +184,7 @@ public class EnemyController : MonoBehaviour
 
     public void SetPath(List<Tile> path)
     {
+        this.path = path;
         myMovement.SetPath(path);
     }
 

@@ -90,4 +90,15 @@ public class EnemyMovement : MonoBehaviour
     {
         path = newPath;
     }
+
+    public List<Tile> GetRemainingPath()
+    {
+        List<Tile> remainingPath = new List<Tile>();
+        for (int i = pathIndex; i < path.Count; i++)
+        {
+            remainingPath.Add(path[i]);
+        }
+        remainingPath.RemoveAt(0);
+        return remainingPath;
+    }
 }
