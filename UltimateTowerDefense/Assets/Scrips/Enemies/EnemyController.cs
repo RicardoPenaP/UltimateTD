@@ -12,15 +12,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData myData;
     [SerializeField] private bool canMove = true;
 
+    public event Action OnDie;
+
     private int level;
-    private int currentHealth;
-    private int currentShield;
     private int damageToStronghold;
     private int goldReward;
-    private float currentMovementSpeed;
-
     
-    public event Action OnDie;
+    
 
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
@@ -49,6 +47,7 @@ public class EnemyController : MonoBehaviour
     private void OnDisable()
     {
         transform.localPosition = Vector3.zero;
+        OnDie?.Invoke();
     }
 
     private void Start()
