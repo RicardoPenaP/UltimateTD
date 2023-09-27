@@ -5,10 +5,10 @@ using System;
 using AnimatorHandler;
 
 [RequireComponent(typeof(EnemyController))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovementHandler : MonoBehaviour
 {
     public event Action OnPathEnded;
-    private EnemyController myController;
+    private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHandler myAnimatorHandler;
     private Transform meshTransform;
     private List<Tile> path;    
@@ -16,10 +16,14 @@ public class EnemyMovement : MonoBehaviour
     private int pathIndex = 0;
     private Vector3 movementDirection;
 
+    private float distanceFromNextTileOffset;
+    private float currentMovementSpeed;
+    private float movementSpeedMultiplier;
 
+    private bool canMove = true;
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
+        myHealthHandler = GetComponent<EnemyHealthHandler>();
         myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         meshTransform = GetComponentInChildren<Animator>().transform;
     }
@@ -42,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
     private void Move()
     {
         myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, false);
-        if (!myController.CanMove || !myController.IsAlive)
+        if (canMove || !myHealthHandler.IsAlive)
         {            
             return;
         }
@@ -52,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        if (Vector3.Distance(path[pathIndex].GetPosition(), transform.position) <= myController.DistanceFromNextTileOffset)
+        if (Vector3.Distance(path[pathIndex].GetPosition(), transform.position) <= distanceFromNextTileOffset)
         {
             transform.position = path[pathIndex].GetPosition();
 
@@ -68,9 +72,9 @@ public class EnemyMovement : MonoBehaviour
             }
         }
        
-        transform.position += movementDirection * myController.CurrentMovementSpeed * Time.fixedDeltaTime;
+        transform.position += movementDirection * currentMovementSpeed * Time.fixedDeltaTime;
         myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Walk, true);
-        myAnimatorHandler.ChangeAnimationSpeed(AnimationWithSpeedModifiers.Walk, myController.MovementSpeedMultiplier);
+        myAnimatorHandler.ChangeAnimationSpeed(AnimationWithSpeedModifiers.Walk, movementSpeedMultiplier);
     }
 
     private void SetMovementDirection()
@@ -102,5 +106,15 @@ public class EnemyMovement : MonoBehaviour
         }
         remainingPath.RemoveAt(0);
         return remainingPath;
+    }
+
+    public void SetCanMove(bool state)
+    {
+        canMove = state;
+    }
+
+    public void InitializeMovementHandler()
+    {
+
     }
 }

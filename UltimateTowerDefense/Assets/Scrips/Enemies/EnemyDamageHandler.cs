@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(EnemyController),typeof(BoxCollider), typeof(Rigidbody))]
 public class EnemyDamageHandler : MonoBehaviour
 {
-    public delegate void DamageHandler(int amount);    
+    public event Action<int> OnTakeDamage;
+    public event Action<int> OnHealDamage;
 
-    public DamageHandler OnTakeDamage;
-    public DamageHandler OnHealDamage;
-
-    private EnemyController myController;
     private Transform myAimPoint;
+    private EnemyHealthHandler myHealthHandler;
 
-    public bool IsAlive { get { return myController.IsAlive; } }
+    public bool IsAlive { get { return myHealthHandler.IsAlive; } }
     private void Awake()
     {
-        myController = GetComponent<EnemyController>();
         myAimPoint = GetComponentInChildren<EnemyAimPoint>().transform;
+        myHealthHandler = GetComponent<EnemyHealthHandler>();
     }
 
     public void TakeDamage(int damageAmount)

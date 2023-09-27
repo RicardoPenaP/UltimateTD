@@ -7,6 +7,6 @@ public class EnemyUI : MonoBehaviour
     private void Awake()
     {
         UIHealthAndShieldBar myUIBar = GetComponentInChildren<UIHealthAndShieldBar>();
-        GetComponentInParent<EnemyController>().OnUIUpdate += myUIBar.UpdateBar;
+        GetComponentInParent<EnemyHealthHandler>().OnUpdateUI += myUIBar.UpdateBar;
     }
 }

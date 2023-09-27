@@ -13,7 +13,7 @@ public class SiegeEngineAI : MonoBehaviour
 
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
-    private EnemyMovement myMovement;
+    private EnemyMovementHandler myMovement;
     private Animator myAnimator;
 
     private EnemyState myState;
@@ -24,7 +24,7 @@ public class SiegeEngineAI : MonoBehaviour
     {
         myController = GetComponent<EnemyController>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
-        myMovement = GetComponent<EnemyMovement>();
+        myMovement = GetComponent<EnemyMovementHandler>();
         myAnimator = GetComponentInChildren<Animator>();
         InitEventsSubscriptions();
     }

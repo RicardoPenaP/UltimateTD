@@ -4,12 +4,10 @@ using UnityEngine;
 using System;
 using AnimatorHandler;
 
-[RequireComponent(typeof(EnemyMovement),typeof(EnemyDamageHandler))]
+
+[RequireComponent(typeof(EnemyMovementHandler),typeof(EnemyDamageHandler))]
 public class EnemyController : MonoBehaviour
 {
-    public delegate void UpdateEnemyUIDelegate(int healthCurrentValue, int healthMaxValue, int shieldCurrentValue, int shieldMaxValue);    
-    private enum EnemyStatus { None, WalkinInAPath, AttackingStronghold}
-
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
     [SerializeField] private bool canMove = true;
@@ -21,12 +19,13 @@ public class EnemyController : MonoBehaviour
     private int goldReward;
     private float currentMovementSpeed;
 
-    public UpdateEnemyUIDelegate OnUIUpdate;
+    
     public event Action OnDie;
 
     private List<Tile> path;
     private EnemyAnimatorHandler myAnimatorHandler;
-    private EnemyMovement myMovement;
+    private EnemyMovementHandler myMovement;
+    private EnemyHealthHandler myHealthHandler;
 
     private int maxHealth;  
 
@@ -60,14 +59,14 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {        
-        myMovement = GetComponent<EnemyMovement>();
-        InitHandlers();
+        myMovement = GetComponent<EnemyMovementHandler>();
+        myHealthHandler = GetComponent<EnemyHealthHandler>();
         myAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
     }
 
     private void OnEnable()
     {        
-        ResetEnemy();
+        InitializeEnemy();
     }
 
     private void OnDisable()
@@ -82,103 +81,12 @@ public class EnemyController : MonoBehaviour
         SetLevel(level);
     }
 
-    private void OnDestroy()
+    private void InitializeHealthHandler()
     {
-        DeInitHandlers();
+        myHealthHandler.InitializeHandler(maxHealth, maxShield);
     }
 
-    private void InitHandlers()
-    {
-        EnemyDamageHandler myDamageHandler = GetComponent<EnemyDamageHandler>();
-        if (myDamageHandler)
-        {
-            myDamageHandler.OnTakeDamage += TakeDamage;
-            myDamageHandler.OnHealDamage += HealDamage;
-        }
-        
-        EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
-        if (myAnimatorHelper)
-        {
-            myAnimatorHelper.OnDieAnimationEnded += Desactivate;
-        }
-    }
-
-    private void DeInitHandlers()
-    {
-        EnemyDamageHandler myDamageHandler = GetComponent<EnemyDamageHandler>();
-        if (myDamageHandler)
-        {
-            myDamageHandler.OnTakeDamage -= TakeDamage;
-            myDamageHandler.OnHealDamage -= HealDamage;
-        }
-        
-        EnemyAnimatorHelper myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
-
-        if (myAnimatorHelper)
-        {
-            myAnimatorHelper.OnDieAnimationStarted += () => { isAlive = false; };
-            myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
-        }
-    }
-
-    private void TakeDamage(int damageAmount)
-    {
-        if (!isAlive)
-        {
-            return;
-        }
-        int damageTaken = damageAmount;
-        if (currentShield >= damageTaken)
-        {
-            currentShield -= damageTaken;
-            damageTaken = 0;
-        }
-        else
-        {
-            damageTaken -= currentShield;
-            currentShield = 0;
-        }
-
-        if (damageTaken > 0)
-        {
-            currentHealth -= damageTaken;
-            damageTaken = 0;
-        }
-        
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            isAlive = false;
-            Die();
-        }
-
-        UpdateUI();
-    }
-
-    private void HealDamage(int healedAmount)
-    {
-        currentHealth += healedAmount;
-        currentHealth = currentHealth > maxHealth ? maxHealth : currentHealth;
-        UpdateUI();
-    }
-
-    public void RestShieldPercentage(int percentageRested)
-    {
-        if (!isAlive)
-        {
-            return;
-        }
-        int amountRested =  Mathf.RoundToInt( (float)(maxShield * percentageRested) / 100);
-        currentShield += amountRested;
-        currentShield = currentShield > maxShield ? maxShield : currentShield;
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        OnUIUpdate?.Invoke(currentHealth, maxHealth, currentShield, maxShield);
-    }
-
+    
     public void SetPath(List<Tile> path)
     {
         this.path = path;
@@ -194,8 +102,7 @@ public class EnemyController : MonoBehaviour
 
         this.level = level;
         SetLevelStats();
-        ResetEnemy();
-        UpdateUI();
+        InitializeEnemy();
     }
 
     private void SetLevelStats()
@@ -207,28 +114,18 @@ public class EnemyController : MonoBehaviour
         goldReward = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(EnemyStatToAugment.BaseGoldReward, level));
     }
     
-    private void Die()
-    {
-        myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Die);
-        OnDie?.Invoke();
-        isAlive = false;
-        BankMananger.Instance.AddGold(goldReward);
-    }
-
     private void Desactivate()
     {       
         gameObject.SetActive(false);
     }
 
-    private void ResetEnemy()
+    private void InitializeEnemy()
     {
-        currentHealth = maxHealth;
-        currentShield = maxShield;
+        InitializeHealthHandler();        
         currentMovementSpeed = defaultMovementSpeed;
-        movementSpeedMultiplier = 1;
-        isAlive = true;
+        movementSpeedMultiplier = 1;        
         canMove = true;
-        UpdateUI();
+        
     }
 
     public void SetCanMove(bool state)

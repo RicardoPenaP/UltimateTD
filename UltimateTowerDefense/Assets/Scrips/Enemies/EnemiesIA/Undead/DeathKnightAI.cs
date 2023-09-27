@@ -13,8 +13,9 @@ public class DeathKnightAI : MonoBehaviour
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
     private EnemyController myController;
+    private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
-    private EnemyMovement myMovement;
+    private EnemyMovementHandler myMovement;
     private Animator myAnimator;
     private ParticleSystem skillVFX;
 
@@ -25,8 +26,9 @@ public class DeathKnightAI : MonoBehaviour
     private void Awake()
     {
         myController = GetComponent<EnemyController>();
+        myHealthHandler = GetComponent<EnemyHealthHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
-        myMovement = GetComponent<EnemyMovement>();
+        myMovement = GetComponent<EnemyMovementHandler>();
         myAnimator = GetComponentInChildren<Animator>();
         skillVFX = GetComponentInChildren<ParticleSystem>();
         InitEventsSubscriptions();
@@ -86,7 +88,7 @@ public class DeathKnightAI : MonoBehaviour
     private void CastSkill()
     {
         skillVFX.Play();
-        myController.RestShieldPercentage(shieldPercentageRecover);
+        myHealthHandler.RestShieldPercentage(shieldPercentageRecover);
         StartCoroutine(SkillCooldownRoutine());
     }
 
