@@ -13,13 +13,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyData myData;
     [SerializeField] private bool canMove = true;
 
-    [Header("Testing Values")]
-    [SerializeField] private int level;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int currentShield;
-    [SerializeField] private int damageToStronghold;
-    [SerializeField] private int goldReward;
-    [SerializeField] private float currentMovementSpeed;
+    private int level;
+    private int currentHealth;
+    private int currentShield;
+    private int damageToStronghold;
+    private int goldReward;
+    private float currentMovementSpeed;
 
     public UpdateEnemyUIDelegate OnUIUpdate;
     public event Action OnDie;
@@ -122,7 +121,6 @@ public class EnemyController : MonoBehaviour
             myAnimatorHelper.OnDieAnimationEnded -= Desactivate;
         }
     }
-
 
     private void TakeDamage(int damageAmount)
     {
