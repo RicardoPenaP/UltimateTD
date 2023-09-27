@@ -87,6 +87,7 @@ public class EnemyHealthHandler : MonoBehaviour
     {
         myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Die);
         OnDie?.Invoke();
+        
         isAlive = false;       
     }
 

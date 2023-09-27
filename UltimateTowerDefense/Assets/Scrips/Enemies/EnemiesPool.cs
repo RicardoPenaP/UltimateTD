@@ -36,7 +36,7 @@ public class EnemiesPool : MonoBehaviour
         for (int i = 0; i < amountToInstantiate; i++)
         {
             EnemyController newEnemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
-            newEnemy.OnDie += OnEnemyDie;
+            newEnemy.SubmitToOnDie(OnEnemyDie);
             OnLevelUpEnemies += newEnemy.SetLevel;
             newEnemy.gameObject.SetActive(false);
             enemiesPooled.Add(newEnemy);

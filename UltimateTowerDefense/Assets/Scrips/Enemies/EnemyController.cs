@@ -10,11 +10,10 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Controller")]
     [SerializeField] private EnemyData myData;
 
-    public event Action OnDie;
-
     private IEnemy myAI;
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
+    private EnemyAnimatorHelper myAnimatorHelper;
 
     private int level;
 
@@ -35,7 +34,9 @@ public class EnemyController : MonoBehaviour
     {        
         myMovement = GetComponent<EnemyMovementHandler>();
         myHealthHandler = GetComponent<EnemyHealthHandler>();
+        myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myAI = GetComponent<IEnemy>();
+        SubscribeToEvents();
     }
 
     private void OnEnable()
@@ -45,14 +46,29 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.localPosition = Vector3.zero;
-        OnDie?.Invoke();
-        BankMananger.Instance.AddGold(currentGoldReward);
+        transform.localPosition = Vector3.zero;  
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
+        myHealthHandler.OnDie += () => { BankMananger.Instance.AddGold(currentGoldReward); };
+        myAnimatorHelper.OnDieAnimationEnded += () => { this.gameObject.SetActive(false); };        
+    }
+
+    private void UnsubscribeToEvents()
+    {
+        myHealthHandler.OnDie -= () => { BankMananger.Instance.AddGold(currentGoldReward); };
     }
 
     private void InitializeHealthHandler()
     {
         myHealthHandler.InitializeHandler(currentMaxHealth, currentMaxShield);
+       
     }
     private void InitializeMovementHandler()
     {
@@ -95,6 +111,11 @@ public class EnemyController : MonoBehaviour
         InitializeHealthHandler();
         InitializeMovementHandler();
         
+    }
+
+    public void SubmitToOnDie(Action method)
+    {
+        myHealthHandler.OnDie += method;
     }
 
 }
