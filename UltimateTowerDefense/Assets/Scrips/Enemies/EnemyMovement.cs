@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
         myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         meshTransform = GetComponentInChildren<Animator>().transform;
     }
+
     private void OnEnable()
     {
         ResetWalkthroughPath();
