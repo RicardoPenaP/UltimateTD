@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class DeathRiderAI : MonoBehaviour
+public class DeathRiderAI : MonoBehaviour,IEnemy
 {
     [Header("Death Knight AI")]
     [SerializeField, Min(0)] private float skillDurationTime = 1;

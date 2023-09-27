@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class BaseMeleeAI : MonoBehaviour
+public class BaseMeleeAI : MonoBehaviour, IEnemy
 {
     [Header("Base Melee AI")]
     private readonly int ATTACK_HASH = Animator.StringToHash("Attack");
@@ -14,8 +14,9 @@ public class BaseMeleeAI : MonoBehaviour
     private Animator myAnimator;
 
     private EnemyState myState;
-
     private bool canAttack = true;
+    private float attackRange;
+    private int damageToStronghold;
 
     private void Awake()
     {
@@ -97,5 +98,7 @@ public class BaseMeleeAI : MonoBehaviour
         myMovement.SetCanMove(false);
         myState = EnemyState.Attacking;
     }
+
+    
 
 }

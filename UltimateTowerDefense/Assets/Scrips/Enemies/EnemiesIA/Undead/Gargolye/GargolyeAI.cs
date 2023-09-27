@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class GargolyeAI : MonoBehaviour
+public class GargolyeAI : MonoBehaviour,IEnemy
 {
     [Header("Gargolye AI")]
     [SerializeField] private GargolyeColdFireBall coldFireBallPrefab;

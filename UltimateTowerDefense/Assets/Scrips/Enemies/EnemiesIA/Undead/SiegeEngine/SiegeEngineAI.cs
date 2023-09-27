@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class SiegeEngineAI : MonoBehaviour
+public class SiegeEngineAI : MonoBehaviour,IEnemy
 {
     [Header("Siege Engine AI")]
     [SerializeField] private SiegeEngineAmmo ammoPrefab;

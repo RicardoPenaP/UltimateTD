@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class CrossbowManAI : MonoBehaviour
+public class CrossbowManAI : MonoBehaviour,IEnemy
 {
     [Header("Crossbow Man AI")]
     [SerializeField] private CrossbowManAmmo ammoPrefab;

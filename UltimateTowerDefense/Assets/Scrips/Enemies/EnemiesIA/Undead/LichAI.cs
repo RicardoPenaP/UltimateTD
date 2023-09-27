@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class LichAI : MonoBehaviour
+public class LichAI : MonoBehaviour,IEnemy
 {
     [Header("Lich AI")]
     [SerializeField] private EnemyController minionPrefab;

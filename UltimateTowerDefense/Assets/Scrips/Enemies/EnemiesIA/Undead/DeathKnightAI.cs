@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 
-public class DeathKnightAI : MonoBehaviour
+public class DeathKnightAI : MonoBehaviour,IEnemy
 {
     [Header("Death Knight AI")]    
     [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
