@@ -142,7 +142,8 @@ public class LichAI : MonoBehaviour
             if (!minion.gameObject.activeInHierarchy)
             {
                 minions.Remove(minion);
-                Destroy(minion.gameObject);                
+                Destroy(minion.gameObject);
+                return;
             }
         }
     }
@@ -164,7 +165,7 @@ public class LichAI : MonoBehaviour
     {        
         for (int i = 0; i < amountOfMinionsPerCast; i++)
         {
-            EnemyController newMinion = Instantiate(minionPrefab, summonPos.position, myAnimator.transform.rotation, transform.parent);
+            EnemyController newMinion = Instantiate(minionPrefab, summonPos.position, Quaternion.identity, transform.parent);
             
             newMinion.SetPath(myMovement.GetRemainingPath());
             newMinion.SetLevel(myController.CurrentLevel);

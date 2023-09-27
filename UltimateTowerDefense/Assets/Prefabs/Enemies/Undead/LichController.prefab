@@ -228,5 +228,5 @@ MonoBehaviour:
   minionPrefab: {fileID: 3268712963724518002, guid: 7b0fb1497a9440c4ba65d06b1d43c61f, type: 3}
   summonPos: {fileID: 8759920548857105749}
   amountOfMinionsPerCast: 3
-  skillCooldownTime: 4
+  skillCooldownTime: 3
   betweenSummonTime: 1.8
