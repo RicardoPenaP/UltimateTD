@@ -23,7 +23,7 @@ namespace AnimatorHandler
     {
         private static readonly int IDLE_HASH = Animator.StringToHash("Idle");
         private static readonly int ATTACK_HASH = Animator.StringToHash("Attack");
-        private static readonly int SKIL_CAST_HASH = Animator.StringToHash("SkilCast");
+        private static readonly int CAST_SKIL_HASH = Animator.StringToHash("CastSkil");
         private static readonly int DIE_HASH = Animator.StringToHash("Die");
         private static readonly int WALK_HASH = Animator.StringToHash("Walk");
 
@@ -46,7 +46,7 @@ namespace AnimatorHandler
                     myAnimator.SetTrigger(ATTACK_HASH);
                     break;
                 case TrigerAnimationsToPlay.SkilCast:
-                    myAnimator.SetTrigger(SKIL_CAST_HASH);
+                    myAnimator.SetTrigger(CAST_SKIL_HASH);
                     break;
                 case TrigerAnimationsToPlay.Die:
                     myAnimator.SetTrigger(DIE_HASH);

@@ -52,6 +52,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
             return;
         }
         canAttack = true;
+
+        if (!objectivePos)
+        {
+            return;
+        }
         if (!objectivePos.gameObject.activeInHierarchy)
         {
             return;

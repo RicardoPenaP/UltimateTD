@@ -17,7 +17,6 @@ public class LichAI : MonoBehaviour,IEnemy
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
-    private Animator myAnimator;
 
     private List<EnemyController> minions = new List<EnemyController>();
 
@@ -34,7 +33,6 @@ public class LichAI : MonoBehaviour,IEnemy
         myController = GetComponent<EnemyController>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
-        myAnimator = GetComponentInChildren<Animator>();
         InitEventsSubscriptions();
     }
 
