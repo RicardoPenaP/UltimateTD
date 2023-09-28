@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInputMananger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Player Input Mananger")]
+    [Header("Input Actions")]
+    [SerializeField] private InputAction pauseInput = new InputAction();
+
+    private void OnEnable()
     {
-        
+        pauseInput.Enable();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        pauseInput.Disable();
+    }
+
+    private void Update()
+    {
+        if (pauseInput.triggered)
+        {
+            PauseMenu.Instance?.ToggleMenu();
+        }
     }
 }

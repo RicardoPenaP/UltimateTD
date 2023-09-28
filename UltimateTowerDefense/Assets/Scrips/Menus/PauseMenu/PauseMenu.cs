@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using GameSceneManangement;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : Singleton<PauseMenu>
 {
     private static readonly float DEFAULT_TIME_SCALE_VALUE = 1f;
     private static readonly float PAUSE_TIME_SCALE_VALUE = 1f;
@@ -15,9 +15,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button resumeButton;
 
     private bool isPaused = false;
+    public bool IsPaused { get { return isPaused; } }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         SubmitButtonsEvents();
     }
 
