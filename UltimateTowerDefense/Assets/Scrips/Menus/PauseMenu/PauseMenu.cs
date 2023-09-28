@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameSceneManangement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PauseMenu : MonoBehaviour
     private void SubmitButtonsEvents()
     {
         resumeButton?.onClick.AddListener(ToggleMenu);
+        mainMenuButton?.onClick.AddListener(GoToMainMenu);
     }
 
     public void ToggleMenu()
@@ -30,6 +32,12 @@ public class PauseMenu : MonoBehaviour
         isPaused = !isPaused;
         gameObject.SetActive(!isPaused);
         Time.timeScale = isPaused? PAUSE_TIME_SCALE_VALUE : DEFAULT_TIME_SCALE_VALUE;
+    }
+
+    public void GoToMainMenu()
+    {
+        ToggleMenu();
+        GameScenesLoader.LoadGameScene(GameScenes.MainMenu);
     }
 
     
