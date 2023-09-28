@@ -7,7 +7,7 @@ using GameSceneManangement;
 public class PauseMenu : Singleton<PauseMenu>
 {
     private static readonly float DEFAULT_TIME_SCALE_VALUE = 1f;
-    private static readonly float PAUSE_TIME_SCALE_VALUE = 1f;
+    private static readonly float PAUSE_TIME_SCALE_VALUE = 0f;
 
     [Header("Pause Menu")]
     [Header("Buttons Reference")]
@@ -37,7 +37,7 @@ public class PauseMenu : Singleton<PauseMenu>
     public void ToggleMenu()
     {
         isPaused = !isPaused;
-        gameObject.SetActive(!isPaused);
+        gameObject.SetActive(!gameObject.activeInHierarchy);
         Time.timeScale = isPaused? PAUSE_TIME_SCALE_VALUE : DEFAULT_TIME_SCALE_VALUE;
     }
 

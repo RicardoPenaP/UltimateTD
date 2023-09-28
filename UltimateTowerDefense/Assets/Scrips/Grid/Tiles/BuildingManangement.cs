@@ -21,6 +21,10 @@ public class BuildingManangement : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         if (myTile.TileStatus == TileStatusID.Free)
         {
             if (StoreMananger.Instance?.SelectedTower)
@@ -32,6 +36,10 @@ public class BuildingManangement : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         if (myTile.TileStatus == TileStatusID.Free)
         {
             PreviewBuildingMananger.Instance?.PreviewTower(transform.position);
@@ -40,6 +48,10 @@ public class BuildingManangement : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         if (myTile.TileStatus == TileStatusID.Free)
         {
             PreviewBuildingMananger.Instance?.TurnOffPreviewTower();

@@ -54,6 +54,10 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         MoveByKeysInput();
         MoveByEdgeScrollInput();
         MoveByMouseDragInput();

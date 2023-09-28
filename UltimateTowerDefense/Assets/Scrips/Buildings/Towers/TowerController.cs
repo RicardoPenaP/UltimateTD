@@ -36,6 +36,10 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void OnMouseDown()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         BuildingMananger.Instance?.OpenBuildingMananger(this);
     }
 

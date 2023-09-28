@@ -64,6 +64,10 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
     private void LevelUp()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         if (selectedBuilding == null)
         {
             return;
@@ -75,6 +79,10 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
     private void SellBuilding()
     {
+        if (PauseMenu.Instance?.IsPaused == true)
+        {
+            return;
+        }
         if (selectedBuilding == null)
         {
             return;
