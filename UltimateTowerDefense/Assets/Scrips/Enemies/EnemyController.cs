@@ -26,6 +26,10 @@ public class EnemyController : MonoBehaviour
    
     private void OnDrawGizmos()
     {
+        if (!myData)
+        {
+            return;
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, myData.AttackRange);
     }

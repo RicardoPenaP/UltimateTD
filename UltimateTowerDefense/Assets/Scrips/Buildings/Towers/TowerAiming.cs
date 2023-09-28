@@ -9,6 +9,7 @@ public class TowerAiming : MonoBehaviour
     private ITowerWeapon myWeapon;        
     private TowerController myController;
     private EnemyDamageHandler target;
+    private MainMenuTowersTarget menuTarget;
 
     private bool canAttack = true;
     private float attackCooldownTime;
@@ -48,6 +49,11 @@ public class TowerAiming : MonoBehaviour
 
     private bool HaveAValidTarged()
     {
+        if (menuTarget)
+        {
+            return true;
+        }
+
         if (!target)
         {
             return false;
@@ -71,16 +77,32 @@ public class TowerAiming : MonoBehaviour
         {
             return;
         }
+        
         canAttack = false;
-
-        myWeapon.Attack(myController.AmmunitionPrefab,myController.AttackDamage,target.GetEnemyAimPoint());
+        if (menuTarget)
+        {
+            myWeapon.Attack(myController.AmmunitionPrefab, myController.AttackDamage, menuTarget.transform);
+        }
+        else
+        {
+            myWeapon.Attack(myController.AmmunitionPrefab, myController.AttackDamage, target.GetEnemyAimPoint());
+        }
+        
         SetAttackCooldownTime(myController.AttackRatio);
         StartCoroutine(AttackCooldownTime());
     }
 
     private void AimTowerCanon()
     {
-        myWeapon.AimAt(target.transform.position);
+        if (target)
+        {
+            myWeapon.AimAt(target.transform.position);
+        }
+
+        if (menuTarget)
+        {
+            myWeapon.AimAt(menuTarget.transform.position);
+        }
     }
 
     private void LookForTarget()
@@ -104,6 +126,12 @@ public class TowerAiming : MonoBehaviour
                     target = enemy;
                     return;
                 }
+            }
+
+            MainMenuTowersTarget menuTarget = nearObject.GetComponent<MainMenuTowersTarget>();
+            if (menuTarget)
+            {
+                this.menuTarget = menuTarget;
             }
         }
 

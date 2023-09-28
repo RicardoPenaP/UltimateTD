@@ -23,7 +23,7 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            if (StoreMananger.Instance.SelectedTower)
+            if (StoreMananger.Instance?.SelectedTower)
             {
                 CreateBuilding();
             }
@@ -34,7 +34,7 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            PreviewBuildingMananger.Instance.PreviewTower(transform.position);
+            PreviewBuildingMananger.Instance?.PreviewTower(transform.position);
         }
     }
 
@@ -42,7 +42,7 @@ public class BuildingManangement : MonoBehaviour
     {
         if (myTile.TileStatus == TileStatusID.Free)
         {
-            PreviewBuildingMananger.Instance.TurnOffPreviewTower();
+            PreviewBuildingMananger.Instance?.TurnOffPreviewTower();
         }
     }
 

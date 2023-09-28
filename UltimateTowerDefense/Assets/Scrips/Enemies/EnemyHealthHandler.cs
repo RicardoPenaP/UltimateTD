@@ -6,6 +6,8 @@ using System;
 
 public class EnemyHealthHandler : MonoBehaviour
 {
+    [Header("Enemy Health Handler")]
+    [SerializeField] private bool inmortal=false;
     public event Action<int, int, int, int> OnUpdateUI;
     public event Action OnDie;
 
@@ -35,6 +37,10 @@ public class EnemyHealthHandler : MonoBehaviour
 
     private void TakeDamage(int damageAmount)
     {
+        if (inmortal)
+        {
+            return;
+        }
         if (!isAlive)
         {
             return;

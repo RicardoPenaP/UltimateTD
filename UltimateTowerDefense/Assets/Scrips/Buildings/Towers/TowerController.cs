@@ -36,7 +36,7 @@ public class TowerController : MonoBehaviour,IBuilding
 
     private void OnMouseDown()
     {
-        BuildingMananger.Instance.OpenBuildingMananger(this);
+        BuildingMananger.Instance?.OpenBuildingMananger(this);
     }
 
     private void InitTowerStats()
