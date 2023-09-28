@@ -28,14 +28,19 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
 
     public void PreviewTower(Vector3 tilePosition)
     {
-        if (!StoreMananger.Instance.SelectedTower)
+        if (!towerPreview)
         {
-            if (towerPreview.activeInHierarchy)
+            return;
+        }
+        if (!StoreMananger.Instance?.SelectedTower)
+        {
+            if (towerPreview?.activeInHierarchy == true)
             {
                 TurnOffPreviewTower();                
             }
             return;
         }
+       
         towerPreview.transform.position = tilePosition;
         towerPreview.SetActive(true);
         PreviewRange(tilePosition, StoreMananger.Instance.SelectedTower.BaseAttackRange);
@@ -44,10 +49,15 @@ public class PreviewBuildingMananger : Singleton<PreviewBuildingMananger>
 
     public void TurnOffPreviewTower()
     {
-        if (!towerPreview.activeInHierarchy)
+        if (!towerPreview)
         {
             return;
         }
+        if (towerPreview.activeInHierarchy==false)
+        {
+            return;
+        }
+
         towerPreview.SetActive(false);
         towerPreview.transform.position = Vector3.zero;
         TurnOffPreviewRange();
