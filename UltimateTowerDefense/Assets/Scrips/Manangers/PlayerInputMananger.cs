@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerInputMananger : MonoBehaviour
 {
     [Header("Player Input Mananger")]
+    [Header("Pause Menu Reference")]
+    [SerializeField] private PauseMenu pauseMenu;
     [Header("Input Actions")]
     [SerializeField] private InputAction pauseInput = new InputAction();
+    
 
     private void OnEnable()
     {
@@ -23,7 +26,7 @@ public class PlayerInputMananger : MonoBehaviour
     {
         if (pauseInput.triggered)
         {
-            PauseMenu.Instance?.ToggleMenu();
+            pauseMenu?.ToggleMenu();
         }
     }
 }
