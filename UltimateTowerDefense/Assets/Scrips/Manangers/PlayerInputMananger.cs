@@ -22,8 +22,14 @@ public class PlayerInputMananger : MonoBehaviour
 
     private void Update()
     {
+        PauseMenuInput();
+    }
+
+    private void PauseMenuInput()
+    {
         if (pauseInput.triggered)
         {
+            BuildingMananger.Instance?.CloseBuildingManangerWindow();
             PauseMenu.Instance?.ToggleMenu();
         }
     }
