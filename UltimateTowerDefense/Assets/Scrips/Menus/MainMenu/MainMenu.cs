@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [Header("Main Menu")]
+    [Header("Menus Reference")]
+    [SerializeField] private PlayMenu playMenu;
     [Header("Buttons Reference")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
@@ -18,15 +20,22 @@ public class MainMenu : MonoBehaviour
 
     private void SubmitButtonsEvents()
     {
-        playButton?.onClick.AddListener(CloseMenu);
-        settingsButton?.onClick.AddListener(CloseMenu);
+        playButton?.onClick.AddListener(PlayMenu);
+        //settingsButton?.onClick.AddListener(CloseMenu);
         exitButton?.onClick.AddListener(ExitApplication);
 
     }
 
+    private void PlayMenu()
+    {
+        CloseMenu();
+        playMenu.OpenMenu();
+    }
+    
+
     private void CloseMenu()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     private void ExitApplication()
@@ -36,5 +45,10 @@ public class MainMenu : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+
+    public void OpenMenu()
+    {
+        gameObject.SetActive(true);
     }
 }

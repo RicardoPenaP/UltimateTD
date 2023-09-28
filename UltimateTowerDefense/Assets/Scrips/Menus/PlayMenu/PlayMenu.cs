@@ -1,18 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Play Menu")]
+    [Header("Menus Reference")]
+    [SerializeField] private MainMenu mainMenu;
+    [Header("Button References")]
+    [SerializeField] private Button backToMainMenuButton;
+    [SerializeField] private Button singleRoad;
+    [SerializeField] private Button doubleRoad;
+    [SerializeField] private Button tripleRoad;
+    [SerializeField] private Button quadRoad;
+
+    private void Awake()
     {
-        
+        SubmitToButtonsEvents();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SubmitToButtonsEvents()
     {
-        
+        backToMainMenuButton.onClick.AddListener(BackToMainMenu);
+    }
+
+    private void BackToMainMenu()
+    {
+        CloseMenu();
+        mainMenu.OpenMenu();
+    }
+
+    private void CloseMenu()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OpenMenu()
+    {
+        gameObject.SetActive(true);
     }
 }
