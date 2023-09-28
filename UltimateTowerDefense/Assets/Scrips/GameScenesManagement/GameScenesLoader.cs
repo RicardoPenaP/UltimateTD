@@ -10,7 +10,7 @@ namespace GameSceneManangement
         TestingScene ,MainMenu, SingleRoadGame, DoubleRoadGame,TripleRoadGame,QuadRoadGame
     }
 
-    public static class GameScenesManagement
+    public static class GameScenesLoader
     {
         public static void LoadGameScene(GameScenes sceneToLoad)
         {

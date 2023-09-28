@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameSceneManangement;
 
 public class PlayMenu : MonoBehaviour
 {
@@ -23,12 +24,19 @@ public class PlayMenu : MonoBehaviour
     private void SubmitToButtonsEvents()
     {
         backToMainMenuButton.onClick.AddListener(BackToMainMenu);
+        singleRoad.onClick.AddListener(PlaySingleRoad);
     }
 
     private void BackToMainMenu()
     {
         CloseMenu();
         mainMenu.OpenMenu();
+    }
+
+    private void PlaySingleRoad()
+    {
+        CloseMenu();
+        GameScenesLoader.LoadGameScene(GameScenes.TestingScene);//for testing only
     }
 
     private void CloseMenu()
