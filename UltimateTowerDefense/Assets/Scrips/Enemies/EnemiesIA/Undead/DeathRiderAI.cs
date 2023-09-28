@@ -14,7 +14,6 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
-    private Animator myAnimator;
 
     private EnemyState myState;
 
@@ -26,7 +25,6 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
         myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
-        myAnimator = GetComponentInChildren<Animator>();
         InitEventsSubscriptions();
     }
 
@@ -60,8 +58,7 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
     }
 
     private void SetAttackAnimationsEvents()
-    {
-        myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
+    {       
         myAnimatorHelper.OnAttackAnimationPerformed += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
@@ -106,6 +103,7 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
+        canAttack = false;
         myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
