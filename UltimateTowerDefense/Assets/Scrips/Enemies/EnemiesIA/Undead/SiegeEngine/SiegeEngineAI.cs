@@ -13,7 +13,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
-    private Animator myAnimator;
+    private Transform meshTransform;
 
     private EnemyState myState;
 
@@ -26,7 +26,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
         myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myAnimatorHelper = GetComponentInChildren<EnemyAnimatorHelper>();
         myMovement = GetComponent<EnemyMovementHandler>();
-        myAnimator = GetComponentInChildren<Animator>();
+        meshTransform = myAnimatorHelper.transform;
         InitEventsSubscriptions();
     }
 
@@ -48,8 +48,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
     }
 
     private void SetAttackAnimationsEvents()
-    {
-        myAnimatorHelper.OnAttackAnimationStarted += () => { canAttack = false; };
+    {       
         myAnimatorHelper.OnAttackAnimationPerformed += Shoot;
         myAnimatorHelper.OnAttackAnimationEnded += () => { canAttack = true; };
     }
@@ -81,7 +80,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Attacking()
     {
-        myAnimator.transform.LookAt(HealthMananger.Instance.GetStrongholdPos());
+        meshTransform.LookAt(HealthMananger.Instance.GetStrongholdPos());
         if (!canAttack)
         {
             return;
@@ -91,6 +90,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Attack()
     {
+        canAttack = false;
         myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Attack);
     }
 
@@ -102,7 +102,7 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
 
     private void Shoot()
     {
-        SiegeEngineAmmo currentAmmo = Instantiate(ammoPrefab, shootPosition.position, myAnimator.transform.rotation, transform);
+        SiegeEngineAmmo currentAmmo = Instantiate(ammoPrefab, shootPosition.position, meshTransform.rotation, transform);
         currentAmmo.SetRange(attackRange);
         currentAmmo.OnInpact += () => { HealthMananger.Instance.TakeDamage(damageToStronghold); };
     }
