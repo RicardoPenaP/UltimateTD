@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class LichAI : MonoBehaviour,IEnemy
 {
@@ -12,7 +13,9 @@ public class LichAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0)] private int amountOfMinionsPerCast;
     [SerializeField, Min(0f)] private float skillCooldownTime = 3;
     [SerializeField, Min(0f)] private float betweenSummonTime = 0.5f;
-    
+
+    private Action<float, float> OnUpdateSkillCooldownUI;
+
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyController myController;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -181,5 +184,9 @@ public class LichAI : MonoBehaviour,IEnemy
         this.damageToStronghold = damageToStronghold;
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
+
+    }
 
 }

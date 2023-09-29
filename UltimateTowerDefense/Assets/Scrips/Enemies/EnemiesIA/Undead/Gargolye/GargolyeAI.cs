@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class GargolyeAI : MonoBehaviour,IEnemy
 {
@@ -12,6 +13,7 @@ public class GargolyeAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
     [SerializeField] private Transform launchPos;
 
+    private Action<float, float> OnUpdateSkillCooldownUI;
 
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -149,4 +151,8 @@ public class GargolyeAI : MonoBehaviour,IEnemy
         skillDamage = Mathf.RoundToInt((float)damageToStronghold * (1 + (float)damageToStrongholdPercentageAugment / 100));
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
+
+    }
 }

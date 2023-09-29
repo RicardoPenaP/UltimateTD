@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class DeathKnightAI : MonoBehaviour,IEnemy
 {
     [Header("Death Knight AI")]    
     [SerializeField, Min(0)] private int shieldPercentageRecover = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
-    
+
+    private Action<float, float> OnUpdateSkillCooldownUI;
+
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -132,5 +135,8 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
         this.damageToStronghold = damageToStronghold;
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
 
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace EnemiesInterface
 {
@@ -8,6 +9,7 @@ namespace EnemiesInterface
     public interface IEnemy
     {
         public void InitializeEnemy(float attackRange, int damageToStronghold);
+        public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction);
     }
 }
 

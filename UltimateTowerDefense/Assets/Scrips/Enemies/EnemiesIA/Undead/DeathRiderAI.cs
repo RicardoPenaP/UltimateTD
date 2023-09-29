@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class DeathRiderAI : MonoBehaviour,IEnemy
 {
@@ -10,6 +11,8 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
     [SerializeField, Min(0)] private float skillDurationTime = 1;
     [SerializeField, Min(0)] private int speedPercentageAugment = 100;
     [SerializeField, Min(0)] private float skillCooldownTime = 3;
+
+    private Action<float, float> OnUpdateSkillCooldownUI;
 
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
@@ -132,4 +135,8 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
         this.damageToStronghold = damageToStronghold;
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
+
+    }
 }

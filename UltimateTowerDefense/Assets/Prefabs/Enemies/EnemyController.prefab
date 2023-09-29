@@ -97,7 +97,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myData: {fileID: 0}
-  canMove: 1
+  level: 0
+  currentMaxHealth: 0
+  currentMaxShield: 0
+  currentMovementSpeed: 0
+  currentGoldReward: 0
+  currentDamageToStronghold: 0
 --- !u!114 &1025608508404835863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19d1596cbe445b4fbebaa796814cf38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inmortal: 0
 --- !u!114 &8974265248102564304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9784a363619e06643b5cc9317887b124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceFromNextTileOffset: 0.08
+  movementSpeedMultiplier: 0
 --- !u!114 &7556322295252573249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +209,10 @@ PrefabInstance:
     - target: {fileID: 1331664979968751135, guid: 05eef5ac35309c545870e147fc4f7ddc, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430631780612037929, guid: 05eef5ac35309c545870e147fc4f7ddc, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2858745763554549938, guid: 05eef5ac35309c545870e147fc4f7ddc, type: 3}
       propertyPath: m_Pivot.x

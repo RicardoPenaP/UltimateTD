@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class SiegeEngineAI : MonoBehaviour,IEnemy
 {
@@ -113,4 +114,8 @@ public class SiegeEngineAI : MonoBehaviour,IEnemy
         this.damageToStronghold = damageToStronghold;
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
+
+    }
 }

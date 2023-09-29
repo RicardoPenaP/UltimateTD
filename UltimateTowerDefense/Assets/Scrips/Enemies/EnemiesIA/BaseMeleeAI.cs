@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using EnemiesInterface;
 using AnimatorHandler;
+using System;
 
 public class BaseMeleeAI : MonoBehaviour, IEnemy
-{
+{   
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyAnimatorHelper myAnimatorHelper;
     private EnemyMovementHandler myMovement;
@@ -101,6 +102,9 @@ public class BaseMeleeAI : MonoBehaviour, IEnemy
         this.damageToStronghold = damageToStronghold;
     }
 
+    public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
+    {
 
+    }
 
 }
