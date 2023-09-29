@@ -11,6 +11,7 @@ public class WaveMananger : MonoBehaviour
     [SerializeField] private WaveData[] waves;
     //For Testing Only
     [SerializeField] private float timeBetweenWaves = 5f;
+    [SerializeField] private bool waveCompleted = false;
 
     private event Action OnResetPools;
 
@@ -19,19 +20,17 @@ public class WaveMananger : MonoBehaviour
 
     private int waveIndex = 0;
 
+    public bool WaveCompleted { get { return waveCompleted; } }
+    public bool HavePendingWaves { get { return waveIndex < waves.Length; } }
+
     private void Awake()
     {
         InitEnemiesPool();
     }
 
-    private void Start()
-    {
-        StartCoroutine(WaitBetweenWavesRoutine());
-    }
-
     private void Update()
     {
-        UpdateWave();
+        UpdateWaveState();
     }
 
     private void InitEnemiesPool()
@@ -73,9 +72,9 @@ public class WaveMananger : MonoBehaviour
         }        
     }
 
-    private void StartNewWave()
+    public void StartNewWave(int waveIndex)
     {
-        if (waveIndex >= waves.Length)
+        if (waveIndex >= waves.Length || waveIndex < 0)
         {
             return;
         }
@@ -92,24 +91,14 @@ public class WaveMananger : MonoBehaviour
         }
     }
 
-    private void UpdateWave()
+    private void UpdateWaveState()
     {
-        if (WaveCompleted())
-        {
-            waveIndex++;
-            if (AllWavesCompleted())
-            {
-                Debug.Log("All Waves Completed");
-            }
-            else
-            {
-                ResetPools();
-            }
-        }
+        waveCompleted = CheckWaveCompleted();
+        
     }
     
 
-    private bool WaveCompleted()
+    private bool CheckWaveCompleted()
     {
         if (!currentWave)
         {
@@ -130,15 +119,9 @@ public class WaveMananger : MonoBehaviour
         return true;
     }
 
-    private bool AllWavesCompleted()
-    {
-        return waveIndex >= waves.Length;
-    }
-
     private void ResetPools()
     {
-        OnResetPools.Invoke();
-        StartCoroutine(WaitBetweenWavesRoutine());
+        OnResetPools.Invoke();        
     }
 
     public void SetTimeBetweenWaves(float timeBetweenWaves)
@@ -146,9 +129,6 @@ public class WaveMananger : MonoBehaviour
         this.timeBetweenWaves = timeBetweenWaves;
     }
 
-    private IEnumerator WaitBetweenWavesRoutine()
-    {
-        yield return new WaitForSeconds(timeBetweenWaves);
-        StartNewWave();
-    }
+    
+
 }
