@@ -111,7 +111,11 @@ public class EnemiesPool : MonoBehaviour
         {
             canSpawn = true;
         }
-        StartCoroutine(EnemiesCanSpawnRoutine());
+        else
+        {
+            StartCoroutine(EnemiesCanSpawnRoutine());
+        }
+        
     }
 
     private IEnumerator EnemiesCanSpawnRoutine()
