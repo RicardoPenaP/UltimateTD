@@ -42,15 +42,21 @@ public class GameOverMenu : Singleton<GameOverMenu>
         GameScenesLoader.ReloadCurrentScene();
     }
 
-    public void OpenGameOverMenu()
+    public void OpenGameOverMenu(float timePlayed,int enemiesKilled,int wavesCleared)
     {
         titleText.text = "Game Over";
+        gameOverStatsPanel.SetTimePlayed(timePlayed);
+        gameOverStatsPanel.SetEnemiesKilled(enemiesKilled);
+        gameOverStatsPanel.SetWavesCleared(wavesCleared);
         gameObject.SetActive(true);
     }
 
-    public void OpenGameCompleteMenu()
+    public void OpenGameCompleteMenu(float timePlayed, int enemiesKilled, int wavesCleared)
     {
         titleText.text = "Congratulations, you successfully defended your kingdom";
+        gameOverStatsPanel.SetTimePlayed(timePlayed);
+        gameOverStatsPanel.SetEnemiesKilled(enemiesKilled);
+        gameOverStatsPanel.SetWavesCleared(wavesCleared);
         gameObject.SetActive(true);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMananger : MonoBehaviour
+public class GameMananger : Singleton<GameMananger>
 {
     [Header("Game Mananger")]
     [SerializeField] private float timeToStart;
@@ -14,28 +14,37 @@ public class GameMananger : MonoBehaviour
     //for testing 
     [SerializeField]private int currentWave = 1;
 
-    private float playTime;
+    private float timePlayed;
     private int enemiesKilled;
     private int wavesCleared;
 
     private bool canCheckForNextWave = true;
     private bool gameCompleted = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitWaveManangers();
     }
 
     private void Start()
     {
         currentWave = 1;
+        enemiesKilled = 0;
+        wavesCleared = 0;
         gameCompleted = false;
+        StartCoroutine(PlayTimeCounterRoutine());
         StartCoroutine(WaitBetweenWavesRoutine(timeToStart));
     }
 
     private void Update()
     {
         GameLoop();
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 
     private void InitWaveManangers()
@@ -60,8 +69,7 @@ public class GameMananger : MonoBehaviour
             {
                 return;
             }
-        }
-
+        }        
         CheckForNextWave();
     }
 
@@ -71,7 +79,7 @@ public class GameMananger : MonoBehaviour
         {
             return;
         }
-
+        wavesCleared++;
         foreach (WaveMananger waveMananger in waveManangers)
         {
             if (waveMananger.HavePendingWaves)
@@ -90,7 +98,7 @@ public class GameMananger : MonoBehaviour
     private void AllWavesCleared()
     {
         gameCompleted = true;
-        GameOverMenu.Instance.OpenGameCompleteMenu();
+        GameOverMenu.Instance.OpenGameCompleteMenu(timePlayed, enemiesKilled, wavesCleared);
         //Win behaviour
     }
 
@@ -112,6 +120,25 @@ public class GameMananger : MonoBehaviour
         }
         canCheckForNextWave = true;
         StartWaves();
+    }
+
+    private IEnumerator PlayTimeCounterRoutine()
+    {
+        timePlayed = 0;
+        while (true)
+        {
+            if (PauseMenu.Instance.IsPaused)
+            {
+                yield return null;
+            }
+            timePlayed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public void AddEnemyKilled()
+    {
+        enemiesKilled++;
     }
 
 }
