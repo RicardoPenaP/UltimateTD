@@ -13,6 +13,7 @@ public class EnemyHealthHandler : MonoBehaviour
 
     private EnemyAnimatorHandler myAnimatorHandler;
     private EnemyDamageHandler myDamageHandler;
+    private Collider myCollider;
 
     private bool isAlive = true;
     private int maxHealth;
@@ -22,10 +23,16 @@ public class EnemyHealthHandler : MonoBehaviour
 
     public bool IsAlive { get { return isAlive; } }
 
+    private void OnEnable()
+    {
+        myCollider.enabled = true;
+    }
+
     private void Awake()
     {
         myAnimatorHandler = GetComponent<EnemyAnimatorHandler>();
         myDamageHandler = GetComponent<EnemyDamageHandler>();
+        myCollider = GetComponent<Collider>();
         SetEventSubcription();
     }
 
@@ -92,6 +99,7 @@ public class EnemyHealthHandler : MonoBehaviour
     private void Die()
     {
         myAnimatorHandler.PlayATriggerAnimation(TrigerAnimationsToPlay.Die);
+        myCollider.enabled = false;
         OnDie?.Invoke();
         
         isAlive = false;       
