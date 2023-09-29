@@ -160,7 +160,16 @@ public class LichAI : MonoBehaviour,IEnemy
 
     private IEnumerator SkillCooldownRoutine()
     {
-        yield return new WaitForSeconds(skillCooldownTime);
+        float timeNeeded = 0;
+        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+        while (timeNeeded < skillCooldownTime)
+        {
+            timeNeeded += Time.deltaTime;
+            OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+            yield return null;
+        }
+        timeNeeded = 0;
+        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);        
         SkilCast();
     }
 
@@ -186,7 +195,7 @@ public class LichAI : MonoBehaviour,IEnemy
 
     public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
     {
-
+        OnUpdateSkillCooldownUI += OnUpdateSkillCooldownUIAction;
     }
 
 }
