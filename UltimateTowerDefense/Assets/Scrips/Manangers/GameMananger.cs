@@ -23,10 +23,7 @@ public class GameMananger : MonoBehaviour
     private void InitWaveManangers()
     {
         waveManangers = GetComponentsInChildren<WaveMananger>();
-        foreach (WaveMananger waveMananger in waveManangers)
-        {
-            waveMananger.SetTimeBetweenWaves(timeBetweenWaves);
-        }
+        
     }
 
 

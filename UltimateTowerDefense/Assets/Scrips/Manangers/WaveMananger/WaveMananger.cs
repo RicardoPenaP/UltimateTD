@@ -8,10 +8,7 @@ public class WaveMananger : MonoBehaviour
 {  
     [Header("Wave Mananger")]    
     [SerializeField] private EnemiesPool enemyPoolPrefabReference;
-    [SerializeField] private WaveData[] waves;
-    //For Testing Only
-    [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private bool waveCompleted = false;
+    [SerializeField] private WaveData[] waves; 
 
     private event Action OnResetPools;
 
@@ -20,17 +17,12 @@ public class WaveMananger : MonoBehaviour
 
     private int waveIndex = 0;
 
-    public bool WaveCompleted { get { return waveCompleted; } }
+    public bool WaveCompleted { get { return CheckWaveCompleted(); } }
     public bool HavePendingWaves { get { return waveIndex < waves.Length; } }
 
     private void Awake()
     {
         InitEnemiesPool();
-    }
-
-    private void Update()
-    {
-        UpdateWaveState();
     }
 
     private void InitEnemiesPool()
@@ -78,6 +70,7 @@ public class WaveMananger : MonoBehaviour
         {
             return;
         }
+        ResetPools();
         currentWave = waves[waveIndex];
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
@@ -90,13 +83,6 @@ public class WaveMananger : MonoBehaviour
             }
         }
     }
-
-    private void UpdateWaveState()
-    {
-        waveCompleted = CheckWaveCompleted();
-        
-    }
-    
 
     private bool CheckWaveCompleted()
     {
@@ -123,12 +109,6 @@ public class WaveMananger : MonoBehaviour
     {
         OnResetPools.Invoke();        
     }
-
-    public void SetTimeBetweenWaves(float timeBetweenWaves)
-    {
-        this.timeBetweenWaves = timeBetweenWaves;
-    }
-
     
 
 }
