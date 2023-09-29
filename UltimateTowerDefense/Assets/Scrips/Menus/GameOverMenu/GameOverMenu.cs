@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using GameSceneManangement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Game Over Menu")]
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button playAgainButton;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
