@@ -105,6 +105,10 @@ public class EnemiesPool : MonoBehaviour
 
     public void EnemiesCanSpawn()
     {
+        if (enemiesSpawned == 0)
+        {
+            canSpawn = true;
+        }
         StartCoroutine(EnemiesCanSpawnRoutine());
     }
 
