@@ -140,7 +140,16 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     private IEnumerator SkillCooldownRoutine()
     {
-        yield return new WaitForSeconds(skillCooldownTime);
+        float elapsedTime = 0;
+        OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);
+        while (elapsedTime < skillCooldownTime)
+        {
+            elapsedTime += Time.deltaTime;
+            OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);
+            yield return null;
+        }
+        elapsedTime = 0;
+        OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);        
         canCastSkill = true;       
     }
 
