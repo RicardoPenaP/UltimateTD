@@ -36,16 +36,19 @@ public class PauseMenu : Singleton<PauseMenu>
 
     public void ToggleMenu()
     {
-        isPaused = !isPaused;
-        gameObject.SetActive(!gameObject.activeInHierarchy);
-        Time.timeScale = isPaused? PAUSE_TIME_SCALE_VALUE : DEFAULT_TIME_SCALE_VALUE;
+        SetIsPaused(!isPaused);
+        gameObject.SetActive(!gameObject.activeInHierarchy);        
     }
 
-    public void GoToMainMenu()
+    private void GoToMainMenu()
     {
         ToggleMenu();
         GameScenesLoader.LoadGameScene(GameScenes.MainMenu);
     }
 
-    
+    public void SetIsPaused(bool isPaused)
+    {
+        this.isPaused = isPaused;
+        Time.timeScale = isPaused ? PAUSE_TIME_SCALE_VALUE : DEFAULT_TIME_SCALE_VALUE;
+    }
 }

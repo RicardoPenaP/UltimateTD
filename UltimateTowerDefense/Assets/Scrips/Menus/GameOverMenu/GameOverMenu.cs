@@ -7,12 +7,16 @@ using GameSceneManangement;
 
 public class GameOverMenu : Singleton<GameOverMenu>
 {
+    public enum GameOverMenuToOpen { GameOver,GameCompleted}
     [Header("Game Over Menu")]
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private GameOverStatsPanel gameOverStatsPanel;
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button playAgainButton;
 
+    private bool isGameOver;
+
+    public bool IsGameOver { get { return isGameOver; } }
     protected override void Awake()
     {
         base.Awake();
@@ -21,6 +25,7 @@ public class GameOverMenu : Singleton<GameOverMenu>
 
     private void Start()
     {
+        isGameOver = false;
         gameObject.SetActive(false);
     }
 
@@ -31,32 +36,38 @@ public class GameOverMenu : Singleton<GameOverMenu>
     }
 
     private void GoToMainMenu()
-    {
+    {        
         gameObject.SetActive(false);
         GameScenesLoader.LoadGameScene(GameScenes.MainMenu);
     }
 
     private void PlayAgain()
-    {
+    {        
         gameObject.SetActive(false);
         GameScenesLoader.ReloadCurrentScene();
     }
 
-    public void OpenGameOverMenu(float timePlayed,int enemiesKilled,int wavesCleared)
+    public void OpenGameOverMenu(GameOverMenuToOpen menuToOpen)
     {
-        titleText.text = "Game Over";
-        gameOverStatsPanel.SetTimePlayed(timePlayed);
-        gameOverStatsPanel.SetEnemiesKilled(enemiesKilled);
-        gameOverStatsPanel.SetWavesCleared(wavesCleared);
+        isGameOver = true;
+        switch (menuToOpen)
+        {
+            case GameOverMenuToOpen.GameOver:
+                titleText.text = "Game Over";
+                break;
+            case GameOverMenuToOpen.GameCompleted:
+                titleText.text = "Congratulations, you successfully defended your kingdom";
+               
+                break;
+            default:
+                break;
+        }
+       
+        gameOverStatsPanel.SetTimePlayed(GameMananger.Instance.TimePlayed);
+        gameOverStatsPanel.SetEnemiesKilled(GameMananger.Instance.EnemiesKilled);
+        gameOverStatsPanel.SetWavesCleared(GameMananger.Instance.WavesCleared);
+       
         gameObject.SetActive(true);
     }
 
-    public void OpenGameCompleteMenu(float timePlayed, int enemiesKilled, int wavesCleared)
-    {
-        titleText.text = "Congratulations, you successfully defended your kingdom";
-        gameOverStatsPanel.SetTimePlayed(timePlayed);
-        gameOverStatsPanel.SetEnemiesKilled(enemiesKilled);
-        gameOverStatsPanel.SetWavesCleared(wavesCleared);
-        gameObject.SetActive(true);
-    }
 }

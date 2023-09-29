@@ -37,6 +37,10 @@ public class TowerAiming : MonoBehaviour
 
     private void UpdateTowerCanon()
     {
+        if (GameOverMenu.Instance.IsGameOver)
+        {
+            return;
+        }
         if (!HaveAValidTarged())
         {
             LookForTarget();

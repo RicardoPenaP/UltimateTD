@@ -21,6 +21,10 @@ public class GameMananger : Singleton<GameMananger>
     private bool canCheckForNextWave = true;
     private bool gameCompleted = false;
 
+
+    public float TimePlayed { get { return timePlayed; } }
+    public int EnemiesKilled { get { return enemiesKilled; } }
+    public int WavesCleared { get { return wavesCleared; } }
     protected override void Awake()
     {
         base.Awake();
@@ -98,7 +102,7 @@ public class GameMananger : Singleton<GameMananger>
     private void AllWavesCleared()
     {
         gameCompleted = true;
-        GameOverMenu.Instance.OpenGameCompleteMenu(timePlayed, enemiesKilled, wavesCleared);
+        GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameCompleted);
         //Win behaviour
     }
 

@@ -10,6 +10,7 @@ public class HealthMananger : Singleton<HealthMananger>
     [SerializeField] private Transform strongholdPos;
 
     private UIBar healthBar;
+    private bool isAlive;
 
     protected override void Awake()
     {
@@ -19,17 +20,23 @@ public class HealthMananger : Singleton<HealthMananger>
 
     private void Start()
     {
+        isAlive = true;
         currentHealth = maxHealth;
         healthBar.UpdateBar(currentHealth, maxHealth);
     }
 
     public void TakeDamage(int damage)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            isAlive = false;
             currentHealth = 0;
-            //GameOver behaviour
+            GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameOver);
         }
 
         healthBar.UpdateBar(currentHealth, maxHealth);

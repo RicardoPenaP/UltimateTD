@@ -44,3 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e2c53d322aae044a8b548ee71203cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseInput:
+    m_Name: Pause Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f08ff631-28b7-48e4-875b-bc86d75d2d0f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
