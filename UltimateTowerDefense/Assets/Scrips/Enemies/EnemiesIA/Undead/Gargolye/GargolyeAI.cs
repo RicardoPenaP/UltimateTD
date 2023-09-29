@@ -153,6 +153,6 @@ public class GargolyeAI : MonoBehaviour,IEnemy
 
     public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
     {
-
+        OnUpdateSkillCooldownUI += OnUpdateSkillCooldownUIAction;
     }
 }

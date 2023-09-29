@@ -137,6 +137,6 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
 
     public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
     {
-
+        OnUpdateSkillCooldownUI += OnUpdateSkillCooldownUIAction;
     }
 }

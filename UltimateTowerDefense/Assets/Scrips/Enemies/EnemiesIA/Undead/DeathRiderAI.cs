@@ -118,7 +118,16 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
 
     private IEnumerator SkillCooldownRoutine()
     {
-        yield return new WaitForSeconds(skillCooldownTime);
+        float timeNeeded = 0;
+        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+        while (timeNeeded < skillCooldownTime)
+        {
+            timeNeeded += Time.deltaTime;
+            OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+            yield return null;
+        }
+        timeNeeded = skillCooldownTime;
+        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
         CastSkill();
     }
 
@@ -137,6 +146,6 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
 
     public void SubscribeToUpdateSkillCooldownUI(Action<float, float> OnUpdateSkillCooldownUIAction)
     {
-
+        OnUpdateSkillCooldownUI += OnUpdateSkillCooldownUIAction;
     }
 }
