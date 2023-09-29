@@ -23,12 +23,12 @@ public class GameManangerNextWavePanel : MonoBehaviour
         timerText.text = $"{t.Minutes.ToString("00")}:{t.Seconds.ToString("00")}:{t.Milliseconds.ToString("00")}";
     }
 
-    public void SubmitToStarNowButtonOnClickEvent(UnityAction action)
+    public void SubscribeToStarNowButtonOnClickEvent(UnityAction action)
     {
         startNowButton.onClick.AddListener(action);
     }
 
-    public void UnSubmitToStarNowButtonOnClickEvent(UnityAction action)
+    public void UnsubscribeToStarNowButtonOnClickEvent(UnityAction action)
     {
         startNowButton.onClick.RemoveListener(action);
     }

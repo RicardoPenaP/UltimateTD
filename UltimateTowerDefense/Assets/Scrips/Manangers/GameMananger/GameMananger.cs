@@ -26,10 +26,13 @@ public class GameMananger : Singleton<GameMananger>
     public float TimePlayed { get { return timePlayed; } }
     public int EnemiesKilled { get { return enemiesKilled; } }
     public int WavesCleared { get { return wavesCleared; } }
+
     protected override void Awake()
     {
         base.Awake();
         InitWaveManangers();
+        nextWavePanel?.SubscribeToStarNowButtonOnClickEvent(StarNextWave);
+
     }
 
     private void Start()
@@ -49,6 +52,8 @@ public class GameMananger : Singleton<GameMananger>
 
     private void OnDestroy()
     {
+        nextWavePanel.UnsubscribeToStarNowButtonOnClickEvent(StarNextWave);
+
         StopAllCoroutines();
     }
 
@@ -115,14 +120,22 @@ public class GameMananger : Singleton<GameMananger>
         }
     }
 
+    private void StarNextWave()
+    {
+        timeLeft = 0;
+    }
+
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)
     {
         timeLeft = timeToWait;
+        nextWavePanel.TogglePanel();
         while (timeLeft > 0)
-        {
+        {            
             timeLeft -= Time.deltaTime;
+            nextWavePanel.UpdateTimer(timeLeft);
             yield return null;
         }
+        nextWavePanel.TogglePanel();
         timeLeft = 0;
         canCheckForNextWave = true;
         StartWaves();
