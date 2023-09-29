@@ -8,12 +8,14 @@ namespace GameSceneManangement
     public enum GameScenes
     {
         TestingScene ,MainMenu, SingleRoadGame, DoubleRoadGame,TripleRoadGame,QuadRoadGame
-    }
+    }    
 
     public static class GameScenesLoader
     {
+        private static GameScenes currentScene = GameScenes.MainMenu;
         public static void LoadGameScene(GameScenes sceneToLoad)
         {
+            currentScene = sceneToLoad;
             switch (sceneToLoad)
             {
                 case GameScenes.TestingScene:
@@ -34,6 +36,11 @@ namespace GameSceneManangement
                     Debug.Log("Scene Not found");
                     break;
             }
+        }
+
+        public static void ReloadCurrentScene()
+        {
+            LoadGameScene(currentScene);
         }
     }
 

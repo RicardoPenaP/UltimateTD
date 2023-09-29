@@ -13,5 +13,23 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button playAgainButton;
 
+    private void Awake()
+    {
+        SubmitToButtonsEvents();
+    }
 
+    private void SubmitToButtonsEvents()
+    {
+
+    }
+
+    public void OpenGameOverMenu()
+    {
+        titleText.text = "Game Over";
+    }
+
+    public void OpenGameCompleteMenu()
+    {
+        titleText.text = "Congratulations, you successfully defended your kingdom";
+    }
 }
