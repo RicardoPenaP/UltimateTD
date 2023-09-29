@@ -6,10 +6,11 @@ using EnemiesWaves;
 
 public class WaveMananger : MonoBehaviour
 {  
-    [Header("Wave Mananger")]
-    [SerializeField] private float timeBetweenWaves = 5f;
+    [Header("Wave Mananger")]    
     [SerializeField] private EnemiesPool enemyPoolPrefabReference;
     [SerializeField] private WaveData[] waves;
+    //For Testing Only
+    [SerializeField] private float timeBetweenWaves = 5f;
 
     private event Action OnResetPools;
 
@@ -138,6 +139,11 @@ public class WaveMananger : MonoBehaviour
     {
         OnResetPools.Invoke();
         StartCoroutine(WaitBetweenWavesRoutine());
+    }
+
+    public void SetTimeBetweenWaves(float timeBetweenWaves)
+    {
+        this.timeBetweenWaves = timeBetweenWaves;
     }
 
     private IEnumerator WaitBetweenWavesRoutine()
