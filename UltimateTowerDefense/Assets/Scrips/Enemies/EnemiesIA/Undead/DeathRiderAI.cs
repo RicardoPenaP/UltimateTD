@@ -118,22 +118,31 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
 
     private IEnumerator SkillCooldownRoutine()
     {
-        float timeNeeded = 0;
-        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
-        while (timeNeeded < skillCooldownTime)
+        float elapsedTime = 0;
+        OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);
+        while (elapsedTime < skillCooldownTime)
         {
-            timeNeeded += Time.deltaTime;
-            OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+            elapsedTime += Time.deltaTime;
+            OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);
             yield return null;
         }
-        timeNeeded = skillCooldownTime;
-        OnUpdateSkillCooldownUI?.Invoke(timeNeeded, skillCooldownTime);
+        elapsedTime = skillCooldownTime;
+        OnUpdateSkillCooldownUI?.Invoke(elapsedTime, skillCooldownTime);
         CastSkill();
     }
 
     private IEnumerator SkillDurationRoutine()
     {
-        yield return new WaitForSeconds(skillDurationTime);
+        float remainingTime = skillDurationTime;
+        OnUpdateSkillCooldownUI?.Invoke(remainingTime, skillDurationTime);
+        while (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime;
+            OnUpdateSkillCooldownUI?.Invoke(remainingTime, skillDurationTime);
+            yield return null;
+        }
+        remainingTime = 0;
+        OnUpdateSkillCooldownUI?.Invoke(remainingTime, skillDurationTime);        
         myMovement.SetMovementSpeedMultiplier(1f);
         StartCoroutine(SkillCooldownRoutine());
     }
