@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemiesPool : MonoBehaviour
 {    
     private delegate void LevelUpEnemiesHandler(int level);
-    private LevelUpEnemiesHandler OnLevelUpEnemies;
+    private LevelUpEnemiesHandler OnSetEnemiesLevel;
 
     private List<EnemyController> enemiesPooled = new List<EnemyController>();    
     private List<Tile> pooledEnemiesPath;
@@ -37,7 +37,7 @@ public class EnemiesPool : MonoBehaviour
         {
             EnemyController newEnemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity, transform);
             newEnemy.SubmitToOnDie(OnEnemyDie);
-            OnLevelUpEnemies += newEnemy.SetLevel;
+            OnSetEnemiesLevel += newEnemy.SetLevel;
             newEnemy.gameObject.SetActive(false);
             enemiesPooled.Add(newEnemy);
         }
@@ -86,7 +86,7 @@ public class EnemiesPool : MonoBehaviour
 
     public void SetEnemiesLevel(int level)
     {
-        OnLevelUpEnemies?.Invoke(level);
+        OnSetEnemiesLevel?.Invoke(level);
     }
 
     public void SetTimeBetweenSpawn(float timeBetweenSpawn)

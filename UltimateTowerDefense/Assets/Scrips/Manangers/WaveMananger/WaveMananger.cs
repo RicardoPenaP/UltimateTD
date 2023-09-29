@@ -16,7 +16,7 @@ public class WaveMananger : MonoBehaviour
     private WaveData currentWave;
 
     private int waveIndex = 0;
-
+    
     public bool WaveCompleted { get { return CheckWaveCompleted(); } }
     public bool HavePendingWaves { get { return waveIndex < waves.Length; } }
 
@@ -71,6 +71,7 @@ public class WaveMananger : MonoBehaviour
             return;
         }
         ResetPools();
+        this.waveIndex = waveIndex;
         currentWave = waves[waveIndex];
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
@@ -78,8 +79,9 @@ public class WaveMananger : MonoBehaviour
             {
                 enemiesPools[enemyInWave.EnemyPrefabReference].SetAmountOfEnemiesToSpawn(enemyInWave.AmountToSpawn);
                 enemiesPools[enemyInWave.EnemyPrefabReference].SetTimeBetweenSpawn(enemyInWave.TimeBetweenSpawn);
-                enemiesPools[enemyInWave.EnemyPrefabReference].EnemiesCanSpawn();
                 enemiesPools[enemyInWave.EnemyPrefabReference].SetEnemiesLevel(enemyInWave.EnemyLevel);
+                enemiesPools[enemyInWave.EnemyPrefabReference].EnemiesCanSpawn();
+                
             }
         }
     }
