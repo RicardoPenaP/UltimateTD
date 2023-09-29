@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using GameSceneManangement;
 
-public class GameOverMenu : MonoBehaviour
+public class GameOverMenu : Singleton<GameOverMenu>
 {
     [Header("Game Over Menu")]
     [SerializeField] private TextMeshProUGUI titleText;
@@ -13,9 +13,15 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button playAgainButton;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         SubmitToButtonsEvents();
+    }
+
+    private void Start()
+    {
+        gameObject.SetActive(false);
     }
 
     private void SubmitToButtonsEvents()

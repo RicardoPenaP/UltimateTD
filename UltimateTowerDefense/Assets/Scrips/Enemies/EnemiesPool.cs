@@ -22,8 +22,9 @@ public class EnemiesPool : MonoBehaviour
 
 
     private void Start()
-    {        
-        pooledEnemiesPath = Pathfinder.Instance.GetNewPath();
+    {
+        Vector2Int myCoordinates = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(myCoordinates);
     }    
 
     private void Update()

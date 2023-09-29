@@ -8,14 +8,18 @@ public class GameMananger : MonoBehaviour
     [Header("Game Mananger")]
     [SerializeField] private float timeToStart;
     [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private float restingTime;
         
     private WaveMananger[] waveManangers;
-
-    private int currentWave = 0;
+    //for testing 
+    [SerializeField]private int currentWave = 1;
 
     private float playTime;
     private int enemiesKilled;
     private int wavesCleared;
+
+    private bool canCheckForNextWave = true;
+    private bool gameCompleted = false;
 
     private void Awake()
     {
@@ -24,6 +28,8 @@ public class GameMananger : MonoBehaviour
 
     private void Start()
     {
+        currentWave = 1;
+        gameCompleted = false;
         StartCoroutine(WaitBetweenWavesRoutine(timeToStart));
     }
 
@@ -39,6 +45,10 @@ public class GameMananger : MonoBehaviour
 
     private void GameLoop()
     {
+        if (gameCompleted)
+        {
+            return;
+        }
         CheckForWaveCompleted();
     }
 
@@ -57,10 +67,16 @@ public class GameMananger : MonoBehaviour
 
     private void CheckForNextWave()
     {
+        if (!canCheckForNextWave)
+        {
+            return;
+        }
+
         foreach (WaveMananger waveMananger in waveManangers)
         {
             if (waveMananger.HavePendingWaves)
             {
+                canCheckForNextWave = false;
                 currentWave++;
                 StartCoroutine(WaitBetweenWavesRoutine(timeBetweenWaves));
                 return;
@@ -73,20 +89,28 @@ public class GameMananger : MonoBehaviour
 
     private void AllWavesCleared()
     {
-
+        gameCompleted = true;
+        GameOverMenu.Instance.OpenGameCompleteMenu();
+        //Win behaviour
     }
 
     private void StartWaves()
     {
         foreach (WaveMananger waveMananger in waveManangers)
         {
-            waveMananger.StartNewWave(currentWave);
+            waveMananger.StartNewWave(currentWave-1);
         }
     }
 
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)
     {
-        yield return new WaitForSeconds(timeToWait);
+        restingTime = timeToWait;
+        while (restingTime > 0)
+        {
+            restingTime -= Time.deltaTime;
+            yield return null;
+        }
+        canCheckForNextWave = true;
         StartWaves();
     }
 
