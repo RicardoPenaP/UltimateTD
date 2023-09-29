@@ -8,11 +8,11 @@ public class GameMananger : Singleton<GameMananger>
     [Header("Game Mananger")]
     [SerializeField] private float timeToStart;
     [SerializeField] private float timeBetweenWaves;
-    [SerializeField] private float restingTime;
         
     private WaveMananger[] waveManangers;
-    //for testing 
-    [SerializeField]private int currentWave = 1;
+    
+    private int currentWave = 1;
+    private float timeLeft;
 
     private float timePlayed;
     private int enemiesKilled;
@@ -116,10 +116,10 @@ public class GameMananger : Singleton<GameMananger>
 
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)
     {
-        restingTime = timeToWait;
-        while (restingTime > 0)
+        timeLeft = timeToWait;
+        while (timeLeft > 0)
         {
-            restingTime -= Time.deltaTime;
+            timeLeft -= Time.deltaTime;
             yield return null;
         }
         canCheckForNextWave = true;
