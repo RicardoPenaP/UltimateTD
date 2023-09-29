@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameMananger : Singleton<GameMananger>
 {
     [Header("Game Mananger")]
+    [SerializeField] private GameManangerNextWavePanel nextWavePanel;
     [SerializeField] private float timeToStart;
     [SerializeField] private float timeBetweenWaves;
         
@@ -122,6 +123,7 @@ public class GameMananger : Singleton<GameMananger>
             timeLeft -= Time.deltaTime;
             yield return null;
         }
+        timeLeft = 0;
         canCheckForNextWave = true;
         StartWaves();
     }
