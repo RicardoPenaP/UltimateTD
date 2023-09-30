@@ -17,7 +17,7 @@ public class TowerLevelingData : ScriptableObject
     [SerializeField, Range(0, 100)] private int baseAttackRatioAugment = 0;
     [SerializeField, Range(0, 100)] private int baseAttackRangeAugment = 0;
 
-    public float GetAugmentCostCoeficient(TowerStatToAugment wantedStatCoeficient, int level)
+    public float GetAugmentCostCoeficient(TowerStatToAugment wantedStatCoeficient)
     {
         float resultingPercentage = 0f;
 
@@ -37,8 +37,7 @@ public class TowerLevelingData : ScriptableObject
                 break;
             default:
                 break;
-        }
-        resultingPercentage *= level - 1;
+        }        
         float augmentCoeficient = 1 + resultingPercentage;
 
         return augmentCoeficient;

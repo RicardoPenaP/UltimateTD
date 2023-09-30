@@ -18,7 +18,7 @@ public class CanonBall : MonoBehaviour,IAmmunition
     private void Move()
     {
         transform.right = (target.position - transform.position).normalized;
-        transform.position += transform.right * movementSpeed * Time.deltaTime;
+        transform.position += transform.right * movementSpeed * Time.deltaTime;       
     }
 
     public void SetTarget(Transform target)

@@ -68,11 +68,11 @@ public class TowerController : MonoBehaviour,IBuilding
     public void LevelUp()
     {
         myInfo.currentLevel++;        
-        myInfo.currentAttackDamage = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackDamage, myInfo.currentLevel));        
-        myInfo.currentAttackRange = myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRange, myInfo.currentLevel);
-        myInfo.currentAttackRatio = myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseAttackRatio, myInfo.currentLevel);        
+        myInfo.currentAttackDamage = Mathf.RoundToInt(myData.GetStatValueForALevel(TowerStatToAugment.BaseAttackDamage, myInfo.currentLevel));        
+        myInfo.currentAttackRange = myData.GetStatValueForALevel(TowerStatToAugment.BaseAttackRange, myInfo.currentLevel);
+        myInfo.currentAttackRatio = myData.GetStatValueForALevel(TowerStatToAugment.BaseAttackRatio, myInfo.currentLevel);        
         totalBuildingCost += myInfo.currentLevelUpGoldCost;
-        myInfo.currentLevelUpGoldCost = Mathf.RoundToInt(myData.GetLevelRelatedStatValue(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
+        myInfo.currentLevelUpGoldCost = Mathf.RoundToInt(myData.GetStatValueForALevel(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
     }

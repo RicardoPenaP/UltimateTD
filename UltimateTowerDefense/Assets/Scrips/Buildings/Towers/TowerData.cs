@@ -35,9 +35,10 @@ public class TowerData : ScriptableObject
     public int BaseLevelUpCost { get { return baseLevelUpCost; } }
  
     public float SellValuePercentageCoeficient { get { return sellValuePercentageCoeficient; } }
-    public float GetLevelRelatedStatValue(TowerStatToAugment wantedStatValue, int level)
+    public float GetStatValueForALevel(TowerStatToAugment wantedStatValue, int level)
     {
         float statValue = 0f;
+        float statCoeficient = levelingData.GetAugmentCostCoeficient(wantedStatValue); ;
 
         switch (wantedStatValue)
         {
@@ -57,6 +58,11 @@ public class TowerData : ScriptableObject
                 break;
         }
 
-        return statValue * levelingData.GetAugmentCostCoeficient(wantedStatValue, level);
+        for (int i = 0; i < level; i++)
+        {
+            statValue *= statCoeficient;
+        }
+
+        return statValue;
     }
 }
