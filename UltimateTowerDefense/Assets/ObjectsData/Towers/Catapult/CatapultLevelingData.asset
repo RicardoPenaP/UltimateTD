@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a48bbd4ed185244cbc2902dbfa33f9e, type: 3}
   m_Name: CatapultLevelingData
   m_EditorClassIdentifier: 
-  baseLevelUpGoldCostAugment: 25
+  baseLevelUpGoldCostAugment: 50
   baseAttackDamageAugment: 5
   baseAttackRatioAugment: 0
-  baseAttackRangeAugment: 5
+  baseAttackRangeAugment: 15

@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
   m_Name: DeathKnightData
   m_EditorClassIdentifier: 
-  enemyName: DeathKnight
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 100
-  baseShield: 50
+  baseHealth: 200
+  baseShield: 100
   baseMovementSpeed: 0.8
-  distanceFromNextTileOffset: 0.08
   baseGoldReward: 50
-  baseDamageToStronghold: 1
+  baseDamageToStronghold: 2
   attackRange: 1
-  isRanged: 0

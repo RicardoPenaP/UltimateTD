@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a48bbd4ed185244cbc2902dbfa33f9e, type: 3}
   m_Name: GunLevelingData
   m_EditorClassIdentifier: 
-  baseLevelUpGoldCostAugment: 25
-  baseAttackDamageAugment: 2
+  baseLevelUpGoldCostAugment: 50
+  baseAttackDamageAugment: 5
   baseAttackRatioAugment: 10
-  baseAttackRangeAugment: 2
+  baseAttackRangeAugment: 5

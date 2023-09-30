@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc75fca8cd8a5a4a916575f8cc035d9, type: 3}
   m_Name: GunTowerUIData
   m_EditorClassIdentifier: 
-  baseGoldCost: 400
+  baseGoldCost: 250
   buildingIcon: {fileID: 21300000, guid: 366340aeb70736749afc3385d75bdd02, type: 3}
   buildingName: Gun Tower
   buildingDescription: A powerful tower with a machine gun that quickly fires at

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseLevelUpGoldCostAugment: 50
   baseAttackDamageAugment: 10
-  baseAttackRatioAugment: 5
-  baseAttackRangeAugment: 1
+  baseAttackRatioAugment: 10
+  baseAttackRangeAugment: 0

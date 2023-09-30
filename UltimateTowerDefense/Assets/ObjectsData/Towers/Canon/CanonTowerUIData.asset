@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc75fca8cd8a5a4a916575f8cc035d9, type: 3}
   m_Name: CanonTowerUIData
   m_EditorClassIdentifier: 
-  baseGoldCost: 250
+  baseGoldCost: 100
   buildingIcon: {fileID: 21300000, guid: 5c39250745a91ed4eb7158ca300d60fc, type: 3}
   buildingName: Canon Tower
   buildingDescription: A powerful tower with a canon that destroys your enemies.

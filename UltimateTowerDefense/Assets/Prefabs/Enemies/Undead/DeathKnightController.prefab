@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldPercentageRecover: 30
-  skillCooldownTime: 3
+  skillCooldownTime: 10
 --- !u!1001 &5131916921871823918
 PrefabInstance:
   m_ObjectHideFlags: 0
