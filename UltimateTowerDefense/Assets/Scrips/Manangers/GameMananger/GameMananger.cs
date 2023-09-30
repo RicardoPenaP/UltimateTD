@@ -52,7 +52,7 @@ public class GameMananger : Singleton<GameMananger>
 
     private void OnDestroy()
     {
-        nextWavePanel.UnsubscribeToStarNowButtonOnClickEvent(StarNextWave);
+        nextWavePanel?.UnsubscribeToStarNowButtonOnClickEvent(StarNextWave);
 
         StopAllCoroutines();
     }
@@ -122,6 +122,10 @@ public class GameMananger : Singleton<GameMananger>
 
     private void StarNextWave()
     {
+        if (PauseMenu.Instance.IsPaused)
+        {
+            return;
+        }
         timeLeft = 0;
     }
 
