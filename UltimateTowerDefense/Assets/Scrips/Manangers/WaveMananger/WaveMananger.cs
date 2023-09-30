@@ -20,7 +20,7 @@ public class WaveMananger : MonoBehaviour
     public bool WaveCompleted { get { return CheckWaveCompleted(); } }
     public bool HavePendingWaves { get { return waveIndex < waves.Length-1; } }
 
-    private void Awake()
+    private void Start()
     {
         InitEnemiesPool();
     }

@@ -37,7 +37,7 @@ public class TowerAiming : MonoBehaviour
 
     private void UpdateTowerCanon()
     {
-        if (GameOverMenu.Instance.IsGameOver)
+        if (GameOverMenu.Instance?.IsGameOver == true)
         {
             return;
         }
