@@ -29,6 +29,7 @@ public class EnemyData : ScriptableObject
     public float GetLevelRelatedStatValue(EnemyStatToAugment wantedStatValue, int level)
     {
         float statValue = 0f;
+        float statCoeficient = levelingData.GetAugmentCoeficient(wantedStatValue);
         switch (wantedStatValue)
         {
             case EnemyStatToAugment.BaseHealth:
@@ -48,9 +49,14 @@ public class EnemyData : ScriptableObject
                 break;
             default:
                 break;
-        }       
+        }
 
-        return statValue * levelingData.GetAugmentCoeficient(wantedStatValue, level);
+        for (int i = 0; i < level-1; i++)
+        {
+            statValue *= statCoeficient;
+        }
+
+        return statValue;
         
     }
 

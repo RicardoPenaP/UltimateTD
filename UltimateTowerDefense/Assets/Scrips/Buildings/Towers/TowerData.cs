@@ -58,7 +58,7 @@ public class TowerData : ScriptableObject
                 break;
         }
 
-        for (int i = 0; i < level; i++)
+        for (int i = 0; i < level-1; i++)
         {
             statValue *= statCoeficient;
         }

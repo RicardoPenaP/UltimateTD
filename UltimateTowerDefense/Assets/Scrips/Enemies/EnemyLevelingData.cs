@@ -21,31 +21,31 @@ public class EnemyLevelingData : ScriptableObject
     [Header("Damage")]
     [SerializeField, Range(0, 100)] private int baseDamageToStrongholdAugment = 0;
 
-    public float GetAugmentCoeficient(EnemyStatToAugment wantedStatCoeficient, int level)
+    public float GetAugmentCoeficient(EnemyStatToAugment wantedStatCoeficient)
     {        
-        float resultingPercentage = 0f;
+        float augmentCoeficient = 0f;
         switch (wantedStatCoeficient)
         {
             case EnemyStatToAugment.BaseHealth:
-                resultingPercentage = (float)baseHealthAugment / 100;
+                augmentCoeficient = (float)baseHealthAugment / 100;
                 break;
             case EnemyStatToAugment.BaseShield:
-                resultingPercentage = (float)baseShieldAugment / 100;
+                augmentCoeficient = (float)baseShieldAugment / 100;
                 break;
             case EnemyStatToAugment.BaseMovementSpeed:
-                resultingPercentage = (float)baseMovementSpeedAugment / 100;
+                augmentCoeficient = (float)baseMovementSpeedAugment / 100;
                 break;
             case EnemyStatToAugment.BaseGoldReward:
-                resultingPercentage = (float)baseGoldRewardAugment / 100;
+                augmentCoeficient = (float)baseGoldRewardAugment / 100;
                 break;
             case EnemyStatToAugment.BaseDamageToStronghold:
-                resultingPercentage = (float)baseDamageToStrongholdAugment / 100;
+                augmentCoeficient = (float)baseDamageToStrongholdAugment / 100;
                 break;
             default:
                 break;
         }
-        resultingPercentage *= level-1;
-        float augmentCoeficient = 1f+resultingPercentage;
+
+        augmentCoeficient = 1f+augmentCoeficient;
         return augmentCoeficient;
     }
 }
