@@ -14,7 +14,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GridMananger gridManangerPrefab;
 
     [Header("Stronghold")]
-    [SerializeField] GameObject strongholdReference;
+    [SerializeField] Stronghold strongholdReference;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
     [SerializeField,Min(0)] int tilesFromBorder;
 
@@ -22,11 +22,13 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] Tile defaultTilePrefab;
     [SerializeField] Tile pathTile;
 
+    [Header("Path Settings")]
+    [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
+
     private GridMananger myGridMananger;
     private Dictionary<Vector2Int, Tile> myGrid = new Dictionary<Vector2Int, Tile>();
 
-    private GameObject myStronghold;
-
+    private Stronghold myStronghold;
 
     private void Awake()
     {
@@ -69,7 +71,7 @@ public class MapGenerator : MonoBehaviour
 
     public void InitPaths()
     {
-
+       
     }
 
 }

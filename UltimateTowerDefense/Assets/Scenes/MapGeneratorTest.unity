@@ -333,7 +333,10 @@ MonoBehaviour:
   gridSize: 5
   gridDimension: {x: 15, y: 15}
   gridManangerPrefab: {fileID: 4014150688977234643, guid: 10fb0211b56a849448918565b14b0eb8, type: 3}
+  strongholdReference: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
+  tilesFromBorder: 3
   defaultTilePrefab: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+  pathTile: {fileID: 0}
 --- !u!4 &1101151351
 Transform:
   m_ObjectHideFlags: 0
