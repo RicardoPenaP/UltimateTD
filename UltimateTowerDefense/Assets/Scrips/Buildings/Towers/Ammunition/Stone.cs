@@ -42,12 +42,16 @@ public class Stone : MonoBehaviour,IAmmunition
         DestroyBehaviour();
     }
 
+    public void StartMovement()
+    {
+        StartCoroutine(ParableMovementRoutine());
+    }
+
     public void SetTarget(Transform newDirection)
     {
         finalPos = new Vector3(newDirection.position.x,0,newDirection.position.z);
         startPos = transform.position;
-        maxY = (Vector3.Distance(startPos, finalPos) * maxHeightPercentage) /100;
-        StartCoroutine(ParableMovementRoutine());        
+        maxY = (Vector3.Distance(startPos, finalPos) * maxHeightPercentage) /100;         
     }
 
     public void SetTarget(EnemyDamageHandler target)

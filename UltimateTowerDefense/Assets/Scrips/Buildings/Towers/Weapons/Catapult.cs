@@ -9,10 +9,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     private Animator myAnimator;
     private readonly int ATTACK_ANIMATION_HASH = Animator.StringToHash("Attack");
-
-    private IAmmunition myAmmunition;
+   
+    private Stone myAmmunition;
 
     private Transform objectivePos;
+    private EnemyDamageHandler target;
 
     private bool canAttack = true;
 
@@ -30,17 +31,32 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
         if (myAmmunition == null)
         {
-            myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<IAmmunition>();
+            myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<Stone>();
         }
         canAttack = false;       
         myAmmunition.SetDamage(attackDamage);        
         this.objectivePos = attackObjectivePos;
+        myAmmunition.SetTarget(objectivePos);
         myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
     }
 
     public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
     {
-        
+        if (!canAttack)
+        {
+            return;
+        }
+
+        if (myAmmunition == null)
+        {
+            myAmmunition = Instantiate(ammunition, shootingPos.position, Quaternion.identity, shootingPos).GetComponent<Stone>();
+        }
+        canAttack = false;
+        this.target = target;
+        this.objectivePos = target.GetEnemyAimPoint();
+        myAmmunition.SetDamage(attackDamage);
+        myAmmunition.SetTarget(objectivePos);        
+        myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
     }
 
     public void AimAt(Vector3 aimPos)
@@ -52,22 +68,13 @@ public class Catapult : MonoBehaviour,ITowerWeapon
 
     public void AnimatorAttackCompletedHelper()
     {
-        if (myAmmunition==null)
+        if (myAmmunition == null)
         {
             return;
         }
-        canAttack = true;
-
-        if (!objectivePos)
-        {
-            return;
-        }
-        if (!objectivePos.gameObject.activeInHierarchy)
-        {
-            return;
-        }
-        myAmmunition.SetTarget(objectivePos);
-        (myAmmunition as MonoBehaviour).transform.SetParent(transform.parent);
+        canAttack = true;       
+        myAmmunition.transform.SetParent(transform.parent);
+        myAmmunition.StartMovement();
         myAmmunition = null;
         
     }

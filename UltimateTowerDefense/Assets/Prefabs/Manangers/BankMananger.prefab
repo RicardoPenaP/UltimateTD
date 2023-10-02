@@ -291,5 +291,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmountGold: 100000
-  startingAmouuntGold: 1000
+  startingAmouuntGold: 100
   currentAmountGold: 0
