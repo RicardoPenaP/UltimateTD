@@ -100,7 +100,7 @@ public class TowerAiming : MonoBehaviour
     {
         if (target)
         {
-            myWeapon.AimAt(target.transform.position);
+            myWeapon.AimAt(target.GetEnemyAimPoint().position);
         }
 
         if (menuTarget)

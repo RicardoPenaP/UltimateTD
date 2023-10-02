@@ -8,8 +8,8 @@ public class CanonBall : MonoBehaviour,IAmmunition
     [SerializeField,Min(0f)] private float movementSpeed = 30f;
 
     private int damage;   
-    private Transform target;
-    private EnemyDamageHandler targetDamageHandler;
+    private Transform targetPosition;
+    private EnemyDamageHandler target;
 
     private Vector3 startingPos;
 
@@ -28,7 +28,7 @@ public class CanonBall : MonoBehaviour,IAmmunition
     {
         EnemyDamageHandler enemy = other.GetComponent<EnemyDamageHandler>();
 
-        if (enemy == targetDamageHandler)
+        if (enemy == target)
         {
             enemy.TakeDamage(damage);
             Destroy();
@@ -45,16 +45,16 @@ public class CanonBall : MonoBehaviour,IAmmunition
             return;
         }
 
-        if (targetDamageHandler.IsAlive)
+        if (target?.IsAlive == true)
         {
-            transform.forward = (target.position - transform.position).normalized;           
+            transform.forward = (targetPosition.position - transform.position).normalized;           
         }
         else
         {
-            transform.forward = (transform.position-startingPos).normalized;
+            Destroy();
         }
 
-        transform.forward = (target.position - transform.position).normalized;
+        transform.forward = (targetPosition.position - transform.position).normalized;
         transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
 
@@ -67,13 +67,13 @@ public class CanonBall : MonoBehaviour,IAmmunition
 
     public void SetTarget(Transform target)
     {
-        this.target = target;
-        targetDamageHandler = target.GetComponent<EnemyDamageHandler>();
+        this.targetPosition = target;       
     }
 
     public void SetTarget(EnemyDamageHandler target)
     {
-
+        this.target = target;
+        targetPosition = target.GetEnemyAimPoint();
     }
 
     public void SetDamage(int damage)

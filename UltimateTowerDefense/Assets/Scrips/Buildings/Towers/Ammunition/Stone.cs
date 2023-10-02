@@ -50,6 +50,11 @@ public class Stone : MonoBehaviour,IAmmunition
         StartCoroutine(ParableMovementRoutine());        
     }
 
+    public void SetTarget(EnemyDamageHandler target)
+    {
+        
+    }
+
     public void SetDamage(int damage)
     {
         this.damage = damage;
