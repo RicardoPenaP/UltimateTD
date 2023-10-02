@@ -23,6 +23,11 @@ public class GridMananger : Singleton<GridMananger>
     protected override void Awake()
     {
         base.Awake();
+        
+    }
+
+    private void Start()
+    {
         UpdateTiles();
         SetTresholds();
     }
