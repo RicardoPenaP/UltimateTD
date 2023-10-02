@@ -10,23 +10,29 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] float gridSize;
     [SerializeField] Vector2Int gridDimension;
 
-    [Header("Manangers Reference")]
+    [Header("Manangers")]
     [SerializeField] GridMananger gridManangerPrefab;
 
-    [Header("Stronghold Reference")]
+    [Header("Stronghold")]
     [SerializeField] GameObject strongholdReference;
+    [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
+    [SerializeField,Min(0)] int tilesFromBorder;
 
     [Header("Tiles Reference")] 
     [SerializeField] Tile defaultTilePrefab;
+    [SerializeField] Tile pathTile;
 
     private GridMananger myGridMananger;
     private Dictionary<Vector2Int, Tile> myGrid = new Dictionary<Vector2Int, Tile>();
 
+    private GameObject myStronghold;
 
 
     private void Awake()
     {
         InitGrid();
+        InitStronghold();
+        InitPaths();
     }
 
     private void InitGrid()
@@ -48,7 +54,20 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void InitStronghold()
+    public void InitStronghold()
+    {
+        Vector2Int gridPosition = new Vector2Int();
+        gridPosition.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
+        gridPosition.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
+
+
+        Vector3 strongholdPos = myGrid[gridPosition].GetPosition();
+
+        myStronghold = Instantiate(strongholdReference,strongholdPos,Quaternion.identity);
+        myGrid[gridPosition].TileStatus = TileStatusID.Occuped;
+    }
+
+    public void InitPaths()
     {
 
     }
