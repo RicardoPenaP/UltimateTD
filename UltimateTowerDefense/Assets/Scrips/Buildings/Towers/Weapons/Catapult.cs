@@ -38,6 +38,11 @@ public class Catapult : MonoBehaviour,ITowerWeapon
         myAnimator.SetTrigger(ATTACK_ANIMATION_HASH);
     }
 
+    public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
+    {
+        
+    }
+
     public void AimAt(Vector3 aimPos)
     {
         Vector3 newDirection = (aimPos - transform.position).normalized;

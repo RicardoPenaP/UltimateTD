@@ -15,6 +15,14 @@ public class Canon : MonoBehaviour,ITowerWeapon
 
     }
 
+    public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
+    {
+        IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        ammoShooted.SetDamage(attackDamage);
+        ammoShooted.SetTarget(target);
+
+    }
+
     public void AimAt(Vector3 aimPos)
     {
         Vector3 newDirection = (aimPos - transform.position).normalized;

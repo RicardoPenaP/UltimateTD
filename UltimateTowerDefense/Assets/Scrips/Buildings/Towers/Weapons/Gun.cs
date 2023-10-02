@@ -17,6 +17,15 @@ public class Gun : MonoBehaviour,ITowerWeapon
         shootingPosIndex = shootingPosIndex >= shootingPos.Length ? 0 : shootingPosIndex;
     }
 
+    public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
+    {
+        IAmmunition ammoshooted = Instantiate(ammunition, shootingPos[shootingPosIndex].position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        ammoshooted.SetDamage(attackDamage);
+        ammoshooted.SetTarget(target);
+        shootingPosIndex++;
+        shootingPosIndex = shootingPosIndex >= shootingPos.Length ? 0 : shootingPosIndex;
+    }
+
     public void AimAt(Vector3 aimPos)
     {
         Vector3 newDirection = (aimPos - transform.position).normalized;

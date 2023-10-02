@@ -89,7 +89,7 @@ public class TowerAiming : MonoBehaviour
         }
         else
         {
-            myWeapon.Attack(myController.AmmunitionPrefab, myController.AttackDamage, target.GetEnemyAimPoint());
+            myWeapon.Attack(myController.AmmunitionPrefab, myController.AttackDamage, target);
         }
         
         SetAttackCooldownTime(myController.AttackRatio);
