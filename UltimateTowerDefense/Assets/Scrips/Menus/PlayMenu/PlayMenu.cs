@@ -36,7 +36,7 @@ public class PlayMenu : MonoBehaviour
     private void PlaySingleRoad()
     {
         CloseMenu();
-        GameScenesLoader.LoadGameScene(GameScenes.TestingScene);//for testing only
+        GameScenesLoader.LoadGameScene(GameScenes.SingleRoadGame);//for testing only
     }
 
     private void CloseMenu()

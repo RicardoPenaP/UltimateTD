@@ -25,6 +25,7 @@ namespace GameSceneManangement
                     SceneManager.LoadScene(1);
                     break;
                 case GameScenes.SingleRoadGame:
+                    SceneManager.LoadScene(2);
                     break;
                 case GameScenes.DoubleRoadGame:
                     break;
