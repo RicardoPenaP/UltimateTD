@@ -10,6 +10,13 @@ public class CanonBall : MonoBehaviour,IAmmunition
     private int damage;
     private Transform target;
 
+    private Vector3 startingPos;
+
+    private void Start()
+    {
+        startingPos = transform.position;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -17,8 +24,16 @@ public class CanonBall : MonoBehaviour,IAmmunition
 
     private void Move()
     {
-        transform.right = (target.position - transform.position).normalized;
-        transform.position += transform.right * movementSpeed * Time.deltaTime;       
+        if (target.gameObject.activeInHierarchy)
+        {
+            transform.forward = (target.position - transform.position).normalized;
+        }
+        else
+        {
+            transform.forward = (transform.position - startingPos).normalized;
+        }
+
+        transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
 
     public void SetTarget(Transform target)

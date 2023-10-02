@@ -9,6 +9,12 @@ public class Arrow : MonoBehaviour, IAmmunition
 
     private int damage;
     private Transform target;
+    private Vector3 startingPos;
+
+    private void Start()
+    {
+        startingPos = transform.position;
+    }
 
     private void FixedUpdate()
     {
@@ -17,7 +23,15 @@ public class Arrow : MonoBehaviour, IAmmunition
 
     private void Move()
     {
-        transform.forward = (target.position - transform.position).normalized;
+        if (target.gameObject.activeInHierarchy)
+        {
+            transform.forward = (target.position - transform.position).normalized;
+        }
+        else
+        {
+            transform.forward = (transform.position-startingPos).normalized;
+        }
+        
         transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
 
