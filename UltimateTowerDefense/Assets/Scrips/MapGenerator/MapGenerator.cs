@@ -7,20 +7,20 @@ public class MapGenerator : MonoBehaviour
     [Header("Map Generator")]
 
     [Header("Size Settings")]
-    [SerializeField] float gridSize;
-    [SerializeField] Vector2Int gridDimension;
+    [SerializeField] public static readonly float gridSize = 5;
+    [SerializeField] private Vector2Int gridDimension;
 
     [Header("Manangers")]
-    [SerializeField] GridMananger gridManangerPrefab;
+    [SerializeField] private GridMananger gridManangerPrefab;
 
     [Header("Stronghold")]
-    [SerializeField] Stronghold strongholdReference;
+    [SerializeField] private Stronghold strongholdReference;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
-    [SerializeField,Min(0)] int tilesFromBorder;
+    [SerializeField,Min(0)] private int tilesFromBorder;
 
     [Header("Tiles Reference")] 
-    [SerializeField] Tile defaultTilePrefab;
-    [SerializeField] Tile pathTile;
+    [SerializeField] private Tile defaultTilePrefab;
+    [SerializeField] private Tile pathTile;
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
@@ -160,12 +160,12 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private Vector3 CoordinatesToPosition(Vector2Int coordinates)
+    public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
     {
         return new Vector3(coordinates.x * gridSize,0, coordinates.y * gridSize);
     }
 
-    private Vector2Int PositionToCoordinates(Vector3 position)
+    public static Vector2Int PositionToCoordinates(Vector3 position)
     {
         return new Vector2Int(Mathf.RoundToInt(position.x/gridSize), Mathf.RoundToInt(position.z/ gridSize));
     }
