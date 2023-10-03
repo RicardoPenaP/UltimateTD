@@ -336,7 +336,8 @@ MonoBehaviour:
   strongholdReference: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
   tilesFromBorder: 3
   defaultTilePrefab: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
-  pathTile: {fileID: 0}
+  pathTile: {fileID: 6461317154435440578, guid: 8e80c5605e1c4b1488ba441d85c4ab34, type: 3}
+  amountOfPaths: 2
 --- !u!4 &1101151351
 Transform:
   m_ObjectHideFlags: 0
