@@ -20,13 +20,12 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Tiles Reference")] 
     [SerializeField] private Tile defaultTilePrefab;
-    [SerializeField] private Tile pathTile;
+    [SerializeField] private Tile deafultPathTilePrefab;
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
 
-    private GridMananger myGridMananger;
-    private Dictionary<Vector2Int, Tile> myGrid = new Dictionary<Vector2Int, Tile>();
+    private GridMananger myGridMananger;    
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
 
 
@@ -37,7 +36,8 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {        
-        InitNodesGrid();  
+        InitNodesGrid();
+        InitTilesGrid();
     }
 
     private void InitNodesGrid()
@@ -47,12 +47,12 @@ public class MapGenerator : MonoBehaviour
             for (int j = 0; j < gridDimension.y; j++)
             {               
                 Node newNode = new Node(new Vector2Int(i, j));
+                newNode.content = NodeContent.Grass;
+                myNodeGrid.Add(newNode.coordinates, newNode);
             }
         }
         InitStrongholdNode();        
-        InitPaths();
-
-       
+        InitPaths();       
 
     }
 
@@ -84,8 +84,9 @@ public class MapGenerator : MonoBehaviour
         {
             paths[i] = new Path();
         }
-        SetPathsCoordinates(GeneratePathRandomUbication(amountOfPaths));        
-
+        SetPathsStartCoordinates(GeneratePathRandomUbication(amountOfPaths));
+        SetPathDestinationCoordinates();
+        SetPathNodes();
     }
 
     private Path.PathUbication[] GeneratePathRandomUbication(int amount)
@@ -110,7 +111,7 @@ public class MapGenerator : MonoBehaviour
         return randomUbications;
     }
 
-    private void SetPathsCoordinates(Path.PathUbication[] randomUbication)
+    private void SetPathsStartCoordinates(Path.PathUbication[] randomUbication)
     {
         for (int i = 0; i < paths.Length; i++)
         {            
@@ -127,24 +128,99 @@ public class MapGenerator : MonoBehaviour
                     randomStarCoordinate.y = 0;
                     break;
                 case Path.PathUbication.East:
-                    randomStarCoordinate.x = 0;
+                    randomStarCoordinate.x = gridDimension.x - 1;
                     randomStarCoordinate.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder); 
                     break;
                 case Path.PathUbication.West:
-                    randomStarCoordinate.x = gridDimension.x - 1;
+                    randomStarCoordinate.x = 0;
                     randomStarCoordinate.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
                     break;
                 default:
                     break;
             }
 
-            paths[i].startNode = new Node(randomStarCoordinate);
-            paths[i].startNode.content = NodeContent.Path;
-            myNodeGrid.TryAdd(randomStarCoordinate, paths[i].startNode);
-            paths[i].destinationNode = new Node(myStrongholdNode.coordinates);
+            paths[i].startCoordinates = randomStarCoordinate;            
         }
     }
 
+    private void SetPathDestinationCoordinates()
+    {
+        foreach (Path path in paths)
+        {
+            switch (path.ubication)
+            {               
+                case Path.PathUbication.North:
+                    path.destinationCoordinates=myStrongholdNode.coordinates + Vector2Int.up;
+                    break;
+                case Path.PathUbication.South:
+                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.down;
+                    break;
+                case Path.PathUbication.East:
+                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.right;
+                    break;
+                case Path.PathUbication.West:
+                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.left;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void SetPathNodes()
+    {
+        PathGeneratorData myPathData = new PathGeneratorData();
+       
+        myPathData.contentOfPathNodes = NodeContent.Path;
+        foreach (Path path in paths)
+        {
+            myPathData.startCoordinates = path.startCoordinates;
+            myPathData.destinationCoordinates = path.destinationCoordinates;
+            myPathData.nodesGrid = myNodeGrid;
+            path.nodes = PathGenerator.GetNewPath(myPathData);
+            if (path.nodes != null)
+            {
+                foreach (Node node in path.nodes)
+                {
+                    myNodeGrid[node.coordinates].content = node.content;
+                    myNodeGrid[node.coordinates].isFree = false;
+                    myNodeGrid[node.coordinates].isPath = true;
+                }
+            }           
+        }
+
+    }
+
+    private void InitTilesGrid()
+    {
+        myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
+        foreach (KeyValuePair<Vector2Int,Node> keyValue in myNodeGrid)
+        {            
+            switch (keyValue.Value.content)
+            {
+                case NodeContent.None:
+                    break;
+                case NodeContent.Grass:
+                    Tile grassTile = Instantiate(defaultTilePrefab, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));                    
+                    break;
+                case NodeContent.Water:
+                    break;
+                case NodeContent.Path:
+                    Tile pathTile = Instantiate(deafultPathTilePrefab, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    keyValue.Value.isFree = false;
+                    keyValue.Value.isPath = true;
+                    break;
+                case NodeContent.Stronghold:
+                    myStronghold = Instantiate(strongholdReference, keyValue.Value.position, Quaternion.identity);
+                    keyValue.Value.isFree = false;
+                    break;
+                case NodeContent.Decoration:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
     {

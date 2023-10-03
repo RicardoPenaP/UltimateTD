@@ -5,52 +5,64 @@ using UnityEngine;
 public struct PathGeneratorData
 {
     public Dictionary<Vector2Int, Node> nodesGrid;
-    public Node startNode;
-    public Node destinationNode;
+    public Vector2Int startCoordinates;
+    public Vector2Int destinationCoordinates;
     public NodeContent contentOfPathNodes;
 }
-
-
-
-public class PathGenerator : MonoBehaviour
+public class PathGenerator
 {
-    private static Node startNode;
-    private static Node destinationNode;
+    private static Vector2Int startCoordinates;
+    private static Vector2Int destinationCoordinates;
     private static Queue<Node> frontier = new Queue<Node>();
     private static Dictionary<Vector2Int, Node> nodesGrid;
     private static Dictionary<Vector2Int, Node> nodesReached = new Dictionary<Vector2Int, Node>();
     private static Node currenSearchNode;
+    private static Vector2Int[] exploreDirections;
+    private static bool successfulSearch = false;
 
     public static List<Node> GetNewPath(PathGeneratorData pathData)
     {
         frontier.Clear();
-        nodesReached.Clear();
+        nodesReached.Clear();      
 
-        startNode = pathData.startNode;
-        destinationNode = pathData.destinationNode;
-        nodesGrid = pathData.nodesGrid;
-        currenSearchNode = new Node(startNode.coordinates);
+        startCoordinates = pathData.startCoordinates;
+        destinationCoordinates = pathData.destinationCoordinates;
+        nodesGrid = pathData.nodesGrid;        
         BreadthFirstSearch();
-        return BuildPath();
+
+        if (successfulSearch)
+        {
+            return BuildPath(pathData.contentOfPathNodes);
+        }
+        else
+        {
+            Debug.Log("PathNotFounded");
+            return null;
+        }
+        
     }
 
     private static void BreadthFirstSearch()
     { 
-        bool isRuning = true;
+        bool isRunning = true;
 
-        frontier.Enqueue(nodesGrid[startNode.coordinates]);
-        nodesReached.Add(startNode.coordinates, startNode);
+        frontier.Enqueue(nodesGrid[startCoordinates]);
+        nodesReached.Add(startCoordinates, new Node(startCoordinates));
 
-        while (frontier.Count > 0 && isRuning)
+        while (frontier.Count > 0 && isRunning)
         {
             currenSearchNode = frontier.Dequeue();
             currenSearchNode.isExplored = true;            
             ExploreNeighbors();
-            if (currenSearchNode.coordinates == destinationNode.coordinates)
+            if (currenSearchNode.coordinates == destinationCoordinates)
             {
-                isRuning = false;
+                isRunning = false;
+                successfulSearch = true;
+                return;
             }
         }
+
+        successfulSearch = false;
     }
 
     private static void ExploreNeighbors()
@@ -59,8 +71,7 @@ public class PathGenerator : MonoBehaviour
         {
             return;
         }
-
-        Vector2Int[] exploreDirections = GetRandomExploreDirections();
+        exploreDirections = GetRandomExploreDirections();
 
         List<Node> neighbors = new List<Node>();
 
@@ -74,24 +85,25 @@ public class PathGenerator : MonoBehaviour
             }
         }
 
-        foreach (Node neightbor in neighbors)
+        foreach (Node neighbor in neighbors)
         {
-            if (!nodesReached.ContainsKey(neightbor.coordinates) && neightbor.isFree)
+            if (!nodesReached.ContainsKey(neighbor.coordinates) && neighbor.isFree)
             {
-                neightbor.connectedTo = currenSearchNode;
-                nodesReached.Add(neightbor.coordinates, nodesGrid[neightbor.coordinates]);
-                frontier.Enqueue(nodesGrid[neightbor.coordinates]);
+                neighbor.connectedTo = currenSearchNode;
+                nodesReached.Add(neighbor.coordinates, nodesGrid[neighbor.coordinates]);
+                frontier.Enqueue(nodesGrid[neighbor.coordinates]);
             }
         }
     }
 
-    private static List<Node> BuildPath()
+    private static List<Node> BuildPath(NodeContent nodesContent)
     {
         List<Node> path = new List<Node>();
-        Node currentNode = destinationNode;
+        Node currentNode = nodesReached[destinationCoordinates];
 
-        path.Add(currentNode);
         currentNode.isPath = true;
+        path.Add(currentNode);
+        
 
         while (currentNode.connectedTo != null)
         {
@@ -101,6 +113,11 @@ public class PathGenerator : MonoBehaviour
         }
 
         path.Reverse();
+
+        foreach (Node node in path)
+        {
+            node.content = nodesContent;
+        }
 
         return path;
     }

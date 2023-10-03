@@ -6,8 +6,8 @@ public class Path
 {
     public enum PathUbication { None,North, South,East,West}
     public PathUbication ubication = PathUbication.None;
-    public Node startNode;   
-    public Node destinationNode;
+    public Vector2Int startCoordinates;   
+    public Vector2Int destinationCoordinates;
     public List<Node> nodes;
 
 }
