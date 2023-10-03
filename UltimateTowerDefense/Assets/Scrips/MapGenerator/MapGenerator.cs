@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    [System.Serializable]
+    private struct PerlinNodeContent
+    {
+        public NodeContent content;
+        public float level;
+    }
+
     [Header("Map Generator")]
 
     [Header("Size Settings")]
     [SerializeField] public static readonly float gridSize = 5;
     [SerializeField] private Vector2Int gridDimension;
 
+    [Header("Perlin Noise Settings")]
+    [SerializeField] private PerlinNodeContent[] contentLevels;
+    [SerializeField] private float seed;
+    [SerializeField] private float scale;
+    
     [Header("Manangers")]
     [SerializeField] private GridMananger gridManangerPrefab;
 
     [Header("Stronghold")]
     [SerializeField] private Stronghold strongholdReference;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
-    [SerializeField,Min(0)] private int tilesFromBorder;
-
-    [Header("Tiles Reference")] 
-    [SerializeField] private Tile defaultTilePrefab;
-    [SerializeField] private Tile deafultPathTilePrefab;
+    [SerializeField,Min(0)] private int tilesFromBorder;    
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
+
+    [Header("Tiles Reference")]
+    [SerializeField] private Tile grassDefaultTile;
+    [SerializeField] private Tile pathDefaultTile;
+    [SerializeField] private Tile iceDefaultTile;
 
     private GridMananger myGridMananger;    
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
@@ -51,9 +64,39 @@ public class MapGenerator : MonoBehaviour
                 myNodeGrid.Add(newNode.coordinates, newNode);
             }
         }
-        InitStrongholdNode();        
-        InitPaths();       
 
+        InitNodesWithPerlinNoise();
+        //InitStrongholdNode();        
+        //InitPaths();       
+
+    }
+
+    private void InitNodesWithPerlinNoise()
+    {
+        for (int x = 0; x < gridDimension.x; x++)
+        {
+            for (int y = 0; y < gridDimension.y; y++)
+            {
+                if (myNodeGrid.ContainsKey(new Vector2Int(x,y)))
+                {
+                    float value = Mathf.PerlinNoise(((float)x + seed) / scale, ((float)y + seed)) / scale;
+                    myNodeGrid[new Vector2Int(x, y)].content = GetRandomContent(value);
+                }                
+            }
+        }
+    }
+
+    private NodeContent GetRandomContent(float value)
+    {
+        for (int i = 0; i < contentLevels.Length; i++)
+        {
+            if (value < contentLevels[i].level)
+            {
+                return contentLevels[i].content;
+            }
+
+        }
+        return NodeContent.None;
     }
 
     private void InitStrongholdNode()
@@ -201,12 +244,12 @@ public class MapGenerator : MonoBehaviour
                 case NodeContent.None:
                     break;
                 case NodeContent.Grass:
-                    Tile grassTile = Instantiate(defaultTilePrefab, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));                    
+                    Tile grassTile = Instantiate(grassDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));                    
                     break;
                 case NodeContent.Water:
                     break;
                 case NodeContent.Path:
-                    Tile pathTile = Instantiate(deafultPathTilePrefab, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Tile pathTile = Instantiate(pathDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
                     keyValue.Value.isFree = false;
                     keyValue.Value.isPath = true;
                     break;
