@@ -2,156 +2,155 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct PathGeneratorData
+{
+    public Dictionary<Vector2Int, Node> nodesGrid;
+    public Node startNode;
+    public Node destinationNode;
+    public NodeContent contentOfPathNodes;
+}
+
+
+
 public class PathGenerator : MonoBehaviour
 {
-    [Header("Pathfinder")]
-    [SerializeField] private Vector2Int startCoordinates;
-    [SerializeField] private Vector2Int destinationCoordinates;
+    private static Node startNode;
+    private static Node destinationNode;
+    private static Queue<Node> frontier = new Queue<Node>();
+    private static Dictionary<Vector2Int, Node> nodesGrid;
+    private static Dictionary<Vector2Int, Node> nodesReached = new Dictionary<Vector2Int, Node>();
+    private static Node currenSearchNode;
 
-    private Tile startTile;
-    private Tile destinationTile;
-    private Tile currentSearchTile;
-
-    private Vector2Int[] directions = { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
-
-    private GridMananger gridMananger;
-
-    private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
-    private Dictionary<Vector2Int, Tile> tilesReached = new Dictionary<Vector2Int, Tile>();
-    private Queue<Tile> frontier = new Queue<Tile>();
-
-    public Vector2Int DestinationCoordinates { get { return destinationCoordinates; } }
-
-    private void Awake()
-    {       
-        gridMananger = GetComponent<GridMananger>();
-
-        if (gridMananger)
-        {
-            mapGrid = gridMananger.MapGrid;
-            startTile = mapGrid[startCoordinates];
-            destinationTile = mapGrid[destinationCoordinates];
-        }
-
-    }
-
-    private void Start()
+    public static List<Node> GetNewPath(PathGeneratorData pathData)
     {
-        GetNewPath();
-    }
-
-    public List<Tile> GetNewPath()
-    {
-        gridMananger.UpdateTiles();
-        BreadthFirstSearch(startCoordinates);
-        return BuildPath();
-    }
-
-    public List<Tile> GetNewPath(Vector2Int coordinates)
-    {
-        gridMananger.UpdateTiles();
-        BreadthFirstSearch(coordinates);
-        return BuildPath();
-    }
-
-
-    private void BreadthFirstSearch(Vector2Int coordinates)
-    {
-        startTile.isWalkable = true;
-        destinationTile.isWalkable = true;
-
         frontier.Clear();
-        tilesReached.Clear();
+        nodesReached.Clear();
 
-        bool isRunning = true;
+        startNode = pathData.startNode;
+        destinationNode = pathData.destinationNode;
+        nodesGrid = pathData.nodesGrid;
+        currenSearchNode = new Node(startNode.coordinates);
+        BreadthFirstSearch();
+        return BuildPath();
+    }
 
-        frontier.Enqueue(mapGrid[coordinates]);
-        tilesReached.Add(coordinates, mapGrid[coordinates]);
+    private static void BreadthFirstSearch()
+    { 
+        bool isRuning = true;
 
-        while (frontier.Count > 0 && isRunning)
+        frontier.Enqueue(nodesGrid[startNode.coordinates]);
+        nodesReached.Add(startNode.coordinates, startNode);
+
+        while (frontier.Count > 0 && isRuning)
         {
-            currentSearchTile = frontier.Dequeue();
-            currentSearchTile.isExplored = true;
+            currenSearchNode = frontier.Dequeue();
+            currenSearchNode.isExplored = true;            
             ExploreNeighbors();
-            if (currentSearchTile.Coordinates == destinationCoordinates)
+            if (currenSearchNode.coordinates == destinationNode.coordinates)
             {
-                isRunning = false;
+                isRuning = false;
             }
         }
     }
 
-    private void ExploreNeighbors()
+    private static void ExploreNeighbors()
     {
-        if (currentSearchTile == null)
+        if (currenSearchNode == null)
         {
             return;
         }
 
-        List<Tile> neighbors = new List<Tile>();
+        Vector2Int[] exploreDirections = GetRandomExploreDirections();
 
-        for (int i = 0; i < directions.Length; i++)
+        List<Node> neighbors = new List<Node>();
+
+        for (int i = 0; i < exploreDirections.Length; i++)
         {
-            Vector2Int neighborCoordinates = currentSearchTile.Coordinates + directions[i];
+            Vector2Int neighborCoordinates = currenSearchNode.coordinates + exploreDirections[i];
 
-            if (mapGrid.ContainsKey(neighborCoordinates))
+            if (nodesGrid.ContainsKey(neighborCoordinates))
             {
-                neighbors.Add(mapGrid[neighborCoordinates]);
+                neighbors.Add(nodesGrid[neighborCoordinates]);
             }
         }
 
-        foreach (Tile neightbor in neighbors)
+        foreach (Node neightbor in neighbors)
         {
-            if (!tilesReached.ContainsKey(neightbor.Coordinates) && neightbor.isWalkable)
+            if (!nodesReached.ContainsKey(neightbor.coordinates) && neightbor.isFree)
             {
-                neightbor.connectedTo = currentSearchTile;
-                tilesReached.Add(neightbor.Coordinates, mapGrid[neightbor.Coordinates]);
-                frontier.Enqueue(mapGrid[neightbor.Coordinates]);
+                neightbor.connectedTo = currenSearchNode;
+                nodesReached.Add(neightbor.coordinates, nodesGrid[neightbor.coordinates]);
+                frontier.Enqueue(nodesGrid[neightbor.coordinates]);
             }
         }
     }
-    private List<Tile> BuildPath()
+
+    private static List<Node> BuildPath()
     {
-        List<Tile> path = new List<Tile>();
-        Tile currentTile = destinationTile;
+        List<Node> path = new List<Node>();
+        Node currentNode = destinationNode;
 
-        path.Add(currentTile);
-        currentTile.isPath = true;
+        path.Add(currentNode);
+        currentNode.isPath = true;
 
-        while (currentTile.connectedTo != null)
+        while (currentNode.connectedTo != null)
         {
-            currentTile = currentTile.connectedTo;
-            currentTile.isPath = true;
-            path.Add(currentTile);
+            currentNode = currentNode.connectedTo;
+            currentNode.isPath = true;
+            path.Add(currentNode);
         }
 
         path.Reverse();
 
         return path;
-
     }
 
-    public bool WillBlockPath(Vector2Int coordinates)
+    private static Vector2Int[] GetRandomExploreDirections()
     {
-        if (mapGrid.ContainsKey(coordinates))
+        Vector2Int[] randomExploreDirections = new Vector2Int[4];
+
+        for (int i = 0; i < randomExploreDirections.Length; i++)
         {
-            bool previusState = mapGrid[coordinates].isWalkable;
+            randomExploreDirections[i] = GetRandomDirectionVector();
 
-            mapGrid[coordinates].isWalkable = false;
-            List<Tile> newPath = GetNewPath();
-            mapGrid[coordinates].isWalkable = previusState;
-
-            if (newPath.Count <= 1)
+            for (int j = 0; j < randomExploreDirections.Length; j++)
             {
-                GetNewPath();
-                return true;
+                if (i!=j)
+                {
+                    if (randomExploreDirections[i] == randomExploreDirections[j])
+                    {
+                        randomExploreDirections[i] = GetRandomDirectionVector();
+                        j = -1;
+                    }
+                }
             }
         }
 
-        return false;
+        return randomExploreDirections;
     }
 
-    public void NotifyReceivers()
+    private static Vector2Int GetRandomDirectionVector()
     {
-        BroadcastMessage("RecalculatePath", false, SendMessageOptions.DontRequireReceiver);
+        int randomNumber = Random.Range(0, 4);
+        Vector2Int randomDirectionVector = Vector2Int.zero;
+        switch (randomNumber)
+        {
+            case 0:
+                randomDirectionVector = Vector2Int.up;
+                break;
+            case 1:
+                randomDirectionVector = Vector2Int.down;
+                break;
+            case 2:
+                randomDirectionVector = Vector2Int.right;
+                break;
+            case 3:
+                randomDirectionVector = Vector2Int.left;
+                break;
+            default:
+                break;
+        }
+
+        return randomDirectionVector;
     }
 }

@@ -27,57 +27,54 @@ public class MapGenerator : MonoBehaviour
 
     private GridMananger myGridMananger;
     private Dictionary<Vector2Int, Tile> myGrid = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
+
 
     private Stronghold myStronghold;
+    private Node myStrongholdNode;
 
     private Path[] paths;
 
     private void Awake()
     {        
-        InitGrid();  
+        InitNodesGrid();  
     }
 
-    private void InitGrid()
+    private void InitNodesGrid()
     {
-        InitStronghold();
-        myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
-        InitPaths();
-
         for (int i = 0; i < gridDimension.x; i++)
         {
             for (int j = 0; j < gridDimension.y; j++)
-            {
-                float x = i * gridSize;
-                float z = j * gridSize;
-                Tile newTile = Instantiate(defaultTilePrefab, new Vector3(x, 0,z), Quaternion.identity, myGridMananger.transform.GetChild(1));
-
-                if (!myGrid.ContainsKey(newTile.Coordinates))
-                {
-                    myGrid.Add(newTile.Coordinates, newTile);
-                }
+            {               
+                Node newNode = new Node(new Vector2Int(i, j));
             }
         }
+        InitStrongholdNode();        
+        InitPaths();
 
-        BlockStrongholdCoordinates();
+       
+
     }
 
-    private void InitStronghold()
+    private void InitStrongholdNode()
     {
         Vector2Int strongholdCoordinates = new Vector2Int();
         strongholdCoordinates.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
         strongholdCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
-
-
-        Vector3 strongholdPos = CoordinatesToPosition(strongholdCoordinates);
-
-        myStronghold = Instantiate(strongholdReference,strongholdPos,Quaternion.identity);
-        //myStronghold.Coordinates=strongholdCoordinates;
-    }
-
-    private void BlockStrongholdCoordinates()
-    {
-        Vector2Int strongholdCoordinates = PositionToCoordinates(myStronghold.transform.position);        
-        myGrid[strongholdCoordinates].TileStatus = TileStatusID.Occuped;
+        if (!myNodeGrid.ContainsKey(strongholdCoordinates))
+        {
+            myStrongholdNode = new Node(strongholdCoordinates);
+            myStrongholdNode.isFree = false;
+            myStrongholdNode.content = NodeContent.Stronghold;
+            myNodeGrid.TryAdd(strongholdCoordinates, myStrongholdNode);
+        }
+        else
+        {
+            myStrongholdNode = myNodeGrid[strongholdCoordinates];
+            myNodeGrid[strongholdCoordinates].isFree = false;
+            myNodeGrid[strongholdCoordinates].content = NodeContent.Stronghold;
+        }
+      
     }
 
     private void InitPaths()
@@ -87,8 +84,7 @@ public class MapGenerator : MonoBehaviour
         {
             paths[i] = new Path();
         }
-        SetPathsCoordinates(GeneratePathRandomUbication(amountOfPaths));
-        SetPathsTiles();
+        SetPathsCoordinates(GeneratePathRandomUbication(amountOfPaths));        
 
     }
 
@@ -142,23 +138,13 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
 
-            paths[i].startCoordinates = randomStarCoordinate;
-            paths[i].startPosition = CoordinatesToPosition(randomStarCoordinate);
-            paths[i].destinationCoordinates = myStronghold.Coordinates;
+            paths[i].startNode = new Node(randomStarCoordinate);
+            paths[i].startNode.content = NodeContent.Path;
+            myNodeGrid.TryAdd(randomStarCoordinate, paths[i].startNode);
+            paths[i].destinationNode = new Node(myStrongholdNode.coordinates);
         }
     }
 
-    private void SetPathsTiles()
-    {
-        foreach (Path path in paths)
-        {
-            Tile pathStarPoint = Instantiate(pathTile, path.startPosition, Quaternion.identity, myGridMananger.transform.GetChild(0));
-            if (!myGrid.ContainsKey(path.startCoordinates))
-            {
-                myGrid.Add(path.startCoordinates, pathStarPoint);
-            }
-        }
-    }
 
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
     {
