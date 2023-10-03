@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &644338920586269703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7993009260884965261}
+  - component: {fileID: 8084771640774763029}
+  - component: {fileID: 7066254026505747337}
+  m_Layer: 0
+  m_Name: rocks (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7993009260884965261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644338920586269703}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5252540986103296756}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &8084771640774763029
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644338920586269703}
+  m_Mesh: {fileID: -6679825976550175534, guid: c78a4e0ef76113e438c50363c993743b, type: 3}
+--- !u!23 &7066254026505747337
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644338920586269703}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -6126091556477775235, guid: c78a4e0ef76113e438c50363c993743b, type: 3}
+  - {fileID: -7796859627820213912, guid: c78a4e0ef76113e438c50363c993743b, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &8697507662104518916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,7 +93,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 327929781564016204, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_Name
-      value: WaterTileVariant
+      value: RocksTileVariant
       objectReference: {fileID: 0}
     - target: {fileID: 1029783216566186145, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_fontColor.b
@@ -27,14 +111,6 @@ PrefabInstance:
       propertyPath: tileStatus
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2950121007530026321, guid: 08c18076dc581d54da7f934099299c77, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 5604539269314155553, guid: 192d37f18513c554d95e98da5407b35b, type: 3}
-    - target: {fileID: 2950121007530026321, guid: 08c18076dc581d54da7f934099299c77, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 5604539269314155553, guid: 192d37f18513c554d95e98da5407b35b, type: 3}
     - target: {fileID: 3353006742313967625, guid: 08c18076dc581d54da7f934099299c77, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -89,3 +165,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+--- !u!4 &5252540986103296756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3483260609513362416, guid: 08c18076dc581d54da7f934099299c77, type: 3}
+  m_PrefabInstance: {fileID: 8697507662104518916}
+  m_PrefabAsset: {fileID: 0}

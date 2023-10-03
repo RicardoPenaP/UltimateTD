@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum NodeContent { None, Grass, Ice, Water, Trees, Rock, Path, Stronghold, Decoration}
+public enum NodeContent { None, Grass, Ice, Water, Sand, Trees, Rock, Path, Stronghold, Decoration}
 public class Node 
 {
     public Vector2Int coordinates;

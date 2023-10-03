@@ -37,6 +37,10 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private Tile grassDefaultTile;
     [SerializeField] private Tile pathDefaultTile;
     [SerializeField] private Tile iceDefaultTile;
+    [SerializeField] private Tile waterDefaultTile;
+    [SerializeField] private Tile treesDefaultTile;
+    [SerializeField] private Tile sandDefaultTile;
+    [SerializeField] private Tile rocksDefaultTile;
 
     private GridMananger myGridMananger;    
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
@@ -50,6 +54,7 @@ public class MapGenerator : MonoBehaviour
     private void Awake()
     {        
         InitNodesGrid();
+        InitNodesWithPerlinNoise();
         InitTilesGrid();
     }
 
@@ -238,18 +243,29 @@ public class MapGenerator : MonoBehaviour
     {
         myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         foreach (KeyValuePair<Vector2Int,Node> keyValue in myNodeGrid)
-        {            
+        {
             switch (keyValue.Value.content)
-            {
-                case NodeContent.None:
-                    break;
+            {               
                 case NodeContent.Grass:
-                    Tile grassTile = Instantiate(grassDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));                    
+                    Instantiate(grassDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    break;
+                case NodeContent.Ice:
+                    Instantiate(iceDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeContent.Water:
+                    Instantiate(waterDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    break;
+                case NodeContent.Trees:
+                    Instantiate(treesDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    break;
+                case NodeContent.Sand:
+                    Instantiate(sandDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    break;
+                case NodeContent.Rock:
+                    Instantiate(rocksDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeContent.Path:
-                    Tile pathTile = Instantiate(pathDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(pathDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
                     keyValue.Value.isFree = false;
                     keyValue.Value.isPath = true;
                     break;
@@ -262,6 +278,7 @@ public class MapGenerator : MonoBehaviour
                 default:
                     break;
             }
+            
         }
     }
 
