@@ -6,11 +6,6 @@ public class Stronghold : MonoBehaviour
 {
     private Vector2Int coordinates;
 
-    public Vector2Int Coordinates { get { return coordinates; } }
+    public Vector2Int Coordinates { get { return coordinates; } set { coordinates = value; }  }
 
-    private void Awake()
-    {
-        coordinates.x = Mathf.RoundToInt(transform.position.x);
-        coordinates.y = Mathf.RoundToInt(transform.position.z);
-    }
 }
