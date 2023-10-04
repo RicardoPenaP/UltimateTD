@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {   
+    private enum NeighborLocation { None,Up,Down,Left,Right}
     [Header("Map Generator")]
 
     [Header("Perling Noise Settings")]
@@ -37,10 +38,10 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GameObject straightVertical;
     [SerializeField] private GameObject straightHorizontal;
     [Header("Corners")]
-    [SerializeField] private GameObject upperLeft;
-    [SerializeField] private GameObject upperRight;
-    [SerializeField] private GameObject lowerLeft;
-    [SerializeField] private GameObject lowerRight;
+    [SerializeField] private GameObject upperLeftCorner;
+    [SerializeField] private GameObject upperRightCorner;
+    [SerializeField] private GameObject lowerLeftCorner;
+    [SerializeField] private GameObject lowerRightCorner;
 
     [Header("Tiles Settings")]
     [SerializeField] private PerlinNoiseTileRange[] tilesRanges;
@@ -55,8 +56,9 @@ public class MapGenerator : MonoBehaviour
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
 
     private Node myStrongholdNode;
+    GridMananger myGridMananger;
 
-    private Path[] paths;
+    private Path[] enemiesPaths;
 
     private void Awake()
     {        
@@ -100,10 +102,10 @@ public class MapGenerator : MonoBehaviour
 
     private void InitPaths()
     {
-        paths = new Path[amountOfPaths];
-        for (int i = 0; i < paths.Length; i++)
+        enemiesPaths = new Path[amountOfPaths];
+        for (int i = 0; i < enemiesPaths.Length; i++)
         {
-            paths[i] = new Path();
+            enemiesPaths[i] = new Path();
         }
         SetPathsStartCoordinates(GeneratePathRandomUbication(amountOfPaths));
         SetPathDestinationCoordinates();
@@ -134,10 +136,10 @@ public class MapGenerator : MonoBehaviour
 
     private void SetPathsStartCoordinates(Path.PathUbication[] randomUbication)
     {
-        for (int i = 0; i < paths.Length; i++)
+        for (int i = 0; i < enemiesPaths.Length; i++)
         {            
             Vector2Int randomStarCoordinates = new Vector2Int();
-            paths[i].ubication = randomUbication[i];
+            enemiesPaths[i].ubication = randomUbication[i];
             switch (randomUbication[i])
             {               
                 case Path.PathUbication.North:
@@ -160,13 +162,13 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
 
-            paths[i].startCoordinates = randomStarCoordinates;            
+            enemiesPaths[i].startCoordinates = randomStarCoordinates;            
         }
     }
 
     private void SetPathDestinationCoordinates()
     {
-        foreach (Path path in paths)
+        foreach (Path path in enemiesPaths)
         {
             switch (path.ubication)
             {               
@@ -193,7 +195,7 @@ public class MapGenerator : MonoBehaviour
         PathGeneratorData myPathData = new PathGeneratorData();
 
         myPathData.contentOfPathNodes = NodeContent.Path;
-        foreach (Path path in paths)
+        foreach (Path path in enemiesPaths)
         {
             myPathData.startCoordinates = path.startCoordinates;
             myPathData.destinationCoordinates = path.destinationCoordinates;
@@ -214,41 +216,37 @@ public class MapGenerator : MonoBehaviour
 
     private void InitTiles()
     {
-        GridMananger gridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
+        myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
         {
             switch (node.Value.TileType)
             {
                 case NodeTileType.LightGrass:
-                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeTileType.DarkGrass:
-                    Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeTileType.Snow:
-                    Instantiate(snowTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(snowTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeTileType.Mud:
-                    Instantiate(mudTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(mudTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeTileType.Sand:
-                    Instantiate(sandTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(sandTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 case NodeTileType.Water:
-                    Instantiate(waterTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(waterTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     break;
                 default:
                     break;
             }
 
-
             switch (node.Value.Content)
-            {               
-                case NodeContent.Path:
-                    //Instantiate(pathPrefab,node.Value.Position,Quaternion.identity, gridMananger.transform.GetChild(0));
-                    break;
+            {   
                 case NodeContent.Stronghold:
-                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
                     Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
                     break;                
                 default:
@@ -256,6 +254,180 @@ public class MapGenerator : MonoBehaviour
                     break;
             }
         }
+
+        InitPathTiles();
+    }
+
+    private void InitPathTiles()
+    {
+        foreach (Path path in enemiesPaths)
+        {
+            for (int i = 0; i < path.nodes.Count; i++)
+            {
+                if (i == 0)
+                {
+                    InstanciatePathTile(path.nodes[i], path.nodes[i + 1]);                    
+                }
+                else
+                {
+                    if (i == path.nodes.Count - 1)
+                    {
+                        InstanciatePathTile(path.nodes[i], null, path.nodes[i - 1]);
+                    }
+                    else
+                    {
+                        InstanciatePathTile(path.nodes[i], path.nodes[i + 1], path.nodes[i - 1]);
+                    }
+                }
+            }
+        }
+    }
+
+    private void InstanciatePathTile(Node currentNode, Node nextNode = null, Node previousNode = null)
+    {        
+        NeighborLocation previusNeighbor = previousNode != null ? GetNeighborLocation(currentNode.Coordinates, previousNode.Coordinates):NeighborLocation.None;
+        NeighborLocation nextNeighbor = nextNode != null ? GetNeighborLocation(currentNode.Coordinates, nextNode.Coordinates): NeighborLocation.None;
+        if (nextNode != null && previousNode != null)
+        {
+            if ((nextNeighbor== NeighborLocation.Right && previusNeighbor == NeighborLocation.Left) || 
+                (nextNeighbor == NeighborLocation.Left && previusNeighbor == NeighborLocation.Right))
+            {
+                Instantiate(straightHorizontal, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+            }
+
+            if ((nextNeighbor == NeighborLocation.Up && previusNeighbor == NeighborLocation.Down) ||
+                (nextNeighbor == NeighborLocation.Down && previusNeighbor == NeighborLocation.Up))
+            {
+                Instantiate(straightVertical, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+            }
+
+            if (previusNeighbor == NeighborLocation.Up)
+            {
+                if (nextNeighbor == NeighborLocation.Right)
+                {
+                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+
+                if (nextNeighbor == NeighborLocation.Left)
+                {
+                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+            }
+
+            if (previusNeighbor == NeighborLocation.Down)
+            {
+                if (nextNeighbor == NeighborLocation.Right)
+                {
+                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+
+                if (nextNeighbor == NeighborLocation.Left)
+                {
+                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+            }
+
+            if (previusNeighbor == NeighborLocation.Right)
+            {
+                if (nextNeighbor == NeighborLocation.Down)
+                {
+                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+
+                if (nextNeighbor == NeighborLocation.Up)
+                {
+                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+            }
+
+            if (previusNeighbor == NeighborLocation.Left)
+            {
+                if (nextNeighbor == NeighborLocation.Down)
+                {
+                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+
+                if (nextNeighbor == NeighborLocation.Up)
+                {
+                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                }
+            }
+
+
+            return;
+        }
+
+        if (nextNode != null)
+        {
+            switch (nextNeighbor)
+            {
+                case NeighborLocation.None:
+                    break;
+                case NeighborLocation.Up:
+                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Down:
+                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Left:
+                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Right:
+                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+
+        if (previousNode != null)
+        {
+            switch (previusNeighbor)
+            {
+                case NeighborLocation.None:
+                    break;
+                case NeighborLocation.Up:
+                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Down:
+                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Left:
+                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                case NeighborLocation.Right:
+                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+    }
+
+    private NeighborLocation GetNeighborLocation(Vector2Int currentCoordinates, Vector2Int neighborCoordinates)
+    {
+        if (neighborCoordinates == currentCoordinates + Vector2Int.up)
+        {
+            return NeighborLocation.Up;
+        }
+
+        if (neighborCoordinates == currentCoordinates + Vector2Int.down)
+        {
+            return NeighborLocation.Down;
+        }
+
+        if (neighborCoordinates == currentCoordinates + Vector2Int.left)
+        {
+            return NeighborLocation.Left;
+        }
+
+        if (neighborCoordinates == currentCoordinates + Vector2Int.right)
+        {
+            return NeighborLocation.Right;
+        }
+        return NeighborLocation.None;
     }
 
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
