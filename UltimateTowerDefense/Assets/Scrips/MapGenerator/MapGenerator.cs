@@ -26,11 +26,25 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
+    [SerializeField] private GameObject pathPrefab;
+    [Header("Path Rules Tiles")]
+    [Header("Star and Fish")]
+    [SerializeField] private GameObject startFinishUp;
+    [SerializeField] private GameObject startFinishDown;
+    [SerializeField] private GameObject startFinishRight;
+    [SerializeField] private GameObject startFinishLeft;
+    [Header("Straigh")]
+    [SerializeField] private GameObject straightVertical;
+    [SerializeField] private GameObject straightHorizontal;
+    [Header("Corners")]
+    [SerializeField] private GameObject upperLeft;
+    [SerializeField] private GameObject upperRight;
+    [SerializeField] private GameObject lowerLeft;
+    [SerializeField] private GameObject lowerRight;
 
     [Header("Tiles Settings")]
     [SerializeField] private PerlinNoiseTileRange[] tilesRanges;
-    [Header("Tiles Reference")]
-    [SerializeField] private Tile pathTile;
+    [Header("Tiles Reference")]    
     [SerializeField] private Tile lightGrassTile;
     [SerializeField] private Tile darkGrassTile;
     [SerializeField] private Tile snowTile;
@@ -203,39 +217,42 @@ public class MapGenerator : MonoBehaviour
         GridMananger gridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
         {
+            switch (node.Value.TileType)
+            {
+                case NodeTileType.LightGrass:
+                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                case NodeTileType.DarkGrass:
+                    Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                case NodeTileType.Snow:
+                    Instantiate(snowTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                case NodeTileType.Mud:
+                    Instantiate(mudTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                case NodeTileType.Sand:
+                    Instantiate(sandTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                case NodeTileType.Water:
+                    Instantiate(waterTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    break;
+                default:
+                    break;
+            }
+
+
             switch (node.Value.Content)
             {               
                 case NodeContent.Path:
-                    Instantiate(pathTile,node.Value.Position,Quaternion.identity, gridMananger.transform.GetChild(0));
+                    //Instantiate(pathPrefab,node.Value.Position,Quaternion.identity, gridMananger.transform.GetChild(0));
                     break;
                 case NodeContent.Stronghold:
                     Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                     Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
                     break;                
                 default:
-                    switch (node.Value.TileType)
-                    {
-                        case NodeTileType.LightGrass:
-                            Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        case NodeTileType.DarkGrass:
-                            Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        case NodeTileType.Snow:
-                            Instantiate(snowTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        case NodeTileType.Mud:
-                            Instantiate(mudTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        case NodeTileType.Sand:
-                            Instantiate(sandTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        case NodeTileType.Water:
-                            Instantiate(waterTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                            break;
-                        default:
-                            break;
-                    }
+                    
                     break;
             }
         }

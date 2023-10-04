@@ -337,8 +337,9 @@ MonoBehaviour:
   gridDimension: {x: 40, y: 40}
   gridManangerPrefab: {fileID: 4014150688977234643, guid: 10fb0211b56a849448918565b14b0eb8, type: 3}
   strongholdPrefab: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
-  tilesFromBorder: 3
-  amountOfPaths: 1
+  tilesFromBorder: 15
+  amountOfPaths: 4
+  pathPrefab: {fileID: 0}
   tilesRanges:
   - tileType: 0
     value: 0.3
@@ -350,7 +351,6 @@ MonoBehaviour:
     value: 0.8
   - tileType: 5
     value: 1
-  pathTile: {fileID: 5826834818044822377, guid: eb1b4d09b0e9cd541812ed8d81eb95cc, type: 3}
   lightGrassTile: {fileID: 5826834818044822377, guid: a4e5bbb5b003809408aef53c459d74f4, type: 3}
   darkGrassTile: {fileID: 5826834818044822377, guid: 48831c5183b940e44bd517566fa8814a, type: 3}
   snowTile: {fileID: 5826834818044822377, guid: 8766f95b936d6ad41aa774dde6f0e0b6, type: 3}
