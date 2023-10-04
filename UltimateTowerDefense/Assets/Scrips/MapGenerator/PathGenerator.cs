@@ -87,7 +87,7 @@ public class PathGenerator
 
         foreach (Node neighbor in neighbors)
         {
-            if (!nodesReached.ContainsKey(neighbor.Coordinates) && neighbor.isFree)
+            if (!nodesReached.ContainsKey(neighbor.Coordinates) && neighbor.isFree && neighbor.isWalkable)
             {
                 neighbor.connectedTo = currenSearchNode;
                 nodesReached.Add(neighbor.Coordinates, nodesGrid[neighbor.Coordinates]);

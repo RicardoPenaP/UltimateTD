@@ -22,8 +22,21 @@ public static class PerlingNoiseGenerator
             for (int y = 0; y < size.y; y++)
             {
                 Node newNode = new Node(new Vector2Int(x, y));
-                float perlingNoiseValue = Mathf.PerlinNoise(x * scale + seed + offset.x,y * scale + seed + offset.y);
-                newNode.TileType = GetNodeTileType(perlingNoiseValue);
+                if (x == 0 || y == 0 || x == size.x -1 || y == size.y - 1)
+                {
+                    newNode.TileType = NodeTileType.DarkGrass;
+                }
+                else
+                {
+                    float perlingNoiseValue = Mathf.PerlinNoise(x * scale + seed + offset.x, y * scale + seed + offset.y);
+                    newNode.TileType = GetNodeTileType(perlingNoiseValue);
+                }
+
+                if (newNode.TileType == NodeTileType.Water)
+                {
+                    newNode.isWalkable = false;
+                }
+
                 nodesGrid.TryAdd(new Vector2Int(x, y), newNode);
             }
         }

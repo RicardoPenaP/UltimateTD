@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
-{
-    [System.Serializable]
-    private struct PerlinNodeContent
-    {
-        public NodeContent content;
-        public float level;
-    }
-
+{   
     [Header("Map Generator")]
 
     [Header("Perling Noise Settings")]
