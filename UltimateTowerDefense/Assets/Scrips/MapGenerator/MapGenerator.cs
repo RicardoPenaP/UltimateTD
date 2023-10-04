@@ -53,8 +53,7 @@ public class MapGenerator : MonoBehaviour
 
     private void Awake()
     {        
-        InitNodesGrid();
-        InitNodesWithPerlinNoise();
+        InitNodesGrid();        
         InitTilesGrid();
     }
 
@@ -69,26 +68,9 @@ public class MapGenerator : MonoBehaviour
                 myNodeGrid.Add(newNode.coordinates, newNode);
             }
         }
+        InitStrongholdNode();        
+        InitPaths();       
 
-        InitNodesWithPerlinNoise();
-        //InitStrongholdNode();        
-        //InitPaths();       
-
-    }
-
-    private void InitNodesWithPerlinNoise()
-    {
-        for (int x = 0; x < gridDimension.x; x++)
-        {
-            for (int y = 0; y < gridDimension.y; y++)
-            {
-                if (myNodeGrid.ContainsKey(new Vector2Int(x,y)))
-                {
-                    float value = Mathf.PerlinNoise(((float)x + seed) / scale, ((float)y + seed)) / scale;
-                    myNodeGrid[new Vector2Int(x, y)].content = GetRandomContent(value);
-                }                
-            }
-        }
     }
 
     private NodeContent GetRandomContent(float value)
@@ -240,7 +222,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void InitTilesGrid()
-    {
+    {       
         myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         foreach (KeyValuePair<Vector2Int,Node> keyValue in myNodeGrid)
         {

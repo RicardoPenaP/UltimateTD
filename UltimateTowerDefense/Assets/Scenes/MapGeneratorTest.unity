@@ -330,26 +330,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf87625b64819db4fbe26276e952bce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDimension: {x: 40, y: 40}
+  gridDimension: {x: 25, y: 25}
   contentLevels:
-  - content: 3
-    level: 0.2
-  - content: 4
-    level: 0.3
-  - content: 1
-    level: 0.4
-  - content: 5
-    level: 0.42
-  - content: 6
-    level: 0.45
   - content: 2
-    level: 5
+    level: 0.1
+  - content: 3
+    level: 0.15
+  - content: 4
+    level: 0.2
+  - content: 6
+    level: 0.3
+  - content: 5
+    level: 0.33
+  - content: 1
+    level: 0.6
   seed: 3010
   scale: 40
   gridManangerPrefab: {fileID: 4014150688977234643, guid: 10fb0211b56a849448918565b14b0eb8, type: 3}
   strongholdReference: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
-  tilesFromBorder: 5
-  amountOfPaths: 1
+  tilesFromBorder: 3
+  amountOfPaths: 2
   grassDefaultTile: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
   pathDefaultTile: {fileID: 6461317154435440578, guid: 8e80c5605e1c4b1488ba441d85c4ab34, type: 3}
   iceDefaultTile: {fileID: 6461317154435440578, guid: 417a7e34fe7e0c647ab93663d07123e7, type: 3}
