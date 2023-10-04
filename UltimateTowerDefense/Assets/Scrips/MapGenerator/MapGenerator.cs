@@ -13,6 +13,12 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Map Generator")]
 
+    [Header("Perling Noise Settings")]
+    [SerializeField] private bool randomSeed = false;
+    [SerializeField] private float seed = 241197;
+    [SerializeField] private Vector2Int offset = Vector2Int.zero;
+    [SerializeField] private float scale = 1f;
+
     [Header("Size Settings")]
     [SerializeField] public static readonly float gridSize = 5;
     [SerializeField] private Vector2Int gridDimension;
@@ -21,13 +27,22 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private GridMananger gridManangerPrefab;
 
     [Header("Stronghold")]
-    [SerializeField] private Stronghold strongholdReference;
+    [SerializeField] private Stronghold strongholdPrefab;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
     [SerializeField,Min(0)] private int tilesFromBorder;    
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
-       
+
+    [Header("Tiles Reference")]
+    [SerializeField] private Tile pathTile;
+    [SerializeField] private Tile lightGrassTile;
+    [SerializeField] private Tile darkGrassTile;
+    [SerializeField] private Tile snowTile;
+    [SerializeField] private Tile mudTile;
+    [SerializeField] private Tile sandTile;
+    [SerializeField] private Tile waterTile;
+
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
 
     private Node myStrongholdNode;
@@ -41,17 +56,16 @@ public class MapGenerator : MonoBehaviour
 
     private void InitNodesGrid()
     {
-        for (int i = 0; i < gridDimension.x; i++)
+        if (randomSeed)
         {
-            for (int j = 0; j < gridDimension.y; j++)
-            {               
-                Node newNode = new Node(new Vector2Int(i, j));                
-                myNodeGrid.Add(newNode.coordinates, newNode);
-            }
+            seed = Random.Range(0.000f, 999999f);
         }
-        InitStrongholdNode();        
-        InitPaths();       
 
+        myNodeGrid = PerlingNoiseGenerator.GenerateRandomNodesGrid(gridDimension,scale,seed,offset);
+       
+        InitStrongholdNode();        
+        InitPaths();
+        InitTiles();
     }
 
     private void InitStrongholdNode()
@@ -187,6 +201,49 @@ public class MapGenerator : MonoBehaviour
             }           
         }
 
+    }
+
+    private void InitTiles()
+    {
+        GridMananger gridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
+        foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
+        {
+            switch (node.Value.content)
+            {               
+                case NodeContent.Path:
+                    Instantiate(pathTile,node.Value.position,Quaternion.identity, gridMananger.transform.GetChild(0));
+                    break;
+                case NodeContent.Stronghold:
+                    Instantiate(lightGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(strongholdPrefab, node.Value.position, Quaternion.identity);
+                    break;                
+                default:
+                    switch (node.Value.tileType)
+                    {
+                        case NodeTileType.LightGrass:
+                            Instantiate(lightGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        case NodeTileType.DarkGrass:
+                            Instantiate(darkGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        case NodeTileType.Snow:
+                            Instantiate(snowTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        case NodeTileType.Mud:
+                            Instantiate(mudTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        case NodeTileType.Sand:
+                            Instantiate(sandTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        case NodeTileType.Water:
+                            Instantiate(waterTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
+        }
     }
 
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
