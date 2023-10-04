@@ -23,7 +23,7 @@ public static class PerlingNoiseGenerator
             {
                 Node newNode = new Node(new Vector2Int(x, y));
                 float perlingNoiseValue = Mathf.PerlinNoise(x * scale + seed + offset.x,y * scale + seed + offset.y);
-                newNode.tileType = GetNodeTileType(perlingNoiseValue);
+                newNode.TileType = GetNodeTileType(perlingNoiseValue);
                 nodesGrid.TryAdd(new Vector2Int(x, y), newNode);
             }
         }

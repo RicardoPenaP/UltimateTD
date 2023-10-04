@@ -79,14 +79,14 @@ public class MapGenerator : MonoBehaviour
         {
             myStrongholdNode = new Node(strongholdCoordinates);
             myStrongholdNode.isFree = false;
-            myStrongholdNode.content = NodeContent.Stronghold;
+            myStrongholdNode.Content = NodeContent.Stronghold;
             myNodeGrid.TryAdd(strongholdCoordinates, myStrongholdNode);
         }
         else
         {
             myStrongholdNode = myNodeGrid[strongholdCoordinates];
             myNodeGrid[strongholdCoordinates].isFree = false;
-            myNodeGrid[strongholdCoordinates].content = NodeContent.Stronghold;
+            myNodeGrid[strongholdCoordinates].Content = NodeContent.Stronghold;
         }
       
     }
@@ -129,31 +129,31 @@ public class MapGenerator : MonoBehaviour
     {
         for (int i = 0; i < paths.Length; i++)
         {            
-            Vector2Int randomStarCoordinate = new Vector2Int();
+            Vector2Int randomStarCoordinates = new Vector2Int();
             paths[i].ubication = randomUbication[i];
             switch (randomUbication[i])
             {               
                 case Path.PathUbication.North:
-                    randomStarCoordinate.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
-                    randomStarCoordinate.y = gridDimension.y - 1;
+                    randomStarCoordinates.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
+                    randomStarCoordinates.y = gridDimension.y - 1;
                     break;
                 case Path.PathUbication.South:
-                    randomStarCoordinate.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
-                    randomStarCoordinate.y = 0;
+                    randomStarCoordinates.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
+                    randomStarCoordinates.y = 0;
                     break;
                 case Path.PathUbication.East:
-                    randomStarCoordinate.x = gridDimension.x - 1;
-                    randomStarCoordinate.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder); 
+                    randomStarCoordinates.x = gridDimension.x - 1;
+                    randomStarCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder); 
                     break;
                 case Path.PathUbication.West:
-                    randomStarCoordinate.x = 0;
-                    randomStarCoordinate.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
+                    randomStarCoordinates.x = 0;
+                    randomStarCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
                     break;
                 default:
                     break;
             }
 
-            paths[i].startCoordinates = randomStarCoordinate;            
+            paths[i].startCoordinates = randomStarCoordinates;            
         }
     }
 
@@ -164,27 +164,27 @@ public class MapGenerator : MonoBehaviour
             switch (path.ubication)
             {               
                 case Path.PathUbication.North:
-                    path.destinationCoordinates=myStrongholdNode.coordinates + Vector2Int.up;
+                    path.destinationCoordinates=myStrongholdNode.Coordinates + Vector2Int.up;                    
                     break;
                 case Path.PathUbication.South:
-                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.down;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.down;
                     break;
                 case Path.PathUbication.East:
-                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.right;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.right;
                     break;
                 case Path.PathUbication.West:
-                    path.destinationCoordinates = myStrongholdNode.coordinates + Vector2Int.left;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.left;
                     break;
                 default:
                     break;
-            }
+            }            
         }
     }
 
     private void SetPathNodes()
     {
         PathGeneratorData myPathData = new PathGeneratorData();
-       
+
         myPathData.contentOfPathNodes = NodeContent.Path;
         foreach (Path path in paths)
         {
@@ -196,11 +196,11 @@ public class MapGenerator : MonoBehaviour
             {
                 foreach (Node node in path.nodes)
                 {
-                    myNodeGrid[node.coordinates].content = node.content;
-                    myNodeGrid[node.coordinates].isFree = false;
-                    myNodeGrid[node.coordinates].isPath = true;
+                    myNodeGrid[node.Coordinates].Content = node.Content;
+                    myNodeGrid[node.Coordinates].isFree = false;
+                    myNodeGrid[node.Coordinates].isPath = true;
                 }
-            }           
+            }
         }
 
     }
@@ -210,35 +210,35 @@ public class MapGenerator : MonoBehaviour
         GridMananger gridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
         {
-            switch (node.Value.content)
+            switch (node.Value.Content)
             {               
                 case NodeContent.Path:
-                    Instantiate(pathTile,node.Value.position,Quaternion.identity, gridMananger.transform.GetChild(0));
+                    Instantiate(pathTile,node.Value.Position,Quaternion.identity, gridMananger.transform.GetChild(0));
                     break;
                 case NodeContent.Stronghold:
-                    Instantiate(lightGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
-                    Instantiate(strongholdPrefab, node.Value.position, Quaternion.identity);
+                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                    Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
                     break;                
                 default:
-                    switch (node.Value.tileType)
+                    switch (node.Value.TileType)
                     {
                         case NodeTileType.LightGrass:
-                            Instantiate(lightGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         case NodeTileType.DarkGrass:
-                            Instantiate(darkGrassTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         case NodeTileType.Snow:
-                            Instantiate(snowTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(snowTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         case NodeTileType.Mud:
-                            Instantiate(mudTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(mudTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         case NodeTileType.Sand:
-                            Instantiate(sandTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(sandTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         case NodeTileType.Water:
-                            Instantiate(waterTile, node.Value.position, Quaternion.identity, gridMananger.transform.GetChild(1));
+                            Instantiate(waterTile, node.Value.Position, Quaternion.identity, gridMananger.transform.GetChild(1));
                             break;
                         default:
                             break;

@@ -54,7 +54,7 @@ public class PathGenerator
             currenSearchNode = frontier.Dequeue();
             currenSearchNode.isExplored = true;            
             ExploreNeighbors();
-            if (currenSearchNode.coordinates == destinationCoordinates)
+            if (currenSearchNode.Coordinates == destinationCoordinates)
             {
                 isRunning = false;
                 successfulSearch = true;
@@ -77,7 +77,7 @@ public class PathGenerator
 
         for (int i = 0; i < exploreDirections.Length; i++)
         {
-            Vector2Int neighborCoordinates = currenSearchNode.coordinates + exploreDirections[i];
+            Vector2Int neighborCoordinates = currenSearchNode.Coordinates + exploreDirections[i];
 
             if (nodesGrid.ContainsKey(neighborCoordinates))
             {
@@ -87,11 +87,11 @@ public class PathGenerator
 
         foreach (Node neighbor in neighbors)
         {
-            if (!nodesReached.ContainsKey(neighbor.coordinates) && neighbor.isFree)
+            if (!nodesReached.ContainsKey(neighbor.Coordinates) && neighbor.isFree)
             {
                 neighbor.connectedTo = currenSearchNode;
-                nodesReached.Add(neighbor.coordinates, nodesGrid[neighbor.coordinates]);
-                frontier.Enqueue(nodesGrid[neighbor.coordinates]);
+                nodesReached.Add(neighbor.Coordinates, nodesGrid[neighbor.Coordinates]);
+                frontier.Enqueue(nodesGrid[neighbor.Coordinates]);
             }
         }
     }
@@ -116,7 +116,7 @@ public class PathGenerator
 
         foreach (Node node in path)
         {
-            node.content = nodesContent;
+            node.Content = nodesContent;
         }
 
         return path;
@@ -170,4 +170,5 @@ public class PathGenerator
 
         return randomDirectionVector;
     }
+
 }

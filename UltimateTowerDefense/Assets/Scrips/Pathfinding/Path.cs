@@ -8,6 +8,8 @@ public class Path
     public PathUbication ubication = PathUbication.None;
     public Vector2Int startCoordinates;   
     public Vector2Int destinationCoordinates;
+    public Node startNode;
+    public Node destinationNode;
     public List<Node> nodes;
 
 }
