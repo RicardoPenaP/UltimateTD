@@ -16,11 +16,6 @@ public class MapGenerator : MonoBehaviour
     [Header("Size Settings")]
     [SerializeField] public static readonly float gridSize = 5;
     [SerializeField] private Vector2Int gridDimension;
-
-    [Header("Perlin Noise Settings")]
-    [SerializeField] private PerlinNodeContent[] contentLevels;
-    [SerializeField] private float seed;
-    [SerializeField] private float scale;
     
     [Header("Manangers")]
     [SerializeField] private GridMananger gridManangerPrefab;
@@ -32,29 +27,16 @@ public class MapGenerator : MonoBehaviour
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
-
-    [Header("Tiles Reference")]
-    [SerializeField] private Tile grassDefaultTile;
-    [SerializeField] private Tile pathDefaultTile;
-    [SerializeField] private Tile iceDefaultTile;
-    [SerializeField] private Tile waterDefaultTile;
-    [SerializeField] private Tile treesDefaultTile;
-    [SerializeField] private Tile sandDefaultTile;
-    [SerializeField] private Tile rocksDefaultTile;
-
-    private GridMananger myGridMananger;    
+       
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
 
-
-    private Stronghold myStronghold;
     private Node myStrongholdNode;
 
     private Path[] paths;
 
     private void Awake()
     {        
-        InitNodesGrid();        
-        InitTilesGrid();
+        InitNodesGrid();
     }
 
     private void InitNodesGrid()
@@ -63,27 +45,13 @@ public class MapGenerator : MonoBehaviour
         {
             for (int j = 0; j < gridDimension.y; j++)
             {               
-                Node newNode = new Node(new Vector2Int(i, j));
-                newNode.content = NodeContent.Grass;
+                Node newNode = new Node(new Vector2Int(i, j));                
                 myNodeGrid.Add(newNode.coordinates, newNode);
             }
         }
         InitStrongholdNode();        
         InitPaths();       
 
-    }
-
-    private NodeContent GetRandomContent(float value)
-    {
-        for (int i = 0; i < contentLevels.Length; i++)
-        {
-            if (value < contentLevels[i].level)
-            {
-                return contentLevels[i].content;
-            }
-
-        }
-        return NodeContent.None;
     }
 
     private void InitStrongholdNode()
@@ -219,49 +187,6 @@ public class MapGenerator : MonoBehaviour
             }           
         }
 
-    }
-
-    private void InitTilesGrid()
-    {       
-        myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
-        foreach (KeyValuePair<Vector2Int,Node> keyValue in myNodeGrid)
-        {
-            switch (keyValue.Value.content)
-            {               
-                case NodeContent.Grass:
-                    Instantiate(grassDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Ice:
-                    Instantiate(iceDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Water:
-                    Instantiate(waterDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Trees:
-                    Instantiate(treesDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Sand:
-                    Instantiate(sandDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Rock:
-                    Instantiate(rocksDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(1));
-                    break;
-                case NodeContent.Path:
-                    Instantiate(pathDefaultTile, keyValue.Value.position, Quaternion.identity, myGridMananger.transform.GetChild(0));
-                    keyValue.Value.isFree = false;
-                    keyValue.Value.isPath = true;
-                    break;
-                case NodeContent.Stronghold:
-                    myStronghold = Instantiate(strongholdReference, keyValue.Value.position, Quaternion.identity);
-                    keyValue.Value.isFree = false;
-                    break;
-                case NodeContent.Decoration:
-                    break;
-                default:
-                    break;
-            }
-            
-        }
     }
 
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
