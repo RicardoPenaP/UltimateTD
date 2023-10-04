@@ -34,6 +34,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
 
+    [Header("Tiles Settings")]
+    [SerializeField] private PerlinNoiseTileRange[] tilesRanges;
     [Header("Tiles Reference")]
     [SerializeField] private Tile pathTile;
     [SerializeField] private Tile lightGrassTile;
@@ -61,7 +63,7 @@ public class MapGenerator : MonoBehaviour
             seed = Random.Range(0.000f, 999999f);
         }
 
-        myNodeGrid = PerlingNoiseGenerator.GenerateRandomNodesGrid(gridDimension,scale,seed,offset);
+        myNodeGrid = PerlingNoiseGenerator.GenerateRandomNodesGrid(gridDimension,scale,seed,offset,tilesRanges);
        
         InitStrongholdNode();        
         InitPaths();

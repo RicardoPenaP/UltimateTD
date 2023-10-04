@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public enum NodeContent { None, Path, Stronghold, Decoration}
-public enum NodeTileType { Snow, LightGrass, DarkGrass, Mud, Sand, Water}
+public enum NodeTileType { LightGrass, DarkGrass, Snow, Mud, Sand, Water}
 public class Node 
 {
     public Vector2Int coordinates;

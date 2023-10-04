@@ -330,33 +330,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf87625b64819db4fbe26276e952bce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomSeed: 0
+  seed: 241197
+  offset: {x: 0, y: 0}
+  scale: 1
   gridDimension: {x: 25, y: 25}
-  contentLevels:
-  - content: 2
-    level: 0.1
-  - content: 3
-    level: 0.15
-  - content: 4
-    level: 0.2
-  - content: 6
-    level: 0.3
-  - content: 5
-    level: 0.33
-  - content: 1
-    level: 0.6
-  seed: 3010
-  scale: 40
   gridManangerPrefab: {fileID: 4014150688977234643, guid: 10fb0211b56a849448918565b14b0eb8, type: 3}
-  strongholdReference: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
+  strongholdPrefab: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
   tilesFromBorder: 3
-  amountOfPaths: 2
-  grassDefaultTile: {fileID: 2384924922636500678, guid: 08c18076dc581d54da7f934099299c77, type: 3}
-  pathDefaultTile: {fileID: 6461317154435440578, guid: 8e80c5605e1c4b1488ba441d85c4ab34, type: 3}
-  iceDefaultTile: {fileID: 6461317154435440578, guid: 417a7e34fe7e0c647ab93663d07123e7, type: 3}
-  waterDefaultTile: {fileID: 6461317154435440578, guid: e48747dde1ea6a847ab244bd02d52ab5, type: 3}
-  treesDefaultTile: {fileID: 6461317154435440578, guid: 823df389f1304414ba9da95ca1affdc2, type: 3}
-  sandDefaultTile: {fileID: 6461317154435440578, guid: ddcf950ca68aea140a72890537ea4c63, type: 3}
-  rocksDefaultTile: {fileID: 6461317154435440578, guid: 0c69113b027e4334eb859a519e60616e, type: 3}
+  amountOfPaths: 1
+  pathTile: {fileID: 5826834818044822377, guid: eb1b4d09b0e9cd541812ed8d81eb95cc, type: 3}
+  lightGrassTile: {fileID: 5826834818044822377, guid: a4e5bbb5b003809408aef53c459d74f4, type: 3}
+  darkGrassTile: {fileID: 5826834818044822377, guid: 48831c5183b940e44bd517566fa8814a, type: 3}
+  snowTile: {fileID: 5826834818044822377, guid: 8766f95b936d6ad41aa774dde6f0e0b6, type: 3}
+  mudTile: {fileID: 5826834818044822377, guid: 3cf30a6f4b65a9c4da76c2767d278a52, type: 3}
+  sandTile: {fileID: 5826834818044822377, guid: 45fd1f4a97d59474fad2f678d82d17cf, type: 3}
+  waterTile: {fileID: 5826834818044822377, guid: 5ba1206c2d41bae43bf7d4086671d233, type: 3}
 --- !u!4 &1101151351
 Transform:
   m_ObjectHideFlags: 0

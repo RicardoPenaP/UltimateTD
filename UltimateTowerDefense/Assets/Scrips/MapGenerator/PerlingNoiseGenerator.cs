@@ -2,10 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct PerlinNoiseTileRange
+{
+    public NodeTileType tileType;
+    public float value;
+}
+
 public static class PerlingNoiseGenerator
 {
-    public static Dictionary<Vector2Int,Node> GenerateRandomNodesGrid(Vector2Int size, float scale,float seed, Vector2 offset)
+    private static PerlinNoiseTileRange[] localTileRanges;
+    public static Dictionary<Vector2Int,Node> GenerateRandomNodesGrid(Vector2Int size, float scale,float seed, Vector2 offset, PerlinNoiseTileRange[] tileRanges)
     {
+        localTileRanges = tileRanges;
         Dictionary<Vector2Int, Node> nodesGrid = new Dictionary<Vector2Int, Node>();
 
         for (int x = 0; x < size.x; x++)
@@ -24,21 +33,14 @@ public static class PerlingNoiseGenerator
 
     private static NodeTileType GetNodeTileType(float perlingNoiseValue)
     {
-        int tileIndex = Mathf.RoundToInt(perlingNoiseValue * 10);
-
-        switch ((NodeTileType)tileIndex)
+        for (int i = 0; i < localTileRanges.Length; i++)
         {
-            case NodeTileType.LightGrass:                
-            case NodeTileType.DarkGrass:               
-            case NodeTileType.Snow:                
-            case NodeTileType.Mud:                
-            case NodeTileType.Sand:                
-            case NodeTileType.Water:
-                return (NodeTileType)tileIndex;               
-            default:
-                return NodeTileType.LightGrass;                
-        }
+            if (perlingNoiseValue < localTileRanges[i].value)
+            {
+                return localTileRanges[i].tileType;
+            }
+        }  
 
-       
+        return NodeTileType.LightGrass;
     }
 }
