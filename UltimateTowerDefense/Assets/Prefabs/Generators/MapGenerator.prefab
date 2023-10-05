@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1832682504241799873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832682504241799875}
+  - component: {fileID: 1832682504241799874}
+  m_Layer: 0
+  m_Name: MapGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1832682504241799875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832682504241799873}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832682504241799874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832682504241799873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf87625b64819db4fbe26276e952bce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomSeed: 1
+  seed: 241197
+  offset: {x: 0, y: 0}
+  scale: 0.056
+  gridDimension: {x: 40, y: 40}
+  gridManangerPrefab: {fileID: 4014150688977234643, guid: 10fb0211b56a849448918565b14b0eb8, type: 3}
+  strongholdPrefab: {fileID: 8669405955988873178, guid: a21140f7c70102b4182b536c01bee643, type: 3}
+  tilesFromBorder: 15
+  amountOfPaths: 4
+  pathPrefab: {fileID: 8451265937695112163, guid: 038d41904572c7d4dbdd9da7b0e18833, type: 3}
+  startFinishUp: {fileID: 8451265937695112163, guid: 894495942b8656044a2028ae5a776b33, type: 3}
+  startFinishDown: {fileID: 8451265937695112163, guid: 7660b5b53433f7048adce849b716663e, type: 3}
+  startFinishRight: {fileID: 8451265937695112163, guid: f0d84468af6e1da4d942017a12633c37, type: 3}
+  startFinishLeft: {fileID: 8451265937695112163, guid: 428614ed5247f3143800af203fcc14af, type: 3}
+  straightVertical: {fileID: 8451265937695112163, guid: 038d41904572c7d4dbdd9da7b0e18833, type: 3}
+  straightHorizontal: {fileID: 8451265937695112163, guid: 5344752761999624288dbb19e021a80a, type: 3}
+  upperLeftCorner: {fileID: 8451265937695112163, guid: 4d6be41a4e1155d499b7607417c9a50a, type: 3}
+  upperRightCorner: {fileID: 8451265937695112163, guid: 646af6894b0c560409542d2f8ebc7fc5, type: 3}
+  lowerLeftCorner: {fileID: 8451265937695112163, guid: e0b34c9c6cace3a4584dedeb5e30da03, type: 3}
+  lowerRightCorner: {fileID: 8451265937695112163, guid: 54834aff2d40d5b4c818bc32537c3bf6, type: 3}
+  tilesRanges:
+  - tileType: 0
+    value: 0.3
+  - tileType: 1
+    value: 0.6
+  - tileType: 3
+    value: 0.7
+  - tileType: 4
+    value: 0.8
+  - tileType: 5
+    value: 1
+  lightGrassTile: {fileID: 5826834818044822377, guid: a4e5bbb5b003809408aef53c459d74f4, type: 3}
+  darkGrassTile: {fileID: 5826834818044822377, guid: 48831c5183b940e44bd517566fa8814a, type: 3}
+  snowTile: {fileID: 5826834818044822377, guid: 8766f95b936d6ad41aa774dde6f0e0b6, type: 3}
+  mudTile: {fileID: 5826834818044822377, guid: 3cf30a6f4b65a9c4da76c2767d278a52, type: 3}
+  sandTile: {fileID: 5826834818044822377, guid: 45fd1f4a97d59474fad2f678d82d17cf, type: 3}
+  waterTile: {fileID: 5826834818044822377, guid: 5ba1206c2d41bae43bf7d4086671d233, type: 3}
