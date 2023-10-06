@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9160323089764996406}
   - component: {fileID: 5228638229213698707}
   - component: {fileID: 8028560847508844121}
-  - component: {fileID: 8389029617812377475}
   m_Layer: 0
   m_Name: PP_Rock_Moss_Grown_11
   m_TagString: Untagged
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0799a1e95665ef14f8fe2cbcd4ba3dc4, type: 2}
+  - {fileID: 2100000, guid: dd9c2e50030efdf48b63f31a0ce18382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8389029617812377475
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8389029617812377484}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1806810134458854372, guid: 7ed75b99c26237b4d844c1581c5da1b2, type: 3}
 --- !u!1001 &7239431641412746812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,6 +132,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4725086213116948063, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5417854687762796790, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6084551006654087760, guid: ac6539e4599782e45963446b0861e9cc, type: 3}

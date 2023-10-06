@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8416249316858615576}
   - component: {fileID: 4855827889002928317}
   - component: {fileID: 7243946495771454583}
-  - component: {fileID: 9189408693950287277}
   m_Layer: 0
   m_Name: PP_Rock_Pile_Forest_Moss_10
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9189408693950287277
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9189408693950287266}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3547404156773701478, guid: 7ea25f0f06a711d48a2bd754e29ecb0e, type: 3}
 --- !u!1001 &7239431641412746812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,6 +134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5417854687762796790, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6084551006654087760, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -156,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 8451265937695112163, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
       propertyPath: m_Name
       value: Rock02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451265937695112163, guid: ac6539e4599782e45963446b0861e9cc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac6539e4599782e45963446b0861e9cc, type: 3}

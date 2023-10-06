@@ -69,7 +69,7 @@ public static class PerlingNoiseGenerator
                 return perlingNoiseValue > 0.5 && perlingNoiseValue < 0.56;
            
             case NodeTileType.Mud:
-                return perlingNoiseValue > 0.65;
+                return perlingNoiseValue > 0.62 && perlingNoiseValue < 0.68;
                 
             case NodeTileType.Sand:
                 return perlingNoiseValue > 0.75;
