@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum NodeContent { None, Path, Stronghold, Decoration}
+public enum NodeContent { None, Path, Stronghold, Obstacle}
 public enum NodeTileType { LightGrass, DarkGrass, Snow, Mud, Sand, Water}
 public class Node 
 {

@@ -255,7 +255,7 @@ public class MapGenerator : MonoBehaviour
 
             switch (node.Value.Content)
             {
-                case NodeContent.Decoration:
+                case NodeContent.Obstacle:
                     instantiatedTile.hasDecoration = true;
                     break;
                 case NodeContent.Stronghold:

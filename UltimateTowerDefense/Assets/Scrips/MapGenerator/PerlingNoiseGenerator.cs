@@ -30,7 +30,7 @@ public static class PerlingNoiseGenerator
                 {
                     float perlingNoiseValue = Mathf.PerlinNoise(x * scale + seed + offset.x, y * scale + seed + offset.y);
                     newNode.TileType = GetNodeTileType(perlingNoiseValue);
-                    newNode.Content = HasDecoration(perlingNoiseValue,newNode.TileType) ? NodeContent.Decoration : NodeContent.None;
+                    newNode.Content = HasDecoration(perlingNoiseValue,newNode.TileType) ? NodeContent.Obstacle : NodeContent.None;
                 }
 
                 if (newNode.TileType == NodeTileType.Water || newNode.TileType == NodeTileType.Sand)
