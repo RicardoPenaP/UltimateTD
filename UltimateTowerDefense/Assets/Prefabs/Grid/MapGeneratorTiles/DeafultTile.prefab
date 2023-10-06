@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 5789112901364282692}
   - component: {fileID: 7557497608424961004}
   m_Layer: 0
-  m_Name: DecorationGenerator
+  m_Name: ObstacleGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,4 +362,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85350ddb4b612ac428f662e3c5da08ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorationPrefabs: []
+  obtaclePrefabs: []
+  instantiationProbability: 0.25

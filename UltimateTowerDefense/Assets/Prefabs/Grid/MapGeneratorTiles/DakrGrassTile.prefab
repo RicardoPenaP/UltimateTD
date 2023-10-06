@@ -295,9 +295,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
+      propertyPath: instantiationProbability
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
+      propertyPath: obtaclePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
       propertyPath: decorationPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
+      propertyPath: obtaclePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1296837146631065395, guid: 15d90215eb376664f9c0a1ba73fff0f4, type: 3}
+    - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
+      propertyPath: obtaclePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1296837146631065395, guid: 232b0407a3da92e48b7717feb0ec409e, type: 3}
     - target: {fileID: 7557497608424961004, guid: 7329f36494e289746a563bb2d27b1f92, type: 3}
       propertyPath: decorationPrefabs.Array.data[0]
       value: 

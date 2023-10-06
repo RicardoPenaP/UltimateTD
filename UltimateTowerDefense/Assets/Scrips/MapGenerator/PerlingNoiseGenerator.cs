@@ -63,10 +63,10 @@ public static class PerlingNoiseGenerator
         switch (nodeTileType)
         {
             case NodeTileType.LightGrass:
-                return perlingNoiseValue > 0.2;
+                return perlingNoiseValue > 0.2 && perlingNoiseValue < 0.3;
                
             case NodeTileType.DarkGrass:
-                return perlingNoiseValue > 0.5;
+                return perlingNoiseValue > 0.5 && perlingNoiseValue < 0.56;
            
             case NodeTileType.Mud:
                 return perlingNoiseValue > 0.65;
