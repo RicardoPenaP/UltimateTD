@@ -9,6 +9,7 @@ public class GameMananger : Singleton<GameMananger>
     [SerializeField] private GameManangerNextWavePanel nextWavePanel;
     [SerializeField] private float timeToStart;
     [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private WaveMananger waveManangerPrefab;
         
     private WaveMananger[] waveManangers;
     
