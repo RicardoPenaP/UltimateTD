@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileStatus: 0
+  hasDecoration: 0
   isWalkable: 0
   isExplored: 0
   isPath: 0
@@ -326,6 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5789112901364282692}
+  - component: {fileID: 7557497608424961004}
   m_Layer: 0
   m_Name: DecorationGenerator
   m_TagString: Untagged
@@ -348,3 +350,16 @@ Transform:
   m_Father: {fileID: 3483260609513362416}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7557497608424961004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8475539709842588296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85350ddb4b612ac428f662e3c5da08ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decorationPrefabs: []
