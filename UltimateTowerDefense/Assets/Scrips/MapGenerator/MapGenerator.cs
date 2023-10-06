@@ -107,6 +107,15 @@ public class MapGenerator : MonoBehaviour
         {
             enemiesPaths[i] = new Path();
         }
+
+        foreach (Path path in enemiesPaths)
+        {
+            if (path == null)
+            {
+                InitNodesGrid();
+                Debug.Log("Path not found, Reloading map");
+            }
+        }
         SetPathsStartCoordinates(GeneratePathRandomUbication(amountOfPaths));
         SetPathDestinationCoordinates();
         SetPathNodes();

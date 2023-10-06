@@ -26,8 +26,11 @@ public class DecorationGenerator : MonoBehaviour
     {
         foreach (Transform decorationPoint in transform)
         {
-            int itemToInstantiate = Random.Range(0, decorationPrefabs.Length);
-            Instantiate(decorationPrefabs[itemToInstantiate], decorationPoint.transform.position, Random.rotation, decorationPoint);
+            if (Random.value > 0.25)
+            {
+                int itemToInstantiate = Random.Range(0, decorationPrefabs.Length);
+                Instantiate(decorationPrefabs[itemToInstantiate], decorationPoint.transform.position, Quaternion.Euler(0, Random.Range(0f, 360f), 0), decorationPoint);
+            }    
         }
     }
 
