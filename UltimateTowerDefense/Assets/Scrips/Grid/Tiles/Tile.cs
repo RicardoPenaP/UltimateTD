@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
 
     //Pathfinding variables
 
+    public bool hasDecoration;
     public bool isWalkable;
     public bool isExplored;
     public bool isPath;
