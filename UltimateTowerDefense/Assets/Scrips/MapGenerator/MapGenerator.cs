@@ -451,6 +451,11 @@ public class MapGenerator : MonoBehaviour
         return NeighborLocation.None;
     }
 
+    public Path[] GetEnemiesPaths()
+    {
+        return enemiesPaths;
+    }
+
     public static Vector3 CoordinatesToPosition(Vector2Int coordinates)
     {
         return new Vector3(coordinates.x * gridSize,0, coordinates.y * gridSize);

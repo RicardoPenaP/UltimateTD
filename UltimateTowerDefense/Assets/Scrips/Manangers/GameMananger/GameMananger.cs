@@ -11,7 +11,7 @@ public class GameMananger : Singleton<GameMananger>
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private WaveMananger waveManangerPrefab;
         
-    private WaveMananger[] waveManangers;
+    private WaveMananger[] waveManangers;    
     
     private int currentWave = 1;
     private float timeLeft;
@@ -30,14 +30,14 @@ public class GameMananger : Singleton<GameMananger>
 
     protected override void Awake()
     {
-        base.Awake();
-        InitWaveManangers();
+        base.Awake();        
         nextWavePanel?.SubscribeToStarNowButtonOnClickEvent(StarNextWave);
 
     }
 
     private void Start()
     {
+        InitWaveManangers();
         currentWave = 1;
         enemiesKilled = 0;
         wavesCleared = 0;
@@ -60,7 +60,12 @@ public class GameMananger : Singleton<GameMananger>
 
     private void InitWaveManangers()
     {
-        waveManangers = GetComponentsInChildren<WaveMananger>();        
+        Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();
+        waveManangers = new WaveMananger[enemiesPath.Length];
+        for (int i = 0; i < enemiesPath.Length; i++)
+        {
+            waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
+        }              
     }
 
     private void GameLoop()
