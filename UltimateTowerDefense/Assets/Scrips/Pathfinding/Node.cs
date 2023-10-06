@@ -15,7 +15,7 @@ public class Node
     public bool isFree = true;
     public bool isExplored = false;
     public bool isPath = false;
-    public bool isWalkable = true;
+    public bool isWalkable = true;    
     public Node connectedTo;
 
     public Node(Vector2Int coordinates)

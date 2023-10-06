@@ -30,9 +30,10 @@ public static class PerlingNoiseGenerator
                 {
                     float perlingNoiseValue = Mathf.PerlinNoise(x * scale + seed + offset.x, y * scale + seed + offset.y);
                     newNode.TileType = GetNodeTileType(perlingNoiseValue);
+                    newNode.Content = HasDecoration(perlingNoiseValue,newNode.TileType) ? NodeContent.Decoration : NodeContent.None;
                 }
 
-                if (newNode.TileType == NodeTileType.Water)
+                if (newNode.TileType == NodeTileType.Water || newNode.TileType == NodeTileType.Sand)
                 {
                     newNode.isWalkable = false;
                 }
@@ -55,5 +56,30 @@ public static class PerlingNoiseGenerator
         }  
 
         return NodeTileType.LightGrass;
+    }
+
+    private static bool HasDecoration(float perlingNoiseValue, NodeTileType nodeTileType)
+    {
+        switch (nodeTileType)
+        {
+            case NodeTileType.LightGrass:
+                return perlingNoiseValue > 0.2;
+               
+            case NodeTileType.DarkGrass:
+                return perlingNoiseValue > 0.5;
+           
+            case NodeTileType.Mud:
+                return perlingNoiseValue > 0.65;
+                
+            case NodeTileType.Sand:
+                return perlingNoiseValue > 0.75;
+                
+            case NodeTileType.Water:
+                return perlingNoiseValue > 0.85;
+                
+            default:
+                return false;
+        }
+       
     }
 }
