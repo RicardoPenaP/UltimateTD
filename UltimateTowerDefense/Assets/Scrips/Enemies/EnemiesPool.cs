@@ -9,6 +9,7 @@ public class EnemiesPool : MonoBehaviour
 
     private List<EnemyController> enemiesPooled = new List<EnemyController>();    
     private List<Tile> pooledEnemiesPath;
+    private Path enemiesPath;
 
     private bool allEnemiesKilled = false;
     private bool canActivate = true;
@@ -62,8 +63,8 @@ public class EnemiesPool : MonoBehaviour
             if (!enemy.gameObject.activeInHierarchy)
             {
                 enemiesSpawned++;
-                StartCoroutine(CanActivateRespawnRoutine());
-                enemy.SetPath(pooledEnemiesPath);
+                StartCoroutine(CanActivateRespawnRoutine());                
+                enemy.SetPath(enemiesPath);
                 enemy.gameObject.SetActive(true);
                 if (enemiesSpawned >= enemiesToSpawn)
                 {                    
@@ -103,6 +104,11 @@ public class EnemiesPool : MonoBehaviour
         {
             allEnemiesKilled = true;
         }
+    }
+
+    public void SetEnemiesPath(Path enemiesPath)
+    {
+        this.enemiesPath = enemiesPath;
     }
 
     public void EnemiesCanSpawn()

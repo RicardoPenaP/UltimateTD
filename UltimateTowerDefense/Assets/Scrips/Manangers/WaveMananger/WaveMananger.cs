@@ -13,6 +13,7 @@ public class WaveMananger : MonoBehaviour
     private event Action OnResetPools;
 
     private Dictionary<EnemyController, EnemiesPool> enemiesPools = new Dictionary<EnemyController, EnemiesPool>();
+    private Path enemiesPath;
     private WaveData currentWave;
 
     private int waveIndex = 0;
@@ -111,5 +112,10 @@ public class WaveMananger : MonoBehaviour
         OnResetPools.Invoke();        
     }
     
+
+    public void SetEnemiesPath(Path enemiesPath)
+    {
+        this.enemiesPath = enemiesPath;
+    }
 
 }

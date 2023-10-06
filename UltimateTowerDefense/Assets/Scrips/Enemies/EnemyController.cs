@@ -83,8 +83,8 @@ public class EnemyController : MonoBehaviour
         myAI.InitializeEnemy(myData.AttackRange,currentDamageToStronghold);
     }
     
-    public void SetPath(List<Tile> path)
-    {       
+    public void SetPath(Path path)
+    {
         myMovement.SetPath(path);
     }
 

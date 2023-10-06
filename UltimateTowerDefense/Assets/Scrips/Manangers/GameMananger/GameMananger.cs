@@ -65,6 +65,7 @@ public class GameMananger : Singleton<GameMananger>
         for (int i = 0; i < enemiesPath.Length; i++)
         {
             waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
+            waveManangers[i].SetEnemiesPath(enemiesPath[i]);
         }              
     }
 

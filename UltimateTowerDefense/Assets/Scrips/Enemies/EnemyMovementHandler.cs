@@ -15,8 +15,8 @@ public class EnemyMovementHandler : MonoBehaviour
     public event Action OnPathEnded;
     private EnemyHealthHandler myHealthHandler;
     private EnemyAnimatorHandler myAnimatorHandler;
-    private Transform meshTransform;
-    private List<Tile> path;    
+    private Transform meshTransform;   
+    private Path myPath;
    
     private int pathIndex = 0;
     private Vector3 movementDirection;
@@ -50,16 +50,16 @@ public class EnemyMovementHandler : MonoBehaviour
             return;
         }
 
-        if (path == null)
+        if (myPath == null)
         {
             return;
         }
 
-        if (Vector3.Distance(path[pathIndex].GetPosition(), transform.position) <= distanceFromNextTileOffset)
+        if (Vector3.Distance(myPath.nodes[pathIndex].Position, transform.position) <= distanceFromNextTileOffset)
         {
-            transform.position = path[pathIndex].GetPosition();
+            transform.position = myPath.nodes[pathIndex].Position;
 
-            if (pathIndex < path.Count - 1)
+            if (pathIndex < myPath.nodes.Count - 1)
             {
                 pathIndex++;
                 SetMovementDirection();
@@ -78,28 +78,28 @@ public class EnemyMovementHandler : MonoBehaviour
 
     private void SetMovementDirection()
     {
-        if (path == null)
+        if (myPath == null)
         {
             return;
         }
-        movementDirection = (path[pathIndex].GetPosition() - transform.position).normalized;
-        meshTransform.LookAt(path[pathIndex].GetPosition());
+        movementDirection = (myPath.nodes[pathIndex].Position - transform.position).normalized;
+        meshTransform.LookAt(myPath.nodes[pathIndex].Position);
     }
 
-    public void SetPath(List<Tile> newPath)
+    public void SetPath(Path path)
     {
         pathIndex = 0;
-        path = newPath;
+        myPath = path;
     }
 
-    public List<Tile> GetRemainingPath()
+    public Path GetRemainingPath()
     {
-        List<Tile> remainingPath = new List<Tile>();
-        for (int i = pathIndex; i < path.Count; i++)
+        Path remainingPath = new Path();
+        for (int i = pathIndex; i < myPath.nodes.Count; i++)
         {
-            remainingPath.Add(path[i]);
+            remainingPath.nodes.Add(myPath.nodes[i]);
         }
-        remainingPath.RemoveAt(0);
+        remainingPath.nodes.RemoveAt(0);
         return remainingPath;
     }
 
