@@ -60,6 +60,8 @@ public class MapGenerator : MonoBehaviour
 
     private Path[] enemiesPaths;
 
+    private bool tilesCanBeInstatiated = false;
+
     private void Awake()
     {        
         InitNodesGrid();
@@ -102,6 +104,7 @@ public class MapGenerator : MonoBehaviour
 
     private void InitPaths()
     {
+        
         enemiesPaths = new Path[amountOfPaths];
         for (int i = 0; i < enemiesPaths.Length; i++)
         {
@@ -202,6 +205,8 @@ public class MapGenerator : MonoBehaviour
             myPathData.destinationCoordinates = path.destinationCoordinates;
             myPathData.nodesGrid = myNodeGrid;
             path.nodes = PathGenerator.GetNewPath(myPathData);
+            tilesCanBeInstatiated = true;
+
             if (path.nodes != null)
             {
                 foreach (Node node in path.nodes)
@@ -211,12 +216,23 @@ public class MapGenerator : MonoBehaviour
                     myNodeGrid[node.Coordinates].isPath = true;
                 }
             }
+            else
+            {
+                Debug.Log($"Path not found, seed: {seed}");
+                tilesCanBeInstatiated = false;
+            }
         }
-
     }
 
     private void InitTiles()
     {
+        if (!tilesCanBeInstatiated)
+        {
+            randomSeed = true;
+            InitNodesGrid();
+            return;
+        }
+
         myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         Tile instantiatedTile = null;
         foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
