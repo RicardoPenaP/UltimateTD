@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class GameMananger : Singleton<GameMananger>
 {
+    private enum GameMode { SingleRoad, DoubleRoad, TripleRoad, QuadRoad}
+
     [Header("Game Mananger")]
+    [SerializeField] private GameData myGameData;
     [SerializeField] private GameManangerNextWavePanel nextWavePanel;
     [SerializeField] private float timeToStart;
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private WaveMananger waveManangerPrefab;
         
-    private WaveMananger[] waveManangers;    
+    private WaveMananger[] waveManangers;
+    private GameMode gameMode;
     
     private int currentWave = 1;
     private float timeLeft;
@@ -66,6 +70,20 @@ public class GameMananger : Singleton<GameMananger>
         {
             waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
             waveManangers[i].SetEnemiesPath(enemiesPath[i]);
+            switch (enemiesPath.Length)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
+
         }              
     }
 

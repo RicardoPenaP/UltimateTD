@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace EnemiesWaves
-{
+{    
     [System.Serializable]
     public struct EnemyToSpawn
     {
         [Header("Enemy To Spawn")]
+        [Tooltip("Enemy")]
+        [SerializeField] EnemyType enemy;
         [Tooltip("Prefab reference")]
         [SerializeField] private EnemyController enemyPrefabReference;
         [Tooltip("Amount of total units of this enemy to spawn along the wave")]
@@ -17,6 +19,7 @@ namespace EnemiesWaves
         [Tooltip("The unit level")]
         [SerializeField, Range(1, 100)] private int enemyLevel;
 
+        public EnemyType Enemy { get { return enemy; } }
         public EnemyController EnemyPrefabReference { get { return enemyPrefabReference; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
         public float TimeBetweenSpawn { get { return timeBetweenSpawn; } }

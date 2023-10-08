@@ -8,9 +8,12 @@ public class WaveMananger : MonoBehaviour
 {  
     [Header("Wave Mananger")]    
     [SerializeField] private EnemiesPool enemyPoolPrefabReference;
-    [SerializeField] private WaveData[] waves; 
 
     private event Action OnResetPools;
+
+    private WaveData[] waveData;    
+
+    private Dictionary<EnemyType, EnemyController> myEnemies = new Dictionary<EnemyType, EnemyController>();
 
     private Dictionary<EnemyController, EnemiesPool> enemiesPools = new Dictionary<EnemyController, EnemiesPool>();
     private Path enemiesPath;
@@ -19,7 +22,7 @@ public class WaveMananger : MonoBehaviour
     private int waveIndex = 0;
     
     public bool WaveCompleted { get { return CheckWaveCompleted(); } }
-    public bool HavePendingWaves { get { return waveIndex < waves.Length-1; } }
+    public bool HavePendingWaves { get { return waveIndex < waveData.Length-1; } }
 
     private void Start()
     {
@@ -31,7 +34,7 @@ public class WaveMananger : MonoBehaviour
         //First, set all the enemies and the maximum amount of units to instantiate in a dictionary
         Dictionary<EnemyController, int> enemiesToInstantiate = new Dictionary<EnemyController, int>();
 
-        foreach (WaveData wave in waves)
+        foreach (WaveData wave in waveData)
         {
             foreach (EnemyToSpawn enemy in wave.EnemiesToSpawn)
             {
@@ -67,13 +70,13 @@ public class WaveMananger : MonoBehaviour
 
     public void StartNewWave(int waveIndex)
     {
-        if (waveIndex >= waves.Length || waveIndex < 0)
+        if (waveIndex >= waveData.Length || waveIndex < 0)
         {
             return;
         }
         ResetPools();
         this.waveIndex = waveIndex;
-        currentWave = waves[waveIndex];
+        currentWave = waveData[waveIndex];
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
             if (enemiesPools.ContainsKey(enemyInWave.EnemyPrefabReference))
@@ -118,4 +121,19 @@ public class WaveMananger : MonoBehaviour
         this.enemiesPath = enemiesPath;
     }
 
+    public void SetEnemies(EnemiesReference[] enemies)
+    {
+        myEnemies.Clear();
+        EnemiesReference[] newEnemies = enemies;
+
+        foreach (EnemiesReference enemy in newEnemies)
+        {
+            myEnemies.TryAdd(enemy.EnemyType,enemy.EnemyPrefab);
+        }
+    }
+
+    public void SetWaveData(WaveData[] waveData)
+    {
+        this.waveData = waveData;
+    }
 }

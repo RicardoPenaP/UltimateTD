@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using EnemiesInterface;
 
+public enum EnemyType { Slave, SkeletonWarrior, Crossbow, DeathKnigh, Lich, DeathRider, SiegeEngine, Gargolye }
 [RequireComponent(typeof(EnemyMovementHandler),typeof(EnemyDamageHandler))]
 public class EnemyController : MonoBehaviour
 {
