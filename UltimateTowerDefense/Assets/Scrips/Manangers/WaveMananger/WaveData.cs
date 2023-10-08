@@ -9,7 +9,7 @@ namespace EnemiesWaves
     {
         [Header("Enemy To Spawn")]
         [Tooltip("Enemy")]
-        [SerializeField] EnemyType enemy;
+        [SerializeField] EnemyType enemyType;
         [Tooltip("Prefab reference")]
         [SerializeField] private EnemyController enemyPrefabReference;
         [Tooltip("Amount of total units of this enemy to spawn along the wave")]
@@ -19,7 +19,7 @@ namespace EnemiesWaves
         [Tooltip("The unit level")]
         [SerializeField, Range(1, 100)] private int enemyLevel;
 
-        public EnemyType Enemy { get { return enemy; } }
+        public EnemyType EnemyType { get { return enemyType; } }
         public EnemyController EnemyPrefabReference { get { return enemyPrefabReference; } }
         public int AmountToSpawn { get { return amountToSpawn; } }
         public float TimeBetweenSpawn { get { return timeBetweenSpawn; } }

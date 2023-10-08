@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EnemiesWaves;
 
 public class GameMananger : Singleton<GameMananger>
 {
@@ -65,24 +66,34 @@ public class GameMananger : Singleton<GameMananger>
     private void InitWaveManangers()
     {
         Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();
+        gameMode = (GameMode)enemiesPath.Length;
         waveManangers = new WaveMananger[enemiesPath.Length];
+        WaveData[] waveDataToUse;
+        switch (gameMode)
+        {
+            case GameMode.SingleRoad:
+                waveDataToUse = myGameData.SingleRoadWaves;
+                break;
+            case GameMode.DoubleRoad:
+                waveDataToUse = myGameData.DoubleRoadWaves;
+                break;
+            case GameMode.TripleRoad:
+                waveDataToUse = myGameData.TripleRoadWaves;
+                break;
+            case GameMode.QuadRoad:
+                waveDataToUse = myGameData.QuadRoadWaves;
+                break;
+            default:
+                waveDataToUse = new WaveData[0];
+                break;
+        }
+
+
         for (int i = 0; i < enemiesPath.Length; i++)
         {
             waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
             waveManangers[i].SetEnemiesPath(enemiesPath[i]);
-            switch (enemiesPath.Length)
-            {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
-            }
+            waveManangers[i].SetWaveData(waveDataToUse);
 
         }              
     }

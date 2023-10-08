@@ -17,7 +17,7 @@ public class GameData : ScriptableObject
 {
     [Header("Game Data")]
     [Header("Enemies Reference")]
-    [SerializeField] private EnemiesReference[] undeadEnemies;
+    [SerializeField] private static EnemiesReference[] undeadEnemies;
 
     [Header("Wave Reference")]
     [SerializeField] private WaveData[] singleRoadWaves;
@@ -25,9 +25,22 @@ public class GameData : ScriptableObject
     [SerializeField] private WaveData[] tripleRoadWaves;
     [SerializeField] private WaveData[] quadRoadWaves;
 
+    public static EnemiesReference[] UndeadEnemies { get { return undeadEnemies;} }
     public WaveData[] SingleRoadWaves { get { return singleRoadWaves; } }
     public WaveData[] DoubleRoadWaves { get { return doubleRoadWaves; } }
     public WaveData[] TripleRoadWaves { get { return tripleRoadWaves; } }
     public WaveData[] QuadRoadWaves { get { return quadRoadWaves; } }
 
+    public static EnemyController GetEnemyPrefab(EnemyType enemyType)
+    {
+        EnemyController enemyPrefab = new EnemyController();
+        foreach (EnemiesReference enemy in undeadEnemies)
+        {
+            if (enemyType == enemy.EnemyType)
+            {
+                enemyPrefab = enemy.EnemyPrefab;
+            }
+        }
+        return enemyPrefab;
+    }
 }
