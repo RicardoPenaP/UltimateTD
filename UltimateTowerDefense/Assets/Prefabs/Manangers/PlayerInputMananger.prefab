@@ -51,5 +51,13 @@ MonoBehaviour:
     m_Id: f08ff631-28b7-48e4-875b-bc86d75d2d0f
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a6065ee9-e10b-4a37-b719-8189369f57e1
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause Input
+      m_Flags: 0
     m_Flags: 0

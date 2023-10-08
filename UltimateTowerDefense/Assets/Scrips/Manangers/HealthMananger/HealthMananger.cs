@@ -6,8 +6,7 @@ public class HealthMananger : Singleton<HealthMananger>
 {
     [Header("Health Mananger")]
     [SerializeField,Min(0)] private int maxHealth = 10;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private Transform strongholdPos;
+    [SerializeField] private int currentHealth;    
 
     private UIBar healthBar;
     private bool isAlive;
@@ -44,6 +43,6 @@ public class HealthMananger : Singleton<HealthMananger>
 
     public Vector3 GetStrongholdPos()
     {
-        return strongholdPos.position;
+        return Stronghold.Instance.transform.position;
     }
 }
