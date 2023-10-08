@@ -28,8 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6822185644091630128}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,96 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ba3d5a1821915438d88881bfd4a13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myGameData: {fileID: 11400000, guid: 33a4a46da42555c46b8e8fe6cea2873a, type: 2}
   nextWavePanel: {fileID: 0}
   timeToStart: 10
   timeBetweenWaves: 15
---- !u!1001 &1018302133581248466
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6822185644782297016}
-    m_Modifications:
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966436, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_Name
-      value: WaveMananger
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966436, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: timeBetweenWaves
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: waves.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: waves.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: f0c5dfce188d9564ebf8a200450e8479, type: 2}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: waves.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: f0c5dfce188d9564ebf8a200450e8479, type: 2}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: waves.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: f0c5dfce188d9564ebf8a200450e8479, type: 2}
-    - target: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-      propertyPath: waves.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: f0c5dfce188d9564ebf8a200450e8479, type: 2}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
---- !u!4 &6822185644091630128 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5804288724035966434, guid: a6864b156c8058a41b4d537d6037f949, type: 3}
-  m_PrefabInstance: {fileID: 1018302133581248466}
-  m_PrefabAsset: {fileID: 0}
+  waveManangerPrefab: {fileID: 5804288724035966437, guid: a6864b156c8058a41b4d537d6037f949, type: 3}

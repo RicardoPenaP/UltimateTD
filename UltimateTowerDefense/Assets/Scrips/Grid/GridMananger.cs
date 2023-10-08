@@ -10,9 +10,6 @@ public class GridMananger : Singleton<GridMananger>
         public float minX, maxX, minZ, maxZ;
     }
 
-    [Header("Grid Mananger")]
-    public static readonly int tileSize = 5;    
-
     private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
 
     private MapTresholds myTresholds = new MapTresholds();
@@ -75,16 +72,6 @@ public class GridMananger : Singleton<GridMananger>
                 mapGrid.Add(tile.Coordinates, tile);                
             }
         }
-    }
-
-    public Vector3 GetPositionFromCoordinates(Vector2Int coordinates)
-    {
-        return new Vector3(coordinates.x * tileSize, 0, coordinates.y * tileSize);
-    }
-
-    public Vector2Int GetCoordinatesFromPosition(Vector3 position)
-    {
-        return new Vector2Int(Mathf.RoundToInt(position.x / tileSize), Mathf.RoundToInt(position.z / tileSize));
     }
 
 }
