@@ -65,7 +65,7 @@ public class GameMananger : Singleton<GameMananger>
     private void InitWaveManangers()
     {
         Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();
-        gameMode = (GameMode)enemiesPath.Length;
+        gameMode = (GameMode)enemiesPath.Length-1;
         waveManangers = new WaveMananger[enemiesPath.Length];
         WaveData[] waveDataToUse;
         switch (gameMode)
