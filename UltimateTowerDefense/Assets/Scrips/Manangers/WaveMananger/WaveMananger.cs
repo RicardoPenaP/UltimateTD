@@ -60,7 +60,8 @@ public class WaveMananger : MonoBehaviour
             if (!enemiesPools.ContainsKey(keyValuePar.Key))
             {
                 EnemiesPool pool = Instantiate(enemyPoolPrefabReference, transform.position, Quaternion.identity, transform);
-                pool.PopulatePool(GameData.GetEnemyPrefab(keyValuePar.Key),keyValuePar.Value);
+                pool.SetEnemiesPath(enemiesPath);
+                pool.PopulatePool(GameMananger.Instance.GetEnemyPrefab(keyValuePar.Key),keyValuePar.Value);
                 OnResetPools += pool.ResetPool;
                 enemiesPools.Add(keyValuePar.Key, pool);
             }
@@ -112,8 +113,7 @@ public class WaveMananger : MonoBehaviour
     private void ResetPools()
     {
         OnResetPools.Invoke();        
-    }
-    
+    }    
 
     public void SetEnemiesPath(Path enemiesPath)
     {

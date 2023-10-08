@@ -200,4 +200,8 @@ public class GameMananger : Singleton<GameMananger>
         enemiesKilled++;
     }
 
+    public EnemyController GetEnemyPrefab(EnemyType enemyType)
+    {        
+        return myGameData.GetEnemyPrefab(enemyType);
+    }
 }

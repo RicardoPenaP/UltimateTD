@@ -7,8 +7,7 @@ public class EnemiesPool : MonoBehaviour
     private delegate void LevelUpEnemiesHandler(int level);
     private LevelUpEnemiesHandler OnSetEnemiesLevel;
 
-    private List<EnemyController> enemiesPooled = new List<EnemyController>();    
-    private List<Tile> pooledEnemiesPath;
+    private List<EnemyController> enemiesPooled = new List<EnemyController>();
     private Path enemiesPath;
 
     private bool allEnemiesKilled = false;
@@ -20,13 +19,6 @@ public class EnemiesPool : MonoBehaviour
 
     private bool canSpawn = false;
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
-
-
-    private void Start()
-    {
-        Vector2Int myCoordinates = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
-        pooledEnemiesPath = Pathfinder.Instance.GetNewPath(myCoordinates);
-    }    
 
     private void Update()
     {       
