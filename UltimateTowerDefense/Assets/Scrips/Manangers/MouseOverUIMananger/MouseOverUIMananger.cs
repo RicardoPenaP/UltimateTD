@@ -13,7 +13,6 @@ public class MouseOverUIMananger : Singleton<MouseOverUIMananger>
     private void Update()
     {
         SetMouseOverUI();
-
     }
 
     private void SetMouseOverUI()

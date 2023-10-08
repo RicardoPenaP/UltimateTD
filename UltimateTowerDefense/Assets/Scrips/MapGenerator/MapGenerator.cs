@@ -17,9 +17,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] public static readonly float gridSize = 5;
     [SerializeField] private Vector2Int gridDimension;
     
-    [Header("Manangers")]
-    [SerializeField] private GridMananger gridManangerPrefab;
-
     [Header("Stronghold")]
     [SerializeField] private Stronghold strongholdPrefab;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
@@ -55,8 +52,7 @@ public class MapGenerator : MonoBehaviour
 
     private Dictionary<Vector2Int, Node> myNodeGrid = new Dictionary<Vector2Int, Node>();
 
-    private Node myStrongholdNode;
-    GridMananger myGridMananger;
+    private Node myStrongholdNode;    
 
     private Path[] enemiesPaths;
 
@@ -233,29 +229,28 @@ public class MapGenerator : MonoBehaviour
             return;
         }
 
-        myGridMananger = Instantiate(gridManangerPrefab, transform.position, Quaternion.identity);
         Tile instantiatedTile = null;
         foreach (KeyValuePair<Vector2Int,Node> node in myNodeGrid)
         {
             switch (node.Value.TileType)
             {
                 case NodeTileType.LightGrass:
-                    instantiatedTile = Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.DarkGrass:
-                    instantiatedTile = Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.Snow:
-                    instantiatedTile = Instantiate(snowTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(snowTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.Mud:
-                    instantiatedTile = Instantiate(mudTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(mudTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.Sand:
-                    instantiatedTile = Instantiate(sandTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(sandTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.Water:
-                    instantiatedTile = Instantiate(waterTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    instantiatedTile = Instantiate(waterTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 default:
                     break;
@@ -267,7 +262,7 @@ public class MapGenerator : MonoBehaviour
                     instantiatedTile.hasDecoration = true;
                     break;
                 case NodeContent.Stronghold:
-                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, myGridMananger.transform.GetChild(1));
+                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
                     break;                
                 default:
@@ -313,25 +308,25 @@ public class MapGenerator : MonoBehaviour
             if ((nextNeighbor== NeighborLocation.Right && previusNeighbor == NeighborLocation.Left) || 
                 (nextNeighbor == NeighborLocation.Left && previusNeighbor == NeighborLocation.Right))
             {
-                Instantiate(straightHorizontal, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                Instantiate(straightHorizontal, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
             }
 
             if ((nextNeighbor == NeighborLocation.Up && previusNeighbor == NeighborLocation.Down) ||
                 (nextNeighbor == NeighborLocation.Down && previusNeighbor == NeighborLocation.Up))
             {
-                Instantiate(straightVertical, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                Instantiate(straightVertical, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
             }
 
             if (previusNeighbor == NeighborLocation.Up)
             {
                 if (nextNeighbor == NeighborLocation.Right)
                 {
-                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
 
                 if (nextNeighbor == NeighborLocation.Left)
                 {
-                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
             }
 
@@ -339,12 +334,12 @@ public class MapGenerator : MonoBehaviour
             {
                 if (nextNeighbor == NeighborLocation.Right)
                 {
-                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
 
                 if (nextNeighbor == NeighborLocation.Left)
                 {
-                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
             }
 
@@ -352,12 +347,12 @@ public class MapGenerator : MonoBehaviour
             {
                 if (nextNeighbor == NeighborLocation.Down)
                 {
-                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(upperLeftCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
 
                 if (nextNeighbor == NeighborLocation.Up)
                 {
-                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(lowerLeftCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
             }
 
@@ -365,12 +360,12 @@ public class MapGenerator : MonoBehaviour
             {
                 if (nextNeighbor == NeighborLocation.Down)
                 {
-                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(upperRightCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
 
                 if (nextNeighbor == NeighborLocation.Up)
                 {
-                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(lowerRightCorner, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                 }
             }
 
@@ -385,16 +380,16 @@ public class MapGenerator : MonoBehaviour
                 case NeighborLocation.None:
                     break;
                 case NeighborLocation.Up:
-                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Down:
-                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Left:
-                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Right:
-                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 default:
                     break;
@@ -409,16 +404,16 @@ public class MapGenerator : MonoBehaviour
                 case NeighborLocation.None:
                     break;
                 case NeighborLocation.Up:
-                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishDown, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Down:
-                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishUp, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Left:
-                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishRight, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 case NeighborLocation.Right:
-                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, myGridMananger.transform.GetChild(0));
+                    Instantiate(startFinishLeft, currentNode.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(0));
                     break;
                 default:
                     break;

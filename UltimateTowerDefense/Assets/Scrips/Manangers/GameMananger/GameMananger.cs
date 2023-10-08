@@ -37,7 +37,6 @@ public class GameMananger : Singleton<GameMananger>
     {
         base.Awake();        
         nextWavePanel?.SubscribeToStarNowButtonOnClickEvent(StarNextWave);
-
     }
 
     private void Start()
