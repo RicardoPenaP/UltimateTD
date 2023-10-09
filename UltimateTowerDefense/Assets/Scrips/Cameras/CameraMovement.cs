@@ -49,7 +49,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
-        myPointer = FindObjectOfType<Stronghold>().transform;
+        myPointer.position = FindObjectOfType<Stronghold>().transform.position;
     }
 
     private void OnEnable()

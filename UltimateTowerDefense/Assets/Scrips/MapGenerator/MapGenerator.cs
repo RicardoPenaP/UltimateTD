@@ -65,7 +65,7 @@ public class MapGenerator : MonoBehaviour
 
     private void InitNodesGrid()
     {
-        amountOfPaths = (int)GameMode.GameModeOption;
+        amountOfPaths = (int)GameMode.GameModeOption;        
         if (randomSeed)
         {
             seed = Random.Range(0.000f, 999999f);
