@@ -258,8 +258,11 @@ public class MapGenerator : MonoBehaviour
 
             switch (node.Value.Content)
             {
+                case NodeContent.Path:
+                    instantiatedTile.TileStatus = TileStatusID.IsPath;
+                    break;
                 case NodeContent.Obstacle:
-                    instantiatedTile.hasObstacle = true;
+                    instantiatedTile.TileStatus = TileStatusID.HasObstacle;
                     break;
                 case NodeContent.Stronghold:
                     Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
@@ -269,6 +272,8 @@ public class MapGenerator : MonoBehaviour
                    
                     break;
             }
+
+            instantiatedTile.SetTileCoordinates(node.Value.Coordinates);
         }
 
         InitPathTiles();

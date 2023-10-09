@@ -97,7 +97,7 @@ public class StoreMananger : Singleton<StoreMananger>
             }
         } 
         selectedTower = null;
-        PreviewBuildingMananger.Instance.TurnOffPreviewTower();
+        PreviewBuildingMananger.Instance?.TurnOffPreviewTower();
     }
 
    
@@ -107,8 +107,8 @@ public class StoreMananger : Singleton<StoreMananger>
         {
             return null;
         }
-        PreviewBuildingMananger.Instance.TurnOffPreviewTower();
-        BankMananger.Instance.SubtractGold(selectedTower.GetBuildindUIInfo().BaseGoldCost);
+        PreviewBuildingMananger.Instance?.TurnOffPreviewTower();
+        BankMananger.Instance?.SubtractGold(selectedTower.GetBuildindUIInfo().BaseGoldCost);
         IBuilding building = Instantiate(selectedTower, tileTransform.position, Quaternion.identity, tileTransform).GetComponent<IBuilding>();
         selectedTower = null;
         return building;

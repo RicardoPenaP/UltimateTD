@@ -17,7 +17,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void Start()
     {
-        if (myTile.hasObstacle)
+        if (myTile.TileStatus == TileStatusID.HasObstacle)
         {           
             InstantiateObstacles();
         }
