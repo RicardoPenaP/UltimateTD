@@ -259,7 +259,7 @@ public class MapGenerator : MonoBehaviour
             switch (node.Value.Content)
             {
                 case NodeContent.Obstacle:
-                    instantiatedTile.hasDecoration = true;
+                    instantiatedTile.hasObstacle = true;
                     break;
                 case NodeContent.Stronghold:
                     Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));

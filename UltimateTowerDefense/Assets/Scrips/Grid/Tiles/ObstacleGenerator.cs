@@ -17,7 +17,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void Start()
     {
-        if (myTile.hasDecoration)
+        if (myTile.hasObstacle)
         {           
             InstantiateObstacles();
         }

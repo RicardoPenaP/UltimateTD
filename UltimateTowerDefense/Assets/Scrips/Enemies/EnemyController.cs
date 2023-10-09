@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     private IEnemy myAI;
     private EnemyMovementHandler myMovement;
     private EnemyHealthHandler myHealthHandler;
-    private EnemyAnimatorHelper myAnimatorHelper;
+    private EnemyAnimatorHelper myAnimatorHelper;    
     //For testing
     [SerializeField] private int level;
 

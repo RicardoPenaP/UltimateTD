@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using BuildingInterface;
 
-public class BuildingManangement : MonoBehaviour
+public class TileManangement : MonoBehaviour
 {
-    [Header("TileManangement")]
+    [Header("Tile Manangement")]
 
     private IBuilding tileBuilding;
 

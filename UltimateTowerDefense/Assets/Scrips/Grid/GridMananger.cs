@@ -12,20 +12,13 @@ public class GridMananger : Singleton<GridMananger>
 
     private Dictionary<Vector2Int, Tile> mapGrid = new Dictionary<Vector2Int, Tile>();
 
-    private MapTresholds myTresholds = new MapTresholds();
-
-    public Dictionary<Vector2Int, Tile> MapGrid { get { return mapGrid; } }
+    private MapTresholds myTresholds = new MapTresholds();   
     public MapTresholds MyThresholds { get { return myTresholds; } }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        
-    }
 
     private void Start()
     {
-        UpdateTiles();
+        StoreTiles();
         SetTresholds();
     }
 
@@ -61,7 +54,7 @@ public class GridMananger : Singleton<GridMananger>
         myTresholds.maxZ = maxZ;
     }
 
-    public void UpdateTiles()
+    private void StoreTiles()
     {
         Tile[] tiles = transform.GetComponentsInChildren<Tile>();
 

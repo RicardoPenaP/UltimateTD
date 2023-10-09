@@ -72,10 +72,7 @@ public class CoordinateLabeler : MonoBehaviour
         {
             case TileStatusID.Free:
                 labelText.color = freeColor;
-                break;
-            case TileStatusID.Walkable:
-                labelText.color = walkableColor;
-                break;
+                break;            
             case TileStatusID.Occuped:
                 labelText.color = occupedColor;
                 break;
