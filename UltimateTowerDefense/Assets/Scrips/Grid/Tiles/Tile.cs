@@ -13,16 +13,15 @@ public class Tile : MonoBehaviour
     private Vector2Int coordinates = new Vector2Int();
 
     public bool hasObstacle; 
-    public bool isPath;
-    
+    //public bool isPath;
 
     public TileStatusID TileStatus { get { return tileStatus; } set { tileStatus = value; } }    
     public Vector2Int Coordinates { get { return coordinates; } }
 
-    private void SetTile()
+    private void SetTile(Vector2Int coordinates, TileStatusID tileStatus)
     {
-        coordinates.x = Mathf.RoundToInt(transform.position.x / MapGenerator.gridSize);
-        coordinates.y = Mathf.RoundToInt(transform.position.z / MapGenerator.gridSize);       
+        this.coordinates = coordinates;
+        this.tileStatus = tileStatus;          
     }
 
 }
