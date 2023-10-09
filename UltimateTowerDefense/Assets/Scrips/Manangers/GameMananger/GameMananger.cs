@@ -6,7 +6,7 @@ using EnemiesWaves;
 
 public class GameMananger : Singleton<GameMananger>
 {
-    private enum GameMode { SingleRoad, DoubleRoad, TripleRoad, QuadRoad}
+    private enum GameModeOptions { SingleRoad, DoubleRoad, TripleRoad, QuadRoad}
 
     [Header("Game Mananger")]
     [SerializeField] private GameData myGameData;
@@ -16,7 +16,7 @@ public class GameMananger : Singleton<GameMananger>
     [SerializeField] private WaveMananger waveManangerPrefab;
         
     private WaveMananger[] waveManangers;
-    private GameMode gameMode;
+    private GameModeOptions gameMode;
     
     private int currentWave = 1;
     private float timeLeft;
@@ -65,21 +65,21 @@ public class GameMananger : Singleton<GameMananger>
     private void InitWaveManangers()
     {
         Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();
-        gameMode = (GameMode)enemiesPath.Length-1;
+        gameMode = (GameModeOptions)enemiesPath.Length-1;
         waveManangers = new WaveMananger[enemiesPath.Length];
         WaveData[] waveDataToUse;
         switch (gameMode)
         {
-            case GameMode.SingleRoad:
+            case GameModeOptions.SingleRoad:
                 waveDataToUse = myGameData.SingleRoadWaves;
                 break;
-            case GameMode.DoubleRoad:
+            case GameModeOptions.DoubleRoad:
                 waveDataToUse = myGameData.DoubleRoadWaves;
                 break;
-            case GameMode.TripleRoad:
+            case GameModeOptions.TripleRoad:
                 waveDataToUse = myGameData.TripleRoadWaves;
                 break;
-            case GameMode.QuadRoad:
+            case GameModeOptions.QuadRoad:
                 waveDataToUse = myGameData.QuadRoadWaves;
                 break;
             default:
