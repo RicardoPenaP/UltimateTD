@@ -25,6 +25,9 @@ public class PlayMenu : MonoBehaviour
     {
         backToMainMenuButton.onClick.AddListener(BackToMainMenu);
         singleRoad.onClick.AddListener(PlaySingleRoad);
+        doubleRoad.onClick.AddListener(PlayDoubleRoad);
+        tripleRoad.onClick.AddListener(PlayTripleRoad);
+        quadRoad.onClick.AddListener(PlayQuadRoad);
     }
 
     private void BackToMainMenu()
@@ -35,13 +38,37 @@ public class PlayMenu : MonoBehaviour
 
     private void PlaySingleRoad()
     {
+        GameMode.GameModeOption = GameModeOptions.SingleRoad;
         CloseMenu();
-        GameScenesLoader.LoadGameScene(GameScenes.SingleRoadGame);//for testing only
+        LoadScene();
+    }
+    private void PlayDoubleRoad()
+    {
+        GameMode.GameModeOption = GameModeOptions.DoubleRoad;
+        CloseMenu();
+        LoadScene();
+    }
+    private void PlayTripleRoad()
+    {
+        GameMode.GameModeOption = GameModeOptions.TripleRoad;
+        CloseMenu();
+        LoadScene();
+    }
+    private void PlayQuadRoad()
+    {
+        GameMode.GameModeOption = GameModeOptions.QuadRoad;
+        CloseMenu();
+        LoadScene();
     }
 
     private void CloseMenu()
     {
         gameObject.SetActive(false);
+    }
+
+    private void LoadScene()
+    {
+        GameScenesLoader.LoadGameScene(GameScenes.GameScene);//for testing only
     }
 
     public void OpenMenu()

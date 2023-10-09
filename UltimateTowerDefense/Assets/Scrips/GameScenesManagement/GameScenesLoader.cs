@@ -7,7 +7,7 @@ namespace GameSceneManangement
 {
     public enum GameScenes
     {
-        TestingScene ,MainMenu, SingleRoadGame, DoubleRoadGame,TripleRoadGame,QuadRoadGame
+        MainMenu, GameScene
     }    
 
     public static class GameScenesLoader
@@ -17,22 +17,14 @@ namespace GameSceneManangement
         {
             currentScene = sceneToLoad;
             switch (sceneToLoad)
-            {
-                case GameScenes.TestingScene:
+            {               
+                case GameScenes.MainMenu:
                     SceneManager.LoadScene(0);
                     break;
-                case GameScenes.MainMenu:
+                case GameScenes.GameScene:
                     SceneManager.LoadScene(1);
                     break;
-                case GameScenes.SingleRoadGame:
-                    SceneManager.LoadScene(2);
-                    break;
-                case GameScenes.DoubleRoadGame:
-                    break;
-                case GameScenes.TripleRoadGame:
-                    break;
-                case GameScenes.QuadRoadGame:
-                    break;
+               
                 default:
                     Debug.Log("Scene Not found");
                     break;

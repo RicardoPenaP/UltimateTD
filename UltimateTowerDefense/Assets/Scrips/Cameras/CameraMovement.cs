@@ -47,6 +47,11 @@ public class CameraMovement : MonoBehaviour
         targetFOV = virtualCamera.m_Lens.FieldOfView;
     }
 
+    private void Start()
+    {
+        myPointer = FindObjectOfType<Stronghold>().transform;
+    }
+
     private void OnEnable()
     {
         playerInput.Enable();

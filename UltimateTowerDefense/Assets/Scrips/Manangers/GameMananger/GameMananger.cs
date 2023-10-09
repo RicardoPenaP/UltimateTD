@@ -5,9 +5,7 @@ using UnityEngine;
 using EnemiesWaves;
 
 public class GameMananger : Singleton<GameMananger>
-{
-    private enum GameModeOptions { SingleRoad, DoubleRoad, TripleRoad, QuadRoad}
-
+{  
     [Header("Game Mananger")]
     [SerializeField] private GameData myGameData;
     [SerializeField] private GameManangerNextWavePanel nextWavePanel;
@@ -15,8 +13,7 @@ public class GameMananger : Singleton<GameMananger>
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private WaveMananger waveManangerPrefab;
         
-    private WaveMananger[] waveManangers;
-    private GameModeOptions gameMode;
+    private WaveMananger[] waveManangers;   
     
     private int currentWave = 1;
     private float timeLeft;
@@ -64,11 +61,10 @@ public class GameMananger : Singleton<GameMananger>
 
     private void InitWaveManangers()
     {
-        Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();
-        gameMode = (GameModeOptions)enemiesPath.Length-1;
+        Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();      
         waveManangers = new WaveMananger[enemiesPath.Length];
         WaveData[] waveDataToUse;
-        switch (gameMode)
+        switch (GameMode.GameModeOption)
         {
             case GameModeOptions.SingleRoad:
                 waveDataToUse = myGameData.SingleRoadWaves;
