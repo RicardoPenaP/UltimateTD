@@ -20,7 +20,8 @@ public class MapGenerator : MonoBehaviour
     [Header("Stronghold")]
     [SerializeField] private Stronghold strongholdPrefab;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
-    [SerializeField,Min(0)] private int tilesFromBorder;    
+    [SerializeField,Min(0)] private int tilesFromBorder;
+    [SerializeField, Min(0)] private int pathEndTilesDistanceFromCenter = 1;
 
     [Header("Path Settings")]
     [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
@@ -174,16 +175,16 @@ public class MapGenerator : MonoBehaviour
             switch (path.ubication)
             {               
                 case Path.PathUbication.North:
-                    path.destinationCoordinates=myStrongholdNode.Coordinates + Vector2Int.up;                    
+                    path.destinationCoordinates=myStrongholdNode.Coordinates + (Vector2Int.up * pathEndTilesDistanceFromCenter);                    
                     break;
                 case Path.PathUbication.South:
-                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.down;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.down * pathEndTilesDistanceFromCenter);
                     break;
                 case Path.PathUbication.East:
-                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.right;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.right * pathEndTilesDistanceFromCenter);
                     break;
                 case Path.PathUbication.West:
-                    path.destinationCoordinates = myStrongholdNode.Coordinates + Vector2Int.left;
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.left * pathEndTilesDistanceFromCenter);
                     break;
                 default:
                     break;
