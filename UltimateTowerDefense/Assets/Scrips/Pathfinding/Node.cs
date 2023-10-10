@@ -11,6 +11,10 @@ public class Node
     public Vector3 Position { get; set; }
     public NodeContent Content { get; set; }
     public NodeTileType TileType { get; set; }
+    public int G { get; set; }
+    public int H { get; set; }
+
+    public int F => G + H;
 
     public bool isFree = true;
     public bool isExplored = false;
@@ -24,13 +28,6 @@ public class Node
         Position = MapGenerator.CoordinatesToPosition(coordinates);       
         connectedTo = null;        
     }
-
-    //A* test  
-   
-    public int G { get; set; } // Costo acumulado desde el nodo inicial hasta este nodo
-    public int H { get; set; } // Heurística (costo estimado desde este nodo hasta el destino)
-
-    public int F => G + H; // Función de costo total (F = G + H)
 
 }
 
