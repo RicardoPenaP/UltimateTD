@@ -45,8 +45,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private PerlinNoiseTileRange[] tilesRanges;
     [Header("Tiles Reference")]    
     [SerializeField] private Tile lightGrassTile;
-    [SerializeField] private Tile darkGrassTile;
-    [SerializeField] private Tile snowTile;
+    [SerializeField] private Tile darkGrassTile;    
     [SerializeField] private Tile mudTile;
     [SerializeField] private Tile sandTile;
     [SerializeField] private Tile waterTile;
@@ -249,18 +248,17 @@ public class MapGenerator : MonoBehaviour
                     break;
                 case NodeTileType.DarkGrass:
                     instantiatedTile = Instantiate(darkGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
-                    break;
-                case NodeTileType.Snow:
-                    instantiatedTile = Instantiate(snowTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
-                    break;
+                    break;               
                 case NodeTileType.Mud:
                     instantiatedTile = Instantiate(mudTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
                     break;
                 case NodeTileType.Sand:
                     instantiatedTile = Instantiate(sandTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
+                    instantiatedTile.TileStatus = TileStatusID.Occuped;
                     break;
                 case NodeTileType.Water:
                     instantiatedTile = Instantiate(waterTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
+                    instantiatedTile.TileStatus = TileStatusID.Occuped;
                     break;
                 default:
                     break;
