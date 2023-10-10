@@ -97,7 +97,15 @@ public class MapGenerator : MonoBehaviour
             myNodeGrid[strongholdCoordinates].isFree = false;
             myNodeGrid[strongholdCoordinates].Content = NodeContent.Stronghold;
         }
-      
+
+        for (int x = myStrongholdNode.Coordinates.x - pathEndTilesDistanceFromCenter; x < myStrongholdNode.Coordinates.x + pathEndTilesDistanceFromCenter; x++)
+        {
+            for (int y = myStrongholdNode.Coordinates.y - pathEndTilesDistanceFromCenter; y < myStrongholdNode.Coordinates.y + pathEndTilesDistanceFromCenter; y++)
+            {
+                myNodeGrid[new Vector2Int(x, y)].isFree = false;
+                myNodeGrid[new Vector2Int(x, y)].Content = NodeContent.Stronghold;
+            }
+        }
     }
 
     private void InitPaths()
@@ -267,8 +275,12 @@ public class MapGenerator : MonoBehaviour
                     instantiatedTile.TileStatus = TileStatusID.HasObstacle;
                     break;
                 case NodeContent.Stronghold:
-                    Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
-                    Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
+                    if (node.Key == myStrongholdNode.Coordinates)
+                    {
+                        //Instantiate(lightGrassTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
+                        Instantiate(strongholdPrefab, node.Value.Position, Quaternion.identity);
+                    }
+                    instantiatedTile.TileStatus = TileStatusID.Occuped;
                     break;                
                 default:
                    
