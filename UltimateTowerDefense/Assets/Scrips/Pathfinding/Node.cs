@@ -25,6 +25,13 @@ public class Node
         connectedTo = null;        
     }
 
+    //A* test  
+   
+    public int G { get; set; } // Costo acumulado desde el nodo inicial hasta este nodo
+    public int H { get; set; } // Heurística (costo estimado desde este nodo hasta el destino)
+
+    public int F => G + H; // Función de costo total (F = G + H)
+
 }
 
 

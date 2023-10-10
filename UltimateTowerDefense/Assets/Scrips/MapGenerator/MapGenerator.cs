@@ -108,8 +108,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     private void InitPaths()
-    {
-        
+    {        
         enemiesPaths = new Path[amountOfPaths];
         for (int i = 0; i < enemiesPaths.Length; i++)
         {
@@ -204,12 +203,13 @@ public class MapGenerator : MonoBehaviour
         PathGeneratorData myPathData = new PathGeneratorData();
 
         myPathData.contentOfPathNodes = NodeContent.Path;
+        myPathData.nodesGrid = myNodeGrid;
         foreach (Path path in enemiesPaths)
         {
             myPathData.startCoordinates = path.startCoordinates;
             myPathData.destinationCoordinates = path.destinationCoordinates;
-            myPathData.nodesGrid = myNodeGrid;
-            path.nodes = PathGenerator.GetNewPath(myPathData);
+            //path.nodes = PathGenerator.GetNewPath(myPathData);
+            path.nodes = AStarPathGenerator.FindPath(myPathData);
             tilesCanBeInstatiated = true;
 
             if (path.nodes != null)

@@ -33,10 +33,10 @@ public static class PerlingNoiseGenerator
                     newNode.Content = HasDecoration(perlingNoiseValue,newNode.TileType) ? NodeContent.Obstacle : NodeContent.None;
                 }
 
-                if (newNode.TileType == NodeTileType.Water || newNode.TileType == NodeTileType.Sand)
-                {
-                    newNode.isWalkable = false;
-                }
+                //if (newNode.TileType == NodeTileType.Water || newNode.TileType == NodeTileType.Sand)
+                //{
+                //    newNode.isWalkable = false;
+                //}
 
                 nodesGrid.TryAdd(new Vector2Int(x, y), newNode);
             }

@@ -23,13 +23,13 @@ public class PathGenerator
     public static List<Node> GetNewPath(PathGeneratorData pathData)
     {
         frontier.Clear();
-        nodesReached.Clear();      
-
+        nodesReached.Clear();
+        exploreDirections = GetRandomExploreDirections();
         startCoordinates = pathData.startCoordinates;
         destinationCoordinates = pathData.destinationCoordinates;
         nodesGrid = pathData.nodesGrid;        
         BreadthFirstSearch();
-
+       
         if (successfulSearch)
         {
             return BuildPath(pathData.contentOfPathNodes);
@@ -71,7 +71,6 @@ public class PathGenerator
         {
             return;
         }
-        exploreDirections = GetRandomExploreDirections();
 
         List<Node> neighbors = new List<Node>();
 
@@ -87,7 +86,7 @@ public class PathGenerator
 
         foreach (Node neighbor in neighbors)
         {
-            if (!nodesReached.ContainsKey(neighbor.Coordinates) && neighbor.isFree && neighbor.isWalkable)
+            if (!nodesReached.ContainsKey(neighbor.Coordinates) && neighbor.isFree)
             {
                 neighbor.connectedTo = currenSearchNode;
                 nodesReached.Add(neighbor.Coordinates, nodesGrid[neighbor.Coordinates]);
