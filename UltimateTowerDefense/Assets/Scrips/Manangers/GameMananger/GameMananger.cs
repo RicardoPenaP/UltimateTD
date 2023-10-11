@@ -32,7 +32,7 @@ public class GameMananger : Singleton<GameMananger>
 
     protected override void Awake()
     {
-        base.Awake();        
+        base.Awake();
         nextWavePanel?.SubscribeToStarNowButtonOnClickEvent(StarNextWave);
     }
 

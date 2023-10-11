@@ -26,7 +26,7 @@ public class Node
     {
         Coordinates = coordinates;        
         Position = MapGenerator.CoordinatesToPosition(coordinates);       
-        connectedTo = null;        
+        connectedTo = null;
     }
 
 }
