@@ -20,15 +20,18 @@ public class MapGenerator : MonoBehaviour
     [Header("Stronghold Settings")]
     [SerializeField] private Stronghold strongholdPrefab;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
-    [SerializeField,Min(0)] private int tilesFromBorder;
+    [SerializeField, Min(0)] private int tilesFromBorder;
     [SerializeField, Min(0)] private int pathEndTilesDistanceFromCenter = 1;
     [SerializeField, Min(0)] private int wallsDistanceFromCenter = 1;
 
-    [Header("Path Settings")]
+    [Header("Enemies Path Settings")]
     [SerializeField] private GameObject pathPrefab;
     [Header("Localization Settings")]    
-    [SerializeField] private int startPointMinDistanceFromBorder = 0;    
-    [SerializeField] private int startPointMinDistanceFromCorners = 0;
+    [Tooltip("If the value is 0 the start point of each Enemy Path will be in the border")]
+    [SerializeField, Min(0)] private int startPointMinDistanceFromBorder = 0;
+    [Tooltip("If the value is 0 the start point of each Enemy Path will be in the middle betwen the border corners")]
+    [SerializeField, Min(0)] private int startPointMinDistanceFromCorners = 0;
+    [SerializeField, Min(0)] private int amountOfMiddleNodes = 0;
 
     [Header("Path Rules Tiles")]
     [Header("Star and Fish")]
@@ -162,35 +165,108 @@ public class MapGenerator : MonoBehaviour
             switch (randomUbication[i])
             {               
                 case Path.PathUbication.North:
-                    minX = 0 + startPointMinDistanceFromCorners;
-                    maxX = gridDimension.x - 1 - startPointMinDistanceFromCorners;                    
+                    if (startPointMinDistanceFromCorners == 0)
+                    {
+                        minX = Mathf.RoundToInt(gridDimension.x / 2);
+                        maxX = minX + 1;
+                    }
+                    else
+                    {
+                        minX = 0 + startPointMinDistanceFromCorners;
+                        maxX = gridDimension.x - startPointMinDistanceFromCorners;
+                    }
+                   
 
-                    minY = Mathf.RoundToInt((gridDimension.y - 1) / 2) + startPointMinDistanceFromBorder;
-                    maxY = gridDimension.y - 1 - startPointMinDistanceFromBorder;                    
+                    if (startPointMinDistanceFromBorder == 0)
+                    {
+                        minY = gridDimension.y - 1;
+                        maxY = minY + 1;
+                    }
+                    else
+                    {
+                        minY = Mathf.RoundToInt(gridDimension.y / 2) + startPointMinDistanceFromBorder;
+                        maxY = gridDimension.y - startPointMinDistanceFromBorder;
+                    }
+
+                                      
                     break;
 
                 case Path.PathUbication.South:
-                    minX = 0 + startPointMinDistanceFromCorners;
-                    maxX = gridDimension.x - 1 - startPointMinDistanceFromCorners;                   
+                    if (startPointMinDistanceFromCorners == 0)
+                    {
+                        minX = Mathf.RoundToInt(gridDimension.x / 2);
+                        maxX = minX + 1;
+                    }
+                    else
+                    {
+                        minX = 0 + startPointMinDistanceFromCorners;
+                        maxX = gridDimension.x - startPointMinDistanceFromCorners;
+                    }
+                   
 
-                    minY = 0 + startPointMinDistanceFromBorder;
-                    maxY = Mathf.RoundToInt((gridDimension.y - 1)/2)-startPointMinDistanceFromBorder;                   
+                    if (startPointMinDistanceFromBorder == 0)
+                    {
+                        minY = 0;
+                        maxY = minY+1;
+                    }
+                    else
+                    {
+                        minY = 0 + startPointMinDistanceFromBorder;
+                        maxY = Mathf.RoundToInt(gridDimension.y/ 2) - startPointMinDistanceFromBorder;
+                    }
+                                
                     break;
 
                 case Path.PathUbication.East:
-                    minX = Mathf.RoundToInt((gridDimension.x - 1) / 2) + startPointMinDistanceFromBorder;
-                    maxX = gridDimension.x - 1 - startPointMinDistanceFromBorder;
+                    if (startPointMinDistanceFromBorder == 0)
+                    {
+                        minX = gridDimension.x - 1;
+                        maxX = minX + 1;
+                    }
+                    else
+                    {
+                        minX = Mathf.RoundToInt(gridDimension.x/ 2) + startPointMinDistanceFromBorder;
+                        maxX = gridDimension.x - startPointMinDistanceFromBorder;
+                    }
+                   
 
-                    minY = 0 + startPointMinDistanceFromCorners;
-                    maxY = gridDimension.y - 1 - startPointMinDistanceFromCorners;
+                    if (startPointMinDistanceFromCorners == 0)
+                    {
+                        minY = Mathf.RoundToInt(gridDimension.y / 2)-1;
+                        maxY = minY + 1;
+                    }
+                    else
+                    {
+                        minY = 0 + startPointMinDistanceFromCorners;
+                        maxY = gridDimension.y- startPointMinDistanceFromCorners;
+                    }
+                   
                     break;
 
                 case Path.PathUbication.West:
-                    minX = 0 + startPointMinDistanceFromBorder;
-                    maxX = Mathf.RoundToInt((gridDimension.x - 1) / 2) - startPointMinDistanceFromBorder;
+                    if (startPointMinDistanceFromBorder == 0)
+                    {
+                        minX = 0;
+                        maxY = minX + 1;
+                    }
+                    else
+                    {
+                        minX = 0 + startPointMinDistanceFromBorder;
+                        maxX = Mathf.RoundToInt(gridDimension.x / 2) - startPointMinDistanceFromBorder;
+                    }
+                   
 
-                    minY = 0 + startPointMinDistanceFromCorners;
-                    maxY = gridDimension.y - 1 - startPointMinDistanceFromCorners;
+                    if (startPointMinDistanceFromCorners == 0)
+                    {
+                        minY = Mathf.RoundToInt(gridDimension.y / 2) - 1;
+                        maxY = minY + 1;
+                    }
+                    else
+                    {
+                        minY = 0 + startPointMinDistanceFromCorners;
+                        maxY = gridDimension.y - startPointMinDistanceFromCorners;
+                    }
+                   
                     break;               
             }
 

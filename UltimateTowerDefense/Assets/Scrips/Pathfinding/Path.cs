@@ -9,5 +9,5 @@ public class Path
     public Vector2Int startCoordinates;   
     public Vector2Int destinationCoordinates;    
     public List<Node> nodes;
-
+    public List<Vector2Int> middlePoints;
 }
