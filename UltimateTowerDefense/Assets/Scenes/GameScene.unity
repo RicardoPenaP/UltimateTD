@@ -1096,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1832682504241799874, guid: c234d68888cf87245ab7e7a7ca87da81, type: 3}
       propertyPath: pathEndTilesDistanceFromCenter
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1832682504241799874, guid: c234d68888cf87245ab7e7a7ca87da81, type: 3}
       propertyPath: tilesRanges.Array.data[0].value

@@ -17,15 +17,19 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] public static readonly float gridSize = 5;
     [SerializeField] private Vector2Int gridDimension;
     
-    [Header("Stronghold")]
+    [Header("Stronghold Settings")]
     [SerializeField] private Stronghold strongholdPrefab;
     [Tooltip("The minimum amount of tiles from the borders that the stronghold possible can be positioned")]
     [SerializeField,Min(0)] private int tilesFromBorder;
     [SerializeField, Min(0)] private int pathEndTilesDistanceFromCenter = 1;
+    [SerializeField, Min(0)] private int wallsDistanceFromCenter = 1;
 
     [Header("Path Settings")]
-    [SerializeField, Range(1, 4)] private int amountOfPaths = 1;
     [SerializeField] private GameObject pathPrefab;
+    [Header("Localization Settings")]    
+    [SerializeField] private int startPointMinDistanceFromBorder = 0;    
+    [SerializeField] private int startPointMinDistanceFromCorners = 0;
+
     [Header("Path Rules Tiles")]
     [Header("Star and Fish")]
     [SerializeField] private GameObject startFinishUp;
@@ -57,6 +61,7 @@ public class MapGenerator : MonoBehaviour
     private Path[] enemiesPaths;
 
     private bool tilesCanBeInstatiated = false;
+    private int amountOfPaths = 1;
 
     private void Awake()
     {        
@@ -85,23 +90,23 @@ public class MapGenerator : MonoBehaviour
         strongholdCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
         if (!myNodeGrid.ContainsKey(strongholdCoordinates))
         {
-            myStrongholdNode = new Node(strongholdCoordinates);
-            myStrongholdNode.isFree = false;
-            myStrongholdNode.Content = NodeContent.Stronghold;
+            myStrongholdNode = new Node(strongholdCoordinates);           
             myNodeGrid.TryAdd(strongholdCoordinates, myStrongholdNode);
         }
         else
         {
-            myStrongholdNode = myNodeGrid[strongholdCoordinates];
-            myNodeGrid[strongholdCoordinates].isFree = false;
-            myNodeGrid[strongholdCoordinates].Content = NodeContent.Stronghold;
+            myStrongholdNode = myNodeGrid[strongholdCoordinates];           
         }
+        myNodeGrid[strongholdCoordinates].isFree = false;
+        myNodeGrid[strongholdCoordinates].Content = NodeContent.Stronghold;
+        myNodeGrid[strongholdCoordinates].isWalkable = false;
 
-        for (int x = myStrongholdNode.Coordinates.x - pathEndTilesDistanceFromCenter; x < myStrongholdNode.Coordinates.x + pathEndTilesDistanceFromCenter; x++)
+        for (int x = myStrongholdNode.Coordinates.x - wallsDistanceFromCenter; x < myStrongholdNode.Coordinates.x + wallsDistanceFromCenter; x++)
         {
-            for (int y = myStrongholdNode.Coordinates.y - pathEndTilesDistanceFromCenter; y < myStrongholdNode.Coordinates.y + pathEndTilesDistanceFromCenter; y++)
+            for (int y = myStrongholdNode.Coordinates.y - wallsDistanceFromCenter; y < myStrongholdNode.Coordinates.y + wallsDistanceFromCenter; y++)
             {
                 myNodeGrid[new Vector2Int(x, y)].isFree = false;
+                myNodeGrid[strongholdCoordinates].isWalkable = false;
                 myNodeGrid[new Vector2Int(x, y)].Content = NodeContent.Stronghold;
             }
         }
@@ -148,28 +153,49 @@ public class MapGenerator : MonoBehaviour
         {            
             Vector2Int randomStarCoordinates = new Vector2Int();
             enemiesPaths[i].ubication = randomUbication[i];
+            int minX, maxX, minY, maxY;
+            minX = 0;
+            maxX = 0;
+            minY = 0;
+            maxY = 0;
+
             switch (randomUbication[i])
             {               
                 case Path.PathUbication.North:
-                    randomStarCoordinates.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
-                    randomStarCoordinates.y = gridDimension.y - 1;
+                    minX = 0 + startPointMinDistanceFromCorners;
+                    maxX = gridDimension.x - 1 - startPointMinDistanceFromCorners;                    
+
+                    minY = Mathf.RoundToInt((gridDimension.y - 1) / 2) + startPointMinDistanceFromBorder;
+                    maxY = gridDimension.y - 1 - startPointMinDistanceFromBorder;                    
                     break;
+
                 case Path.PathUbication.South:
-                    randomStarCoordinates.x = Random.Range(0 + tilesFromBorder, gridDimension.x - tilesFromBorder);
-                    randomStarCoordinates.y = 0;
+                    minX = 0 + startPointMinDistanceFromCorners;
+                    maxX = gridDimension.x - 1 - startPointMinDistanceFromCorners;                   
+
+                    minY = 0 + startPointMinDistanceFromBorder;
+                    maxY = Mathf.RoundToInt((gridDimension.y - 1)/2)-startPointMinDistanceFromBorder;                   
                     break;
+
                 case Path.PathUbication.East:
-                    randomStarCoordinates.x = gridDimension.x - 1;
-                    randomStarCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder); 
+                    minX = Mathf.RoundToInt((gridDimension.x - 1) / 2) + startPointMinDistanceFromBorder;
+                    maxX = gridDimension.x - 1 - startPointMinDistanceFromBorder;
+
+                    minY = 0 + startPointMinDistanceFromCorners;
+                    maxY = gridDimension.y - 1 - startPointMinDistanceFromCorners;
                     break;
+
                 case Path.PathUbication.West:
-                    randomStarCoordinates.x = 0;
-                    randomStarCoordinates.y = Random.Range(0 + tilesFromBorder, gridDimension.y - tilesFromBorder);
-                    break;
-                default:
-                    break;
+                    minX = 0 + startPointMinDistanceFromBorder;
+                    maxX = Mathf.RoundToInt((gridDimension.x - 1) / 2) - startPointMinDistanceFromBorder;
+
+                    minY = 0 + startPointMinDistanceFromCorners;
+                    maxY = gridDimension.y - 1 - startPointMinDistanceFromCorners;
+                    break;               
             }
 
+            randomStarCoordinates.x = Random.Range(minX, maxX);
+            randomStarCoordinates.y = Random.Range(minY, maxY);
             enemiesPaths[i].startCoordinates = randomStarCoordinates;            
         }
     }
