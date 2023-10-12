@@ -8,7 +8,7 @@ public class WindEffectOnWater : MonoBehaviour
     [SerializeField,Min(0f)] private float speed = 1f;
     [SerializeField] private float maxSpeed;    
     [SerializeField] private float aceleration = 0.2f;
-    [SerializeField] private float changeIntervalTime = 1f;
+    //[SerializeField] private float changeIntervalTime = 1f;
 
     private Vector2 direction = Vector2.down;
     private Material waterMaterial;

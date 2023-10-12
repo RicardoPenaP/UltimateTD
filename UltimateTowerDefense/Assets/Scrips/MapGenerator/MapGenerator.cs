@@ -125,6 +125,7 @@ public class MapGenerator : MonoBehaviour
         
         SetPathsStartCoordinates(GeneratePathRandomUbication(amountOfPaths));
         SetPathDestinationCoordinates();
+        SetPathsMiddleCoordinates();
         SetPathNodes();
     }
 
@@ -156,10 +157,8 @@ public class MapGenerator : MonoBehaviour
         { 
             enemiesPaths[i].ubication = randomUbication[i];           
 
-            enemiesPaths[i].startCoordinates = GetStartRandomCoordinates(randomUbication[i]);
-           
-        }
-        SetPathsMiddlePoints();
+            enemiesPaths[i].startCoordinates = GetStartRandomCoordinates(randomUbication[i]);           
+        }        
     }
 
     private Vector2Int GetStartRandomCoordinates(Path.PathUbication randomUbication)
@@ -284,7 +283,7 @@ public class MapGenerator : MonoBehaviour
         return randomCoordinates;
     }
 
-    private void SetPathsMiddlePoints()
+    private void SetPathsMiddleCoordinates()
     {
         if (amountOfMiddlePoints == 0)
         {
@@ -295,8 +294,13 @@ public class MapGenerator : MonoBehaviour
         {
             for (int i = 0; i < amountOfMiddlePoints; i++)
             {
-                //Vector2Int 
-                //path.
+                Vector2Int randomMidleCoordinates = new Vector2Int();
+                do
+                {
+                    randomMidleCoordinates = GetMidleRandomCoordinates(path.ubication);
+                } while (MiddleCoordinatesRepeated(path,randomMidleCoordinates));
+
+                path.middleCoordinates.Add(randomMidleCoordinates);
             }
         }
 
@@ -310,6 +314,7 @@ public class MapGenerator : MonoBehaviour
         maxX = 0;
         minY = 0;
         maxY = 0;
+
         switch (randomUbication)
         {
             case Path.PathUbication.North:
@@ -321,64 +326,29 @@ public class MapGenerator : MonoBehaviour
                 break;
 
             case Path.PathUbication.South:
-                minX = 0 + startPointMinDistanceFromCorners;
-                maxX = gridDimension.x - startPointMinDistanceFromCorners;
+                minX = 0;
+                maxX = gridDimension.x;
 
-                minY = 0 + startPointMinDistanceFromBorder;
-                maxY = Mathf.RoundToInt(gridDimension.y / 2) - startPointMinDistanceFromBorder;
+                minY = 0;
+                maxY = Mathf.RoundToInt(gridDimension.y / 2);
 
                 break;
 
             case Path.PathUbication.East:
-                if (startPointMinDistanceFromBorder == 0)
-                {
-                    minX = gridDimension.x - 1;
-                    maxX = minX + 1;
-                }
-                else
-                {
-                    minX = Mathf.RoundToInt(gridDimension.x / 2) + startPointMinDistanceFromBorder;
-                    maxX = gridDimension.x - startPointMinDistanceFromBorder;
-                }
+                minX = Mathf.RoundToInt(gridDimension.x / 2);
+                maxX = gridDimension.x;
 
-
-                if (startPointMinDistanceFromCorners == 0)
-                {
-                    minY = Mathf.RoundToInt(gridDimension.y / 2) - 1;
-                    maxY = minY + 1;
-                }
-                else
-                {
-                    minY = 0 + startPointMinDistanceFromCorners;
-                    maxY = gridDimension.y - startPointMinDistanceFromCorners;
-                }
+                minY = 0;
+                maxY = gridDimension.y;
 
                 break;
 
             case Path.PathUbication.West:
-                if (startPointMinDistanceFromBorder == 0)
-                {
-                    minX = 0;
-                    maxY = minX + 1;
-                }
-                else
-                {
-                    minX = 0 + startPointMinDistanceFromBorder;
-                    maxX = Mathf.RoundToInt(gridDimension.x / 2) - startPointMinDistanceFromBorder;
-                }
+                minX = 0;
+                maxX = Mathf.RoundToInt(gridDimension.x / 2);
 
-
-                if (startPointMinDistanceFromCorners == 0)
-                {
-                    minY = Mathf.RoundToInt(gridDimension.y / 2) - 1;
-                    maxY = minY + 1;
-                }
-                else
-                {
-                    minY = 0 + startPointMinDistanceFromCorners;
-                    maxY = gridDimension.y - startPointMinDistanceFromCorners;
-                }
-
+                minY = 0;
+                maxY = gridDimension.y;
                 break;
         }
 
@@ -386,6 +356,24 @@ public class MapGenerator : MonoBehaviour
         randomCoordinates.y = Random.Range(minY, maxY);
 
         return randomCoordinates;
+    }
+
+    private bool MiddleCoordinatesRepeated(Path currentPath, Vector2Int coordinates)
+    {
+        if (currentPath.startCoordinates == coordinates || currentPath.destinationCoordinates == coordinates)
+        {
+            return true;
+        }
+
+        foreach (Vector2Int middleCoordinates in currentPath.middleCoordinates)
+        {
+            if (middleCoordinates == coordinates)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void SetPathDestinationCoordinates()
