@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BuildingInterface;
+using System;
 
 public class TileManangement : MonoBehaviour
-{
-    [Header("Tile Manangement")]
-
+{   
+    public Action OnCleanObstacles;
+   
     private IBuilding tileBuilding;
 
     private Tile myTile;
 
     private OnSellDelegate onSellMethods;
 
+    private int amountOfObstacles;
+    public int AmountOfObstacles { get { return amountOfObstacles; } }
     private void Awake()
     {
         myTile = GetComponent<Tile>();
@@ -73,5 +76,17 @@ public class TileManangement : MonoBehaviour
     {   
         tileBuilding = null;
         myTile.TileStatus = TileStatusID.Free;
+    }
+
+
+    public void CleanObstacles()
+    {
+        OnCleanObstacles?.Invoke();
+        amountOfObstacles = 0;
+    }
+
+    public void SetAmounOfObstacles(int amount)
+    {
+        amountOfObstacles = amount;
     }
 }

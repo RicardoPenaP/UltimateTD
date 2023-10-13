@@ -1,18 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using System;
 
-public class TerrainMananger : MonoBehaviour
+public class TerrainMananger : Singleton<TerrainMananger>
 {
-    // Start is called before the first frame update
-    void Start()
+    private Button cleanButton;
+    private TextMeshProUGUI obstaclesText;
+    private TextMeshProUGUI costText;
+    private Tile activeTerrain;
+    private int cleanCost = 5;
+
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        cleanButton = GetComponentInChildren<Button>();
+        obstaclesText = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        costText = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenMenu(Tile tile)
     {
-        
+        gameObject.SetActive(true);
+
+        transform.position = Camera.main.WorldToScreenPoint(tile.transform.position);
     }
+
+    public void CloseMenu()
+    {
+
+    }
+
 }
