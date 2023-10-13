@@ -40,7 +40,12 @@ public class TowerController : MonoBehaviour,IBuilding
         {
             return;
         }
-        BuildingMananger.Instance?.OpenBuildingMananger(this);
+
+        if (BuildingMananger.Instance)
+        {
+            BuildingMananger.Instance?.OpenBuildingMananger(this);
+        }
+       
     }
 
     private void InitTowerStats()

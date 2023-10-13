@@ -246,17 +246,6 @@ public class MapGenerator : MonoBehaviour
                     maxY = gridDimension.y - startPointMinDistanceFromBorder;
                 }
 
-                //if (startPointMinDistanceFromCorners == 0)
-                //{
-                //    minY = Mathf.RoundToInt(gridDimension.y / 2) - 1;
-                //    maxY = minY + 1;
-                //}
-                //else
-                //{
-                //    minY = 0 + startPointMinDistanceFromCorners;
-                //    maxY = gridDimension.y - startPointMinDistanceFromCorners;
-                //}
-
                 break;
 
             case Path.PathUbication.LowerRightCorner:
@@ -281,16 +270,7 @@ public class MapGenerator : MonoBehaviour
                     minY = 0 + startPointMinDistanceFromBorder;
                     maxY = Mathf.RoundToInt(gridDimension.y / 2) - startPointMinDistanceFromBorder;
                 }
-                //if (startPointMinDistanceFromCorners == 0)
-                //{
-                //    minY = Mathf.RoundToInt(gridDimension.y / 2) - 1;
-                //    maxY = minY + 1;
-                //}
-                //else
-                //{
-                //    minY = 0 + startPointMinDistanceFromCorners;
-                //    maxY = gridDimension.y - startPointMinDistanceFromCorners;
-                //}
+               
 
                 break;
         }
@@ -311,13 +291,13 @@ public class MapGenerator : MonoBehaviour
                     path.destinationCoordinates=myStrongholdNode.Coordinates + (Vector2Int.up * pathEndTilesDistanceFromCenter);                    
                     break;
                 case Path.PathUbication.LowerLeftCorner:
-                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.down * pathEndTilesDistanceFromCenter);
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.left * pathEndTilesDistanceFromCenter);
                     break;
                 case Path.PathUbication.UpperRightCorner:
                     path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.right * pathEndTilesDistanceFromCenter);
                     break;
                 case Path.PathUbication.LowerRightCorner:
-                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.left * pathEndTilesDistanceFromCenter);
+                    path.destinationCoordinates = myStrongholdNode.Coordinates + (Vector2Int.down * pathEndTilesDistanceFromCenter);
                     break;
                 default:
                     break;
@@ -340,6 +320,7 @@ public class MapGenerator : MonoBehaviour
                     myNodeGrid[node.Coordinates].Content = node.Content;
                     myNodeGrid[node.Coordinates].isFree = false;
                     myNodeGrid[node.Coordinates].isPath = true;
+                    myNodeGrid[node.Coordinates].isWalkable = false;
                 }
             }
             else
@@ -386,7 +367,7 @@ public class MapGenerator : MonoBehaviour
                     break;
                 case NodeTileType.Sand:
                     instantiatedTile = Instantiate(sandTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
-                    instantiatedTile.TileStatus = TileStatusID.Occuped;
+                    
                     break;
                 case NodeTileType.Water:
                     instantiatedTile = Instantiate(waterTile, node.Value.Position, Quaternion.identity, GridMananger.Instance.transform.GetChild(1));
