@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Path
 {
-    public enum PathUbication { None,North, South,East,West}
+    public enum PathUbication { None,UpperLeftCorner, LowerLeftCorner,UpperRightCorner,LowerRightCorner}
     public PathUbication ubication;
     public Vector2Int startCoordinates;   
     public Vector2Int destinationCoordinates;    

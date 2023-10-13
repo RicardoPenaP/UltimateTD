@@ -34,7 +34,7 @@ public class GameData : ScriptableObject
 
     public EnemyController GetEnemyPrefab(EnemyType enemyType)
     {
-        EnemyController enemyPrefab = new EnemyController();
+        EnemyController enemyPrefab = null;
         foreach (EnemiesReference enemy in undeadEnemies)
         {
             if (enemyType == enemy.EnemyType)
