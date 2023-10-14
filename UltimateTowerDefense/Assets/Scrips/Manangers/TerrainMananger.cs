@@ -14,7 +14,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     private Button cleanButton;
     private Button closeButton;
     private TextMeshProUGUI costText;
-    private TileManangement activeTerrain;
+    private TileManangement activeTerrain;    
     private int cleanCost;
 
 
@@ -36,7 +36,8 @@ public class TerrainMananger : Singleton<TerrainMananger>
     }
 
     private void Update()
-    {
+    {        
+        transform.position = Camera.main.WorldToScreenPoint(activeTerrain.transform.position);
         UpdateButtonStatus();
     }
 
