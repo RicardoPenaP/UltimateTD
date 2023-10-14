@@ -14,7 +14,7 @@ public class ObstacleGenerator : MonoBehaviour
     private void Awake()
     {
         myTileManangement = GetComponentInParent<TileManangement>();
-        myTile = GetComponent<Tile>();
+        myTile = GetComponentInParent<Tile>();
         myTileManangement.OnCleanObstacles += CleanObstacles;
     }
 

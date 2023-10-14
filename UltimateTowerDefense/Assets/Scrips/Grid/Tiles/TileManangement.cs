@@ -28,13 +28,24 @@ public class TileManangement : MonoBehaviour
         {
             return;
         }
-        if (myTile.TileStatus == TileStatusID.Free)
+
+        switch (myTile.TileStatus)
         {
-            if (StoreMananger.Instance?.SelectedTower)
-            {
-                CreateBuilding();
-            }
+            case TileStatusID.Free:
+                if (StoreMananger.Instance?.SelectedTower)
+                {
+                    CreateBuilding();
+                }
+                break;           
+            case TileStatusID.HasObstacle:
+                if (TerrainMananger.Instance)
+                {
+                    TerrainMananger.Instance.OpenTerrainMananger(this);
+                }
+                break;
+            
         }
+        
     }
 
     private void OnMouseEnter()
@@ -83,6 +94,7 @@ public class TileManangement : MonoBehaviour
     {
         OnCleanObstacles?.Invoke();
         amountOfObstacles = 0;
+        myTile.TileStatus = TileStatusID.Free;
     }
 
     public void SetAmounOfObstacles(int amount)
