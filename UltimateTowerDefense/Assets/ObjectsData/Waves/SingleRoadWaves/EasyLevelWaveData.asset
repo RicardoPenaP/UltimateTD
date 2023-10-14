@@ -12,4 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27a0a8ba31df4ac45ae4f4f260131809, type: 3}
   m_Name: EasyLevelWaveData
   m_EditorClassIdentifier: 
-  waveData: []
+  waveData:
+  - enemiesToSpawn:
+    - enemyType: 0
+      amountToSpawn: 5
+      timeBetweenSpawn: 2
+      enemyLevel: 1
+  - enemiesToSpawn:
+    - enemyType: 0
+      amountToSpawn: 10
+      timeBetweenSpawn: 2
+      enemyLevel: 2
+  - enemiesToSpawn: []
+  - enemiesToSpawn:
+    - enemyType: 0
+      amountToSpawn: 5
+      timeBetweenSpawn: 2
+      enemyLevel: 2
+    - enemyType: 2
+      amountToSpawn: 3
+      timeBetweenSpawn: 4
+      enemyLevel: 2
+  - enemiesToSpawn: []
+  - enemiesToSpawn:
+    - enemyType: 0
+      amountToSpawn: 10
+      timeBetweenSpawn: 2
+      enemyLevel: 3
+    - enemyType: 2
+      amountToSpawn: 5
+      timeBetweenSpawn: 3
+      enemyLevel: 3
+  - enemiesToSpawn:
+    - enemyType: 0
+      amountToSpawn: 10
+      timeBetweenSpawn: 2
+      enemyLevel: 4
+    - enemyType: 2
+      amountToSpawn: 5
+      timeBetweenSpawn: 3
+      enemyLevel: 4
+    - enemyType: 1
+      amountToSpawn: 3
+      timeBetweenSpawn: 4
+      enemyLevel: 4
