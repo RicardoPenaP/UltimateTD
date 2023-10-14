@@ -45,11 +45,6 @@ public class GameData : ScriptableObject
     public WaveData[] TripleRoadWaves { get { return tripleRoadWaves; } }
     public WaveData[] QuadRoadWaves { get { return quadRoadWaves; } }
 
-    //public LevelWaves[] SingleRoadLevelWaves { get { return singleRoadLevelWaves; } }
-    //public LevelWaves[] DoubleRoadLevelWaves { get { return doubleRoadLevelWaves; } }
-    //public LevelWaves[] TripleRoadLevelWaves { get { return tripleRoadLevelWaves; } }
-    //public LevelWaves[] QuadRoadLevelWaves { get { return quadRoadLevelWaves; } }
-
     public EnemyController GetEnemyPrefab(EnemyType enemyType)
     {
         EnemyController enemyPrefab = null;
