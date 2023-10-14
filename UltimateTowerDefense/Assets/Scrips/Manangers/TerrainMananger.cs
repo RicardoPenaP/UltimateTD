@@ -15,7 +15,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     private TextMeshProUGUI obstaclesText;
     private TextMeshProUGUI costText;
     private TileManangement activeTerrain;
-    private int cleanCost = 5;
+    private int cleanCost;
 
 
     protected override void Awake()
@@ -30,6 +30,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
 
     private void Start()
     {
+        cleanCost = baseCleanCost;
         CloseTerrainMananger();
     }
 

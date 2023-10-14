@@ -24,8 +24,8 @@ namespace EnemiesWaves
        
     }
 
-    [CreateAssetMenu(fileName = "NewWaveData", menuName = "WaveData")]
-    public class WaveData : ScriptableObject
+    [System.Serializable]
+    public class WaveData
     {
         [Header("Wave Data")]
         [SerializeField] private EnemyToSpawn[] enemiesToSpawn;

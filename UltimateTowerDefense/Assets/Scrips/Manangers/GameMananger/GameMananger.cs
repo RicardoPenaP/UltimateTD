@@ -69,7 +69,6 @@ public class GameMananger : Singleton<GameMananger>
             waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
             waveManangers[i].SetEnemiesPath(enemiesPath[i]);
             waveManangers[i].SetWaveData(myGameData.GetRandomWaveData(GameMode.GameModeOption));
-
         }              
     }
 

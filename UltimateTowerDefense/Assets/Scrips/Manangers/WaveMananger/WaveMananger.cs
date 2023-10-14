@@ -91,7 +91,7 @@ public class WaveMananger : MonoBehaviour
 
     private bool CheckWaveCompleted()
     {
-        if (!currentWave)
+        if (currentWave == null)
         {
             return false;
         }

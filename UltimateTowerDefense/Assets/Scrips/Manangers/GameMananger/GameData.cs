@@ -13,13 +13,6 @@ public struct EnemiesReference
     public EnemyController EnemyPrefab { get { return enemyPrefab; } }
 }
 
-[System.Serializable]
-public struct LevelWaves 
-{
-    [SerializeField] private WaveData[] waveData;   
-    public WaveData[] WaveData { get { return waveData; } }
-}
-
 [CreateAssetMenu(fileName = "NewGameData", menuName = "GameData")]
 public class GameData : ScriptableObject
 {
@@ -33,10 +26,10 @@ public class GameData : ScriptableObject
     [SerializeField] private WaveData[] tripleRoadWaves;
     [SerializeField] private WaveData[] quadRoadWaves;
 
-    [SerializeField] private LevelWaves[] singleRoadLevelWaves;
-    [SerializeField] private LevelWaves[] doubleRoadLevelWaves;
-    [SerializeField] private LevelWaves[] tripleRoadLevelWaves;
-    [SerializeField] private LevelWaves[] quadRoadLevelWaves;
+    [SerializeField] private LevelWaves singleRoadLevelWaves;
+    [SerializeField] private LevelWaves doubleRoadLevelWaves;
+    [SerializeField] private LevelWaves tripleRoadLevelWaves;
+    [SerializeField] private LevelWaves quadRoadLevelWaves;
 
 
     public static EnemiesReference[] UndeadEnemies { get { return null;} }
@@ -64,20 +57,20 @@ public class GameData : ScriptableObject
         switch (gameMode)
         {
             case GameModeOptions.SingleRoad:
-                auxIndex = Random.Range(0, singleRoadLevelWaves.Length);
-                return singleRoadLevelWaves[auxIndex].WaveData;
-                
+                auxIndex = Random.Range(0, singleRoadLevelWaves.LevelWaveData.Length);
+                return singleRoadLevelWaves.LevelWaveData[auxIndex].WaveData;
+
             case GameModeOptions.DoubleRoad:
-                auxIndex = Random.Range(0, doubleRoadLevelWaves.Length);
-                return doubleRoadLevelWaves[auxIndex].WaveData;
+                auxIndex = Random.Range(0, doubleRoadLevelWaves.LevelWaveData.Length);
+                return doubleRoadLevelWaves.LevelWaveData[auxIndex].WaveData;
                 
             case GameModeOptions.TripleRoad:
-                auxIndex = Random.Range(0, tripleRoadLevelWaves.Length);
-                return tripleRoadLevelWaves[auxIndex].WaveData;
+                auxIndex = Random.Range(0, tripleRoadLevelWaves.LevelWaveData.Length);
+                return tripleRoadLevelWaves.LevelWaveData[auxIndex].WaveData;
              
             case GameModeOptions.QuadRoad:
-                auxIndex = Random.Range(0, quadRoadLevelWaves.Length);
-                return quadRoadLevelWaves[auxIndex].WaveData;
+                auxIndex = Random.Range(0, quadRoadLevelWaves.LevelWaveData.Length);
+                return quadRoadLevelWaves.LevelWaveData[auxIndex].WaveData;
         }
         return null; 
     }
