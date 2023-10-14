@@ -45,10 +45,10 @@ public class GameData : ScriptableObject
     public WaveData[] TripleRoadWaves { get { return tripleRoadWaves; } }
     public WaveData[] QuadRoadWaves { get { return quadRoadWaves; } }
 
-    public LevelWaves[] SingleRoadLevelWaves { get { return singleRoadLevelWaves; } }
-    public LevelWaves[] DoubleRoadLevelWaves { get { return doubleRoadLevelWaves; } }
-    public LevelWaves[] TripleRoadLevelWaves { get { return tripleRoadLevelWaves; } }
-    public LevelWaves[] QuadRoadLevelWaves { get { return quadRoadLevelWaves; } }
+    //public LevelWaves[] SingleRoadLevelWaves { get { return singleRoadLevelWaves; } }
+    //public LevelWaves[] DoubleRoadLevelWaves { get { return doubleRoadLevelWaves; } }
+    //public LevelWaves[] TripleRoadLevelWaves { get { return tripleRoadLevelWaves; } }
+    //public LevelWaves[] QuadRoadLevelWaves { get { return quadRoadLevelWaves; } }
 
     public EnemyController GetEnemyPrefab(EnemyType enemyType)
     {
@@ -61,5 +61,29 @@ public class GameData : ScriptableObject
             }
         }
         return enemyPrefab;
+    }
+
+    public WaveData[] GetRandomWaveData(GameModeOptions gameMode)
+    {
+        int auxIndex = 0;
+        switch (gameMode)
+        {
+            case GameModeOptions.SingleRoad:
+                auxIndex = Random.Range(0, singleRoadLevelWaves.Length);
+                return singleRoadLevelWaves[auxIndex].WaveData;
+                
+            case GameModeOptions.DoubleRoad:
+                auxIndex = Random.Range(0, doubleRoadLevelWaves.Length);
+                return doubleRoadLevelWaves[auxIndex].WaveData;
+                
+            case GameModeOptions.TripleRoad:
+                auxIndex = Random.Range(0, tripleRoadLevelWaves.Length);
+                return tripleRoadLevelWaves[auxIndex].WaveData;
+             
+            case GameModeOptions.QuadRoad:
+                auxIndex = Random.Range(0, quadRoadLevelWaves.Length);
+                return quadRoadLevelWaves[auxIndex].WaveData;
+        }
+        return null; 
     }
 }
