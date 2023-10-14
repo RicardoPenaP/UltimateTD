@@ -12,7 +12,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     [SerializeField,Min(0)] private int baseCleanCost = 5;
 
     private Button cleanButton;
-    private TextMeshProUGUI obstaclesText;
+    private Button closeButton;
     private TextMeshProUGUI costText;
     private TileManangement activeTerrain;
     private int cleanCost;
@@ -21,11 +21,12 @@ public class TerrainMananger : Singleton<TerrainMananger>
     protected override void Awake()
     {
         base.Awake();
-        cleanButton = GetComponentInChildren<Button>();
-        obstaclesText = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        costText = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
-
+             
+        costText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        cleanButton = transform.GetChild(2).GetComponent<Button>();
+        closeButton = transform.GetChild(3).GetComponent<Button>();
         cleanButton.onClick.AddListener(Clean);
+        closeButton.onClick.AddListener(CloseTerrainMananger);
     }
 
     private void Start()
@@ -42,6 +43,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     private void OnDestroy()
     {
         cleanButton.onClick.RemoveListener(Clean);
+        closeButton.onClick.RemoveListener(CloseTerrainMananger);
     }
 
     private void UpdateButtonStatus()
@@ -70,8 +72,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
             return;
         }
         activeTerrain = tile;
-        SetCostText();
-        SetObstaclesText(tile.AmountOfObstacles);
+        SetCostText();      
         gameObject.SetActive(true);
         transform.position = Camera.main.WorldToScreenPoint(tile.transform.position);
     }
@@ -89,11 +90,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     private void SetCostText()
     {
         costText.text = $"Clean Cost: {cleanCost}";
-    }
-    private void SetObstaclesText(int obstaclesAmount)
-    {
-        obstaclesText.text = $"Obstacles: {obstaclesAmount}";
-    }
+    }    
 
     private void Clean()
     {

@@ -14,12 +14,16 @@ public class ObstacleGenerator : MonoBehaviour
     private void Awake()
     {
         myTileManangement = GetComponentInParent<TileManangement>();
-        myTile = GetComponentInParent<Tile>();
-        myTileManangement.OnCleanObstacles += CleanObstacles;
+        myTile = GetComponentInParent<Tile>();  
     }
 
     private void Start()
     {
+        if (!myTile||!myTileManangement)
+        {
+            return;
+        }
+        myTileManangement.OnCleanObstacles += CleanObstacles;
         if (myTile.TileStatus == TileStatusID.HasObstacle)
         {           
             InstantiateObstacles();
@@ -28,6 +32,10 @@ public class ObstacleGenerator : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!myTileManangement)
+        {
+            return;
+        }
         myTileManangement.OnCleanObstacles -= CleanObstacles;
     }
 

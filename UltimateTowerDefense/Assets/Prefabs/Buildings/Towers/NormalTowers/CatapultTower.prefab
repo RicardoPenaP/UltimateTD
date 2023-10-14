@@ -298,6 +298,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7587061796323068580, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eaf17b849c043774a9a195245f3e635c, type: 2}
+    - target: {fileID: -7587061796323068580, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61fa6249e001710418ca64e1ab42ba3c, type: 2}
     - target: {fileID: 919132149155446097, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -338,6 +346,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6965273608008390307, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61fa6249e001710418ca64e1ab42ba3c, type: 2}
+    - target: {fileID: 6965273608008390307, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: eaf17b849c043774a9a195245f3e635c, type: 2}
     - target: {fileID: 8117900062560988864, guid: 04b917861425a1e4ab2d3292c63fb1be, type: 3}
       propertyPath: m_Layer
       value: 6
