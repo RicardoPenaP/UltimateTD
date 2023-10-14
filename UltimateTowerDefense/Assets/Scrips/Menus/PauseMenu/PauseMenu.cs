@@ -43,7 +43,7 @@ public class PauseMenu : Singleton<PauseMenu>
     private void GoToMainMenu()
     {
         ToggleMenu();
-        GameScenesLoader.LoadGameScene(GameScenes.MainMenu);
+        SceneTranstitionFade.Instance.FadeIn(() => GameScenesLoader.LoadGameScene(GameScenes.MainMenu));       
     }
 
     public void SetIsPaused(bool isPaused)

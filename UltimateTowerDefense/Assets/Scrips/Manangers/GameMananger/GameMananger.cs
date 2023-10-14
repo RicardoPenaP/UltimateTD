@@ -45,6 +45,7 @@ public class GameMananger : Singleton<GameMananger>
         gameCompleted = false;
         StartCoroutine(PlayTimeCounterRoutine());
         StartCoroutine(WaitBetweenWavesRoutine(timeToStart));
+        SceneTranstitionFade.Instance.FadeOut();
     }
 
     private void Update()

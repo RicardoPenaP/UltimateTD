@@ -40,6 +40,7 @@ public class PlayMenu : MonoBehaviour
     {
         GameMode.GameModeOption = GameModeOptions.SingleRoad;
         CloseMenu();
+
         LoadScene();
     }
     private void PlayDoubleRoad()
@@ -68,7 +69,7 @@ public class PlayMenu : MonoBehaviour
 
     private void LoadScene()
     {
-        GameScenesLoader.LoadGameScene(GameScenes.GameScene);//for testing only
+        SceneTranstitionFade.Instance.FadeIn(() => GameScenesLoader.LoadGameScene(GameScenes.GameScene));        
     }
 
     public void OpenMenu()

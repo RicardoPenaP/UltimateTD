@@ -18,6 +18,11 @@ public class MainMenu : MonoBehaviour
         SubmitButtonsEvents();
     }
 
+    private void Start()
+    {
+        SceneTranstitionFade.Instance.FadeOut();
+    }
+
     private void SubmitButtonsEvents()
     {
         playButton?.onClick.AddListener(PlayMenu);
