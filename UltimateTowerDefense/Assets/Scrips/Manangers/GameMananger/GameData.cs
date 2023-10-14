@@ -13,6 +13,13 @@ public struct EnemiesReference
     public EnemyController EnemyPrefab { get { return enemyPrefab; } }
 }
 
+[System.Serializable]
+public struct LevelWaves 
+{
+    [SerializeField] private WaveData[] waveData;   
+    public WaveData[] WaveData { get { return waveData; } }
+}
+
 [CreateAssetMenu(fileName = "NewGameData", menuName = "GameData")]
 public class GameData : ScriptableObject
 {
@@ -26,11 +33,22 @@ public class GameData : ScriptableObject
     [SerializeField] private WaveData[] tripleRoadWaves;
     [SerializeField] private WaveData[] quadRoadWaves;
 
+    [SerializeField] private LevelWaves[] singleRoadLevelWaves;
+    [SerializeField] private LevelWaves[] doubleRoadLevelWaves;
+    [SerializeField] private LevelWaves[] tripleRoadLevelWaves;
+    [SerializeField] private LevelWaves[] quadRoadLevelWaves;
+
+
     public static EnemiesReference[] UndeadEnemies { get { return null;} }
     public WaveData[] SingleRoadWaves { get { return singleRoadWaves; } }
     public WaveData[] DoubleRoadWaves { get { return doubleRoadWaves; } }
     public WaveData[] TripleRoadWaves { get { return tripleRoadWaves; } }
     public WaveData[] QuadRoadWaves { get { return quadRoadWaves; } }
+
+    public LevelWaves[] SingleRoadLevelWaves { get { return singleRoadLevelWaves; } }
+    public LevelWaves[] DoubleRoadLevelWaves { get { return doubleRoadLevelWaves; } }
+    public LevelWaves[] TripleRoadLevelWaves { get { return tripleRoadLevelWaves; } }
+    public LevelWaves[] QuadRoadLevelWaves { get { return quadRoadLevelWaves; } }
 
     public EnemyController GetEnemyPrefab(EnemyType enemyType)
     {
