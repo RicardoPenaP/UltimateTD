@@ -36,6 +36,10 @@ public class PauseMenu : Singleton<PauseMenu>
 
     public void ToggleMenu()
     {
+        if (SceneTranstitionFade.Instance.FadeInProgress)
+        {
+            return;
+        }
         SetIsPaused(!isPaused);
         gameObject.SetActive(!gameObject.activeInHierarchy);        
     }

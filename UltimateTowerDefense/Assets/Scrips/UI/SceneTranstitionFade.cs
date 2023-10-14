@@ -10,12 +10,12 @@ public class SceneTranstitionFade : Singleton<SceneTranstitionFade>
     [SerializeField,Min(0)] private float fadeTime = 1f;
 
     private Image fadeImage;
+    public bool FadeInProgress { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
-        fadeImage = GetComponentInChildren<Image>();        
-        
+        fadeImage = GetComponentInChildren<Image>(); 
     }
 
 
@@ -37,6 +37,7 @@ public class SceneTranstitionFade : Singleton<SceneTranstitionFade>
 
     private IEnumerator FadeRoutine(bool fadeIn,Action OnFadeCompletedActions)
     {
+        FadeInProgress = true;
         float initialValue = fadeIn ? 0 : 1;
         float targetValue = fadeIn ? 1 : 0;
         float deltaT = 0;
@@ -53,5 +54,6 @@ public class SceneTranstitionFade : Singleton<SceneTranstitionFade>
         }
 
         OnFadeCompletedActions?.Invoke();
+        FadeInProgress = false;
     }
 }
