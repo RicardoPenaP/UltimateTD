@@ -62,33 +62,13 @@ public class GameMananger : Singleton<GameMananger>
     private void InitWaveManangers()
     {
         Path[] enemiesPath = FindObjectOfType<MapGenerator>().GetEnemiesPaths();      
-        waveManangers = new WaveMananger[enemiesPath.Length];
-        WaveData[] waveDataToUse;
-        switch (GameMode.GameModeOption)
-        {
-            case GameModeOptions.SingleRoad:
-                waveDataToUse = myGameData.SingleRoadWaves;
-                break;
-            case GameModeOptions.DoubleRoad:
-                waveDataToUse = myGameData.DoubleRoadWaves;
-                break;
-            case GameModeOptions.TripleRoad:
-                waveDataToUse = myGameData.TripleRoadWaves;
-                break;
-            case GameModeOptions.QuadRoad:
-                waveDataToUse = myGameData.QuadRoadWaves;
-                break;
-            default:
-                waveDataToUse = new WaveData[0];
-                break;
-        }
-
+        waveManangers = new WaveMananger[enemiesPath.Length];         
 
         for (int i = 0; i < enemiesPath.Length; i++)
-        {
+        {           
             waveManangers[i] = Instantiate(waveManangerPrefab, enemiesPath[i].nodes[0].Position, Quaternion.identity, transform);
             waveManangers[i].SetEnemiesPath(enemiesPath[i]);
-            waveManangers[i].SetWaveData(waveDataToUse);
+            waveManangers[i].SetWaveData(myGameData.GetRandomWaveData(GameMode.GameModeOption));
 
         }              
     }
