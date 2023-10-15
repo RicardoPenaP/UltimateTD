@@ -126,7 +126,8 @@ public class GameMananger : Singleton<GameMananger>
     }
 
     private void StartWaves()
-    {        
+    {
+        GlobalSFXPlayer.Instance?.PlayGlobalSFX(GlobalSFXToPlay.WaveStarting);
         foreach (WaveMananger waveMananger in waveManangers)
         {
             waveMananger.StartNewWave(currentWave-1);
