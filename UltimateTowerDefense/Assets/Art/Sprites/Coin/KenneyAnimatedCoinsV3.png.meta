@@ -115,7 +115,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_39
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 15
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 813a6da910aa41e4db75135d2167f302
+      internalID: 980794858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_40
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 15
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67c05fe88d7d1dd419fcf21d0dcf5114
+      internalID: 798102563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_41
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 15
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85ecc32e12239a847bfcd82431cb7890
+      internalID: -315091687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_42
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 15
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aade13b9a0e9a2489cb9f064116be9a
+      internalID: 1186574003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_43
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 15
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec530b5e45179048a5680cca4d96449
+      internalID: -1994150389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_44
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 15
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f76287fc9620e64abee36aa1a4d35d1
+      internalID: 2045832599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KenneyAnimatedCoinsV3_45
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 15
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ef82ff8c2851b14fa00099d99305dbf
+      internalID: 1290661859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +273,53 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KenneyAnimatedCoinsV3_0: 940064019
+      KenneyAnimatedCoinsV3_1: -344302640
+      KenneyAnimatedCoinsV3_10: 608170842
+      KenneyAnimatedCoinsV3_11: 1525255146
+      KenneyAnimatedCoinsV3_12: -640815147
+      KenneyAnimatedCoinsV3_13: -1226432726
+      KenneyAnimatedCoinsV3_14: -969889630
+      KenneyAnimatedCoinsV3_15: 1914114159
+      KenneyAnimatedCoinsV3_16: 1583888806
+      KenneyAnimatedCoinsV3_17: -1313734192
+      KenneyAnimatedCoinsV3_18: -124527565
+      KenneyAnimatedCoinsV3_19: 1297709671
+      KenneyAnimatedCoinsV3_2: -925736418
+      KenneyAnimatedCoinsV3_20: 1538730662
+      KenneyAnimatedCoinsV3_21: 252052776
+      KenneyAnimatedCoinsV3_22: 1034555908
+      KenneyAnimatedCoinsV3_23: 2136153796
+      KenneyAnimatedCoinsV3_24: 1390925762
+      KenneyAnimatedCoinsV3_25: -181116438
+      KenneyAnimatedCoinsV3_26: -827522824
+      KenneyAnimatedCoinsV3_27: 2072553956
+      KenneyAnimatedCoinsV3_28: -935868293
+      KenneyAnimatedCoinsV3_29: 1227761810
+      KenneyAnimatedCoinsV3_3: 1558084347
+      KenneyAnimatedCoinsV3_30: -899048662
+      KenneyAnimatedCoinsV3_31: 1078470814
+      KenneyAnimatedCoinsV3_32: -926885436
+      KenneyAnimatedCoinsV3_33: 1960379235
+      KenneyAnimatedCoinsV3_34: 1258031087
+      KenneyAnimatedCoinsV3_35: 1243358337
+      KenneyAnimatedCoinsV3_36: -468477864
+      KenneyAnimatedCoinsV3_37: -1468862393
+      KenneyAnimatedCoinsV3_38: -1774965011
+      KenneyAnimatedCoinsV3_39: 980794858
+      KenneyAnimatedCoinsV3_4: -1352793787
+      KenneyAnimatedCoinsV3_40: 798102563
+      KenneyAnimatedCoinsV3_41: -315091687
+      KenneyAnimatedCoinsV3_42: 1186574003
+      KenneyAnimatedCoinsV3_43: -1994150389
+      KenneyAnimatedCoinsV3_44: 2045832599
+      KenneyAnimatedCoinsV3_45: 1290661859
+      KenneyAnimatedCoinsV3_5: -1044957710
+      KenneyAnimatedCoinsV3_6: -265416783
+      KenneyAnimatedCoinsV3_7: 1261550397
+      KenneyAnimatedCoinsV3_8: 398046859
+      KenneyAnimatedCoinsV3_9: -1222164070
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
