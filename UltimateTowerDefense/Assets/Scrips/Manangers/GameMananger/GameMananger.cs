@@ -38,6 +38,7 @@ public class GameMananger : Singleton<GameMananger>
 
     private void Start()
     {
+        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
         InitWaveManangers();
         currentWave = 1;
         enemiesKilled = 0;
@@ -106,7 +107,7 @@ public class GameMananger : Singleton<GameMananger>
             if (waveMananger.HavePendingWaves)
             {
                 canCheckForNextWave = false;
-                currentWave++;
+                currentWave++;                
                 StartCoroutine(WaitBetweenWavesRoutine(timeBetweenWaves));
                 return;
             }
@@ -120,11 +121,12 @@ public class GameMananger : Singleton<GameMananger>
     {
         gameCompleted = true;
         GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameCompleted);
+        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
         //Win behaviour
     }
 
     private void StartWaves()
-    {
+    {        
         foreach (WaveMananger waveMananger in waveManangers)
         {
             waveMananger.StartNewWave(currentWave-1);
@@ -142,6 +144,7 @@ public class GameMananger : Singleton<GameMananger>
 
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)
     {
+        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
         timeLeft = timeToWait;
         nextWavePanel.TogglePanel();
         while (timeLeft > 0)
@@ -153,6 +156,7 @@ public class GameMananger : Singleton<GameMananger>
         nextWavePanel.TogglePanel();
         timeLeft = 0;
         canCheckForNextWave = true;
+        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.WaveGameSceneMusic);
         StartWaves();
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using GameSceneManangement;
+using System;
 
 public class PlayMenu : MonoBehaviour
 {
@@ -68,8 +69,13 @@ public class PlayMenu : MonoBehaviour
     }
 
     private void LoadScene()
-    {
-        SceneTranstitionFade.Instance.FadeIn(() => GameScenesLoader.LoadGameScene(GameScenes.GameScene));        
+    {        
+        SceneTranstitionFade.Instance.FadeIn(OnFadeEnds);        
+    }
+
+    private void OnFadeEnds()
+    {       
+        GameScenesLoader.LoadGameScene(GameScenes.GameScene);        
     }
 
     public void OpenMenu()

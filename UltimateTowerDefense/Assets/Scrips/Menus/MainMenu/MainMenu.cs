@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         SceneTranstitionFade.Instance.FadeOut();
+        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.MainMenuMusic);
     }
 
     private void SubmitButtonsEvents()
