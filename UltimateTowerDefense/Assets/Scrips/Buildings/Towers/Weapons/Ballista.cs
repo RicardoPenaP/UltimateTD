@@ -17,7 +17,7 @@ public class Ballista : MonoBehaviour, ITowerWeapon
 
     public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
     {
-        IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
+        IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, shootingPos.rotation, transform.parent).GetComponent<IAmmunition>();
         ammoShooted.SetDamage(attackDamage);
         ammoShooted.SetTarget(target);
 
