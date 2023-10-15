@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TowerVFXToPlay { Creation, LevelUP, Selling}
 public class TowerVFX : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ParticleSystem levelUpVFX = GetComponentInChildren<ParticleSystem>();
+        TowerController myTowerController = GetComponent<TowerController>();
     }
 }
