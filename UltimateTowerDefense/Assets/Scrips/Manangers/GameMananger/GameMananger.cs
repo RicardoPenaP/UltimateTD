@@ -143,8 +143,7 @@ public class GameMananger : Singleton<GameMananger>
     }
 
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)
-    {
-        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
+    {        
         timeLeft = timeToWait;
         nextWavePanel.TogglePanel();
         while (timeLeft > 0)
@@ -156,7 +155,7 @@ public class GameMananger : Singleton<GameMananger>
         nextWavePanel.TogglePanel();
         timeLeft = 0;
         canCheckForNextWave = true;
-        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.WaveGameSceneMusic);
+       
         StartWaves();
     }
 
