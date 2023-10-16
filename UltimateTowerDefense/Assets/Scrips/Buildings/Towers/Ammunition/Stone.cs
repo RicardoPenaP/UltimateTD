@@ -43,7 +43,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private void Explode()
     {
-       
+        OnHit?.Invoke();
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)
