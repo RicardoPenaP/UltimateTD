@@ -12,12 +12,21 @@ public class Stone : MonoBehaviour,IAmmunition
     [SerializeField,Range(0f,100f)] private float maxHeightPercentage = 50;
     [Tooltip("Is the representaive curve off the movement")]
     [SerializeField] private AnimationCurve heightCurve;
-    
+    [SerializeField] private float destroyAwaitTime = 1f;
+
+    private MeshRenderer myMeshRenderer;
+    private ParticleSystem onHitVFX;
     private Vector3 startPos;
     private Vector3 finalPos;
     private float maxY;
 
     private int damage;
+
+    private void Awake()
+    {
+        myMeshRenderer = GetComponent<MeshRenderer>();
+        onHitVFX = GetComponentInChildren<ParticleSystem>();
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -32,6 +41,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private void Explode()
     {
+        onHitVFX?.Play();
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)
@@ -68,8 +78,9 @@ public class Stone : MonoBehaviour,IAmmunition
     private void DestroyBehaviour()
     {
         //Destroy Behaviour
-        gameObject.SetActive(false);
-        Destroy(gameObject);
+        myMeshRenderer.enabled = false;
+        StartCoroutine(DestroyRoutine());
+       
     }
 
     private IEnumerator ParableMovementRoutine()
@@ -94,5 +105,10 @@ public class Stone : MonoBehaviour,IAmmunition
 
     }
 
-    
+    private IEnumerator DestroyRoutine()
+    {
+        yield return new WaitForSeconds(destroyAwaitTime);
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
 }
