@@ -121,7 +121,7 @@ public class GameMananger : Singleton<GameMananger>
     {
         gameCompleted = true;
         GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameCompleted);
-        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
+        AmbientalMusicPlayer.Instance?.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
         //Win behaviour
     }
 

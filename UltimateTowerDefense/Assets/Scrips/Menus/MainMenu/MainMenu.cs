@@ -13,8 +13,10 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
 
+    private MenuAnimationHelper myAnimationHelper;
     private void Awake()
     {
+        myAnimationHelper = GetComponent<MenuAnimationHelper>();
         SubmitButtonsEvents();
     }
 
