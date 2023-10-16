@@ -10,11 +10,20 @@ public class Arrow : MonoBehaviour, IAmmunition
 
     public event Action OnHit;
 
+    private MeshRenderer myMeshRenderer;
+    private Collider myCollider;
+
     private int damage;
     private Transform targetPosition;
     private EnemyDamageHandler target;
 
     private Vector3 startingPos;
+
+    private void Awake()
+    {
+        myMeshRenderer = GetComponent<MeshRenderer>();
+        myCollider = GetComponent<Collider>();
+    }
 
     private void Start()
     {
@@ -32,8 +41,7 @@ public class Arrow : MonoBehaviour, IAmmunition
         EnemyDamageHandler enemy = other.GetComponent<EnemyDamageHandler>();
 
         if (enemy == target)
-        {
-            OnHit?.Invoke();
+        {            
             enemy.TakeDamage(damage);
             Destroy();
         }
@@ -65,8 +73,10 @@ public class Arrow : MonoBehaviour, IAmmunition
     private void Destroy()
     {
         //Destroy Behaviour
-        gameObject.SetActive(false);
-        Destroy(gameObject);
+        OnHit?.Invoke();
+        myMeshRenderer.enabled = false;
+        myCollider.enabled = false;
+        StartCoroutine(DestroyRoutine());
     }
 
     public void SetTarget(Transform target)
@@ -85,4 +95,10 @@ public class Arrow : MonoBehaviour, IAmmunition
         this.damage = damage;
     }
 
+    private IEnumerator DestroyRoutine()
+    {
+        yield return new WaitForSeconds(IAmmunition.DESTROY_AWAIT_TIME);
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
 }

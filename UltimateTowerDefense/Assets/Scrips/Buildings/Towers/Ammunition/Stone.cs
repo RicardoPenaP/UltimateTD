@@ -42,8 +42,7 @@ public class Stone : MonoBehaviour,IAmmunition
     }
 
     private void Explode()
-    {
-        OnHit?.Invoke();
+    {        
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)
@@ -51,7 +50,7 @@ public class Stone : MonoBehaviour,IAmmunition
             reachedObjects[i].GetComponent<EnemyDamageHandler>()?.TakeDamage(damage);
         }
 
-        DestroyBehaviour();
+        Destroy();
     }
 
     public void StartMovement()
@@ -77,9 +76,10 @@ public class Stone : MonoBehaviour,IAmmunition
     }
 
     
-    private void DestroyBehaviour()
+    private void Destroy()
     {
         //Destroy Behaviour
+        OnHit?.Invoke();
         myMeshRenderer.enabled = false;
         myCollider.enabled = false;
         StartCoroutine(DestroyRoutine());
@@ -110,7 +110,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private IEnumerator DestroyRoutine()
     {
-        yield return new WaitForSeconds(destroyAwaitTime);
+        yield return new WaitForSeconds(IAmmunition.DESTROY_AWAIT_TIME);
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
