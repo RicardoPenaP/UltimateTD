@@ -16,6 +16,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private MeshRenderer myMeshRenderer;
     private ParticleSystem onHitVFX;
+    private Collider myCollider;
     private Vector3 startPos;
     private Vector3 finalPos;
     private float maxY;
@@ -26,6 +27,7 @@ public class Stone : MonoBehaviour,IAmmunition
     {
         myMeshRenderer = GetComponent<MeshRenderer>();
         onHitVFX = GetComponentInChildren<ParticleSystem>();
+        myCollider = GetComponent<Collider>();
     }
 
     private void OnDrawGizmosSelected()
@@ -79,6 +81,7 @@ public class Stone : MonoBehaviour,IAmmunition
     {
         //Destroy Behaviour
         myMeshRenderer.enabled = false;
+        myCollider.enabled = false;
         StartCoroutine(DestroyRoutine());
        
     }
