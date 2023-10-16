@@ -20,7 +20,7 @@ public class GameOverMenu : Singleton<GameOverMenu>
     protected override void Awake()
     {
         base.Awake();
-        SubmitToButtonsEvents();
+        SubscribeToButtonsEvents();
     }
 
     private void Start()
@@ -29,10 +29,21 @@ public class GameOverMenu : Singleton<GameOverMenu>
         gameObject.SetActive(false);
     }
 
-    private void SubmitToButtonsEvents()
+    private void OnDestroy()
+    {
+        UnsubscribeToButtonsEvents();
+    }
+
+    private void SubscribeToButtonsEvents()
     {
         mainMenuButton?.onClick.AddListener(GoToMainMenu);
         playAgainButton?.onClick.AddListener(PlayAgain);
+    }
+
+    private void UnsubscribeToButtonsEvents()
+    {
+        mainMenuButton?.onClick.RemoveListener(GoToMainMenu);
+        playAgainButton?.onClick.RemoveListener(PlayAgain);
     }
 
     private void GoToMainMenu()
