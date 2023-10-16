@@ -38,7 +38,7 @@ public class GameMananger : Singleton<GameMananger>
 
     private void Start()
     {
-        AmbientalMusicPlayer.Instance.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
+        AmbientalMusicPlayer.Instance?.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
         InitWaveManangers();
         currentWave = 1;
         enemiesKilled = 0;

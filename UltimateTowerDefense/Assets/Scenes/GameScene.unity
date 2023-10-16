@@ -642,6 +642,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6913552748719856001, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: startingAmouuntGold
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 6913552748719856003, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_IsActive
       value: 1
