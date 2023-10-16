@@ -12,8 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
-
-    private static readonly int MENU_OPEN_HASH = Animator.StringToHash("MenuOpen");
+   
     private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
     private static readonly int CLOSE_MENU_HASH = Animator.StringToHash("CloseMenu");
 

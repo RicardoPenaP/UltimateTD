@@ -17,19 +17,27 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] private Button tripleRoad;
     [SerializeField] private Button quadRoad;
 
+    private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
+    private static readonly int CLOSE_MENU_HASH = Animator.StringToHash("CloseMenu");
+
     private MenuAnimationHelper myAnimationHelper;
     private Animator myAnimator;
 
+
+
     private void Awake()
-    {
-        SubcribeToButtonsEvents();
+    {        
         myAnimationHelper = GetComponent<MenuAnimationHelper>();
         myAnimator = GetComponent<Animator>();
+        SubcribeToButtonsEvents();
+        SubscribeToAnimationEvents();
+
     }
 
     private void OnDestroy()
     {
         UnsubcribeToButtonsEvents();
+        UnsubscribeToAnimationEvents();
     }
 
     private void SubcribeToButtonsEvents()
@@ -41,6 +49,11 @@ public class PlayMenu : MonoBehaviour
         quadRoad?.onClick.AddListener(PlayQuadRoad);
     }
 
+    private void SubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished += () => gameObject.SetActive(false);
+    }
+
     private void UnsubcribeToButtonsEvents()
     {
         backToMainMenuButton?.onClick.RemoveListener(BackToMainMenu);
@@ -50,6 +63,11 @@ public class PlayMenu : MonoBehaviour
         quadRoad?.onClick.RemoveListener(PlayQuadRoad);
     }
 
+    private void UnsubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished -= () => gameObject.SetActive(false); 
+    }
+    
     private void BackToMainMenu()
     {
         CloseMenu();
@@ -84,7 +102,7 @@ public class PlayMenu : MonoBehaviour
 
     private void CloseMenu()
     {
-        gameObject.SetActive(false);
+        myAnimator.SetTrigger(CLOSE_MENU_HASH);
     }
 
     private void LoadScene()
@@ -100,5 +118,6 @@ public class PlayMenu : MonoBehaviour
     public void OpenMenu()
     {
         gameObject.SetActive(true);
+        myAnimator.SetTrigger(OPEN_MENU_HASH);
     }
 }
