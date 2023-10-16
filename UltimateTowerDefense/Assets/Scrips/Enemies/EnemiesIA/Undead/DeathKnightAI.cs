@@ -83,6 +83,10 @@ public class DeathKnightAI : MonoBehaviour,IEnemy
             case EnemyState.Attacking:
                 Attacking();
                 break;
+            case EnemyState.Victory:
+                myMovement.SetCanMove(false);
+                myAnimatorHandler.PlayABoolAnimation(BoolAnimationsToPlay.Victory, true);
+                break;
             default:
                 break;
         }

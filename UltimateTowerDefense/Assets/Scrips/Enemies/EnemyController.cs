@@ -68,6 +68,7 @@ public class EnemyController : MonoBehaviour
     private void UnsubscribeToEvents()
     {
         myHealthHandler.OnDie -= () => { BankMananger.Instance.AddGold(currentGoldReward); };
+        myAnimatorHelper.OnDieAnimationEnded -= () => { this.gameObject.SetActive(false); };
     }
 
     private void InitializeHealthHandler()

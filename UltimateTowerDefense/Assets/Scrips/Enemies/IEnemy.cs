@@ -5,7 +5,7 @@ using System;
 
 namespace EnemiesInterface
 {
-    public enum EnemyState { None, Walking, CastingSkill,Attacking }
+    public enum EnemyState { None, Walking, CastingSkill,Attacking,Victory }
     public interface IEnemy
     {
         public void InitializeEnemy(float attackRange, int damageToStronghold);
