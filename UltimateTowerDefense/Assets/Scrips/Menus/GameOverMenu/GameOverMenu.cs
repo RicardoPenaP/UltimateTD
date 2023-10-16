@@ -49,13 +49,14 @@ public class GameOverMenu : Singleton<GameOverMenu>
     private void GoToMainMenu()
     {        
         gameObject.SetActive(false);
-        GameScenesLoader.LoadGameScene(GameScenes.MainMenu);
+        SceneTranstitionFade.Instance?.FadeIn(() => GameScenesLoader.LoadGameScene(GameScenes.MainMenu));
+       
     }
 
     private void PlayAgain()
     {        
         gameObject.SetActive(false);
-        GameScenesLoader.ReloadCurrentScene();
+        SceneTranstitionFade.Instance?.FadeIn(() => GameScenesLoader.ReloadCurrentScene());        
     }
 
     public void OpenGameOverMenu(GameOverMenuToOpen menuToOpen)
