@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour,IAmmunition
 
         if (enemy == target)
         {
+            OnHit?.Invoke();
             enemy.TakeDamage(damage);
             Destroy();
         }
