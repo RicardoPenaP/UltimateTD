@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61aa01f414bf6ba44b15cd5ede87d7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onShootAudioClip: {fileID: 8300000, guid: 4ade916338c0f9345a878f0b08c6f63f, type: 3}
+  onShootAudioClip: {fileID: 0}
   onShootVFX: {fileID: 0}
 --- !u!82 &7995217084728750351
 AudioSource:

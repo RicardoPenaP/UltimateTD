@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Canon : MonoBehaviour,ITowerWeapon
+public class Cannon : MonoBehaviour,ITowerWeapon
 {
     [Header("Canon")]
     [SerializeField] private Transform canonBody;
