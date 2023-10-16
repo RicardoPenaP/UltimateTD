@@ -20,6 +20,8 @@ public class EnemiesPool : MonoBehaviour
     private bool canSpawn = false;
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
 
+    public bool AllEnemiesSpawned { get; private set; }
+
     private void Update()
     {       
         ActivateEnemy();
@@ -59,7 +61,8 @@ public class EnemiesPool : MonoBehaviour
                 enemy.SetPath(enemiesPath);
                 enemy.gameObject.SetActive(true);
                 if (enemiesSpawned >= enemiesToSpawn)
-                {                    
+                {
+                    AllEnemiesSpawned = true;
                     canSpawn = false;
                 }
                 return;
@@ -69,7 +72,8 @@ public class EnemiesPool : MonoBehaviour
 
     public void ResetPool()
     {
-        allEnemiesKilled = false;        
+        allEnemiesKilled = false;
+        AllEnemiesSpawned = false;
         enemiesKilled = 0;
         enemiesSpawned = 0;        
     }

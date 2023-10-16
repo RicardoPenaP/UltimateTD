@@ -9,6 +9,8 @@ public class WaveMananger : MonoBehaviour
     [Header("Wave Mananger")]    
     [SerializeField] private EnemiesPool enemyPoolPrefabReference;
 
+    public Action OnStartSpanwning;
+    public Action OnStopSpawning;
     private event Action OnResetPools;
 
     private WaveData[] waveData;    
@@ -26,6 +28,11 @@ public class WaveMananger : MonoBehaviour
     private void Start()
     {
         InitEnemiesPool();
+    }
+
+    private void Update()
+    {
+        CheckForEnemiesPendingToSpawn();
     }
 
     private void InitEnemiesPool()
@@ -75,6 +82,7 @@ public class WaveMananger : MonoBehaviour
             return;
         }
         ResetPools();
+        OnStartSpanwning?.Invoke();
         this.waveIndex = waveIndex;
         currentWave = waveData[waveIndex];
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
@@ -105,8 +113,7 @@ public class WaveMananger : MonoBehaviour
                     return false;
                 }
             }
-        }
-
+        }        
         return true;
     }
 
@@ -114,6 +121,27 @@ public class WaveMananger : MonoBehaviour
     {
         OnResetPools.Invoke();        
     }    
+
+    private void CheckForEnemiesPendingToSpawn()
+    {
+        if (currentWave == null)
+        {
+            return;
+        }
+
+        foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
+        {
+            if (enemiesPools.ContainsKey(enemyInWave.EnemyType))
+            {
+                if (!enemiesPools[enemyInWave.EnemyType].AllEnemiesSpawned)
+                {
+                    return;
+                }
+            }
+        }
+
+        OnStopSpawning?.Invoke();
+    }
 
     public void SetEnemiesPath(Path enemiesPath)
     {
