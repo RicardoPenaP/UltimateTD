@@ -10,7 +10,8 @@ public class Ballista : MonoBehaviour, ITowerWeapon
     [SerializeField] private Transform shootingPos;
     public event Action OnAttack;
     public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
-    {        
+    {
+        OnAttack?.Invoke();
         IAmmunition ammoshooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
         ammoshooted.SetDamage(attackDamage);
         ammoshooted.SetTarget(attackObjectivePos);
@@ -19,6 +20,7 @@ public class Ballista : MonoBehaviour, ITowerWeapon
 
     public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
     {
+        OnAttack?.Invoke();
         IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, shootingPos.rotation, transform.parent).GetComponent<IAmmunition>();
         ammoShooted.SetDamage(attackDamage);
         ammoShooted.SetTarget(target);

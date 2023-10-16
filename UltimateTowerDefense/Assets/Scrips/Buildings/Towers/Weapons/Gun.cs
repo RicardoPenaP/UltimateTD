@@ -16,10 +16,12 @@ public class Gun : MonoBehaviour,ITowerWeapon
         ammoshooted.SetTarget(attackObjectivePos);
         shootingPosIndex++;
         shootingPosIndex = shootingPosIndex >= shootingPos.Length ? 0 : shootingPosIndex;
+        OnAttack?.Invoke();
     }
 
     public void Attack(GameObject ammunition, int attackDamage, EnemyDamageHandler target)
     {
+        OnAttack?.Invoke();
         IAmmunition ammoshooted = Instantiate(ammunition, shootingPos[shootingPosIndex].position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
         ammoshooted.SetDamage(attackDamage);
         ammoshooted.SetTarget(target);

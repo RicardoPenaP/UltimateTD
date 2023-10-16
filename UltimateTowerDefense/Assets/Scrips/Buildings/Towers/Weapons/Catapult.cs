@@ -77,6 +77,7 @@ public class Catapult : MonoBehaviour,ITowerWeapon
         myAmmunition.transform.SetParent(transform.parent);
         myAmmunition.StartMovement();
         myAmmunition = null;
-        
+        OnAttack?.Invoke();
+
     }
 }
