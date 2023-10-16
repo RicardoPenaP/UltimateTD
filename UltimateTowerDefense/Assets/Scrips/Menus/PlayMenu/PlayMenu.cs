@@ -17,18 +17,37 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] private Button tripleRoad;
     [SerializeField] private Button quadRoad;
 
+    private MenuAnimationHelper myAnimationHelper;
+    private Animator myAnimator;
+
     private void Awake()
     {
-        SubmitToButtonsEvents();
+        SubcribeToButtonsEvents();
+        myAnimationHelper = GetComponent<MenuAnimationHelper>();
+        myAnimator = GetComponent<Animator>();
     }
 
-    private void SubmitToButtonsEvents()
+    private void OnDestroy()
     {
-        backToMainMenuButton.onClick.AddListener(BackToMainMenu);
-        singleRoad.onClick.AddListener(PlaySingleRoad);
-        doubleRoad.onClick.AddListener(PlayDoubleRoad);
-        tripleRoad.onClick.AddListener(PlayTripleRoad);
-        quadRoad.onClick.AddListener(PlayQuadRoad);
+        UnsubcribeToButtonsEvents();
+    }
+
+    private void SubcribeToButtonsEvents()
+    {
+        backToMainMenuButton?.onClick.AddListener(BackToMainMenu);
+        singleRoad?.onClick.AddListener(PlaySingleRoad);
+        doubleRoad?.onClick.AddListener(PlayDoubleRoad);
+        tripleRoad?.onClick.AddListener(PlayTripleRoad);
+        quadRoad?.onClick.AddListener(PlayQuadRoad);
+    }
+
+    private void UnsubcribeToButtonsEvents()
+    {
+        backToMainMenuButton?.onClick.RemoveListener(BackToMainMenu);
+        singleRoad?.onClick.RemoveListener(PlaySingleRoad);
+        doubleRoad?.onClick.RemoveListener(PlayDoubleRoad);
+        tripleRoad?.onClick.RemoveListener(PlayTripleRoad);
+        quadRoad?.onClick.RemoveListener(PlayQuadRoad);
     }
 
     private void BackToMainMenu()

@@ -12,7 +12,7 @@ public class MenuAnimationHelper : MonoBehaviour
 
     public void OpenAnimationStarted()
     {
-        OnOpenAnimationStarted?.Invoke();
+        OnOpenAnimationStarted?.Invoke();        
     }
     public void OpenAnimationFinished()
     {
