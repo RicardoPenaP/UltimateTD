@@ -57,6 +57,10 @@ public class CrossbowManAI : MonoBehaviour,IEnemy
 
     private void UpdateState()
     {
+        if (GameOverMenu.Instance?.IsGameOver == true)
+        {
+            myState = EnemyState.Victory;
+        }
         switch (myState)
         {
             case EnemyState.None:

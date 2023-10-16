@@ -68,6 +68,10 @@ public class DeathRiderAI : MonoBehaviour,IEnemy
 
     private void UpdateState()
     {
+        if (GameOverMenu.Instance?.IsGameOver == true)
+        {
+            myState = EnemyState.Victory;
+        }
         switch (myState)
         {
             case EnemyState.Walking:
