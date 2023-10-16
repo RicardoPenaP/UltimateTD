@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Stone : MonoBehaviour,IAmmunition
 {
     [Header("Stone")]
@@ -14,8 +14,9 @@ public class Stone : MonoBehaviour,IAmmunition
     [SerializeField] private AnimationCurve heightCurve;
     [SerializeField] private float destroyAwaitTime = 1f;
 
-    private MeshRenderer myMeshRenderer;
-    private ParticleSystem onHitVFX;
+    public event Action OnHit;
+
+    private MeshRenderer myMeshRenderer;   
     private Collider myCollider;
     private Vector3 startPos;
     private Vector3 finalPos;
@@ -25,8 +26,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private void Awake()
     {
-        myMeshRenderer = GetComponent<MeshRenderer>();
-        onHitVFX = GetComponentInChildren<ParticleSystem>();
+        myMeshRenderer = GetComponent<MeshRenderer>();        
         myCollider = GetComponent<Collider>();
     }
 
@@ -43,7 +43,7 @@ public class Stone : MonoBehaviour,IAmmunition
 
     private void Explode()
     {
-        onHitVFX?.Play();
+       
         Collider[] reachedObjects = Physics.OverlapSphere(transform.position, damageRadius);
 
         for (int i = 0; i < reachedObjects.Length; i++)

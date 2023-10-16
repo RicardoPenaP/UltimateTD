@@ -4,15 +4,59 @@ using UnityEngine;
 
 public class AmmunitionFXController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Ammunition FX Controller")]
+    [Header("SFX Audio Clips")]
+    [SerializeField] private AudioClip onHitAudioClip;
+    [Header("VFX reference")]
+    [SerializeField] private ParticleSystem onHitVFX;
+
+    private AudioSource myAudioSource;
+    private IAmmunition myAmmunition;
+
+    private void Awake()
     {
-        
+        myAudioSource = GetComponent<AudioSource>();
+        myAmmunition = GetComponentInParent<IAmmunition>();
+
+        SubscribeToOnAttack();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        UnsubcribeToOnAttack();
+    }
+
+    private void SubscribeToOnAttack()
+    {
+        if (myAmmunition == null)
+        {
+            return;
+        }
+        if (onHitAudioClip)
+        {
+            myAmmunition.OnHit += () => myAudioSource.PlayOneShot(onHitAudioClip);
+        }
+
+        if (onHitVFX)
+        {
+            myAmmunition.OnHit += () => onHitVFX.Play();
+        }
+    }
+
+    private void UnsubcribeToOnAttack()
+    {
+        if (myAmmunition == null)
+        {
+            return;
+        }
+        if (onHitAudioClip)
+        {
+            myAmmunition.OnHit -= () => myAudioSource.PlayOneShot(onHitAudioClip);
+        }
+
+        if (onHitVFX)
+        {
+            myAmmunition.OnHit -= () => onHitVFX.Play();
+        }
     }
 }

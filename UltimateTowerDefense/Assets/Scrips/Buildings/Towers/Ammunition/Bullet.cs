@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bullet : MonoBehaviour,IAmmunition
 {
     [Header("Bullet")]
     [SerializeField, Min(0f)] private float movementSpeed = 30f;
+
+    public event Action OnHit;
 
     private int damage;
     private Transform targetPosition;
