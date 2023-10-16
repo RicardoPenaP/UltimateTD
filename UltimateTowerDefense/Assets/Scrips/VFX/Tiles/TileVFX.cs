@@ -13,6 +13,10 @@ public class TileVFX : MonoBehaviour
     private void Awake()
     {
         myTileMananger = GetComponentInParent<TileManangement>();
+        if (!myTileMananger)
+        {
+            return;
+        }
         myTileMananger.OnCleanObstacles += () => towerCreationVFX?.Play();
         myTileMananger.OnCreateBuilding += () => towerCreationVFX?.Play();
         myTileMananger.OnSellBuilding += () => towerSellVFX?.Play();
@@ -20,6 +24,10 @@ public class TileVFX : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!myTileMananger)
+        {
+            return;
+        }
         myTileMananger.OnCleanObstacles -= () => towerCreationVFX?.Play();
         myTileMananger.OnCreateBuilding -= () => towerCreationVFX?.Play();
         myTileMananger.OnSellBuilding -= () => towerSellVFX?.Play();
