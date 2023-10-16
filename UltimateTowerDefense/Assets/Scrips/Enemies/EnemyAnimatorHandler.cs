@@ -11,7 +11,7 @@ namespace AnimatorHandler
 
     public enum BoolAnimationsToPlay
     {
-        Walk
+        Walk,Victory
     }
 
     public enum AnimationWithSpeedModifiers
@@ -26,6 +26,7 @@ namespace AnimatorHandler
         private static readonly int CAST_SKIL_HASH = Animator.StringToHash("CastSkil");
         private static readonly int DIE_HASH = Animator.StringToHash("Die");
         private static readonly int WALK_HASH = Animator.StringToHash("Walk");
+        private static readonly int VICTORY_HASH = Animator.StringToHash("Victory");
 
         private static readonly int WALK_SPEED_MULTIPLIER_HASH = Animator.StringToHash("WalkMultiplier");
 
@@ -62,6 +63,9 @@ namespace AnimatorHandler
             {
                 case BoolAnimationsToPlay.Walk:
                     myAnimator.SetBool(WALK_HASH,state);
+                    break;
+                case BoolAnimationsToPlay.Victory:
+                    myAnimator.SetBool(VICTORY_HASH, state);
                     break;
                 default:
                     break;
