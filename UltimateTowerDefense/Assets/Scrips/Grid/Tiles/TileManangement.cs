@@ -7,6 +7,8 @@ using System;
 public class TileManangement : MonoBehaviour
 {   
     public Action OnCleanObstacles;
+    public Action OnSellBuilding;
+    public Action OnCreateBuilding;
    
     private IBuilding tileBuilding;
 
@@ -81,12 +83,14 @@ public class TileManangement : MonoBehaviour
         }
         myTile.TileStatus = TileStatusID.Occuped;
         tileBuilding.SubscribeToOnSell(onSellMethods);
+        OnCreateBuilding?.Invoke();
     }
 
     private void SellBuilding()
     {   
         tileBuilding = null;
         myTile.TileStatus = TileStatusID.Free;
+        OnSellBuilding?.Invoke();
     }
 
 
