@@ -11,8 +11,7 @@ public class Stone : MonoBehaviour,IAmmunition
     [Tooltip("Is the percentage of the distance that will translate to the max height of the curve")]
     [SerializeField,Range(0f,100f)] private float maxHeightPercentage = 50;
     [Tooltip("Is the representaive curve off the movement")]
-    [SerializeField] private AnimationCurve heightCurve;
-    [SerializeField] private float destroyAwaitTime = 1f;
+    [SerializeField] private AnimationCurve heightCurve;    
 
     public event Action OnHit;
 

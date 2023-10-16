@@ -12,16 +12,19 @@ public class Bullet : MonoBehaviour,IAmmunition
 
     private MeshRenderer myMeshRenderer;
     private Collider myCollider;
+    private TrailRenderer myTrailRenderer;
 
     private int damage;
     private Transform targetPosition;
     private EnemyDamageHandler target;
 
+
     private Vector3 startingPos;
 
     private void Awake()
     {
-        myMeshRenderer = GetComponent<MeshRenderer>();
+        myMeshRenderer = GetComponentInChildren<MeshRenderer>();
+        myTrailRenderer = GetComponentInChildren<TrailRenderer>();
         myCollider = GetComponent<Collider>();
     }
 
@@ -51,7 +54,7 @@ public class Bullet : MonoBehaviour,IAmmunition
 
     private void Move()
     {
-        if (Vector3.Distance(transform.position, startingPos) >= IAmmunition.ammoRange)
+        if (Vector3.Distance(transform.position, startingPos) >= IAmmunition.AMMO_RANGE)
         {
             Destroy();
             return;
@@ -76,6 +79,7 @@ public class Bullet : MonoBehaviour,IAmmunition
         OnHit?.Invoke();
         myMeshRenderer.enabled = false;
         myCollider.enabled = false;
+        myTrailRenderer.enabled = false;
         StartCoroutine(DestroyRoutine());
     }
 

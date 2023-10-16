@@ -18,15 +18,15 @@ public class AmmunitionFXController : MonoBehaviour
         myAudioSource = GetComponent<AudioSource>();
         myAmmunition = GetComponentInParent<IAmmunition>();
 
-        SubscribeToOnAttack();
+        SubscribeToOnHit();
     }
 
     private void OnDestroy()
     {
-        UnsubcribeToOnAttack();
+        UnsubcribeToOnHit();
     }
 
-    private void SubscribeToOnAttack()
+    private void SubscribeToOnHit()
     {
         if (myAmmunition == null)
         {
@@ -43,7 +43,7 @@ public class AmmunitionFXController : MonoBehaviour
         }
     }
 
-    private void UnsubcribeToOnAttack()
+    private void UnsubcribeToOnHit()
     {
         if (myAmmunition == null)
         {

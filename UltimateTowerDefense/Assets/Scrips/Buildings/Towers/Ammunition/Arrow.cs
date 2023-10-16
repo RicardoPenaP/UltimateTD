@@ -51,7 +51,7 @@ public class Arrow : MonoBehaviour, IAmmunition
 
     private void Move()
     {
-        if (Vector3.Distance(transform.position, startingPos) >= IAmmunition.ammoRange)
+        if (Vector3.Distance(transform.position, startingPos) >= IAmmunition.AMMO_RANGE)
         {
             Destroy();
             return;

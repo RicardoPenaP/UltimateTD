@@ -85,7 +85,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  destroyAwaitTime: 1
 --- !u!33 &5191714521907918208
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4943,6 +4942,10 @@ PrefabInstance:
     - target: {fileID: 3925872935774131015, guid: 00ed576d4e102c74d9f89f0762c100c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746368810010207875, guid: 00ed576d4e102c74d9f89f0762c100c4, type: 3}
+      propertyPath: MaxDistance
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7938168604590227336, guid: 00ed576d4e102c74d9f89f0762c100c4, type: 3}
       propertyPath: m_Name

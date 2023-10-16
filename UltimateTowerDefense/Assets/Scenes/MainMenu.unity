@@ -14115,6 +14115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 246635577780332626, guid: 4ee4efe86fbb5ee4091cd81ad30c7d49, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 246635577780332629, guid: 4ee4efe86fbb5ee4091cd81ad30c7d49, type: 3}
       propertyPath: m_Name
       value: AmbientalMusicPlayer
@@ -14396,6 +14400,10 @@ PrefabInstance:
     - target: {fileID: 2573101563343068957, guid: 1ed69cff6eea7e64aac8dab930296dcf, type: 3}
       propertyPath: m_Name
       value: GlobalSFXPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573101563343068958, guid: 1ed69cff6eea7e64aac8dab930296dcf, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed69cff6eea7e64aac8dab930296dcf, type: 3}
