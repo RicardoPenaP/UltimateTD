@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Gun : MonoBehaviour,ITowerWeapon
 {
     [Header("Gun")]    
     [SerializeField] private Transform[] shootingPos;
-
+    public event Action OnAttack;
     private int shootingPosIndex = 0;
     public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
     {       

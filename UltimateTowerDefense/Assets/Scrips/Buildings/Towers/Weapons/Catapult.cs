@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Catapult : MonoBehaviour,ITowerWeapon
 {
     [Header("Catapult")]    
     [SerializeField] private Transform shootingPos;
-
+    public event Action OnAttack;
     private Animator myAnimator;
     private readonly int ATTACK_ANIMATION_HASH = Animator.StringToHash("Attack");
    

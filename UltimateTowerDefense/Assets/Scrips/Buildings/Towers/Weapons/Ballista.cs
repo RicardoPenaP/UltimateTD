@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Ballista : MonoBehaviour, ITowerWeapon
 {
     [Header("Ballista")]
     [SerializeField] private Transform ballistaBody;
     [SerializeField] private Transform shootingPos;
+    public event Action OnAttack;
     public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
     {        
         IAmmunition ammoshooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();

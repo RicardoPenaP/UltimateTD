@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Canon : MonoBehaviour,ITowerWeapon
 {
     [Header("Canon")]
     [SerializeField] private Transform canonBody;
     [SerializeField] private Transform shootingPos;
+    public event Action OnAttack;
     public void Attack(GameObject ammunition, int attackDamage, Transform attackObjectivePos)
     {       
         IAmmunition ammoShooted = Instantiate(ammunition, shootingPos.position, Quaternion.identity, transform.parent).GetComponent<IAmmunition>();
