@@ -5,9 +5,24 @@ using UnityEngine;
 public enum TowerVFXToPlay { Creation, LevelUP, Selling}
 public class TowerVFX : MonoBehaviour
 {
+    TowerController myTowerController;
+    private ParticleSystem levelUpVFX;
+
     private void Awake()
     {
-        ParticleSystem levelUpVFX = GetComponentInChildren<ParticleSystem>();
-        TowerController myTowerController = GetComponent<TowerController>();
+        levelUpVFX = GetComponentInChildren<ParticleSystem>();
+        myTowerController = GetComponentInParent<TowerController>();
+        myTowerController.OnLevelUp += levelUpVFX.Play;
     }
+
+    private void OnDestroy()
+    {
+        if (!myTowerController)
+        {
+            return;
+        }
+        myTowerController.OnLevelUp -= levelUpVFX.Play;
+    }
+
+
 }

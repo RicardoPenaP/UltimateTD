@@ -82,6 +82,7 @@ public class TowerController : MonoBehaviour,IBuilding
         myInfo.currentLevelUpGoldCost = Mathf.RoundToInt(myData.GetStatValueForALevel(TowerStatToAugment.BaseLevelUpGoldCost, myInfo.currentLevel));
         float percentageCalculatorHelper = (myData.SellValuePercentageCoeficient / 100);
         myInfo.sellCost = Mathf.RoundToInt((float)totalBuildingCost * percentageCalculatorHelper);
+        OnLevelUp?.Invoke();
     }
 
     public void SellBuilding()
