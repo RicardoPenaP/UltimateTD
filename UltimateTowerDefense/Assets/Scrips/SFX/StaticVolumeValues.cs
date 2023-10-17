@@ -5,6 +5,9 @@ using System;
 
 public static class StaticVolumeValues
 {
+    public static readonly float DEFAULT_MUSIC_VOLUME = 0.5f;
+    public static readonly float DEFAULT_SFX_VOLUME = 0.5f;
+
     private static float musicVolume;
     private static float sfxVolume;
 

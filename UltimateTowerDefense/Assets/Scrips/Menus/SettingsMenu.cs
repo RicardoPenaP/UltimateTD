@@ -21,9 +21,6 @@ public class SettingsMenu : MonoBehaviour
     private MenuAnimationHelper myAnimationHelper;
     private Animator myAnimator;
 
-    private float lastMusicVolume;
-    private float lastSFXVolume;
-
     private bool isPaused = false;
     public bool IsPaused { get { return isPaused; } }
 
@@ -33,27 +30,47 @@ public class SettingsMenu : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         SubscribeToButtonsEvents();
         SubscribeToAnimationEvents();
+        SubscribeToSlidersEvents();
     }
 
     private void Start()
     {
-        
-    }
-
-    private void Update()
-    {
-        UpdateVolumeValues();
+        InitVolumeValues();
     }
 
     private void OnDestroy()
     {
         UnsubscribeFromButtonsEvents();
         UnsubscribeToAnimationEvents();
+        UnsubscribeFromSlidersEvents();
     }
 
-    private void UpdateVolumeValues()
+    private void InitVolumeValues()
     {
+        float musicVolume = 0f;
+        float sfxVolume= 0f;
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            musicVolume = PlayerPrefs.GetFloat("musicVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("musicVolume", StaticVolumeValues.DEFAULT_MUSIC_VOLUME);
+            musicVolume = StaticVolumeValues.DEFAULT_MUSIC_VOLUME;
+        }
 
+        if (PlayerPrefs.HasKey("sfxVolume"))
+        {
+            sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("sfxVolume", StaticVolumeValues.DEFAULT_SFX_VOLUME);
+            sfxVolume = StaticVolumeValues.DEFAULT_SFX_VOLUME;
+        }
+
+        musicVolumeSlider.value = musicVolume;
+        SFXVolumeSlider.value = sfxVolume;
     }
 
     private void SubscribeToButtonsEvents()
@@ -76,6 +93,18 @@ public class SettingsMenu : MonoBehaviour
         myAnimationHelper.OnCloseAnimationFinished -= () => gameObject.SetActive(false);
     }
 
+    private void SubscribeToSlidersEvents()
+    {
+        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+        SFXVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
+    }
+
+    private void UnsubscribeFromSlidersEvents()
+    {
+        musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
+        SFXVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
+    }
+
     public void OpenMenu()
     {
         gameObject.SetActive(true);
@@ -86,6 +115,24 @@ public class SettingsMenu : MonoBehaviour
     {
         myAnimator.Play(CLOSE_MENU_HASH);
         mainMenuReference.OpenMenu(); 
+    }
+
+    private void SetMusicVolume(float value)
+    {
+        StaticVolumeValues.SetMusicVolume(value);
+        PlayerPrefs.SetFloat("musicVolume", value);
+    }
+
+    private void SetSFXVolume(float value)
+    {
+        StaticVolumeValues.SetSFXVolume(value);
+        PlayerPrefs.SetFloat("sfxVolume", value);
+    }
+
+    private void ResetVolumeValues()
+    {
+        PlayerPrefs.DeleteAll();
+        InitVolumeValues();
     }
 
 }
