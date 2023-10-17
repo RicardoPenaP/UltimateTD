@@ -19,11 +19,18 @@ public class AmmunitionFXController : MonoBehaviour
         myAmmunition = GetComponentInParent<IAmmunition>();
 
         SubscribeToOnHit();
+        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
     }
 
     private void OnDestroy()
     {
         UnsubcribeToOnHit();
+        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
+    }
+
+    private void SetAudioSourceVolume(float volume)
+    {
+        myAudioSource.volume = volume;
     }
 
     private void SubscribeToOnHit()

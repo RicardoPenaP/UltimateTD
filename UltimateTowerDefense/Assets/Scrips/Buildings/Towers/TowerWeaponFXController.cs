@@ -19,11 +19,18 @@ public class TowerWeaponFXController : MonoBehaviour
         myTowerWeapon = GetComponentInParent<ITowerWeapon>();
 
         SubscribeToOnAttack();
+        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
     }
 
     private void OnDestroy()
     {
+        StaticVolumeValues.OnSetSFXVolume -= SetAudioSourceVolume;
         UnsubcribeToOnAttack();
+    }
+
+    private void SetAudioSourceVolume(float volume)
+    {
+        myAudioSource.volume = volume;
     }
 
     private void SubscribeToOnAttack()
