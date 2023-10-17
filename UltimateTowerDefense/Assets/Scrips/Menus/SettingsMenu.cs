@@ -13,7 +13,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider SFXVolumeSlider;
     [Header("Buttons Reference")]
     [SerializeField] private Button goBack;
-    
+    [SerializeField] private Button reset;
+
 
     private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
     private static readonly int CLOSE_MENU_HASH = Animator.StringToHash("CloseMenu");
@@ -76,11 +77,13 @@ public class SettingsMenu : MonoBehaviour
     private void SubscribeToButtonsEvents()
     {       
         goBack?.onClick.AddListener(GoToMainMenu);
+        reset?.onClick.AddListener(ResetVolumeValues);
     }
 
     private void UnsubscribeFromButtonsEvents()
     {        
-        goBack?.onClick.AddListener(GoToMainMenu);
+        goBack?.onClick.RemoveListener(GoToMainMenu);
+        reset?.onClick.RemoveListener(ResetVolumeValues);
     }
 
     private void SubscribeToAnimationEvents()
