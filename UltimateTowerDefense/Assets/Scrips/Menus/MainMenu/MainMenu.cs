@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     [Header("Main Menu")]
     [Header("Menus Reference")]
     [SerializeField] private PlayMenu playMenu;
+    [SerializeField] private SettingsMenu settingsMenu;
     [Header("Buttons Reference")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
@@ -40,16 +41,16 @@ public class MainMenu : MonoBehaviour
 
     private void SubscribeToButtonsEvents()
     {
-        playButton?.onClick.AddListener(PlayButton);
-        //settingsButton?.onClick.AddListener(CloseMenu);
+        playButton?.onClick.AddListener(GoToPlayMenu);
+        settingsButton?.onClick.AddListener(GoToSettinsMenu);
         exitButton?.onClick.AddListener(ExitApplication);
 
     }
 
     private void UnsubscribeToButtonsEvents()
     {
-        playButton?.onClick.RemoveListener(PlayButton);
-        //settingsButton?.onClick.RemoveListener(CloseMenu);
+        playButton?.onClick.RemoveListener(GoToPlayMenu);
+        settingsButton?.onClick.RemoveListener(GoToSettinsMenu);
         exitButton?.onClick.RemoveListener(ExitApplication);
     }
 
@@ -63,10 +64,16 @@ public class MainMenu : MonoBehaviour
         myAnimationHelper.OnCloseAnimationFinished -= CloseMenu;
     }
 
-    private void PlayButton()
+    private void GoToPlayMenu()
     {
         myAnimator.SetTrigger(CLOSE_MENU_HASH);
         playMenu.OpenMenu(); 
+    }
+
+    private void GoToSettinsMenu()
+    {
+        myAnimator.SetTrigger(CLOSE_MENU_HASH);
+        settingsMenu.OpenMenu();
     }
     
 
