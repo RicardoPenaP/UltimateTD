@@ -12,9 +12,51 @@ public class GameManangerNextWavePanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Button startNowButton;
 
+    private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
+    private static readonly int CLOSE_MENU_HASH = Animator.StringToHash("CloseMenu");
+
+    private MenuAnimationHelper myAnimationHelper;
+    private Animator myAnimator;
+
+    private bool panelState = false;
+
+    private void Awake()
+    {
+        myAnimationHelper = GetComponent<MenuAnimationHelper>();
+        myAnimator = GetComponent<Animator>();       
+        SubscribeToAnimationEvents();
+
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeToAnimationEvents();
+    }
+
+    private void SubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished += () => gameObject.SetActive(false);
+    }
+
+    private void UnsubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished -= () => gameObject.SetActive(false);
+    }
+
     public void TogglePanel()
     {
-        gameObject.SetActive(!gameObject.activeInHierarchy);
+        panelState = !panelState;
+
+        if (panelState)
+        {
+            gameObject.SetActive(true);
+            myAnimator.Play(OPEN_MENU_HASH);
+        }
+        else
+        {
+            myAnimator.Play(CLOSE_MENU_HASH);
+        }
+       
     }
 
     public void UpdateTimer(float time)
