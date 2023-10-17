@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsMenu : Singleton<SettingsMenu>
+public class SettingsMenu : MonoBehaviour   
 {
     [Header("Settings Menu")]
     [Header("Menus Reference")]
@@ -21,13 +21,14 @@ public class SettingsMenu : Singleton<SettingsMenu>
     private MenuAnimationHelper myAnimationHelper;
     private Animator myAnimator;
 
+    private float lastMusicVolume;
+    private float lastSFXVolume;
 
     private bool isPaused = false;
     public bool IsPaused { get { return isPaused; } }
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         myAnimationHelper = GetComponent<MenuAnimationHelper>();
         myAnimator = GetComponent<Animator>();
         SubscribeToButtonsEvents();
@@ -36,13 +37,23 @@ public class SettingsMenu : Singleton<SettingsMenu>
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        
+    }
+
+    private void Update()
+    {
+        UpdateVolumeValues();
     }
 
     private void OnDestroy()
     {
         UnsubscribeFromButtonsEvents();
         UnsubscribeToAnimationEvents();
+    }
+
+    private void UpdateVolumeValues()
+    {
+
     }
 
     private void SubscribeToButtonsEvents()
