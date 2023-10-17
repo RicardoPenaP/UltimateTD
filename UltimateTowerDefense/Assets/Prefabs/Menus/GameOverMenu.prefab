@@ -454,6 +454,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5887316741382971326}
   - component: {fileID: 5887316741382971324}
+  - component: {fileID: 887967903894594109}
+  - component: {fileID: 879075082059869110}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -501,6 +503,39 @@ MonoBehaviour:
   gameOverStatsPanel: {fileID: 5887316742043507836}
   mainMenuButton: {fileID: 5887316740838612951}
   playAgainButton: {fileID: 5887316740200662834}
+--- !u!95 &887967903894594109
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887316741382971327}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c40ea43a27fe4e40b244353c4d11aed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &879075082059869110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887316741382971327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839d5b4a2e79fc54c9547df46f47644e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5887316741565686837
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +764,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 105.15
+  m_fontSize: 107.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -995,7 +1030,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.45
+  m_fontSize: 52.5
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1265,7 +1300,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.2
+  m_fontSize: 52.25
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1

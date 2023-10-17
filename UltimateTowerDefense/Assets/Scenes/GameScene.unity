@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4c40ea43a27fe4e40b244353c4d11aed, type: 2}
+    - target: {fileID: 3905194532296458945, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5371359675637619977, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
