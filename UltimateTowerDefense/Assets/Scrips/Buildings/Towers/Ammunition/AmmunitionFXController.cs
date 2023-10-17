@@ -25,7 +25,7 @@ public class AmmunitionFXController : MonoBehaviour
     private void OnDestroy()
     {
         UnsubcribeToOnHit();
-        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
+        StaticVolumeValues.OnSetSFXVolume -= SetAudioSourceVolume;        
     }
 
     private void SetAudioSourceVolume(float volume)

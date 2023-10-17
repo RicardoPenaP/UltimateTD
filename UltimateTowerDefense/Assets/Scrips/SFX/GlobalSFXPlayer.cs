@@ -27,7 +27,7 @@ public class GlobalSFXPlayer : Singleton<GlobalSFXPlayer>
 
     private void OnDestroy()
     {
-        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
+        StaticVolumeValues.OnSetSFXVolume -= SetAudioSourceVolume;
     }
 
     private void SetAudioSourceVolume(float volume)

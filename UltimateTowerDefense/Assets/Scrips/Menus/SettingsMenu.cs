@@ -22,8 +22,6 @@ public class SettingsMenu : MonoBehaviour
     private MenuAnimationHelper myAnimationHelper;
     private Animator myAnimator;
 
-    private bool isPaused = false;
-    public bool IsPaused { get { return isPaused; } }
 
     private void Awake()
     {
@@ -31,12 +29,13 @@ public class SettingsMenu : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         SubscribeToButtonsEvents();
         SubscribeToAnimationEvents();
-        SubscribeToSlidersEvents();
+        SubscribeToSlidersEvents();        
     }
 
     private void Start()
     {
         InitVolumeValues();
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -70,8 +69,8 @@ public class SettingsMenu : MonoBehaviour
             sfxVolume = StaticVolumeValues.DEFAULT_SFX_VOLUME;
         }
 
-        musicVolumeSlider.value = musicVolume;
-        SFXVolumeSlider.value = sfxVolume;
+        musicVolumeSlider.value = musicVolume;       
+        SFXVolumeSlider.value = sfxVolume;        
     }
 
     private void SubscribeToButtonsEvents()
