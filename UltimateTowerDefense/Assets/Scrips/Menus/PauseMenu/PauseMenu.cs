@@ -14,13 +14,23 @@ public class PauseMenu : Singleton<PauseMenu>
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private Button resumeButton;
 
+    private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
+    private static readonly int CLOSE_MENU_HASH = Animator.StringToHash("CloseMenu");
+
+    private MenuAnimationHelper myAnimationHelper;
+    private Animator myAnimator;
+
+
     private bool isPaused = false;
     public bool IsPaused { get { return isPaused; } }
 
     protected override void Awake()
     {
         base.Awake();
-        SubmitButtonsEvents();
+        myAnimationHelper = GetComponent<MenuAnimationHelper>();
+        myAnimator = GetComponent<Animator>();
+        SubscribeToButtonsEvents();
+        SubscribeToAnimationEvents();
     }
 
     private void Start()
@@ -28,10 +38,32 @@ public class PauseMenu : Singleton<PauseMenu>
         gameObject.SetActive(false);
     }
 
-    private void SubmitButtonsEvents()
+    private void OnDestroy()
+    {
+        UnsubscribeFromButtonsEvents();
+        UnsubscribeToAnimationEvents();
+    }
+
+    private void SubscribeToButtonsEvents()
     {
         resumeButton?.onClick.AddListener(ToggleMenu);
         mainMenuButton?.onClick.AddListener(GoToMainMenu);
+    }
+
+    private void UnsubscribeFromButtonsEvents()
+    {
+        resumeButton?.onClick.AddListener(ToggleMenu);
+        mainMenuButton?.onClick.AddListener(GoToMainMenu);
+    }
+
+    private void SubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished += () => gameObject.SetActive(false);
+    }
+
+    private void UnsubscribeToAnimationEvents()
+    {
+        myAnimationHelper.OnCloseAnimationFinished -= () => gameObject.SetActive(false);
     }
 
     public void ToggleMenu()
@@ -41,7 +73,15 @@ public class PauseMenu : Singleton<PauseMenu>
             return;
         }
         SetIsPaused(!isPaused);
-        gameObject.SetActive(!gameObject.activeInHierarchy);        
+        if (isPaused)
+        {
+            gameObject.SetActive(true);
+            myAnimator.Play(OPEN_MENU_HASH);
+        }
+        else
+        {
+            myAnimator.Play(CLOSE_MENU_HASH);
+        }  
     }
 
     private void GoToMainMenu()
