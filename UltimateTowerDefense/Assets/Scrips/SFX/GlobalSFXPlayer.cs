@@ -22,6 +22,17 @@ public class GlobalSFXPlayer : Singleton<GlobalSFXPlayer>
             return;
         }
         audioSource = GetComponent<AudioSource>();
+        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
+    }
+
+    private void OnDestroy()
+    {
+        StaticVolumeValues.OnSetSFXVolume += SetAudioSourceVolume;
+    }
+
+    private void SetAudioSourceVolume(float volume)
+    {
+        audioSource.volume = volume;
     }
 
     public void PlayGlobalSFX(GlobalSFXToPlay SFXToPlay)

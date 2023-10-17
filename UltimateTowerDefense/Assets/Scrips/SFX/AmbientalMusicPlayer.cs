@@ -11,7 +11,6 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
 
     private AudioSource audioSource;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -25,6 +24,17 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
         }
 
         audioSource = GetComponent<AudioSource>();
+        StaticVolumeValues.OnSetMusicVolume += SetAudioSourceVolume;
+    }
+
+    private void OnDestroy()
+    {
+        StaticVolumeValues.OnSetMusicVolume -= SetAudioSourceVolume;
+    }
+
+    private void SetAudioSourceVolume(float volume)
+    {
+        audioSource.volume = volume;
     }
 
     public void PlayAnAmbientalMusic(AmbientalMusicToPlay musicToPlay)
