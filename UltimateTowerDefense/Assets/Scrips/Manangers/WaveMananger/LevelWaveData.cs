@@ -12,7 +12,8 @@ public struct LevelWaves
 
 [CreateAssetMenu(fileName = "NewLevelWaveData", menuName = "LevelWaveData")]
 public class LevelWaveData : ScriptableObject
-{
+{    
     [SerializeField] private WaveData[] waveData;
     public WaveData[] WaveData { get { return waveData; } }
+   
 }

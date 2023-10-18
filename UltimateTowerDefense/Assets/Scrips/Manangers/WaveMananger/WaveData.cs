@@ -31,6 +31,7 @@ namespace EnemiesWaves
         [SerializeField] private EnemyToSpawn[] enemiesToSpawn;
 
         public EnemyToSpawn[] EnemiesToSpawn { get { return enemiesToSpawn; } }
+
     }
 }
 
