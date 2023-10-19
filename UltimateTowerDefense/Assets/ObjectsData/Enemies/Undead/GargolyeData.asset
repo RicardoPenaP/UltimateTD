@@ -16,6 +16,6 @@ MonoBehaviour:
   baseHealth: 500
   baseShield: 0
   baseMovementSpeed: 4
-  baseGoldReward: 200
+  baseGoldReward: 100
   baseDamageToStronghold: 5
   attackRange: 5.3

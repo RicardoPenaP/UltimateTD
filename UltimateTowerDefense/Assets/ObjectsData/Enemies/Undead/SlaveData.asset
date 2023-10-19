@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlaveData
   m_EditorClassIdentifier: 
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 50
+  baseHealth: 25
   baseShield: 0
   baseMovementSpeed: 1.6
   baseGoldReward: 10

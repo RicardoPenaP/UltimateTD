@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DeathKnightData
   m_EditorClassIdentifier: 
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 200
-  baseShield: 100
-  baseMovementSpeed: 0.8
-  baseGoldReward: 50
+  baseHealth: 150
+  baseShield: 75
+  baseMovementSpeed: 1
+  baseGoldReward: 20
   baseDamageToStronghold: 2
   attackRange: 1

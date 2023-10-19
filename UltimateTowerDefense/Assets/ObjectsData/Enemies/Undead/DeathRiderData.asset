@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: DeathRiderData
   m_EditorClassIdentifier: 
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 200
-  baseShield: 50
+  baseHealth: 175
+  baseShield: 25
   baseMovementSpeed: 2
-  baseGoldReward: 75
+  baseGoldReward: 30
   baseDamageToStronghold: 4
   attackRange: 1

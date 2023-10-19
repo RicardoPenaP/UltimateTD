@@ -15,8 +15,8 @@ MonoBehaviour:
   uiData: {fileID: 11400000, guid: 8f4fe716410644d4896d488b2e92cf26, type: 2}
   levelingData: {fileID: 11400000, guid: 1dcecb5901ed84242adf0b378b2b10fb, type: 2}
   ammunitionPrefab: {fileID: 2261852100830899983, guid: e60f69e712aaa464ea1ba85cec65d940, type: 3}
-  baseAttackDamage: 50
-  baseAttackRatio: 0.75
-  baseAttackRange: 15
+  baseAttackDamage: 25
+  baseAttackRatio: 0.5
+  baseAttackRange: 12
   baseLevelUpCost: 50
   sellValuePercentageCoeficient: 80

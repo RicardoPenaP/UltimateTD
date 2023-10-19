@@ -54,6 +54,11 @@ public class Bullet : MonoBehaviour,IAmmunition
 
     private void Move()
     {
+        if (!target)
+        {
+            Destroy();
+            return;
+        }
         if (Vector3.Distance(transform.position, startingPos) >= IAmmunition.AMMO_RANGE)
         {
             Destroy();

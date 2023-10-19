@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SkeletonWarriorData
   m_EditorClassIdentifier: 
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
-  baseHealth: 100
-  baseShield: 50
-  baseMovementSpeed: 0.8
-  baseGoldReward: 20
+  baseHealth: 50
+  baseShield: 25
+  baseMovementSpeed: 1.2
+  baseGoldReward: 15
   baseDamageToStronghold: 1
   attackRange: 1

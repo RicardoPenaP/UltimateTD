@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94540335778ff124585a5f58e2ca00ed, type: 3}
   m_Name: CrossbowMan
   m_EditorClassIdentifier: 
-  enemyName: Crossbow Man
   levelingData: {fileID: 11400000, guid: 4963613a7c0048d418d16c94febc6ca9, type: 2}
   baseHealth: 50
   baseShield: 0
-  baseMovementSpeed: 1
-  distanceFromNextTileOffset: 0.08
+  baseMovementSpeed: 1.3
   baseGoldReward: 15
   baseDamageToStronghold: 1
   attackRange: 8
-  isRanged: 1
