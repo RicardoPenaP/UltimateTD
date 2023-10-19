@@ -44,6 +44,14 @@ public class EnemyController : MonoBehaviour
         SubscribeToEvents();
     }
 
+    private void Start()
+    {
+        if (EnemyOutsideScreenIndicator.Instance)
+        {
+            EnemyOutsideScreenIndicator.Instance.AddIndicator(this);
+        }
+    }
+
     private void OnEnable()
     {
         InitializeEnemy();
@@ -51,12 +59,16 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.localPosition = Vector3.zero;  
+        transform.localPosition = Vector3.zero;       
     }
 
     private void OnDestroy()
     {
         UnsubscribeToEvents();
+        if (EnemyOutsideScreenIndicator.Instance)
+        {
+            EnemyOutsideScreenIndicator.Instance.RemoveIndicator(this);
+        }
     }
 
     private void SubscribeToEvents()
@@ -115,8 +127,7 @@ public class EnemyController : MonoBehaviour
     {
         InitializeMyAI();
         InitializeHealthHandler();
-        InitializeMovementHandler();
-        
+        InitializeMovementHandler();       
     }
 
     public void SubmitToOnDie(Action method)
