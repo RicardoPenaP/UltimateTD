@@ -107,8 +107,15 @@ public class WaveMananger : MonoBehaviour
         foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
         {
             if (enemiesPools.ContainsKey(enemyInWave.EnemyType))
-            {                
-                if (!enemiesPools[enemyInWave.EnemyType].AllEnemiesKilled)
+            {
+                //Use this check if you want end the wave when the player killed all the enemies
+                //if (!enemiesPools[enemyInWave.EnemyType].AllEnemiesKilled)
+                //{
+                //    return false;
+                //}
+
+                //Use this check if you want end the wave when all the enemies were spawned
+                if (!enemiesPools[enemyInWave.EnemyType].AllEnemiesSpawned)
                 {
                     return false;
                 }
