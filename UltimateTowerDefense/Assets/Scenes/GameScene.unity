@@ -490,6 +490,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6913552746920268619, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: availableTowers.Array.data[2]
+      value: 
+      objectReference: {fileID: 4415465852592416861, guid: 1f3a0e95f08e47345992a612456729a5, type: 3}
+    - target: {fileID: 6913552746920268619, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: availableTowers.Array.data[3]
+      value: 
+      objectReference: {fileID: 4415465852592416861, guid: cd1e7d4c02d836e44abf1f3810cbf383, type: 3}
     - target: {fileID: 6913552747541513716, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -904,11 +912,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251883478912972397, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015668697
+      value: -0.000000015668697
       objectReference: {fileID: 0}
     - target: {fileID: 1251883478912972397, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000071099566
+      value: 0.000000007109957
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479044961210, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_Name
@@ -984,11 +992,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479260489820, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015668697
+      value: -0.000000015668697
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479260489820, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000071099566
+      value: 0.000000007109957
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479388526722, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_FollowOffset.y

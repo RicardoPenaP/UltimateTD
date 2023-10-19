@@ -10,6 +10,7 @@ public class TerrainMananger : Singleton<TerrainMananger>
     [Header("Terrain mananger")]
     [SerializeField, Min(0)] private float cleanCostAugmentMultiplier = 1;
     [SerializeField,Min(0)] private int baseCleanCost = 5;
+    [SerializeField] private Vector3 panelOffset = Vector3.zero;
 
     private Button cleanButton;
     private Button closeButton;
@@ -36,8 +37,8 @@ public class TerrainMananger : Singleton<TerrainMananger>
     }
 
     private void Update()
-    {        
-        transform.position = Camera.main.WorldToScreenPoint(activeTerrain.transform.position);
+    {
+        LocatePanelInScreenSpace();
         UpdateButtonStatus();
     }
 
@@ -72,10 +73,31 @@ public class TerrainMananger : Singleton<TerrainMananger>
         {
             return;
         }
-        activeTerrain = tile;
+
+        if (activeTerrain != tile)
+        {
+            activeTerrain = tile;
+        }
+
+        if (!gameObject.activeInHierarchy)
+        {
+            LocatePanelInScreenSpace();
+            gameObject.SetActive(true);
+        }
+
+       
+
         SetCostText();      
-        gameObject.SetActive(true);
-        transform.position = Camera.main.WorldToScreenPoint(tile.transform.position);
+       
+    }
+
+    private void LocatePanelInScreenSpace()
+    {
+        if (!activeTerrain)
+        {
+            return;
+        }
+        transform.position = Camera.main.WorldToScreenPoint(activeTerrain.transform.position) + panelOffset;
     }
 
     public void CloseTerrainMananger()
