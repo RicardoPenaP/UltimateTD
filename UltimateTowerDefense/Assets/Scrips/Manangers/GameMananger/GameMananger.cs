@@ -25,7 +25,6 @@ public class GameMananger : Singleton<GameMananger>
     private bool canCheckForNextWave = true;
     private bool gameCompleted = false;
 
-
     public float TimePlayed { get { return timePlayed; } }
     public int EnemiesKilled { get { return enemiesKilled; } }
     public int WavesCleared { get { return wavesCleared; } }
@@ -79,8 +78,9 @@ public class GameMananger : Singleton<GameMananger>
         if (gameCompleted)
         {
             return;
-        }
+        }        
         CheckForWaveCompleted();
+        UpdateWaveInformationPanel();
     }
 
     private void CheckForWaveCompleted()
@@ -141,6 +141,20 @@ public class GameMananger : Singleton<GameMananger>
             return;
         }
         timeLeft = 0;
+    }
+
+    private void UpdateWaveInformationPanel()
+    {
+        if (!WaveInformationPanel.Instance)
+        {
+            return;
+        }
+        int enemiesLeft = 0;
+        foreach (WaveMananger waveMananger in waveManangers)
+        {
+            enemiesLeft += waveMananger.GetEnemiesLeftForSpawn();
+        }
+        WaveInformationPanel.Instance.UpdateWaveInformationPanel(currentWave, enemiesLeft);
     }
 
     private IEnumerator WaitBetweenWavesRoutine(float timeToWait)

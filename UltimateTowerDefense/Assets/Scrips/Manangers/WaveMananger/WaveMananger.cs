@@ -23,7 +23,7 @@ public class WaveMananger : MonoBehaviour
     private int waveIndex = 0;
     
     public bool WaveCompleted { get { return CheckWaveCompleted(); } }
-    public bool HavePendingWaves { get { return waveIndex < waveData.Length-1; } }
+    public bool HavePendingWaves { get { return waveIndex < waveData.Length-1; } }   
 
     private void Start()
     {
@@ -169,5 +169,24 @@ public class WaveMananger : MonoBehaviour
     public void SetWaveData(WaveData[] waveData)
     {
         this.waveData = waveData;
+    }
+
+    public int GetEnemiesLeftForSpawn()
+    {
+        int enemiesLeft = 0;
+        if (currentWave == null)
+        {
+            return enemiesLeft;
+        }
+
+        foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
+        {
+            if (enemiesPools.ContainsKey(enemyInWave.EnemyType))
+            {
+                enemiesLeft = enemiesPools[enemyInWave.EnemyType].EnemiesForSpawn;
+            }
+        }
+
+        return enemiesLeft;
     }
 }

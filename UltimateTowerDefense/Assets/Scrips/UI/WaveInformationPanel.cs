@@ -15,7 +15,7 @@ public class WaveInformationPanel : Singleton<WaveInformationPanel>
         enemiesLeftText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
     }
 
-    private void UpdateWaveInformationPanel(int currenWave, int enemiesLeft)
+    public void UpdateWaveInformationPanel(int currenWave, int enemiesLeft)
     {
         currentWaveText.text = $"Current Wave: {currenWave}";
         enemiesLeftText.text = $"Enemies Left: {enemiesLeft}";

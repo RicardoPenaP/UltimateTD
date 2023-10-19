@@ -20,7 +20,7 @@ public class EnemiesPool : MonoBehaviour
     private bool canSpawn = false;
     public bool AllEnemiesKilled { get { return allEnemiesKilled; } }
     public bool AllEnemiesSpawned { get; private set; }
-    public int EnemiesToSpawn { get { return enemiesToSpawn; } }
+    public int EnemiesForSpawn { get { return enemiesToSpawn - enemiesSpawned; } }
 
     private void Update()
     {       
