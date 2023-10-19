@@ -85,8 +85,6 @@ public class TerrainMananger : Singleton<TerrainMananger>
             gameObject.SetActive(true);
         }
 
-       
-
         SetCostText();      
        
     }
