@@ -6,7 +6,8 @@ public class HealthMananger : Singleton<HealthMananger>
 {
     [Header("Health Mananger")]
     [SerializeField,Min(0)] private int maxHealth = 10;
-    [SerializeField] private int currentHealth;    
+    [SerializeField] private int currentHealth;
+    [SerializeField] private Vector3 panelOffset = Vector3.zero;
 
     private UIBar healthBar;
     private bool isAlive;
@@ -23,6 +24,17 @@ public class HealthMananger : Singleton<HealthMananger>
         currentHealth = maxHealth;
         healthBar.UpdateBar(currentHealth, maxHealth);
     }
+    
+    private void LocatePanelInScreenSpace()
+    {
+        if (!Stronghold.Instance)
+        {
+            return;
+                
+        }
+        transform.position = Camera.main.WorldToScreenPoint(Stronghold.Instance.transform.position) + panelOffset;
+    }
+
 
     public void TakeDamage(int damage)
     {

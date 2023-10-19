@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cleanCostAugmentMultiplier: 2
   baseCleanCost: 5
-  panelOffset: {x: 0, y: 20, z: 0}
+  panelOffset: {x: 0, y: 100, z: 0}
 --- !u!1 &884515592471088445
 GameObject:
   m_ObjectHideFlags: 0

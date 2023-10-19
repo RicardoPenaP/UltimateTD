@@ -434,13 +434,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3905194532296458945, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 4c40ea43a27fe4e40b244353c4d11aed, type: 2}
-    - target: {fileID: 3905194532296458945, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_UpdateMode
-      value: 2
+    - target: {fileID: 685023952425288517, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: panelOffset.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5371359675637619977, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -489,18 +485,6 @@ PrefabInstance:
     - target: {fileID: 5371359676271592938, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913552746920268619, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: availableTowers.Array.data[2]
-      value: 
-      objectReference: {fileID: 4415465852592416861, guid: 1f3a0e95f08e47345992a612456729a5, type: 3}
-    - target: {fileID: 6913552746920268619, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: availableTowers.Array.data[3]
-      value: 
-      objectReference: {fileID: 4415465852592416861, guid: cd1e7d4c02d836e44abf1f3810cbf383, type: 3}
-    - target: {fileID: 6913552747541513716, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913552748076093857, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_Name
@@ -590,13 +574,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6913552748719856001, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: startingAmouuntGold
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8920158422844602759, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 6913552748626572234, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
+      propertyPath: panelOffset.y
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 8920158424026898699, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_AnchorMax.y
