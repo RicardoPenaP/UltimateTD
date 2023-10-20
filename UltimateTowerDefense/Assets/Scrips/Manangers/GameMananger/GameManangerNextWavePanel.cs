@@ -54,6 +54,7 @@ public class GameManangerNextWavePanel : MonoBehaviour
         }
         else
         {
+            UpdateTimer(0f);
             myAnimator.Play(CLOSE_MENU_HASH);
         }
        
