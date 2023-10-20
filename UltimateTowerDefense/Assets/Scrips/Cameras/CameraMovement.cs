@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
     private bool movementByDragActive = false;
     private float startingFOV;
     private float targetFOV;
+    private float relativeSpeedMultiplier = 1f;
 
     private void Awake()
     {
@@ -174,7 +175,7 @@ public class CameraMovement : MonoBehaviour
 
     private void MovePointer(Vector3 rawMovementDirection, float movementSpeed)
     {
-        Vector3 movementDirection = myPointer.position + rawMovementDirection * movementSpeed * Time.deltaTime;
+        Vector3 movementDirection = myPointer.position + rawMovementDirection * movementSpeed *relativeSpeedMultiplier * Time.deltaTime;
         movementDirection.x = Mathf.Clamp(movementDirection.x, GridMananger.Instance.MyThresholds.minX, GridMananger.Instance.MyThresholds.maxX);
         movementDirection.z = Mathf.Clamp(movementDirection.z, GridMananger.Instance.MyThresholds.minZ, GridMananger.Instance.MyThresholds.maxZ);
 
@@ -188,6 +189,7 @@ public class CameraMovement : MonoBehaviour
         float zoomDirection = -Input.mouseScrollDelta.y;
         targetFOV += (zoomDirection * zoomStep);
         targetFOV = Mathf.Clamp(targetFOV, minValue, maxValue);
+        relativeSpeedMultiplier = targetFOV / startingFOV;
         virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(virtualCamera.m_Lens.FieldOfView, targetFOV, zoomSmoothSpeed * Time.deltaTime);        
     }
 }

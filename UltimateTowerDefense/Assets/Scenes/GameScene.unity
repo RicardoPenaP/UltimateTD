@@ -866,6 +866,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1251883478556356638, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
+      propertyPath: byKeysMovementSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251883478556356638, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
+      propertyPath: byDragMouseMovementSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1251883478912972397, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 40
