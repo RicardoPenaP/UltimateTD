@@ -210,18 +210,41 @@ public class MapGenerator : MonoBehaviour
     private Path.PathUbication[] GeneratePathRandomUbication(int amount)
     {
         Path.PathUbication[] randomUbications = new Path.PathUbication[amount];
-
-        for (int i = 0; i < randomUbications.Length; i++)
+        if (GameMode.GameModeOption == GameModeOptions.SingleRoad)
         {
-            Path.PathUbication newRandomUbication = Path.PathUbication.None;
-            do
-            {
-               newRandomUbication = (Path.PathUbication)Random.Range(1, 5);
-
-            } while (UbicationRepeated(newRandomUbication, randomUbications));
-           
-            randomUbications[i] = newRandomUbication;
+            switch (strongholdUbication)
+            {               
+                case Path.PathUbication.UpperLeftCorner:
+                    randomUbications[0] = Path.PathUbication.LowerRightCorner;
+                    break;
+                case Path.PathUbication.LowerLeftCorner:
+                    randomUbications[0] = Path.PathUbication.UpperRightCorner;
+                    break;
+                case Path.PathUbication.UpperRightCorner:
+                    randomUbications[0] = Path.PathUbication.LowerLeftCorner;
+                    break;
+                case Path.PathUbication.LowerRightCorner:
+                    randomUbications[0] = Path.PathUbication.UpperLeftCorner;
+                    break;
+                default:
+                    break;
+            }
         }
+        else
+        {
+            for (int i = 0; i < randomUbications.Length; i++)
+            {
+                Path.PathUbication newRandomUbication = Path.PathUbication.None;
+                do
+                {
+                    newRandomUbication = (Path.PathUbication)Random.Range(1, 5);
+
+                } while (UbicationRepeated(newRandomUbication, randomUbications));
+
+                randomUbications[i] = newRandomUbication;
+            }
+        }
+        
         return randomUbications;
     }
 
