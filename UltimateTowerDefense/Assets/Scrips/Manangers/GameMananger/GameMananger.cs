@@ -81,6 +81,7 @@ public class GameMananger : Singleton<GameMananger>
         }        
         CheckForWaveCompleted();
         UpdateWaveInformationPanel();
+        AllWavesCleared();
     }
 
     private void CheckForWaveCompleted()
@@ -113,15 +114,25 @@ public class GameMananger : Singleton<GameMananger>
             }
         }
 
-        AllWavesCleared();
+       
 
     }
 
     private void AllWavesCleared()
     {
+        if (gameCompleted)
+        {
+            return;
+        }
+        foreach (WaveMananger waveMananger in waveManangers)
+        {
+            if (!waveMananger.GetAllWavesCleared())
+            {
+                return;
+            }
+        }
         gameCompleted = true;
-        GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameCompleted);
-        AmbientalMusicPlayer.Instance?.ChangeMusicWithTransition(AmbientalMusicToPlay.StanByGameSceneMusic);
+        GameOverMenu.Instance.OpenGameOverMenu(GameOverMenu.GameOverMenuToOpen.GameCompleted);        
         //Win behaviour
     }
 

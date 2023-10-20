@@ -65,6 +65,10 @@ public class EnemyOutsideScreenIndicator : Singleton<EnemyOutsideScreenIndicator
         }
         Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(enemy.transform.position);
         Indicator newIndicator = Instantiate(indicatorPrefab, enemyScreenPosition, Quaternion.identity, transform);
+        if (IsInsideScreen(enemyScreenPosition))
+        {
+            newIndicator.gameObject.SetActive(false);
+        }
         activeIndicators.Add(enemy, newIndicator);
     }
 

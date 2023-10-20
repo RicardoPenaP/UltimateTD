@@ -20,9 +20,9 @@ public class WaveMananger : MonoBehaviour
     private Path enemiesPath;
     private WaveData currentWave;
 
-    private int waveIndex = 0;
+    private int waveIndex = 0;   
     
-    public bool WaveCompleted { get { return CheckWaveCompleted(); } }
+    public bool WaveCompleted { get { return CheckWaveCompleted(); } }   
     public bool HavePendingWaves { get { return waveIndex < waveData.Length-1; } }   
 
     private void Start()
@@ -183,10 +183,31 @@ public class WaveMananger : MonoBehaviour
         {
             if (enemiesPools.ContainsKey(enemyInWave.EnemyType))
             {
-                enemiesLeft = enemiesPools[enemyInWave.EnemyType].EnemiesForSpawn;
+                enemiesLeft += enemiesPools[enemyInWave.EnemyType].EnemiesForSpawn;
             }
         }
 
         return enemiesLeft;
+    }
+
+    public bool GetAllWavesCleared()
+    {
+        if (waveIndex < waveData.Length - 1)
+        {
+            return false;
+        }
+
+        foreach (EnemyToSpawn enemyInWave in currentWave.EnemiesToSpawn)
+        {
+            if (enemiesPools.ContainsKey(enemyInWave.EnemyType))
+            {                
+                if (!enemiesPools[enemyInWave.EnemyType].AllEnemiesKilled)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
