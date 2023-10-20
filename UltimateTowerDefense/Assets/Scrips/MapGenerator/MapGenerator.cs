@@ -423,7 +423,7 @@ public class MapGenerator : MonoBehaviour
                 case NodeContent.Path:
                     instantiatedTile.TileStatus = TileStatusID.IsPath;
                     break;
-                case NodeContent.Obstacle:
+                case NodeContent.Obstacle:                    
                     instantiatedTile.TileStatus = TileStatusID.HasObstacle;
                     break;
                 case NodeContent.Stronghold:

@@ -77,8 +77,8 @@ public static class PerlingNoiseGenerator
             case NodeTileType.Sand:
                 return perlingNoiseValue > 0.75;
                 
-            case NodeTileType.Water:
-                return perlingNoiseValue > 0.85;
+            //case NodeTileType.Water:
+            //    return perlingNoiseValue > 0.85;
                 
             default:
                 return false;
