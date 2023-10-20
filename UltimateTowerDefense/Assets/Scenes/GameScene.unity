@@ -482,14 +482,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6913552747189886737, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.54164124
-      objectReference: {fileID: 0}
-    - target: {fileID: 6913552747189886737, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.21780014
-      objectReference: {fileID: 0}
     - target: {fileID: 6913552748076093857, guid: eebeed796b7983249a500c2ff65730c1, type: 3}
       propertyPath: m_Name
       value: UICanvas
@@ -892,11 +884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251883478912972397, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015668697
+      value: -0.000000015668697
       objectReference: {fileID: 0}
     - target: {fileID: 1251883478912972397, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000071099566
+      value: 0.000000007109957
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479044961210, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_Name
@@ -972,11 +964,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479260489820, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015668697
+      value: -0.000000015668697
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479260489820, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000071099566
+      value: 0.000000007109957
       objectReference: {fileID: 0}
     - target: {fileID: 1251883479388526722, guid: ff8a98ba643b7cf478a1360d984a095b, type: 3}
       propertyPath: m_FollowOffset.y

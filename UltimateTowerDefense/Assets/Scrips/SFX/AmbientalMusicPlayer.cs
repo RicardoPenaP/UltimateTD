@@ -10,6 +10,7 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
     [SerializeField,Min(0f)] private float transitionTime = 1f;
 
     private AudioSource audioSource;
+    private AmbientalMusicToPlay currentMusicPlaying;
 
     protected override void Awake()
     {
@@ -27,6 +28,14 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
         StaticVolumeValues.OnSetMusicVolume += SetAudioSourceVolume;
     }
 
+    private void Update()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(ambientalSongs[(int)currentMusicPlaying]);
+        } 
+    }
+
     private void OnDestroy()
     {
         StaticVolumeValues.OnSetMusicVolume -= SetAudioSourceVolume;
@@ -39,6 +48,7 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
 
     public void PlayAnAmbientalMusic(AmbientalMusicToPlay musicToPlay)
     {
+        currentMusicPlaying = musicToPlay;
         audioSource.PlayOneShot(ambientalSongs[(int)musicToPlay]);
     }
 
