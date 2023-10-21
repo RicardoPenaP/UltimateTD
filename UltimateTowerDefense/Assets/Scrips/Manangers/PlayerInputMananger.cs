@@ -31,7 +31,11 @@ public class PlayerInputMananger : MonoBehaviour
         {
             BuildingMananger.Instance?.CloseBuildingManangerWindow();
             TerrainMananger.Instance?.CloseTerrainMananger();
-            PauseMenu.Instance?.ToggleMenu();
+            if (PauseMenu.Instance?.MenuClosedButStillPaused == false)
+            {
+                PauseMenu.Instance?.ToggleMenu();
+            }
+           
         }
     }
 }

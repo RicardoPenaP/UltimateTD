@@ -13,6 +13,7 @@ namespace GameSceneManangement
     public static class GameScenesLoader
     {
         private static GameScenes currentScene = GameScenes.MainMenu;
+        public static GameScenes CurrenScene { get { return currentScene; } }
         public static void LoadGameScene(GameScenes sceneToLoad)
         {
             currentScene = sceneToLoad;

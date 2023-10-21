@@ -12,6 +12,7 @@ public class PauseMenu : Singleton<PauseMenu>
     [Header("Pause Menu")]
     [Header("Buttons Reference")]
     [SerializeField] private Button mainMenuButton;
+    [SerializeField] private Button settingsButton;
     [SerializeField] private Button resumeButton;
 
     private static readonly int OPEN_MENU_HASH = Animator.StringToHash("OpenMenu");
@@ -20,9 +21,11 @@ public class PauseMenu : Singleton<PauseMenu>
     private MenuAnimationHelper myAnimationHelper;
     private Animator myAnimator;
 
-
+    private bool menuClosedButStillPaused = false;   
     private bool isPaused = false;
+    public bool MenuClosedButStillPaused { get { return menuClosedButStillPaused; } }
     public bool IsPaused { get { return isPaused; } }
+
 
     protected override void Awake()
     {
@@ -41,19 +44,21 @@ public class PauseMenu : Singleton<PauseMenu>
     private void OnDestroy()
     {
         UnsubscribeFromButtonsEvents();
-        UnsubscribeToAnimationEvents();
+        UnsubscribeFromAnimationEvents();
     }
 
     private void SubscribeToButtonsEvents()
     {
         resumeButton?.onClick.AddListener(ToggleMenu);
         mainMenuButton?.onClick.AddListener(GoToMainMenu);
+        settingsButton?.onClick.AddListener(GoToSettingsMenu);
     }
 
     private void UnsubscribeFromButtonsEvents()
     {
         resumeButton?.onClick.AddListener(ToggleMenu);
         mainMenuButton?.onClick.AddListener(GoToMainMenu);
+        settingsButton?.onClick.RemoveListener(GoToSettingsMenu);
     }
 
     private void SubscribeToAnimationEvents()
@@ -61,7 +66,7 @@ public class PauseMenu : Singleton<PauseMenu>
         myAnimationHelper.OnCloseAnimationFinished += () => gameObject.SetActive(false);
     }
 
-    private void UnsubscribeToAnimationEvents()
+    private void UnsubscribeFromAnimationEvents()
     {
         myAnimationHelper.OnCloseAnimationFinished -= () => gameObject.SetActive(false);
     }
@@ -84,10 +89,36 @@ public class PauseMenu : Singleton<PauseMenu>
         }  
     }
 
+    public void ToggleMenuStillPaused()
+    {
+        if (SceneTranstitionFade.Instance.FadeInProgress)
+        {
+            return;
+        }   
+        
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+            myAnimator.Play(OPEN_MENU_HASH);
+            menuClosedButStillPaused = false;
+        }
+        else
+        {
+            menuClosedButStillPaused = true;
+            myAnimator.Play(CLOSE_MENU_HASH);
+        }
+    }
+
     private void GoToMainMenu()
     {
         ToggleMenu();
-        SceneTranstitionFade.Instance.FadeIn(OnFadeEnds);       
+        SceneTranstitionFade.Instance?.FadeIn(OnFadeEnds);       
+    }
+
+    private void GoToSettingsMenu()
+    {
+        ToggleMenuStillPaused();
+        SettingsMenu.Instance?.OpenMenu();
     }
 
     private void OnFadeEnds()

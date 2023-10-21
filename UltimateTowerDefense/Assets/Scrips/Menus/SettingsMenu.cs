@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameSceneManangement;
 
 public class SettingsMenu : Singleton<SettingsMenu>   
 {
@@ -76,13 +77,13 @@ public class SettingsMenu : Singleton<SettingsMenu>
 
     private void SubscribeToButtonsEvents()
     {       
-        goBack?.onClick.AddListener(GoToMainMenu);
+        goBack?.onClick.AddListener(GoBack);
         reset?.onClick.AddListener(ResetVolumeValues);
     }
 
     private void UnsubscribeFromButtonsEvents()
     {        
-        goBack?.onClick.RemoveListener(GoToMainMenu);
+        goBack?.onClick.RemoveListener(GoBack);
         reset?.onClick.RemoveListener(ResetVolumeValues);
     }
 
@@ -114,10 +115,21 @@ public class SettingsMenu : Singleton<SettingsMenu>
         myAnimator.Play(OPEN_MENU_HASH);       
     }
 
-    private void GoToMainMenu()
+    private void GoBack()
     {
         myAnimator.Play(CLOSE_MENU_HASH);
-        mainMenuReference.OpenMenu(); 
+        switch (GameScenesLoader.CurrenScene)
+        {
+            case GameScenes.MainMenu:
+                mainMenuReference?.OpenMenu();
+                break;
+            case GameScenes.GameScene:
+                PauseMenu.Instance?.ToggleMenuStillPaused();
+                break;
+            default:
+                break;
+        }
+       
     }
 
     private void SetMusicVolume(float value)
