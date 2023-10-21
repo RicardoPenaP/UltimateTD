@@ -45,6 +45,23 @@ public class GameMananger : Singleton<GameMananger>
         gameCompleted = false;
         StartCoroutine(PlayTimeCounterRoutine());
         StartCoroutine(WaitBetweenWavesRoutine(timeToStart));
+        switch (GameMode.GameModeOption)
+        {
+            case GameModeOptions.SingleRoad:
+                timeBetweenWaves = 20;
+                break;
+            case GameModeOptions.DoubleRoad:
+                timeBetweenWaves = 25;
+                break;
+            case GameModeOptions.TripleRoad:
+                timeBetweenWaves = 30;
+                break;
+            case GameModeOptions.QuadRoad:
+                timeBetweenWaves = 40;
+                break;
+            default:
+                break;
+        }
         SceneTranstitionFade.Instance.FadeOut();
     }
 

@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3614154014985726609, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: byDragMouseMovementSpeed
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3614154014985726610, guid: 31f47df1da673234f9e8c73f84b7efb0, type: 3}
       propertyPath: m_RootOrder

@@ -56,6 +56,10 @@ public class BuildingMananger : Singleton<BuildingMananger>
 
     public void OpenBuildingMananger(IBuilding selectedBuilding)
     {
+        if (MouseOverUIMananger.Instance.MouseOverUI)
+        {
+            return;
+        }
         this.selectedBuilding = selectedBuilding;
         UpdateSelectedBuildingInfo();
         buildingIcon.SetIcon(selectedBuilding.GetBuildindUIInfo().BuildingIcon);        
