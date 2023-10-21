@@ -7,8 +7,7 @@ public class MainMenu : MonoBehaviour
 {    
     [Header("Main Menu")]
     [Header("Menus Reference")]
-    [SerializeField] private PlayMenu playMenu;
-    [SerializeField] private SettingsMenu settingsMenu;
+    [SerializeField] private PlayMenu playMenu;   
     [Header("Buttons Reference")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
@@ -73,7 +72,7 @@ public class MainMenu : MonoBehaviour
     private void GoToSettinsMenu()
     {
         myAnimator.SetTrigger(CLOSE_MENU_HASH);
-        settingsMenu.OpenMenu();
+        SettingsMenu.Instance?.OpenMenu();
     }
     
 

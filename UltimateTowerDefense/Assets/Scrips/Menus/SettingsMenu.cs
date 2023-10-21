@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsMenu : MonoBehaviour   
+public class SettingsMenu : Singleton<SettingsMenu>   
 {
     [Header("Settings Menu")]
     [Header("Menus Reference")]
@@ -23,8 +23,9 @@ public class SettingsMenu : MonoBehaviour
     private Animator myAnimator;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         myAnimationHelper = GetComponent<MenuAnimationHelper>();
         myAnimator = GetComponent<Animator>();
         SubscribeToButtonsEvents();
