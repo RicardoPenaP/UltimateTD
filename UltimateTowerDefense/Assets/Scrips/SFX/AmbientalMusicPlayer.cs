@@ -11,6 +11,7 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
 
     private AudioSource audioSource;
     private AmbientalMusicToPlay currentMusicPlaying;
+    private AudioClip currentClip;
 
     protected override void Awake()
     {
@@ -32,7 +33,7 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
     {
         if (!audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(ambientalSongs[(int)currentMusicPlaying]);
+            PlayAnAmbientalMusic(currentMusicPlaying);
         } 
     }
 
@@ -49,7 +50,21 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
     public void PlayAnAmbientalMusic(AmbientalMusicToPlay musicToPlay)
     {
         currentMusicPlaying = musicToPlay;
-        audioSource.PlayOneShot(ambientalSongs[(int)musicToPlay]);
+        //audioSource.PlayOneShot(ambientalSongs[(int)musicToPlay]);
+        switch (musicToPlay)
+        {
+            case AmbientalMusicToPlay.MainMenuMusic:
+                audioSource.PlayOneShot(ambientalSongs[0]);
+                break;
+            case AmbientalMusicToPlay.StanByGameSceneMusic:
+                audioSource.PlayOneShot(ambientalSongs[1]);
+                break;
+            case AmbientalMusicToPlay.WaveGameSceneMusic:
+                audioSource.PlayOneShot(ambientalSongs[2]);
+                break;
+            default:
+                break;
+        }
     }
 
     public void ChangeMusicWithTransition(AmbientalMusicToPlay musicToPlay)

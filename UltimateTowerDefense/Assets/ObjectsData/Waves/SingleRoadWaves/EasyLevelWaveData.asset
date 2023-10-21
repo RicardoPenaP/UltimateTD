@@ -22,119 +22,111 @@ MonoBehaviour:
     - enemyType: 0
       amountToSpawn: 10
       timeBetweenSpawn: 2
-      enemyLevel: 1
-  - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 5
-      timeBetweenSpawn: 2
-      enemyLevel: 2
-    - enemyType: 1
-      amountToSpawn: 3
-      timeBetweenSpawn: 3
-      enemyLevel: 2
-  - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 5
-      timeBetweenSpawn: 2
-      enemyLevel: 2
-    - enemyType: 2
-      amountToSpawn: 3
-      timeBetweenSpawn: 3
       enemyLevel: 2
   - enemiesToSpawn:
     - enemyType: 1
-      amountToSpawn: 3
-      timeBetweenSpawn: 3
-      enemyLevel: 3
-    - enemyType: 2
-      amountToSpawn: 3
+      amountToSpawn: 5
       timeBetweenSpawn: 3
       enemyLevel: 3
   - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 10
-      timeBetweenSpawn: 2
-      enemyLevel: 4
-    - enemyType: 1
-      amountToSpawn: 3
-      timeBetweenSpawn: 3
-      enemyLevel: 4
     - enemyType: 2
-      amountToSpawn: 3
+      amountToSpawn: 5
       timeBetweenSpawn: 3
-      enemyLevel: 4
-  - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 10
-      timeBetweenSpawn: 2
-      enemyLevel: 5
-    - enemyType: 4
-      amountToSpawn: 2
-      timeBetweenSpawn: 4
-      enemyLevel: 5
-  - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 10
-      timeBetweenSpawn: 2
-      enemyLevel: 5
-    - enemyType: 3
-      amountToSpawn: 2
-      timeBetweenSpawn: 4
-      enemyLevel: 5
-  - enemiesToSpawn:
-    - enemyType: 1
-      amountToSpawn: 6
-      timeBetweenSpawn: 3
-      enemyLevel: 6
-    - enemyType: 4
-      amountToSpawn: 3
-      timeBetweenSpawn: 4
-      enemyLevel: 6
-  - enemiesToSpawn:
-    - enemyType: 2
-      amountToSpawn: 6
-      timeBetweenSpawn: 3
-      enemyLevel: 6
-    - enemyType: 3
-      amountToSpawn: 3
-      timeBetweenSpawn: 4
-      enemyLevel: 6
+      enemyLevel: 3
   - enemiesToSpawn:
     - enemyType: 2
       amountToSpawn: 5
       timeBetweenSpawn: 3
-      enemyLevel: 6
+      enemyLevel: 4
     - enemyType: 1
       amountToSpawn: 5
       timeBetweenSpawn: 3
-      enemyLevel: 6
-    - enemyType: 4
-      amountToSpawn: 2
-      timeBetweenSpawn: 4
-      enemyLevel: 6
+      enemyLevel: 4
+  - enemiesToSpawn:
     - enemyType: 3
-      amountToSpawn: 2
+      amountToSpawn: 5
       timeBetweenSpawn: 4
+      enemyLevel: 5
+  - enemiesToSpawn:
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 5
+  - enemiesToSpawn:
+    - enemyType: 3
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 6
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
       enemyLevel: 6
   - enemiesToSpawn:
-    - enemyType: 0
-      amountToSpawn: 15
-      timeBetweenSpawn: 2
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 6
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 6
+  - enemiesToSpawn:
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 6
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 6
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 6
+    - enemyType: 3
+      amountToSpawn: 5
+      timeBetweenSpawn: 5
+      enemyLevel: 6
+  - enemiesToSpawn:
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
       enemyLevel: 7
-    - enemyType: 5
-      amountToSpawn: 2
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 7
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 7
+    - enemyType: 3
+      amountToSpawn: 5
       timeBetweenSpawn: 5
       enemyLevel: 7
+    - enemyType: 0
+      amountToSpawn: 10
+      timeBetweenSpawn: 2
+      enemyLevel: 7
   - enemiesToSpawn:
+    - enemyType: 5
+      amountToSpawn: 3
+      timeBetweenSpawn: 5
+      enemyLevel: 8
+  - enemiesToSpawn:
+    - enemyType: 5
+      amountToSpawn: 5
+      timeBetweenSpawn: 5
+      enemyLevel: 9
     - enemyType: 0
       amountToSpawn: 20
       timeBetweenSpawn: 2
-      enemyLevel: 8
-    - enemyType: 6
-      amountToSpawn: 2
-      timeBetweenSpawn: 6
-      enemyLevel: 8
+      enemyLevel: 9
   - enemiesToSpawn:
+    - enemyType: 5
+      amountToSpawn: 5
+      timeBetweenSpawn: 5
+      enemyLevel: 9
     - enemyType: 1
       amountToSpawn: 10
       timeBetweenSpawn: 3
@@ -143,12 +135,260 @@ MonoBehaviour:
       amountToSpawn: 10
       timeBetweenSpawn: 3
       enemyLevel: 9
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 9
+  - enemiesToSpawn:
+    - enemyType: 5
+      amountToSpawn: 5
+      timeBetweenSpawn: 5
+      enemyLevel: 9
+    - enemyType: 3
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 9
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 9
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 9
+  - enemiesToSpawn:
+    - enemyType: 5
+      amountToSpawn: 5
+      timeBetweenSpawn: 5
+      enemyLevel: 9
+    - enemyType: 3
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 9
+    - enemyType: 4
+      amountToSpawn: 5
+      timeBetweenSpawn: 4
+      enemyLevel: 9
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 9
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 9
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 9
+  - enemiesToSpawn:
     - enemyType: 6
       amountToSpawn: 3
       timeBetweenSpawn: 6
-      enemyLevel: 9
+      enemyLevel: 10
+  - enemiesToSpawn:
+    - enemyType: 6
+      amountToSpawn: 4
+      timeBetweenSpawn: 6
+      enemyLevel: 10
+    - enemyType: 0
+      amountToSpawn: 15
+      timeBetweenSpawn: 2
+      enemyLevel: 10
+  - enemiesToSpawn:
+    - enemyType: 6
+      amountToSpawn: 4
+      timeBetweenSpawn: 6
+      enemyLevel: 10
+    - enemyType: 0
+      amountToSpawn: 15
+      timeBetweenSpawn: 2
+      enemyLevel: 10
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+  - enemiesToSpawn:
+    - enemyType: 6
+      amountToSpawn: 4
+      timeBetweenSpawn: 6
+      enemyLevel: 10
+    - enemyType: 0
+      amountToSpawn: 15
+      timeBetweenSpawn: 2
+      enemyLevel: 10
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+  - enemiesToSpawn:
+    - enemyType: 6
+      amountToSpawn: 5
+      timeBetweenSpawn: 6
+      enemyLevel: 10
+    - enemyType: 0
+      amountToSpawn: 15
+      timeBetweenSpawn: 2
+      enemyLevel: 10
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+  - enemiesToSpawn:
+    - enemyType: 6
+      amountToSpawn: 5
+      timeBetweenSpawn: 6
+      enemyLevel: 10
+    - enemyType: 0
+      amountToSpawn: 15
+      timeBetweenSpawn: 2
+      enemyLevel: 10
+    - enemyType: 1
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 2
+      amountToSpawn: 10
+      timeBetweenSpawn: 3
+      enemyLevel: 10
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 10
+    - enemyType: 5
+      amountToSpawn: 6
+      timeBetweenSpawn: 5
+      enemyLevel: 10
   - enemiesToSpawn:
     - enemyType: 7
-      amountToSpawn: 1
+      amountToSpawn: 3
       timeBetweenSpawn: 7
-      enemyLevel: 10
+      enemyLevel: 11
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 11
+  - enemiesToSpawn:
+    - enemyType: 7
+      amountToSpawn: 3
+      timeBetweenSpawn: 7
+      enemyLevel: 11
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 11
+    - enemyType: 1
+      amountToSpawn: 15
+      timeBetweenSpawn: 3
+      enemyLevel: 11
+    - enemyType: 2
+      amountToSpawn: 15
+      timeBetweenSpawn: 3
+      enemyLevel: 11
+  - enemiesToSpawn:
+    - enemyType: 7
+      amountToSpawn: 3
+      timeBetweenSpawn: 7
+      enemyLevel: 11
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 11
+    - enemyType: 1
+      amountToSpawn: 15
+      timeBetweenSpawn: 3
+      enemyLevel: 11
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+  - enemiesToSpawn:
+    - enemyType: 7
+      amountToSpawn: 3
+      timeBetweenSpawn: 7
+      enemyLevel: 11
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 11
+    - enemyType: 1
+      amountToSpawn: 15
+      timeBetweenSpawn: 3
+      enemyLevel: 11
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+    - enemyType: 5
+      amountToSpawn: 6
+      timeBetweenSpawn: 5
+      enemyLevel: 11
+  - enemiesToSpawn:
+    - enemyType: 7
+      amountToSpawn: 3
+      timeBetweenSpawn: 7
+      enemyLevel: 11
+    - enemyType: 0
+      amountToSpawn: 20
+      timeBetweenSpawn: 2
+      enemyLevel: 11
+    - enemyType: 1
+      amountToSpawn: 15
+      timeBetweenSpawn: 3
+      enemyLevel: 11
+    - enemyType: 3
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+    - enemyType: 4
+      amountToSpawn: 8
+      timeBetweenSpawn: 4
+      enemyLevel: 11
+    - enemyType: 5
+      amountToSpawn: 6
+      timeBetweenSpawn: 5
+      enemyLevel: 11
+    - enemyType: 6
+      amountToSpawn: 3
+      timeBetweenSpawn: 6
+      enemyLevel: 11
