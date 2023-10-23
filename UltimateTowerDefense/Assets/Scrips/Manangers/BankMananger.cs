@@ -7,8 +7,8 @@ public class BankMananger : Singleton<BankMananger>
 {
     [Header("Bank Mananger")]
     [SerializeField,Min(0)] private int maxAmountGold = 100000;
-    [SerializeField,Min(0)] private int startingAmouuntGold = 250;
-    [SerializeField] private int currentAmountGold;
+    private int startingAmouuntGold = 0;
+    private int currentAmountGold;
 
 
     private TextMeshProUGUI goldText;
@@ -20,6 +20,23 @@ public class BankMananger : Singleton<BankMananger>
     }
     private void Start()
     {
+        switch (GameMode.GameModeOption)
+        {
+            case GameModeOptions.SingleRoad:
+                startingAmouuntGold = 50;
+                break;
+            case GameModeOptions.DoubleRoad:
+                startingAmouuntGold = 100;
+                break;
+            case GameModeOptions.TripleRoad:
+                startingAmouuntGold = 150;
+                break;
+            case GameModeOptions.QuadRoad:
+                startingAmouuntGold = 200;
+                break;
+            default:
+                break;
+        }
         currentAmountGold = startingAmouuntGold;
         UpdateBankUI();
     }

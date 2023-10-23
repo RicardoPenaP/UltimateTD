@@ -36,7 +36,7 @@ public class AStarPathGenerator
 
             foreach (Node neighbor in GetNeighbors(grid, currentNode))
             {
-                if (!neighbor.isWalkable || closedSet.Contains(neighbor))
+                if (!neighbor.isWalkable || closedSet.Contains(neighbor) || neighbor.Content == NodeContent.Stronghold)
                 {
                     continue;
                 }
@@ -49,7 +49,7 @@ public class AStarPathGenerator
                     neighbor.H = GetDistance(neighbor, grid[destinationCoordinates]);
                     neighbor.connectedTo = currentNode;
 
-                    if (!openSet.Contains(neighbor))
+                    if (!openSet.Contains(neighbor) && neighbor.isWalkable)
                     {
                         openSet.Add(neighbor);
                     }

@@ -11,7 +11,7 @@ public class AmbientalMusicPlayer : Singleton<AmbientalMusicPlayer>
 
     private AudioSource audioSource;
     private AmbientalMusicToPlay currentMusicPlaying;
-    private AudioClip currentClip;
+    
 
     protected override void Awake()
     {
